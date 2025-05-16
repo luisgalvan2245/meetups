@@ -7,45 +7,45 @@
 		"requestBodies": {},
 		"responses": {},
 		"schemas": {
-			"Event": {
+			"ReturnType_Event-at-toPrimitives_": {
 				"properties": {
-					"id": {
-						"type": "string"
-					},
-					"title": {
-						"type": "string"
-					},
-					"description": {
-						"type": "string"
-					},
-					"date": {
-						"type": "string"
-					},
-					"location": {
-						"type": "string"
-					},
-					"imageUrl": {
+					"updatedAt": {
 						"type": "string"
 					},
 					"createdAt": {
 						"type": "string"
 					},
-					"updatedAt": {
+					"imageUrl": {
+						"type": "string"
+					},
+					"location": {
+						"type": "string"
+					},
+					"date": {
+						"type": "string"
+					},
+					"description": {
+						"type": "string"
+					},
+					"title": {
+						"type": "string"
+					},
+					"id": {
 						"type": "string"
 					}
 				},
 				"required": [
-					"id",
-					"title",
-					"description",
-					"date",
-					"location",
-					"imageUrl",
+					"updatedAt",
 					"createdAt",
-					"updatedAt"
+					"imageUrl",
+					"location",
+					"date",
+					"description",
+					"title",
+					"id"
 				],
 				"type": "object",
-				"additionalProperties": false
+				"description": "Obtain the return type of a function type"
 			}
 		},
 		"securitySchemes": {}
@@ -71,7 +71,7 @@
 									"properties": {
 										"events": {
 											"items": {
-												"$ref": "#/components/schemas/Event"
+												"$ref": "#/components/schemas/ReturnType_Event-at-toPrimitives_"
 											},
 											"type": "array"
 										}

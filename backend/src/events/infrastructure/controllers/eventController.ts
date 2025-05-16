@@ -1,5 +1,5 @@
 import { Controller, Get, Route } from "tsoa"
-import { Event } from "../../domain/eventModel"
+import { Event } from "../../domain/entities/eventEntity"
 import { EventService } from "../../application/services/eventService"
 import { MockEventRepository } from "../repositories/mockEventRepository"
 
@@ -14,8 +14,10 @@ export class EventController extends Controller {
   }
 
   @Get()
-  public async getEvents(): Promise<{ events: Event[] }> {
+  public async getEvents(): Promise<{
+    events: ReturnType<Event["toPrimitives"]>[]
+  }> {
     const events = await this.eventService.getEvents()
-    return { events }
+    return { events: events.map(event => event.toPrimitives()) }
   }
 }

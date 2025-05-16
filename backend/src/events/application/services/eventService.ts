@@ -1,4 +1,4 @@
-import { Event } from "../../domain/eventModel"
+import { Event } from "../../domain/entities/eventEntity"
 import { EventRepository } from "../../domain/repositories/eventRepository"
 
 export class EventService {
@@ -12,17 +12,38 @@ export class EventService {
     return this.eventRepository.findById(id)
   }
 
-  async createEvent(
-    eventData: Omit<Event, "id" | "createdAt" | "updatedAt">
-  ): Promise<Event> {
-    return this.eventRepository.create(eventData)
+  async createEvent(data: {
+    title: string
+    description: string
+    date: string | Date
+    location: string
+    imageUrl: string
+  }): Promise<Event> {
+    const event = Event.create(
+      data.title,
+      data.description,
+      data.date,
+      data.location,
+      data.imageUrl
+    )
+    return this.eventRepository.create(event)
   }
 
   async updateEvent(
     id: string,
-    eventData: Partial<Event>
+    data: {
+      title?: string
+      description?: string
+      date?: string | Date
+      location?: string
+      imageUrl?: string
+    }
   ): Promise<Event | null> {
-    return this.eventRepository.update(id, eventData)
+    const event = await this.eventRepository.findById(id)
+    if (!event) return null
+
+    event.update(data)
+    return this.eventRepository.update(id, event)
   }
 
   async deleteEvent(id: string): Promise<boolean> {
