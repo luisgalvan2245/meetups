@@ -1,8 +1,12 @@
-import { Router } from "express"
-import { getEvents } from "../controllers/eventController"
+import { Router, Request, Response } from "express"
+import { EventController } from "../controllers/eventController"
 
 const router = Router()
+const eventController = new EventController()
 
-router.get("/", getEvents)
+router.get("/", async (req: Request, res: Response) => {
+  const result = await eventController.getEvents()
+  res.json(result)
+})
 
 export default router
