@@ -1,11 +1,11 @@
 import { Router, Request, Response } from "express"
-import { EventController } from "../controllers/eventController"
+import { MeetupController } from "../controllers/meetupController"
 
 const router = Router()
-const eventController = new EventController()
+const meetupController = new MeetupController()
 
 router.get("/", async (req: Request, res: Response) => {
-  const result = await eventController.getEvents()
+  const result = await meetupController.getMeetups()
   res.json(result)
 })
 
