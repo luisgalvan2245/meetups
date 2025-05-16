@@ -1,11 +1,11 @@
-export class EventDate {
+export class MeetupDate {
   private readonly value: Date
 
   private constructor(value: Date) {
     this.value = value
   }
 
-  public static create(date: string | Date): EventDate {
+  public static create(date: string | Date): MeetupDate {
     const parsedDate = new Date(date)
     if (isNaN(parsedDate.getTime())) {
       throw new Error("La fecha no es válida")
@@ -13,7 +13,7 @@ export class EventDate {
     if (parsedDate < new Date()) {
       throw new Error("La fecha del evento no puede ser en el pasado")
     }
-    return new EventDate(parsedDate)
+    return new MeetupDate(parsedDate)
   }
 
   public getValue(): Date {

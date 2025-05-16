@@ -1,11 +1,11 @@
-import { EventTitle } from "../valueObjects/eventTitle"
-import { EventDate } from "../valueObjects/eventDate"
+import { MeetupTitle } from "../valueObjects/meetupTitle"
+import { MeetupDate } from "../valueObjects/meetupDate"
 
-export class Event {
+export class Meetup {
   private readonly id: string
-  private title: EventTitle
+  private title: MeetupTitle
   private description: string
-  private date: EventDate
+  private date: MeetupDate
   private location: string
   private imageUrl: string
   private readonly createdAt: Date
@@ -13,9 +13,9 @@ export class Event {
 
   private constructor(
     id: string,
-    title: EventTitle,
+    title: MeetupTitle,
     description: string,
-    date: EventDate,
+    date: MeetupDate,
     location: string,
     imageUrl: string,
     createdAt: Date,
@@ -37,13 +37,13 @@ export class Event {
     date: string | Date,
     location: string,
     imageUrl: string
-  ): Event {
+  ): Meetup {
     const now = new Date()
-    return new Event(
+    return new Meetup(
       crypto.randomUUID(),
-      EventTitle.create(title),
+      MeetupTitle.create(title),
       description,
-      EventDate.create(date),
+      MeetupDate.create(date),
       location,
       imageUrl,
       now,
@@ -60,12 +60,12 @@ export class Event {
     imageUrl: string
     createdAt: string
     updatedAt: string
-  }): Event {
-    return new Event(
+  }): Meetup {
+    return new Meetup(
       data.id,
-      EventTitle.create(data.title),
+      MeetupTitle.create(data.title),
       data.description,
-      EventDate.create(data.date),
+      MeetupDate.create(data.date),
       data.location,
       data.imageUrl,
       new Date(data.createdAt),
@@ -94,13 +94,13 @@ export class Event {
     imageUrl?: string
   }): void {
     if (data.title) {
-      this.title = EventTitle.create(data.title)
+      this.title = MeetupTitle.create(data.title)
     }
     if (data.description) {
       this.description = data.description
     }
     if (data.date) {
-      this.date = EventDate.create(data.date)
+      this.date = MeetupDate.create(data.date)
     }
     if (data.location) {
       this.location = data.location

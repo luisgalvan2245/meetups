@@ -1,7 +1,7 @@
 {
   "entryFile": "src/index.ts",
   "noImplicitAdditionalProperties": "throw-on-extras",
-  "controllerPathGlobs": ["src/events/infrastructure/controllers/*.ts"],
+  "controllerPathGlobs": ["src/meetup/infrastructure/controllers/*.ts"],
   "spec": {
     "outputDirectory": "public",
     "specVersion": 3

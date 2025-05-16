@@ -105,7 +105,5 @@ Qué middleware usar (middleware)
 Comando para ejecutar tsoa y generar los ficheros
 cd backend && npx tsoa spec-and-routes
 
-mueve el fichero de tsoa para registrar rutas
-Usa DDD para el proyecto.
-Separa el modelo en entity y domain values con la lógica de negocio si la hubiera
-utiliza camel case para todos los ficheros y carpetas
+Cambia los nombre en todo el proyecto (carpetas, ficheros, clases, etc).
+Utiliza Meetup (mayúscula o minúscula según corresponda)

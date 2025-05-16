@@ -7,7 +7,7 @@
 		"requestBodies": {},
 		"responses": {},
 		"schemas": {
-			"ReturnType_Event-at-toPrimitives_": {
+			"ReturnType_Meetup-at-toPrimitives_": {
 				"properties": {
 					"updatedAt": {
 						"type": "string"
@@ -59,9 +59,9 @@
 		"contact": {}
 	},
 	"paths": {
-		"/events": {
+		"/meetups": {
 			"get": {
-				"operationId": "GetEvents",
+				"operationId": "GetMeetups",
 				"responses": {
 					"200": {
 						"description": "Ok",
@@ -69,15 +69,15 @@
 							"application/json": {
 								"schema": {
 									"properties": {
-										"events": {
+										"meetups": {
 											"items": {
-												"$ref": "#/components/schemas/ReturnType_Event-at-toPrimitives_"
+												"$ref": "#/components/schemas/ReturnType_Meetup-at-toPrimitives_"
 											},
 											"type": "array"
 										}
 									},
 									"required": [
-										"events"
+										"meetups"
 									],
 									"type": "object"
 								}

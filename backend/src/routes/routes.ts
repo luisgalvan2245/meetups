@@ -4,7 +4,7 @@
 import type { TsoaRoute } from '@tsoa/runtime';
 import {  fetchMiddlewares, ExpressTemplateService } from '@tsoa/runtime';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-import { EventController } from './../events/infrastructure/controllers/eventController';
+import { MeetupController } from './../meetup/infrastructure/controllers/meetupController';
 import type { Request as ExRequest, Response as ExResponse, RequestHandler, Router } from 'express';
 
 
@@ -12,7 +12,7 @@ import type { Request as ExRequest, Response as ExResponse, RequestHandler, Rout
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 
 const models: TsoaRoute.Models = {
-    "ReturnType_Event-at-toPrimitives_": {
+    "ReturnType_Meetup-at-toPrimitives_": {
         "dataType": "refAlias",
         "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"updatedAt":{"dataType":"string","required":true},"createdAt":{"dataType":"string","required":true},"imageUrl":{"dataType":"string","required":true},"location":{"dataType":"string","required":true},"date":{"dataType":"string","required":true},"description":{"dataType":"string","required":true},"title":{"dataType":"string","required":true},"id":{"dataType":"string","required":true}},"validators":{}},
     },
@@ -34,24 +34,24 @@ export function RegisterRoutes(app: Router) {
 
 
     
-        const argsEventController_getEvents: Record<string, TsoaRoute.ParameterSchema> = {
+        const argsMeetupController_getMeetups: Record<string, TsoaRoute.ParameterSchema> = {
         };
-        app.get('/events',
-            ...(fetchMiddlewares<RequestHandler>(EventController)),
-            ...(fetchMiddlewares<RequestHandler>(EventController.prototype.getEvents)),
+        app.get('/meetups',
+            ...(fetchMiddlewares<RequestHandler>(MeetupController)),
+            ...(fetchMiddlewares<RequestHandler>(MeetupController.prototype.getMeetups)),
 
-            async function EventController_getEvents(request: ExRequest, response: ExResponse, next: any) {
+            async function MeetupController_getMeetups(request: ExRequest, response: ExResponse, next: any) {
 
             // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 
             let validatedArgs: any[] = [];
             try {
-                validatedArgs = templateService.getValidatedArgs({ args: argsEventController_getEvents, request, response });
+                validatedArgs = templateService.getValidatedArgs({ args: argsMeetupController_getMeetups, request, response });
 
-                const controller = new EventController();
+                const controller = new MeetupController();
 
               await templateService.apiHandler({
-                methodName: 'getEvents',
+                methodName: 'getMeetups',
                 controller,
                 response,
                 next,

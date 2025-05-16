@@ -1,9 +1,9 @@
-import { Event } from "../../domain/entities/eventEntity"
-import { EventRepository } from "../../domain/repositories/eventRepository"
+import { Meetup } from "../../domain/entities/meetupEntity"
+import { MeetupRepository } from "../../domain/repositories/meetupRepository"
 
-export class MockEventRepository implements EventRepository {
-  private events: Event[] = [
-    Event.fromPrimitives({
+export class MockMeetupRepository implements MeetupRepository {
+  private meetups: Meetup[] = [
+    Meetup.fromPrimitives({
       id: "1",
       title: "Conferencia de Tecnología",
       description: "Una conferencia sobre las últimas tendencias en tecnología",
@@ -13,7 +13,7 @@ export class MockEventRepository implements EventRepository {
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString()
     }),
-    Event.fromPrimitives({
+    Meetup.fromPrimitives({
       id: "2",
       title: "Workshop de Programación",
       description: "Aprende las mejores prácticas de programación",
@@ -25,30 +25,30 @@ export class MockEventRepository implements EventRepository {
     })
   ]
 
-  async findAll(): Promise<Event[]> {
-    return this.events
+  async findAll(): Promise<Meetup[]> {
+    return this.meetups
   }
 
-  async findById(id: string): Promise<Event | null> {
-    return this.events.find(event => event.getId() === id) || null
+  async findById(id: string): Promise<Meetup | null> {
+    return this.meetups.find(meetup => meetup.getId() === id) || null
   }
 
-  async create(event: Event): Promise<Event> {
-    this.events.push(event)
-    return event
+  async create(meetup: Meetup): Promise<Meetup> {
+    this.meetups.push(meetup)
+    return meetup
   }
 
-  async update(id: string, event: Event): Promise<Event | null> {
-    const index = this.events.findIndex(e => e.getId() === id)
+  async update(id: string, meetup: Meetup): Promise<Meetup | null> {
+    const index = this.meetups.findIndex(m => m.getId() === id)
     if (index === -1) return null
-    this.events[index] = event
-    return event
+    this.meetups[index] = meetup
+    return meetup
   }
 
   async delete(id: string): Promise<boolean> {
-    const index = this.events.findIndex(e => e.getId() === id)
+    const index = this.meetups.findIndex(m => m.getId() === id)
     if (index === -1) return false
-    this.events.splice(index, 1)
+    this.meetups.splice(index, 1)
     return true
   }
 }
