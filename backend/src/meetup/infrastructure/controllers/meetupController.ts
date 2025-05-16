@@ -3,7 +3,6 @@ import { MockMeetupRepository } from "@/meetup/infrastructure/repositories/mockM
 import { EntityId } from "@/shared/domain/valueObjects/entityId"
 import { Route, Get, Post, Put, Delete, Path, Body } from "@tsoa/runtime"
 
-//Model for Meetup responses
 export interface MeetupModel {
   id: string
   title: string

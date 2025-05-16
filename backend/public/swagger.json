@@ -8,7 +8,6 @@
 		"responses": {},
 		"schemas": {
 			"MeetupModel": {
-				"description": "Model for Meetup responses",
 				"properties": {
 					"id": {
 						"type": "string"
