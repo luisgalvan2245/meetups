@@ -36,4 +36,4 @@ coverage/
 postgres_data/
 
 # Old project
-.docs/
+.old/
