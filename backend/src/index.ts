@@ -15,11 +15,6 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerJson))
 // Registrar las rutas generadas por tsoa
 RegisterRoutes(app)
 
-// Ruta de prueba
-app.get("/", (req, res) => {
-  res.json({ message: "Hello from Express!" })
-})
-
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`)
   console.log(`Swagger documentation at http://localhost:${port}/api-docs`)

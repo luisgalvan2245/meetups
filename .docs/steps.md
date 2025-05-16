@@ -104,3 +104,7 @@ Qué middleware usar (middleware)
 
 Comando para ejecutar tsoa y generar los ficheros
 cd backend && npx tsoa spec-and-routes
+
+los datos mockeados se encuentran tanto en controladores como en servicios.
+Crea un repository que contenga los datos mockeados.
+Crea una interfaz para este repositorio que en domain que será la que utilizarán los servicios.
