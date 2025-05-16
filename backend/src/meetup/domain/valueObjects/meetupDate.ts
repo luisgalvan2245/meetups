@@ -1,19 +1,15 @@
-export class MeetupDate {
-  private readonly value: Date
+import { ValueObject } from "@/shared/domain/valueObjects/valueObject"
 
-  private constructor(value: Date) {
-    this.value = value
+export class MeetupDate extends ValueObject<Date> {
+  constructor(value: Date) {
+    super(value)
   }
 
-  public static create(date: string | Date): MeetupDate {
-    const parsedDate = new Date(date)
-    if (isNaN(parsedDate.getTime())) {
-      throw new Error("La fecha no es válida")
+  static create(value: Date): MeetupDate {
+    if (value < new Date()) {
+      throw new Error("La fecha no puede ser en el pasado")
     }
-    if (parsedDate < new Date()) {
-      throw new Error("La fecha del evento no puede ser en el pasado")
-    }
-    return new MeetupDate(parsedDate)
+    return new MeetupDate(value)
   }
 
   public getValue(): Date {

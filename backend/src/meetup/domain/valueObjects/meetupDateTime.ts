@@ -1,5 +1,9 @@
-export class MeetupDateTime {
-  private constructor(private readonly value: Date) {}
+import { ValueObject } from "@/shared/domain/valueObjects/valueObject"
+
+export class MeetupDateTime extends ValueObject<Date> {
+  private constructor(value: Date) {
+    super(value)
+  }
 
   public static create(date?: string | Date): MeetupDateTime {
     const parsedDate = date ? new Date(date) : new Date()
@@ -7,10 +11,6 @@ export class MeetupDateTime {
       throw new Error("La fecha no es válida")
     }
     return new MeetupDateTime(parsedDate)
-  }
-
-  public getValue(): Date {
-    return this.value
   }
 
   public toISOString(): string {

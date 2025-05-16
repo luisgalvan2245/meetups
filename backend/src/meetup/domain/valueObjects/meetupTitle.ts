@@ -1,17 +1,11 @@
-export class MeetupTitle {
-  private constructor(private readonly value: string) {}
+import { ValueObject } from "@/shared/domain/valueObjects/valueObject"
 
-  public static create(title: string): MeetupTitle {
-    if (!title || title.trim().length === 0) {
-      throw new Error("El título no puede estar vacío")
-    }
-    if (title.length > 100) {
-      throw new Error("El título no puede tener más de 100 caracteres")
-    }
-    return new MeetupTitle(title.trim())
+export class MeetupTitle extends ValueObject<string> {
+  constructor(value: string) {
+    super(value)
   }
 
-  public getValue(): string {
-    return this.value
+  static create(value: string): MeetupTitle {
+    return new MeetupTitle(value)
   }
 }

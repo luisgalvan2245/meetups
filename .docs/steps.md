@@ -94,16 +94,5 @@ npm install tsoa && npm install -D @types/swagger-ui-express swagger-ui-express
 
 ## TSOA
 
-Hay que crear el archivo tsoa.json, no se genera automáticamente.
-Es un archivo de configuración que necesitamos crear manualmente.
-Le dice a tsoa:
-Dónde buscar los controladores (controllerPathGlobs)
-Dónde generar la documentación Swagger (outputDirectory)
-Dónde generar las rutas (routesDir)
-Qué middleware usar (middleware)
-
-Comando para ejecutar tsoa y generar los ficheros
-cd backend && npx tsoa spec-and-routes
-
-Cambia los nombre en todo el proyecto (carpetas, ficheros, clases, etc).
-Utiliza Meetup (mayúscula o minúscula según corresponda)
+Renombra meetupId a entityID y muévelo a una carpeta shared/domain/valueObjects/entityID.ts
+se reutilizará para otras entidades

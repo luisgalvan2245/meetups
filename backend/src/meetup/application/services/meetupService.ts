@@ -1,52 +1,53 @@
-import { Meetup } from "../../domain/entities/meetupEntity"
-import { MeetupRepository } from "../../domain/repositories/meetupRepository"
+import { Meetup } from "@/meetup/domain/entities/meetupEntity"
+import { MeetupRepository } from "@/meetup/domain/repositories/meetupRepository"
+import { EntityId } from "@/shared/domain/valueObjects/entityId"
 
 export class MeetupService {
-  constructor(private readonly meetupRepository: MeetupRepository) {}
+  constructor(private meetupRepository: MeetupRepository) {}
 
-  async getMeetups(): Promise<Meetup[]> {
+  async getAllMeetups(): Promise<Meetup[]> {
     return this.meetupRepository.findAll()
   }
 
-  async getMeetupById(id: string): Promise<Meetup | null> {
-    return this.meetupRepository.findById(id)
+  async getMeetupById(id: EntityId): Promise<Meetup | null> {
+    return this.meetupRepository.findById(id.value)
   }
 
-  async createMeetup(data: {
+  async createMeetup(meetupData: {
     title: string
     description: string
-    date: string | Date
+    date: Date
     location: string
     imageUrl: string
   }): Promise<Meetup> {
     const meetup = Meetup.create(
-      data.title,
-      data.description,
-      data.date,
-      data.location,
-      data.imageUrl
+      meetupData.title,
+      meetupData.description,
+      meetupData.date,
+      meetupData.location,
+      meetupData.imageUrl
     )
     return this.meetupRepository.create(meetup)
   }
 
   async updateMeetup(
-    id: string,
-    data: {
+    id: EntityId,
+    meetupData: {
       title?: string
       description?: string
-      date?: string | Date
+      date?: Date
       location?: string
       imageUrl?: string
     }
   ): Promise<Meetup | null> {
-    const meetup = await this.meetupRepository.findById(id)
+    const meetup = await this.meetupRepository.findById(id.value)
     if (!meetup) return null
 
-    meetup.update(data)
-    return this.meetupRepository.update(id, meetup)
+    meetup.update(meetupData)
+    return this.meetupRepository.update(id.value, meetup)
   }
 
-  async deleteMeetup(id: string): Promise<boolean> {
-    return this.meetupRepository.delete(id)
+  async deleteMeetup(id: EntityId): Promise<void> {
+    await this.meetupRepository.delete(id.value)
   }
 }

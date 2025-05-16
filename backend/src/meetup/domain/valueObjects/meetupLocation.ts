@@ -1,14 +1,18 @@
-export class MeetupLocation {
-  private constructor(private readonly value: string) {}
+import { ValueObject } from "@/shared/domain/valueObjects/valueObject"
 
-  public static create(location: string): MeetupLocation {
-    if (!location || location.trim().length === 0) {
+export class MeetupLocation extends ValueObject<string> {
+  constructor(value: string) {
+    super(value)
+  }
+
+  static create(value: string): MeetupLocation {
+    if (!value || value.trim().length === 0) {
       throw new Error("La localización no puede estar vacía")
     }
-    if (location.length > 200) {
+    if (value.length > 200) {
       throw new Error("La localización no puede tener más de 200 caracteres")
     }
-    return new MeetupLocation(location.trim())
+    return new MeetupLocation(value.trim())
   }
 
   public getValue(): string {

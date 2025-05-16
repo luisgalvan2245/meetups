@@ -1,4 +1,4 @@
-import { MeetupId } from "../valueObjects/meetupId"
+import { EntityId } from "@/shared/domain/valueObjects/entityId"
 import { MeetupTitle } from "../valueObjects/meetupTitle"
 import { MeetupDescription } from "../valueObjects/meetupDescription"
 import { MeetupDate } from "../valueObjects/meetupDate"
@@ -7,7 +7,7 @@ import { MeetupImageUrl } from "../valueObjects/meetupImageUrl"
 import { MeetupDateTime } from "../valueObjects/meetupDateTime"
 
 export class Meetup {
-  private readonly id: MeetupId
+  public readonly id: EntityId
   private title: MeetupTitle
   private description: MeetupDescription
   private date: MeetupDate
@@ -17,7 +17,7 @@ export class Meetup {
   private updatedAt: MeetupDateTime
 
   private constructor(
-    id: MeetupId,
+    id: EntityId,
     title: MeetupTitle,
     description: MeetupDescription,
     date: MeetupDate,
@@ -45,10 +45,10 @@ export class Meetup {
   ): Meetup {
     const now = MeetupDateTime.create()
     return new Meetup(
-      MeetupId.create(),
+      EntityId.create(crypto.randomUUID()),
       MeetupTitle.create(title),
       MeetupDescription.create(description),
-      MeetupDate.create(date),
+      MeetupDate.create(typeof date === "string" ? new Date(date) : date),
       MeetupLocation.create(location),
       MeetupImageUrl.create(imageUrl),
       now,
@@ -67,10 +67,10 @@ export class Meetup {
     updatedAt: string
   }): Meetup {
     return new Meetup(
-      MeetupId.create(data.id),
+      EntityId.create(data.id),
       MeetupTitle.create(data.title),
       MeetupDescription.create(data.description),
-      MeetupDate.create(data.date),
+      MeetupDate.create(new Date(data.date)),
       MeetupLocation.create(data.location),
       MeetupImageUrl.create(data.imageUrl),
       MeetupDateTime.create(data.createdAt),
@@ -80,12 +80,12 @@ export class Meetup {
 
   public toPrimitives() {
     return {
-      id: this.id.getValue(),
-      title: this.title.getValue(),
-      description: this.description.getValue(),
+      id: this.id.value,
+      title: this.title.value,
+      description: this.description.value,
       date: this.date.toISOString(),
-      location: this.location.getValue(),
-      imageUrl: this.imageUrl.getValue(),
+      location: this.location.value,
+      imageUrl: this.imageUrl.value,
       createdAt: this.createdAt.toISOString(),
       updatedAt: this.updatedAt.toISOString()
     }
@@ -105,7 +105,9 @@ export class Meetup {
       this.description = MeetupDescription.create(data.description)
     }
     if (data.date) {
-      this.date = MeetupDate.create(data.date)
+      this.date = MeetupDate.create(
+        typeof data.date === "string" ? new Date(data.date) : data.date
+      )
     }
     if (data.location) {
       this.location = MeetupLocation.create(data.location)
@@ -117,34 +119,34 @@ export class Meetup {
   }
 
   public getId(): string {
-    return this.id.getValue()
+    return this.id.value
   }
 
   public getTitle(): string {
-    return this.title.getValue()
+    return this.title.value
   }
 
   public getDescription(): string {
-    return this.description.getValue()
+    return this.description.value
   }
 
   public getDate(): Date {
-    return this.date.getValue()
+    return this.date.value
   }
 
   public getLocation(): string {
-    return this.location.getValue()
+    return this.location.value
   }
 
   public getImageUrl(): string {
-    return this.imageUrl.getValue()
+    return this.imageUrl.value
   }
 
   public getCreatedAt(): Date {
-    return this.createdAt.getValue()
+    return this.createdAt.value
   }
 
   public getUpdatedAt(): Date {
-    return this.updatedAt.getValue()
+    return this.updatedAt.value
   }
 }
