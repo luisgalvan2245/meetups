@@ -1,8 +1,19 @@
-import { MeetupService } from "../../application/services/meetupService"
-import { MockMeetupRepository } from "../repositories/mockMeetupRepository"
-import { EntityId } from "../../../shared/domain/valueObjects/entityId"
-import { MeetupModel } from "../models/meetupModel"
+import { MeetupService } from "@/meetup/application/services/meetupService"
+import { MockMeetupRepository } from "@/meetup/infrastructure/repositories/mockMeetupRepository"
+import { EntityId } from "@/shared/domain/valueObjects/entityId"
 import { Route, Get, Post, Put, Delete, Path, Body } from "@tsoa/runtime"
+
+//Model for Meetup responses
+export interface MeetupModel {
+  id: string
+  title: string
+  description: string
+  date: string
+  location: string
+  imageUrl: string
+  createdAt: string
+  updatedAt: string
+}
 
 @Route("meetups")
 export class MeetupController {
