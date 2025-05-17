@@ -1,7 +1,7 @@
 import { MeetupService } from "@/meetup/application/services/meetupService"
 import { MockMeetupRepository } from "@/meetup/infrastructure/repositories/mockMeetupRepository"
 import { EntityId } from "@/shared/domain/valueObjects/entityId"
-import { Route, Get, Post, Put, Delete, Path, Body } from "@tsoa/runtime"
+import { Route, Tags, Get, Post, Put, Delete, Path, Body } from "@tsoa/runtime"
 
 export interface MeetupModel {
   id: string
@@ -15,6 +15,7 @@ export interface MeetupModel {
 }
 
 @Route("meetups")
+@Tags("Meetups")
 export class MeetupController {
   private meetupService: MeetupService
 

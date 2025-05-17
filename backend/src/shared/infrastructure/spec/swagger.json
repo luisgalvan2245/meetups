@@ -77,6 +77,9 @@
 						}
 					}
 				},
+				"tags": [
+					"Meetups"
+				],
 				"security": [],
 				"parameters": []
 			},
@@ -94,6 +97,9 @@
 						}
 					}
 				},
+				"tags": [
+					"Meetups"
+				],
 				"security": [],
 				"parameters": [],
 				"requestBody": {
@@ -153,6 +159,9 @@
 						}
 					}
 				},
+				"tags": [
+					"Meetups"
+				],
 				"security": [],
 				"parameters": [
 					{
@@ -184,6 +193,9 @@
 						}
 					}
 				},
+				"tags": [
+					"Meetups"
+				],
 				"security": [],
 				"parameters": [
 					{
@@ -231,6 +243,9 @@
 						"description": "No content"
 					}
 				},
+				"tags": [
+					"Meetups"
+				],
 				"security": [],
 				"parameters": [
 					{
