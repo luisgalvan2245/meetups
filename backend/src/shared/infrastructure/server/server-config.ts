@@ -39,9 +39,7 @@ export async function startServer(
       `Server running at http://localhost:${Number(process.env.PORT) || port}`
     )
     console.log(
-      `Swagger documentation at http://localhost:${
-        Number(process.env.PORT) || port
-      }/docs`
+      `Swagger UI at http://localhost:${Number(process.env.PORT) || port}/docs`
     )
   } catch (err) {
     server.log.error(err)

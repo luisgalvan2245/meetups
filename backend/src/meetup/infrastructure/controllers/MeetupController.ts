@@ -3,14 +3,12 @@ import { EntityId } from "@/shared/domain/value-objects/EntityId"
 import { MeetupService } from "@/meetup/application/services/MeetupService"
 import { MockMeetupRepository } from "@/meetup/infrastructure/repositories/MockMeetupRepository"
 import {
-  MeetupModel,
-  CreateMeetupBody,
-  UpdateMeetupBody,
-  IdParams,
-  RouteSchemas
-} from "@/meetup/infrastructure/types/MeetupTypes"
+  CreateMeetupDto,
+  UpdateMeetupDto,
+  IdParams
+} from "@/meetup/infrastructure/schemas/meetup.schemas"
 
-// Controlador usando registro de rutas manual (sin decoradores)
+// Controlador usando registro de rutas manual con schemas de Zod
 export default class MeetupController {
   private meetupService: MeetupService
 
@@ -26,9 +24,30 @@ export default class MeetupController {
     server.get(
       "/meetups",
       {
-        schema: RouteSchemas.getAllMeetups
+        schema: {
+          tags: ["meetups"],
+          response: {
+            200: {
+              description: "Listado de todos los meetups",
+              type: "array",
+              items: {
+                type: "object",
+                properties: {
+                  id: { type: "string" },
+                  title: { type: "string" },
+                  description: { type: "string" },
+                  date: { type: "string", format: "date-time" },
+                  location: { type: "string" },
+                  imageUrl: { type: "string" },
+                  createdAt: { type: "string", format: "date-time" },
+                  updatedAt: { type: "string", format: "date-time" }
+                }
+              }
+            }
+          }
+        }
       },
-      async (): Promise<MeetupModel[]> => {
+      async () => {
         const meetups = await this.meetupService.getAllMeetups()
         return meetups.map(meetup => meetup.toPrimitives())
       }
@@ -38,9 +57,37 @@ export default class MeetupController {
     server.get<{ Params: IdParams }>(
       "/meetups/:id",
       {
-        schema: RouteSchemas.getMeetupById
+        schema: {
+          tags: ["meetups"],
+          params: {
+            type: "object",
+            properties: {
+              id: { type: "string" }
+            }
+          },
+          response: {
+            200: {
+              description: "Detalles de un meetup",
+              type: "object",
+              properties: {
+                id: { type: "string" },
+                title: { type: "string" },
+                description: { type: "string" },
+                date: { type: "string", format: "date-time" },
+                location: { type: "string" },
+                imageUrl: { type: "string" },
+                createdAt: { type: "string", format: "date-time" },
+                updatedAt: { type: "string", format: "date-time" }
+              }
+            },
+            404: {
+              description: "Meetup no encontrado",
+              type: "null"
+            }
+          }
+        }
       },
-      async (request): Promise<MeetupModel | null> => {
+      async request => {
         const meetup = await this.meetupService.getMeetupById(
           EntityId.create(request.params.id)
         )
@@ -49,12 +96,41 @@ export default class MeetupController {
     )
 
     // POST /meetups
-    server.post<{ Body: CreateMeetupBody }>(
+    server.post<{ Body: CreateMeetupDto }>(
       "/meetups",
       {
-        schema: RouteSchemas.createMeetup
+        schema: {
+          tags: ["meetups"],
+          body: {
+            type: "object",
+            required: ["title", "description", "date", "location", "imageUrl"],
+            properties: {
+              title: { type: "string", minLength: 3, maxLength: 100 },
+              description: { type: "string", minLength: 10, maxLength: 2000 },
+              date: { type: "string", format: "date-time" },
+              location: { type: "string", minLength: 3, maxLength: 200 },
+              imageUrl: { type: "string", format: "uri" }
+            }
+          },
+          response: {
+            201: {
+              description: "Meetup creado",
+              type: "object",
+              properties: {
+                id: { type: "string" },
+                title: { type: "string" },
+                description: { type: "string" },
+                date: { type: "string", format: "date-time" },
+                location: { type: "string" },
+                imageUrl: { type: "string" },
+                createdAt: { type: "string", format: "date-time" },
+                updatedAt: { type: "string", format: "date-time" }
+              }
+            }
+          }
+        }
       },
-      async (request): Promise<MeetupModel> => {
+      async request => {
         const meetup = await this.meetupService.createMeetup({
           ...request.body,
           date: new Date(request.body.date)
@@ -64,12 +140,50 @@ export default class MeetupController {
     )
 
     // PUT /meetups/:id
-    server.put<{ Params: IdParams; Body: UpdateMeetupBody }>(
+    server.put<{ Params: IdParams; Body: UpdateMeetupDto }>(
       "/meetups/:id",
       {
-        schema: RouteSchemas.updateMeetup
+        schema: {
+          tags: ["meetups"],
+          params: {
+            type: "object",
+            properties: {
+              id: { type: "string" }
+            }
+          },
+          body: {
+            type: "object",
+            properties: {
+              title: { type: "string", minLength: 3, maxLength: 100 },
+              description: { type: "string", minLength: 10, maxLength: 2000 },
+              date: { type: "string", format: "date-time" },
+              location: { type: "string", minLength: 3, maxLength: 200 },
+              imageUrl: { type: "string", format: "uri" }
+            }
+          },
+          response: {
+            200: {
+              description: "Meetup actualizado",
+              type: "object",
+              properties: {
+                id: { type: "string" },
+                title: { type: "string" },
+                description: { type: "string" },
+                date: { type: "string", format: "date-time" },
+                location: { type: "string" },
+                imageUrl: { type: "string" },
+                createdAt: { type: "string", format: "date-time" },
+                updatedAt: { type: "string", format: "date-time" }
+              }
+            },
+            404: {
+              description: "Meetup no encontrado",
+              type: "null"
+            }
+          }
+        }
       },
-      async (request): Promise<MeetupModel | null> => {
+      async request => {
         const updateData = {
           ...request.body,
           date: request.body.date ? new Date(request.body.date) : undefined
@@ -87,9 +201,27 @@ export default class MeetupController {
     server.delete<{ Params: IdParams }>(
       "/meetups/:id",
       {
-        schema: RouteSchemas.deleteMeetup
+        schema: {
+          tags: ["meetups"],
+          params: {
+            type: "object",
+            properties: {
+              id: { type: "string" }
+            }
+          },
+          response: {
+            204: {
+              description: "Meetup eliminado",
+              type: "null"
+            },
+            404: {
+              description: "Meetup no encontrado",
+              type: "null"
+            }
+          }
+        }
       },
-      async (request): Promise<void> => {
+      async request => {
         await this.meetupService.deleteMeetup(
           EntityId.create(request.params.id)
         )

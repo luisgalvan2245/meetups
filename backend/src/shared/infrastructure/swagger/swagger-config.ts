@@ -1,28 +1,24 @@
 import { FastifyInstance } from "fastify"
 import swagger from "@fastify/swagger"
 import swaggerUi from "@fastify/swagger-ui"
-import {
-  MeetupSchema,
-  MeetupArraySchema,
-  MeetupBodySchema,
-  UpdateMeetupBodySchema,
-  IdParamsSchema
-} from "@/meetup/infrastructure/types/MeetupTypes"
+import { API_SCHEMAS } from "../schemas/api-schemas"
 
-// Configuración de Swagger
+// Configuración de Swagger centralizada
 export async function setupSwagger(server: FastifyInstance): Promise<void> {
-  // Registra Swagger después de que todas las rutas estén registradas
+  // Registrar Swagger con rutas explícitas
   await server.register(swagger, {
-    swagger: {
+    openapi: {
       info: {
         title: "Meetup API",
         description: "API documentation for the Meetup application",
         version: "1.0.0"
       },
-      host: "localhost:3000",
-      schemes: ["http"],
-      consumes: ["application/json"],
-      produces: ["application/json"],
+      servers: [
+        {
+          url: "http://localhost:3000",
+          description: "Local development server"
+        }
+      ],
       tags: [
         {
           name: "meetups",
@@ -36,27 +32,85 @@ export async function setupSwagger(server: FastifyInstance): Promise<void> {
             summary: "Get all meetups",
             responses: {
               "200": {
-                description: "Successful response",
-                schema: MeetupArraySchema
+                description: "List of all meetups",
+                content: {
+                  "application/json": {
+                    schema: {
+                      type: "array",
+                      items: {
+                        type: "object",
+                        properties: {
+                          id: { type: "string" },
+                          title: { type: "string" },
+                          description: { type: "string" },
+                          date: { type: "string", format: "date-time" },
+                          location: { type: "string" },
+                          imageUrl: { type: "string" },
+                          createdAt: { type: "string", format: "date-time" },
+                          updatedAt: { type: "string", format: "date-time" }
+                        }
+                      }
+                    }
+                  }
+                }
               }
             }
           },
           post: {
             tags: ["meetups"],
             summary: "Create a new meetup",
-            parameters: [
-              {
-                in: "body",
-                name: "body",
-                description: "Meetup object that needs to be added",
-                required: true,
-                schema: MeetupBodySchema
+            requestBody: {
+              required: true,
+              content: {
+                "application/json": {
+                  schema: {
+                    type: "object",
+                    required: [
+                      "title",
+                      "description",
+                      "date",
+                      "location",
+                      "imageUrl"
+                    ],
+                    properties: {
+                      title: { type: "string", minLength: 3, maxLength: 100 },
+                      description: {
+                        type: "string",
+                        minLength: 10,
+                        maxLength: 2000
+                      },
+                      date: { type: "string", format: "date-time" },
+                      location: {
+                        type: "string",
+                        minLength: 3,
+                        maxLength: 200
+                      },
+                      imageUrl: { type: "string", format: "uri" }
+                    }
+                  }
+                }
               }
-            ],
+            },
             responses: {
               "201": {
-                description: "Created",
-                schema: MeetupSchema
+                description: "Created meetup",
+                content: {
+                  "application/json": {
+                    schema: {
+                      type: "object",
+                      properties: {
+                        id: { type: "string" },
+                        title: { type: "string" },
+                        description: { type: "string" },
+                        date: { type: "string", format: "date-time" },
+                        location: { type: "string" },
+                        imageUrl: { type: "string" },
+                        createdAt: { type: "string", format: "date-time" },
+                        updatedAt: { type: "string", format: "date-time" }
+                      }
+                    }
+                  }
+                }
               }
             }
           }
@@ -69,15 +123,31 @@ export async function setupSwagger(server: FastifyInstance): Promise<void> {
               {
                 in: "path",
                 name: "id",
+                schema: { type: "string" },
                 required: true,
-                type: "string",
-                description: "ID of meetup to return"
+                description: "ID of the meetup"
               }
             ],
             responses: {
               "200": {
-                description: "Successful response",
-                schema: MeetupSchema
+                description: "Meetup details",
+                content: {
+                  "application/json": {
+                    schema: {
+                      type: "object",
+                      properties: {
+                        id: { type: "string" },
+                        title: { type: "string" },
+                        description: { type: "string" },
+                        date: { type: "string", format: "date-time" },
+                        location: { type: "string" },
+                        imageUrl: { type: "string" },
+                        createdAt: { type: "string", format: "date-time" },
+                        updatedAt: { type: "string", format: "date-time" }
+                      }
+                    }
+                  }
+                }
               },
               "404": {
                 description: "Meetup not found"
@@ -91,22 +161,56 @@ export async function setupSwagger(server: FastifyInstance): Promise<void> {
               {
                 in: "path",
                 name: "id",
+                schema: { type: "string" },
                 required: true,
-                type: "string",
-                description: "ID of meetup to update"
-              },
-              {
-                in: "body",
-                name: "body",
-                description: "Meetup object that needs to be updated",
-                required: true,
-                schema: UpdateMeetupBodySchema
+                description: "ID of the meetup"
               }
             ],
+            requestBody: {
+              description: "Meetup object to update",
+              content: {
+                "application/json": {
+                  schema: {
+                    type: "object",
+                    properties: {
+                      title: { type: "string", minLength: 3, maxLength: 100 },
+                      description: {
+                        type: "string",
+                        minLength: 10,
+                        maxLength: 2000
+                      },
+                      date: { type: "string", format: "date-time" },
+                      location: {
+                        type: "string",
+                        minLength: 3,
+                        maxLength: 200
+                      },
+                      imageUrl: { type: "string", format: "uri" }
+                    }
+                  }
+                }
+              }
+            },
             responses: {
               "200": {
-                description: "Successful response",
-                schema: MeetupSchema
+                description: "Updated meetup",
+                content: {
+                  "application/json": {
+                    schema: {
+                      type: "object",
+                      properties: {
+                        id: { type: "string" },
+                        title: { type: "string" },
+                        description: { type: "string" },
+                        date: { type: "string", format: "date-time" },
+                        location: { type: "string" },
+                        imageUrl: { type: "string" },
+                        createdAt: { type: "string", format: "date-time" },
+                        updatedAt: { type: "string", format: "date-time" }
+                      }
+                    }
+                  }
+                }
               },
               "404": {
                 description: "Meetup not found"
@@ -120,14 +224,14 @@ export async function setupSwagger(server: FastifyInstance): Promise<void> {
               {
                 in: "path",
                 name: "id",
+                schema: { type: "string" },
                 required: true,
-                type: "string",
-                description: "ID of meetup to delete"
+                description: "ID of the meetup"
               }
             ],
             responses: {
               "204": {
-                description: "No content"
+                description: "Meetup deleted"
               },
               "404": {
                 description: "Meetup not found"
@@ -139,13 +243,19 @@ export async function setupSwagger(server: FastifyInstance): Promise<void> {
     }
   })
 
-  // Registra la UI de Swagger
+  // Registrar UI de Swagger
   await server.register(swaggerUi, {
     routePrefix: "/docs",
     uiConfig: {
       docExpansion: "list",
       deepLinking: false
     },
-    staticCSP: true
+    staticCSP: true,
+    transformSpecification: transformSpec
   })
+}
+
+// Función de transformación para arreglar posibles problemas en la especificación
+function transformSpec(swaggerObject: any) {
+  return swaggerObject
 }
