@@ -37,7 +37,7 @@ const meetup3 = Meetup.fromPrimitives({
   updatedAt: new Date().toISOString()
 })
 
-export class MockMeetupRepository implements MeetupRepository {
+export default class MockMeetupRepository implements MeetupRepository {
   private meetups: Meetup[] = [meetup1, meetup2, meetup3]
 
   async findAll(): Promise<Meetup[]> {

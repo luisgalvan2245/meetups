@@ -2,7 +2,7 @@ import { Meetup } from "@/meetup/domain/entities/meetupEntity"
 import { MeetupRepository } from "@/meetup/domain/repositories/meetupRepository"
 import { EntityId } from "@/shared/domain/valueObjects/entityId"
 
-export class MeetupService {
+export default class MeetupService {
   constructor(private meetupRepository: MeetupRepository) {}
 
   async getAllMeetups(): Promise<Meetup[]> {

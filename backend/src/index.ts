@@ -1,8 +1,10 @@
+import "reflect-metadata"
 import fastify, { FastifyRequest } from "fastify"
 import swagger from "@fastify/swagger"
 // @ts-ignore
 import swaggerUi from "@fastify/swagger-ui"
-import { registerRoutes } from "./shared/infrastructure/routes/fastifyRoutes"
+import { bootstrap } from "fastify-decorators"
+import { resolve } from "path"
 
 const server = fastify({
   logger: true
@@ -78,14 +80,17 @@ async function setupSwagger() {
   })
 }
 
-// Register custom routes
+// Start server
 async function start() {
   try {
     // Set up Swagger
     await setupSwagger()
 
-    // Register routes
-    await registerRoutes(server)
+    // Register controllers using fastify-decorators
+    await server.register(bootstrap, {
+      directory: resolve(__dirname, "meetup/infrastructure/controllers"),
+      mask: /\.controller\.[jt]s$/
+    })
 
     // Start server
     await server.listen({

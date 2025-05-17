@@ -94,5 +94,4 @@ npm install tsoa && npm install -D @types/swagger-ui-express swagger-ui-express
 
 ## TSOA
 
-Renombra meetupId a entityID y muévelo a una carpeta shared/domain/valueObjects/entityID.ts
-se reutilizará para otras entidades
+implementa fastify decorators. Revisa todo el código y elimina la duplicación de código donde sea posible
