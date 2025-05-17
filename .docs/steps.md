@@ -92,7 +92,8 @@ curl http://localhost:3000/api/events
 npm install tsoa && npm install -D @types/swagger-ui-express swagger-ui-express
 ```
 
-## TSOA
+## Workspaces:
 
-Renombra meetupId a entityID y muévelo a una carpeta shared/domain/valueObjects/entityID.ts
-se reutilizará para otras entidades
+Ejecutar comandos en todos los workspaces: npm run dev
+Ejecutar comandos en un workspace específico: npm run dev -w backend
+Instalar dependencias en un workspace específico: npm install express -w backend
