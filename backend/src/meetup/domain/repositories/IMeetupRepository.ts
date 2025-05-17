@@ -1,6 +1,6 @@
-import { Meetup } from "@/meetup/domain/entities/meetupEntity"
+import { Meetup } from "@/meetup/domain/entities/Meetup"
 
-export interface MeetupRepository {
+export interface IMeetupRepository {
   findAll(): Promise<Meetup[]>
   findById(id: string): Promise<Meetup | null>
   create(meetup: Meetup): Promise<Meetup>

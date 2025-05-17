@@ -1,16 +1,16 @@
-import { Meetup } from "@/meetup/domain/entities/meetupEntity"
-import { MeetupRepository } from "@/meetup/domain/repositories/meetupRepository"
-import { EntityId } from "@/shared/domain/valueObjects/entityId"
+import { Meetup } from "@/meetup/domain/entities/Meetup"
+import { IMeetupRepository } from "@/meetup/domain/repositories/IMeetupRepository"
+import { EntityId } from "@/shared/domain/value-objects/EntityId"
 
-export default class MeetupService {
-  constructor(private meetupRepository: MeetupRepository) {}
+export class MeetupService {
+  constructor(private meetupRepository: IMeetupRepository) {}
 
   async getAllMeetups(): Promise<Meetup[]> {
     return this.meetupRepository.findAll()
   }
 
   async getMeetupById(id: EntityId): Promise<Meetup | null> {
-    return this.meetupRepository.findById(id.value)
+    return this.meetupRepository.findById(id.getValue())
   }
 
   async createMeetup(meetupData: {
@@ -40,14 +40,14 @@ export default class MeetupService {
       imageUrl?: string
     }
   ): Promise<Meetup | null> {
-    const meetup = await this.meetupRepository.findById(id.value)
+    const meetup = await this.meetupRepository.findById(id.getValue())
     if (!meetup) return null
 
     meetup.update(meetupData)
-    return this.meetupRepository.update(id.value, meetup)
+    return this.meetupRepository.update(id.getValue(), meetup)
   }
 
   async deleteMeetup(id: EntityId): Promise<void> {
-    await this.meetupRepository.delete(id.value)
+    await this.meetupRepository.delete(id.getValue())
   }
 }

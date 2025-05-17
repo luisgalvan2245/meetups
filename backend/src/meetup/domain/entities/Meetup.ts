@@ -1,10 +1,12 @@
-import { EntityId } from "@/shared/domain/valueObjects/entityId"
-import { MeetupTitle } from "@/meetup/domain/valueObjects/meetupTitle"
-import { MeetupDescription } from "@/meetup/domain/valueObjects/meetupDescription"
-import { MeetupDate } from "@/meetup/domain/valueObjects/meetupDate"
-import { MeetupLocation } from "@/meetup/domain/valueObjects/meetupLocation"
-import { MeetupImageUrl } from "@/meetup/domain/valueObjects/meetupImageUrl"
-import { MeetupDateTime } from "@/meetup/domain/valueObjects/meetupDateTime"
+import { EntityId } from "@/shared/domain/value-objects/EntityId"
+import {
+  MeetupTitle,
+  MeetupDescription,
+  MeetupDate,
+  MeetupLocation,
+  MeetupImageUrl,
+  MeetupDateTime
+} from "@/meetup/domain/value-objects"
 
 export class Meetup {
   public readonly id: EntityId
@@ -80,12 +82,12 @@ export class Meetup {
 
   public toPrimitives() {
     return {
-      id: this.id.value,
-      title: this.title.value,
-      description: this.description.value,
+      id: this.getId(),
+      title: this.getTitle(),
+      description: this.getDescription(),
       date: this.date.toISOString(),
-      location: this.location.value,
-      imageUrl: this.imageUrl.value,
+      location: this.getLocation(),
+      imageUrl: this.getImageUrl(),
       createdAt: this.createdAt.toISOString(),
       updatedAt: this.updatedAt.toISOString()
     }
@@ -119,34 +121,34 @@ export class Meetup {
   }
 
   public getId(): string {
-    return this.id.value
+    return this.id.getValue()
   }
 
   public getTitle(): string {
-    return this.title.value
+    return this.title.getValue()
   }
 
   public getDescription(): string {
-    return this.description.value
+    return this.description.getValue()
   }
 
   public getDate(): Date {
-    return this.date.value
+    return this.date.getValue()
   }
 
   public getLocation(): string {
-    return this.location.value
+    return this.location.getValue()
   }
 
   public getImageUrl(): string {
-    return this.imageUrl.value
+    return this.imageUrl.getValue()
   }
 
   public getCreatedAt(): Date {
-    return this.createdAt.value
+    return this.createdAt.getValue()
   }
 
   public getUpdatedAt(): Date {
-    return this.updatedAt.value
+    return this.updatedAt.getValue()
   }
 }

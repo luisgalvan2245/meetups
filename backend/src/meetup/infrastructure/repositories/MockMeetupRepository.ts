@@ -1,5 +1,5 @@
-import { Meetup } from "@/meetup/domain/entities/meetupEntity"
-import { MeetupRepository } from "@/meetup/domain/repositories/meetupRepository"
+import { Meetup } from "@/meetup/domain/entities/Meetup"
+import { IMeetupRepository } from "@/meetup/domain/repositories/IMeetupRepository"
 
 const futureDate = new Date()
 futureDate.setDate(futureDate.getDate() + 7) // 7 días en el futuro
@@ -37,7 +37,7 @@ const meetup3 = Meetup.fromPrimitives({
   updatedAt: new Date().toISOString()
 })
 
-export default class MockMeetupRepository implements MeetupRepository {
+export class MockMeetupRepository implements IMeetupRepository {
   private meetups: Meetup[] = [meetup1, meetup2, meetup3]
 
   async findAll(): Promise<Meetup[]> {
@@ -45,7 +45,7 @@ export default class MockMeetupRepository implements MeetupRepository {
   }
 
   async findById(id: string): Promise<Meetup | null> {
-    return this.meetups.find(meetup => meetup.id.value === id) || null
+    return this.meetups.find(meetup => meetup.getId() === id) || null
   }
 
   async create(meetup: Meetup): Promise<Meetup> {
@@ -54,7 +54,7 @@ export default class MockMeetupRepository implements MeetupRepository {
   }
 
   async update(id: string, meetup: Meetup): Promise<Meetup | null> {
-    const index = this.meetups.findIndex(m => m.id.value === id)
+    const index = this.meetups.findIndex(m => m.getId() === id)
     if (index >= 0) {
       this.meetups[index] = meetup
       return meetup
@@ -64,7 +64,7 @@ export default class MockMeetupRepository implements MeetupRepository {
 
   async delete(id: string): Promise<boolean> {
     const initialLength = this.meetups.length
-    this.meetups = this.meetups.filter(meetup => meetup.id.value !== id)
+    this.meetups = this.meetups.filter(meetup => meetup.getId() !== id)
     return this.meetups.length !== initialLength
   }
 }
