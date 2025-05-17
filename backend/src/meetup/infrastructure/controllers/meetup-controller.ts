@@ -10,7 +10,8 @@ import {
   Delete,
   Path,
   Body,
-  Response
+  Response,
+  SuccessResponse
 } from "@tsoa/runtime"
 
 export interface MeetupModel {
@@ -35,12 +36,14 @@ export class MeetupController {
   }
 
   @Get()
+  @SuccessResponse("200", "Ok")
   public async getAllMeetups(): Promise<MeetupModel[]> {
     const meetups = await this.meetupService.getAllMeetups()
     return meetups.map(meetup => meetup.toPrimitives())
   }
 
   @Get("{id}")
+  @SuccessResponse("200", "Ok")
   @Response(404, "Meetup not found")
   public async getMeetupById(@Path() id: string): Promise<MeetupModel | null> {
     const meetup = await this.meetupService.getMeetupById(EntityId.create(id))
@@ -51,6 +54,7 @@ export class MeetupController {
   }
 
   @Post()
+  @SuccessResponse("201", "Created")
   public async createMeetup(
     @Body()
     meetupData: {
@@ -66,6 +70,7 @@ export class MeetupController {
   }
 
   @Put("{id}")
+  @SuccessResponse("200", "Ok")
   @Response(404, "Meetup not found")
   public async updateMeetup(
     @Path() id: string,
@@ -89,6 +94,7 @@ export class MeetupController {
   }
 
   @Delete("{id}")
+  @SuccessResponse("204", "No Content")
   @Response(404, "Meetup not found")
   public async deleteMeetup(@Path() id: string): Promise<void> {
     const deleted = await this.meetupService.deleteMeetup(EntityId.create(id))

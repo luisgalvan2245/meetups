@@ -57,7 +57,7 @@ describe("MeetupController", () => {
       }
 
       const response = await request(app).post("/meetups").send(meetupData)
-      expect(response.status).toBe(200)
+      expect(response.status).toBe(201)
       expect(response.body).toHaveProperty("id")
       expect(response.body).toHaveProperty("title", meetupData.title)
       expect(response.body).toHaveProperty(

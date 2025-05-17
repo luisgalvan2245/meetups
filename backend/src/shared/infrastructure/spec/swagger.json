@@ -86,8 +86,8 @@
 			"post": {
 				"operationId": "CreateMeetup",
 				"responses": {
-					"200": {
-						"description": "Ok",
+					"201": {
+						"description": "Created",
 						"content": {
 							"application/json": {
 								"schema": {
@@ -246,7 +246,7 @@
 				"operationId": "DeleteMeetup",
 				"responses": {
 					"204": {
-						"description": "No content"
+						"description": "No Content"
 					},
 					"404": {
 						"description": "Meetup not found"
