@@ -1,4 +1,4 @@
-import { ValueObject } from "@/shared/domain/valueObjects/valueObject"
+import { ValueObject } from "@/shared/domain/value-objects/value-object"
 
 export class MeetupCreatedAt extends ValueObject<Date> {
   constructor(value: Date) {

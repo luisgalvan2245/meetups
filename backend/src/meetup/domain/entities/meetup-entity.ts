@@ -1,10 +1,10 @@
-import { EntityId } from "@/shared/domain/valueObjects/entityId"
-import { MeetupTitle } from "@/meetup/domain/valueObjects/meetupTitle"
-import { MeetupDescription } from "@/meetup/domain/valueObjects/meetupDescription"
-import { MeetupDate } from "@/meetup/domain/valueObjects/meetupDate"
-import { MeetupLocation } from "@/meetup/domain/valueObjects/meetupLocation"
-import { MeetupImageUrl } from "@/meetup/domain/valueObjects/meetupImageUrl"
-import { MeetupDateTime } from "@/meetup/domain/valueObjects/meetupDateTime"
+import { EntityId } from "@/shared/domain/value-objects/entity-id"
+import { MeetupTitle } from "@/meetup/domain/value-objects/meetup-title"
+import { MeetupDescription } from "@/meetup/domain/value-objects/meetup-description"
+import { MeetupDate } from "@/meetup/domain/value-objects/meetup-date"
+import { MeetupLocation } from "@/meetup/domain/value-objects/meetup-location"
+import { MeetupImageUrl } from "@/meetup/domain/value-objects/meetup-image-url"
+import { MeetupDateTime } from "@/meetup/domain/value-objects/meetup-date-time"
 
 export class Meetup {
   public readonly id: EntityId

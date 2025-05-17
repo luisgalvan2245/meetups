@@ -1,5 +1,5 @@
-import { Meetup } from "@/meetup/domain/entities/meetupEntity"
-import { MeetupRepository } from "@/meetup/domain/repositories/meetupRepository"
+import { Meetup } from "@/meetup/domain/entities/meetup-entity"
+import { MeetupRepository } from "@/meetup/domain/repositories/meetup-repository"
 
 const futureDate = new Date()
 futureDate.setDate(futureDate.getDate() + 7) // 7 días en el futuro

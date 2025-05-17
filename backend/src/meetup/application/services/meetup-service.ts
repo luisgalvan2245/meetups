@@ -1,6 +1,6 @@
-import { Meetup } from "@/meetup/domain/entities/meetupEntity"
-import { MeetupRepository } from "@/meetup/domain/repositories/meetupRepository"
-import { EntityId } from "@/shared/domain/valueObjects/entityId"
+import { Meetup } from "@/meetup/domain/entities/meetup-entity"
+import { MeetupRepository } from "@/meetup/domain/repositories/meetup-repository"
+import { EntityId } from "@/shared/domain/value-objects/entity-id"
 
 export class MeetupService {
   constructor(private meetupRepository: MeetupRepository) {}

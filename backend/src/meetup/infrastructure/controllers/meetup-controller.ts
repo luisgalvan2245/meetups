@@ -1,6 +1,6 @@
-import { MeetupService } from "@/meetup/application/services/meetupService"
-import { MockMeetupRepository } from "@/meetup/infrastructure/repositories/mockMeetupRepository"
-import { EntityId } from "@/shared/domain/valueObjects/entityId"
+import { MeetupService } from "@/meetup/application/services/meetup-service"
+import { MockMeetupRepository } from "@/meetup/infrastructure/repositories/mock-meetup-repository"
+import { EntityId } from "@/shared/domain/value-objects/entity-id"
 import { Route, Tags, Get, Post, Put, Delete, Path, Body } from "@tsoa/runtime"
 
 export interface MeetupModel {

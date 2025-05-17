@@ -1,7 +1,7 @@
 import express from "express"
 import swaggerUi from "swagger-ui-express"
-import { RegisterRoutes } from "./shared/infrastructure/routes/routes"
-import swaggerJson from "./shared/infrastructure/spec/swagger.json"
+import { RegisterRoutes } from "@/shared/infrastructure/routes/routes"
+import swaggerJson from "@/shared/infrastructure/spec/swagger.json"
 
 const app = express()
 app.use(express.json())
