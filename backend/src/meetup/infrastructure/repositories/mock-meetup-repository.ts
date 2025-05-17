@@ -38,33 +38,38 @@ const meetup3 = Meetup.fromPrimitives({
 })
 
 export class MockMeetupRepository implements MeetupRepository {
-  private meetups: Meetup[] = [meetup1, meetup2, meetup3]
+  private static meetups: Meetup[] = [meetup1, meetup2, meetup3]
 
   async findAll(): Promise<Meetup[]> {
-    return this.meetups
+    return MockMeetupRepository.meetups
   }
 
   async findById(id: string): Promise<Meetup | null> {
-    return this.meetups.find(meetup => meetup.id.value === id) || null
+    return (
+      MockMeetupRepository.meetups.find(meetup => meetup.id.value === id) ||
+      null
+    )
   }
 
   async create(meetup: Meetup): Promise<Meetup> {
-    this.meetups.push(meetup)
+    MockMeetupRepository.meetups.push(meetup)
     return meetup
   }
 
   async update(id: string, meetup: Meetup): Promise<Meetup | null> {
-    const index = this.meetups.findIndex(m => m.id.value === id)
+    const index = MockMeetupRepository.meetups.findIndex(m => m.id.value === id)
     if (index >= 0) {
-      this.meetups[index] = meetup
+      MockMeetupRepository.meetups[index] = meetup
       return meetup
     }
     return null
   }
 
   async delete(id: string): Promise<boolean> {
-    const initialLength = this.meetups.length
-    this.meetups = this.meetups.filter(meetup => meetup.id.value !== id)
-    return this.meetups.length !== initialLength
+    const initialLength = MockMeetupRepository.meetups.length
+    MockMeetupRepository.meetups = MockMeetupRepository.meetups.filter(
+      meetup => meetup.id.value !== id
+    )
+    return MockMeetupRepository.meetups.length !== initialLength
   }
 }

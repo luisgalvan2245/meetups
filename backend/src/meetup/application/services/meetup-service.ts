@@ -47,7 +47,7 @@ export class MeetupService {
     return this.meetupRepository.update(id.value, meetup)
   }
 
-  async deleteMeetup(id: EntityId): Promise<void> {
-    await this.meetupRepository.delete(id.value)
+  async deleteMeetup(id: EntityId): Promise<boolean> {
+    return this.meetupRepository.delete(id.value)
   }
 }
