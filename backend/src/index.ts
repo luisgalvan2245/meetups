@@ -1,7 +1,7 @@
 import express from "express"
 import swaggerUi from "swagger-ui-express"
-import { RegisterRoutes } from "./shared/infrastructure/routes/routes"
-import swaggerJson from "../public/swagger.json"
+import { RegisterRoutes } from "./shared/infrastructure/openapi/routes"
+import swaggerJson from "./shared/infrastructure/openapi/swagger.json"
 
 const app = express()
 app.use(express.json())
@@ -15,5 +15,5 @@ RegisterRoutes(app)
 const port = process.env.PORT || 3000
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`)
-  console.log(`Swagger documentation at http://localhost:${port}/docs`)
+  console.log(`Swagger at http://localhost:${port}/docs`)
 })
