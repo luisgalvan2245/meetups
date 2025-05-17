@@ -1,4 +1,5 @@
 import { EntityId } from "@/shared/domain/value-objects/entity-id"
+import { Entity } from "@/shared/domain/entities/entity"
 import { MeetupTitle } from "@/meetup/domain/value-objects/meetup-title"
 import { MeetupDescription } from "@/meetup/domain/value-objects/meetup-description"
 import { MeetupDate } from "@/meetup/domain/value-objects/meetup-date"
@@ -6,8 +7,7 @@ import { MeetupLocation } from "@/meetup/domain/value-objects/meetup-location"
 import { MeetupImageUrl } from "@/meetup/domain/value-objects/meetup-image-url"
 import { MeetupDateTime } from "@/meetup/domain/value-objects/meetup-date-time"
 
-export class Meetup {
-  public readonly id: EntityId
+export class Meetup extends Entity {
   private title: MeetupTitle
   private description: MeetupDescription
   private date: MeetupDate
@@ -26,7 +26,7 @@ export class Meetup {
     createdAt: MeetupDateTime,
     updatedAt: MeetupDateTime
   ) {
-    this.id = id
+    super(id)
     this.title = title
     this.description = description
     this.date = date
