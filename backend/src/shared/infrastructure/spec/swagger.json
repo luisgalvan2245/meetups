@@ -96,6 +96,9 @@
 								}
 							}
 						}
+					},
+					"400": {
+						"description": "Bad Request"
 					}
 				},
 				"tags": [
@@ -160,7 +163,7 @@
 						}
 					},
 					"404": {
-						"description": "Meetup not found"
+						"description": "Not found"
 					}
 				},
 				"tags": [
@@ -196,8 +199,11 @@
 							}
 						}
 					},
+					"400": {
+						"description": "Bad Request"
+					},
 					"404": {
-						"description": "Meetup not found"
+						"description": "Not found"
 					}
 				},
 				"tags": [
@@ -250,7 +256,7 @@
 						"description": "No Content"
 					},
 					"404": {
-						"description": "Meetup not found"
+						"description": "Not found"
 					}
 				},
 				"tags": [

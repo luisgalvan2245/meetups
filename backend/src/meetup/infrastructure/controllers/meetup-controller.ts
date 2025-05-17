@@ -44,17 +44,18 @@ export class MeetupController {
 
   @Get("{id}")
   @SuccessResponse("200", "Ok")
-  @Response(404, "Meetup not found")
+  @Response(404, "Not found")
   public async getMeetupById(@Path() id: string): Promise<MeetupModel | null> {
     const meetup = await this.meetupService.getMeetupById(EntityId.create(id))
     if (!meetup) {
-      throw { status: 404, message: "Meetup not found" }
+      throw { status: 404, message: "Not found" }
     }
     return meetup.toPrimitives()
   }
 
   @Post()
   @SuccessResponse("201", "Created")
+  @Response(400, "Bad Request")
   public async createMeetup(
     @Body()
     meetupData: {
@@ -71,7 +72,8 @@ export class MeetupController {
 
   @Put("{id}")
   @SuccessResponse("200", "Ok")
-  @Response(404, "Meetup not found")
+  @Response(400, "Bad Request")
+  @Response(404, "Not found")
   public async updateMeetup(
     @Path() id: string,
     @Body()
@@ -88,18 +90,18 @@ export class MeetupController {
       meetupData
     )
     if (!meetup) {
-      throw { status: 404, message: "Meetup not found" }
+      throw { status: 404, message: "Not found" }
     }
     return meetup.toPrimitives()
   }
 
   @Delete("{id}")
   @SuccessResponse("204", "No Content")
-  @Response(404, "Meetup not found")
+  @Response(404, "Not found")
   public async deleteMeetup(@Path() id: string): Promise<void> {
     const deleted = await this.meetupService.deleteMeetup(EntityId.create(id))
     if (!deleted) {
-      throw { status: 404, message: "Meetup not found" }
+      throw { status: 404, message: "Not found" }
     }
   }
 }
