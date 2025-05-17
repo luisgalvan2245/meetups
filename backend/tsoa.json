@@ -3,11 +3,11 @@
   "noImplicitAdditionalProperties": "throw-on-extras",
   "controllerPathGlobs": ["src/**/*Controller.ts"],
   "spec": {
-    "outputDirectory": "src/shared/infrastructure/openapi",
+    "outputDirectory": "src/shared/infrastructure/spec",
     "specVersion": 3
   },
   "routes": {
-    "routesDir": "src/shared/infrastructure/openapi",
+    "routesDir": "src/shared/infrastructure/routes",
     "middleware": "express"
   }
 }
