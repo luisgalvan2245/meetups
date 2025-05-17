@@ -1,5 +1,5 @@
 import "dotenv/config"
-import express from "express"
+import express, { Application } from "express"
 import swaggerUi from "swagger-ui-express"
 import { RegisterRoutes } from "@/shared/infrastructure/routes/routes"
 import swaggerJson from "@/shared/infrastructure/spec/swagger.json"
@@ -15,7 +15,7 @@ export function createApp() {
   return app
 }
 
-function startServer(app: express.Application) {
+function startServer(app: Application) {
   const host = process.env.HOST || "localhost"
   const port = process.env.PORT || 3000
 

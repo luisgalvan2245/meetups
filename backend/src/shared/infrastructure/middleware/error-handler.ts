@@ -1,20 +1,28 @@
 import type { Request, Response, NextFunction } from "express"
 
+interface AppError {
+  status?: number
+  message?: string
+}
+
 export function errorHandlerMiddleware(
-  err: any,
+  err: AppError,
   _req: Request,
   res: Response,
   _next: NextFunction
-) {
+): void {
   if (res.headersSent) return
-  switch (err?.status) {
-    case 400:
-      return res.status(400).json({ message: "Bad Request" })
-    case 404:
-      return res.status(404).json({ message: "Not found" })
-    case 422:
-      return res.status(422).json({ message: "Unprocessable Entity" })
-    default:
-      return res.status(500).json({ message: "Internal server error" })
+
+  const status = err.status ?? 500
+
+  const messages: Record<number, string> = {
+    400: "Bad Request",
+    404: "Not Found",
+    422: "Unprocessable Entity",
+    500: "Internal Server Error"
   }
+
+  const message = messages[status] || "Unexpected error"
+
+  res.status(status).json({ message })
 }
