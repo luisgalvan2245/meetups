@@ -1,3 +1,4 @@
+import "dotenv/config"
 import express from "express"
 import swaggerUi from "swagger-ui-express"
 import { RegisterRoutes } from "@/shared/infrastructure/routes/routes"
@@ -16,9 +17,8 @@ app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
       return res.status(400).json({ message: "Bad Request" })
     case 500:
       return res.status(500).json({ message: "Internal server error" })
-    default:
-      return err
   }
+  return err
 })
 
 // Routes
@@ -29,12 +29,14 @@ app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerJson))
 
 // Server
 function startServer() {
+  const host = process.env.HOST || "localhost"
   const port = process.env.PORT || 3000
-  const url = `http://localhost:${port}`
+  const url = `http://${host}:${port}`
 
   app.listen(port, () => {
-    console.log(`Server is running on ${url}`)
-    console.log(`Swagger docs at ${url}/docs`)
+    console.log(`Environment: ${process.env.NODE_ENV}`)
+    console.log(`Server: ${url}`)
+    console.log(`Swagger: ${url}/docs`)
   })
 }
 

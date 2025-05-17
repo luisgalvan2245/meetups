@@ -36,15 +36,16 @@ export class MeetupController {
   }
 
   @Get()
-  @SuccessResponse("200", "Ok")
+  @SuccessResponse(200, "Ok")
   public async getAllMeetups(): Promise<MeetupModel[]> {
     const meetups = await this.meetupService.getAllMeetups()
     return meetups.map(meetup => meetup.toPrimitives())
   }
 
   @Get("{id}")
-  @SuccessResponse("200", "Ok")
+  @SuccessResponse(200, "Ok")
   @Response(404, "Not found")
+  @Response(400, "Bad Request")
   public async getMeetupById(@Path() id: string): Promise<MeetupModel | null> {
     const meetup = await this.meetupService.getMeetupById(EntityId.create(id))
     if (!meetup) {
@@ -54,7 +55,7 @@ export class MeetupController {
   }
 
   @Post()
-  @SuccessResponse("201", "Created")
+  @SuccessResponse(201, "Created")
   @Response(400, "Bad Request")
   public async createMeetup(
     @Body()
@@ -71,9 +72,9 @@ export class MeetupController {
   }
 
   @Put("{id}")
-  @SuccessResponse("200", "Ok")
-  @Response(400, "Bad Request")
+  @SuccessResponse(200, "Ok")
   @Response(404, "Not found")
+  @Response(400, "Bad Request")
   public async updateMeetup(
     @Path() id: string,
     @Body()
@@ -96,8 +97,9 @@ export class MeetupController {
   }
 
   @Delete("{id}")
-  @SuccessResponse("204", "No Content")
+  @SuccessResponse(204, "No Content")
   @Response(404, "Not found")
+  @Response(400, "Bad Request")
   public async deleteMeetup(@Path() id: string): Promise<void> {
     const deleted = await this.meetupService.deleteMeetup(EntityId.create(id))
     if (!deleted) {
