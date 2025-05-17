@@ -51,7 +51,7 @@ describe("MeetupController", () => {
       const meetupData = {
         title: "Test Meetup",
         description: "Test Description",
-        date: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(), // 7 días en el futuro
+        date: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(), // 7 days in the future
         location: "Test Location",
         imageUrl: "https://example.com/test.jpg"
       }
@@ -74,11 +74,23 @@ describe("MeetupController", () => {
       const response = await request(app).post("/meetups").send({})
       expect(response.status).toBe(400)
     })
+
+    it("should return 400 if a field has the wrong type", async () => {
+      const invalidData = {
+        title: 123, // should be string
+        description: true, // should be string
+        date: "not-a-date", // should be a valid date
+        location: {}, // should be string
+        imageUrl: 456 // should be string
+      }
+      const response = await request(app).post("/meetups").send(invalidData)
+      expect(response.status).toBe(400)
+    })
   })
 
   describe("PUT /meetups/:id", () => {
     it("should update a meetup", async () => {
-      // Primero obtenemos todos los meetups para tener un ID válido
+      // First we get all meetups to have a valid ID
       const meetupsResponse = await request(app).get("/meetups")
       const meetupId = meetupsResponse.body[0].id
 
@@ -105,18 +117,31 @@ describe("MeetupController", () => {
         .send({ title: "Updated Title" })
       expect(response.status).toBe(404)
     })
+
+    it("should return 400 if a field has the wrong type", async () => {
+      const meetupsResponse = await request(app).get("/meetups")
+      const meetupId = meetupsResponse.body[0].id
+      const invalidUpdate = {
+        title: 123,
+        description: false
+      }
+      const response = await request(app)
+        .put(`/meetups/${meetupId}`)
+        .send(invalidUpdate)
+      expect(response.status).toBe(400)
+    })
   })
 
   describe("DELETE /meetups/:id", () => {
     it("should delete a meetup", async () => {
-      // Primero obtenemos todos los meetups para tener un ID válido
+      // First we get all meetups to have a valid ID
       const meetupsResponse = await request(app).get("/meetups")
       const meetupId = meetupsResponse.body[0].id
 
       const response = await request(app).delete(`/meetups/${meetupId}`)
       expect(response.status).toBe(204)
 
-      // Verificamos que el meetup ya no existe
+      // We verify that the meetup no longer exists
       const getResponse = await request(app).get(`/meetups/${meetupId}`)
       expect(getResponse.status).toBe(404)
     })
