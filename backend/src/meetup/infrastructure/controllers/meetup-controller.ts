@@ -45,7 +45,6 @@ export class MeetupController {
   @Get("{id}")
   @SuccessResponse(200, "Ok")
   @Response(404, "Not found")
-  @Response(400, "Bad Request")
   public async getMeetupById(@Path() id: string): Promise<MeetupModel | null> {
     const meetup = await this.meetupService.getMeetupById(EntityId.create(id))
     if (!meetup) {
@@ -99,7 +98,6 @@ export class MeetupController {
   @Delete("{id}")
   @SuccessResponse(204, "No Content")
   @Response(404, "Not found")
-  @Response(400, "Bad Request")
   public async deleteMeetup(@Path() id: string): Promise<void> {
     const deleted = await this.meetupService.deleteMeetup(EntityId.create(id))
     if (!deleted) {

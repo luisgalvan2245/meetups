@@ -3,41 +3,27 @@ import express from "express"
 import swaggerUi from "swagger-ui-express"
 import { RegisterRoutes } from "@/shared/infrastructure/routes/routes"
 import swaggerJson from "@/shared/infrastructure/spec/swagger.json"
-import type { Request, Response, NextFunction } from "express"
+import { logger } from "@/shared/infrastructure/logger/logger"
+import { errorHandlerMiddleware } from "@/shared/infrastructure/middleware/error-handler"
 
-const app = express()
+export function createApp() {
+  const app = express()
+  app.use(express.json())
+  RegisterRoutes(app)
+  app.use(errorHandlerMiddleware)
+  app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerJson))
+  return app
+}
 
-// JSON parser Middleware
-app.use(express.json())
-
-// Error handling Middleware
-app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
-  switch (err?.status) {
-    case 400:
-      return res.status(400).json({ message: "Bad Request" })
-    case 500:
-      return res.status(500).json({ message: "Internal server error" })
-  }
-  return err
-})
-
-// Routes
-RegisterRoutes(app)
-
-// Swagger
-app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerJson))
-
-// Server
-function startServer() {
+function startServer(app: express.Application) {
   const host = process.env.HOST || "localhost"
   const port = process.env.PORT || 3000
-  const url = `http://${host}:${port}`
 
   app.listen(port, () => {
-    console.log(`Environment: ${process.env.NODE_ENV}`)
-    console.log(`Server: ${url}`)
-    console.log(`Swagger: ${url}/docs`)
+    logger.warn(`Running on ${process.env.NODE_ENV} mode`)
+    logger.info(`Server listening on http://${host}:${port}`)
   })
 }
 
-startServer()
+const app = createApp()
+startServer(app)
