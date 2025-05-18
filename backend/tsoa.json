@@ -1,7 +1,7 @@
 {
   "entryFile": "src/index.ts",
   "noImplicitAdditionalProperties": "throw-on-extras",
-  "controllerPathGlobs": ["src/**/*controller.ts"],
+  "controllerPathGlobs": ["src/**/*[cC]ontroller.ts"],
   "spec": {
     "outputDirectory": "src/shared/infrastructure/spec",
     "specVersion": 3

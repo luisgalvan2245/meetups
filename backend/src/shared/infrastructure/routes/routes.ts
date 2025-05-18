@@ -4,7 +4,7 @@
 import type { TsoaRoute } from '@tsoa/runtime';
 import {  fetchMiddlewares, ExpressTemplateService } from '@tsoa/runtime';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-import { MeetupController } from './../../../meetup/infrastructure/controllers/meetup-controller';
+import { MeetupController } from './../../../meetup/infrastructure/controllers/MeetupController';
 import type { Request as ExRequest, Response as ExResponse, RequestHandler, Router } from 'express';
 
 
@@ -21,8 +21,6 @@ const models: TsoaRoute.Models = {
             "date": {"dataType":"string","required":true},
             "location": {"dataType":"string","required":true},
             "imageUrl": {"dataType":"string","required":true},
-            "createdAt": {"dataType":"string","required":true},
-            "updatedAt": {"dataType":"string","required":true},
         },
         "additionalProperties": false,
     },
@@ -66,7 +64,7 @@ export function RegisterRoutes(app: Router) {
                 response,
                 next,
                 validatedArgs,
-                successStatus: 200,
+                successStatus: undefined,
               });
             } catch (err) {
                 return next(err);
@@ -96,7 +94,7 @@ export function RegisterRoutes(app: Router) {
                 response,
                 next,
                 validatedArgs,
-                successStatus: 200,
+                successStatus: undefined,
               });
             } catch (err) {
                 return next(err);
@@ -104,9 +102,10 @@ export function RegisterRoutes(app: Router) {
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         const argsMeetupController_createMeetup: Record<string, TsoaRoute.ParameterSchema> = {
+                id: {"in":"path","name":"id","required":true,"dataType":"string"},
                 meetupData: {"in":"body","name":"meetupData","required":true,"dataType":"nestedObjectLiteral","nestedProperties":{"imageUrl":{"dataType":"string","required":true},"location":{"dataType":"string","required":true},"date":{"dataType":"datetime","required":true},"description":{"dataType":"string","required":true},"title":{"dataType":"string","required":true}}},
         };
-        app.post('/meetups',
+        app.put('/meetups/:id',
             ...(fetchMiddlewares<RequestHandler>(MeetupController)),
             ...(fetchMiddlewares<RequestHandler>(MeetupController.prototype.createMeetup)),
 
@@ -137,7 +136,7 @@ export function RegisterRoutes(app: Router) {
                 id: {"in":"path","name":"id","required":true,"dataType":"string"},
                 meetupData: {"in":"body","name":"meetupData","required":true,"dataType":"nestedObjectLiteral","nestedProperties":{"imageUrl":{"dataType":"string"},"location":{"dataType":"string"},"date":{"dataType":"datetime"},"description":{"dataType":"string"},"title":{"dataType":"string"}}},
         };
-        app.put('/meetups/:id',
+        app.patch('/meetups/:id',
             ...(fetchMiddlewares<RequestHandler>(MeetupController)),
             ...(fetchMiddlewares<RequestHandler>(MeetupController.prototype.updateMeetup)),
 
