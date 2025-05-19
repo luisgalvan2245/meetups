@@ -1,9 +1,21 @@
 import { DomainError } from "@/shared/domain/errors/DomainError"
+import { InvalidArgumentError } from "@/shared/domain/errors/InvalidArgumentError"
+import { NotFoundError } from "@/shared/domain/errors/NotFoundError"
 import { Request, Response, NextFunction } from "express"
 
 export class ErrorHandlerMiddleware {
   static handle(err: Error, req: Request, res: Response, next: NextFunction) {
-    if (err instanceof DomainError) {
+    if (err instanceof NotFoundError) {
+      return res.status(404).json({
+        status: 404,
+        message: err.errorMessage()
+      })
+    } else if (err instanceof InvalidArgumentError) {
+      return res.status(422).json({
+        status: 422,
+        message: err.message
+      })
+    } else if (err instanceof DomainError) {
       return res.status(400).json({
         status: 400,
         message: err.message

@@ -23,6 +23,7 @@ export class MeetupPutController {
   @Put("{id}")
   @SuccessResponse(201, "Created")
   @Response(400, "Bad Request")
+  @Response(422, "Validation Error")
   public async createMeetup(
     @Path() id: string,
     @Body()

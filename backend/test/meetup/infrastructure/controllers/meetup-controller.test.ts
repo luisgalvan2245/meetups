@@ -33,9 +33,9 @@ describe("MeetupController", () => {
       const response = await request(app).get(`/meetups/${uuidv4()}`)
       expect(response.status).toBe(404)
     })
-    it("should return 400 for invalid UUID format", async () => {
+    it("should return 422 for invalid UUID format", async () => {
       const response = await request(app).get("/meetups/not-a-uuid")
-      expect(response.status).toBe(400)
+      expect(response.status).toBe(422)
     })
   })
 
@@ -175,7 +175,7 @@ describe("MeetupController", () => {
       const response = await request(app).put(`/meetups/${meetupId}`).send(data)
       expect(response.status).toBe(400)
     })
-    it("should return 400 for invalid UUID format", async () => {
+    it("should return 422 for invalid UUID format", async () => {
       const response = await request(app)
         .put("/meetups/not-a-uuid")
         .send({
@@ -185,7 +185,7 @@ describe("MeetupController", () => {
           location: "loc",
           imageUrl: "https://example.com/test.jpg"
         })
-      expect(response.status).toBe(400)
+      expect(response.status).toBe(422)
     })
   })
 
@@ -232,11 +232,11 @@ describe("MeetupController", () => {
       expect(response.status).toBe(404)
     })
 
-    it("should return 400 for invalid UUID format", async () => {
+    it("should return 422 for invalid UUID format", async () => {
       const response = await request(app).patch("/meetups/not-a-uuid").send({
         title: "Updated Title"
       })
-      expect(response.status).toBe(400)
+      expect(response.status).toBe(422)
     })
   })
 
@@ -268,9 +268,9 @@ describe("MeetupController", () => {
       expect(response.status).toBe(404)
     })
 
-    it("should return 400 for invalid UUID format", async () => {
+    it("should return 422 for invalid UUID format", async () => {
       const response = await request(app).delete("/meetups/not-a-uuid")
-      expect(response.status).toBe(400)
+      expect(response.status).toBe(422)
     })
   })
 })

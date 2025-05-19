@@ -10,8 +10,8 @@ export function createApp() {
   const app = express()
   app.use(express.json())
   RegisterRoutes(app)
-  app.use(ErrorHandlerMiddleware.handle)
   app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerJson))
+  app.use(ErrorHandlerMiddleware.handle)
   return app
 }
 

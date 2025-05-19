@@ -30,13 +30,9 @@ export class MeetupGetController {
 
   @Get("{id}")
   @Response(404, "Not found")
-  @Response(400, "Bad Request")
-  public async getMeetupById(@Path() id: string): Promise<MeetupModel | null> {
+  @Response(422, "Validation Error")
+  public async getMeetupById(@Path() id: string): Promise<MeetupModel> {
     const meetup = await this.service.getMeetupById(new MeetupId(id))
-    if (!meetup) {
-      throw { status: 404, message: "Not found" }
-    }
-
     return meetup.toPrimitives()
   }
 }

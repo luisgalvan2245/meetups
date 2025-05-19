@@ -24,6 +24,7 @@ export class MeetupPatchController {
   @Patch("{id}")
   @SuccessResponse(200, "Updated")
   @Response(404, "Not found")
+  @Response(422, "Validation Error")
   @Response(400, "Bad Request")
   public async updateMeetup(
     @Path() id: string,
@@ -36,11 +37,6 @@ export class MeetupPatchController {
       imageUrl?: string
     }
   ): Promise<void> {
-    const meetup = await this.service.getMeetupById(new MeetupId(id))
-    if (!meetup) {
-      throw { status: 404, message: "Not found" }
-    }
-
     await this.service.updateMeetup(new MeetupId(id), data)
   }
 }
