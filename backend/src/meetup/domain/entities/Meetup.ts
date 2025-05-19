@@ -13,14 +13,14 @@ import { MeetupLocationUpdatedDomainEvent } from "@/meetup/domain/events/MeetupL
 import { MeetupImageUrlUpdatedDomainEvent } from "@/meetup/domain/events/MeetupImageUrlUpdatedDomainEvent"
 
 export class Meetup extends AggregateRoot {
-  private readonly _id: MeetupId
+  readonly id: MeetupId
   private _title: MeetupTitle
   private _description: MeetupDescription
   private _date: MeetupDate
   private _location: MeetupLocation
   private _imageUrl: MeetupImageUrl
 
-  private constructor(
+  constructor(
     id: MeetupId,
     title: MeetupTitle,
     description: MeetupDescription,
@@ -29,7 +29,7 @@ export class Meetup extends AggregateRoot {
     imageUrl: MeetupImageUrl
   ) {
     super()
-    this._id = id
+    this.id = id
     this._title = title
     this._description = description
     this._date = date
@@ -61,7 +61,7 @@ export class Meetup extends AggregateRoot {
     return meetup
   }
 
-  public static fromPrimitives(data: {
+  static fromPrimitives(data: {
     id: string
     title: string
     description: string
@@ -79,9 +79,9 @@ export class Meetup extends AggregateRoot {
     )
   }
 
-  public toPrimitives() {
+  toPrimitives() {
     return {
-      id: this._id.value,
+      id: this.id.value,
       title: this._title.value,
       description: this._description.value,
       date: this._date.toString(),
@@ -90,9 +90,6 @@ export class Meetup extends AggregateRoot {
     }
   }
 
-  get id() {
-    return this._id
-  }
   get title() {
     return this._title
   }
@@ -109,7 +106,7 @@ export class Meetup extends AggregateRoot {
     return this._imageUrl
   }
 
-  public updateTitle(title: MeetupTitle): void {
+  updateTitle(title: MeetupTitle): void {
     this._title = title
     this.record(
       new MeetupTitleUpdatedDomainEvent({
@@ -119,7 +116,7 @@ export class Meetup extends AggregateRoot {
     )
   }
 
-  public updateDescription(description: MeetupDescription): void {
+  updateDescription(description: MeetupDescription): void {
     this._description = description
     this.record(
       new MeetupDescriptionUpdatedDomainEvent({
@@ -129,7 +126,7 @@ export class Meetup extends AggregateRoot {
     )
   }
 
-  public updateDate(date: MeetupDate): void {
+  updateDate(date: MeetupDate): void {
     this._date = date
     this.record(
       new MeetupDateUpdatedDomainEvent({
@@ -139,7 +136,7 @@ export class Meetup extends AggregateRoot {
     )
   }
 
-  public updateLocation(location: MeetupLocation): void {
+  updateLocation(location: MeetupLocation): void {
     this._location = location
     this.record(
       new MeetupLocationUpdatedDomainEvent({
@@ -149,7 +146,7 @@ export class Meetup extends AggregateRoot {
     )
   }
 
-  public updateImageUrl(imageUrl: MeetupImageUrl): void {
+  updateImageUrl(imageUrl: MeetupImageUrl): void {
     this._imageUrl = imageUrl
     this.record(
       new MeetupImageUrlUpdatedDomainEvent({

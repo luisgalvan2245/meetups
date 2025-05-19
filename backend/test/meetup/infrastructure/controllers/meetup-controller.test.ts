@@ -1,7 +1,7 @@
 import { describe, it, expect } from "vitest"
 import request from "supertest"
 import { createApp } from "@/index"
-import { v4 as uuidv4 } from "uuid"
+import * as uuid from "uuid"
 
 describe("MeetupController", () => {
   const app = createApp()
@@ -30,7 +30,7 @@ describe("MeetupController", () => {
       expect(response.body).toHaveProperty("id", meetupId)
     })
     it("should return 404 for non-existent meetup", async () => {
-      const response = await request(app).get(`/meetups/${uuidv4()}`)
+      const response = await request(app).get(`/meetups/${uuid.v4()}`)
       expect(response.status).toBe(404)
     })
     it("should return 422 for invalid UUID format", async () => {
@@ -41,7 +41,7 @@ describe("MeetupController", () => {
 
   describe("PUT /meetups/:id (create)", () => {
     it("should create a new meetup with the provided id", async () => {
-      const meetupId = uuidv4()
+      const meetupId = uuid.v4()
       const meetupData = {
         title: "Test Meetup",
         description: "Test Description",
@@ -61,7 +61,7 @@ describe("MeetupController", () => {
     })
 
     it("should return 400 if title is missing", async () => {
-      const meetupId = uuidv4()
+      const meetupId = uuid.v4()
       const data = {
         description: "desc",
         date: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(),
@@ -72,7 +72,7 @@ describe("MeetupController", () => {
       expect(response.status).toBe(400)
     })
     it("should return 400 if description is missing", async () => {
-      const meetupId = uuidv4()
+      const meetupId = uuid.v4()
       const data = {
         title: "title",
         date: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(),
@@ -83,7 +83,7 @@ describe("MeetupController", () => {
       expect(response.status).toBe(400)
     })
     it("should return 400 if date is missing", async () => {
-      const meetupId = uuidv4()
+      const meetupId = uuid.v4()
       const data = {
         title: "title",
         description: "desc",
@@ -94,7 +94,7 @@ describe("MeetupController", () => {
       expect(response.status).toBe(400)
     })
     it("should return 400 if location is missing", async () => {
-      const meetupId = uuidv4()
+      const meetupId = uuid.v4()
       const data = {
         title: "title",
         description: "desc",
@@ -105,7 +105,7 @@ describe("MeetupController", () => {
       expect(response.status).toBe(400)
     })
     it("should return 400 if imageUrl is missing", async () => {
-      const meetupId = uuidv4()
+      const meetupId = uuid.v4()
       const data = {
         title: "title",
         description: "desc",
@@ -116,7 +116,7 @@ describe("MeetupController", () => {
       expect(response.status).toBe(400)
     })
     it("should return 400 if title is not a string", async () => {
-      const meetupId = uuidv4()
+      const meetupId = uuid.v4()
       const data = {
         title: 123,
         description: "desc",
@@ -128,7 +128,7 @@ describe("MeetupController", () => {
       expect(response.status).toBe(400)
     })
     it("should return 400 if description is not a string", async () => {
-      const meetupId = uuidv4()
+      const meetupId = uuid.v4()
       const data = {
         title: "title",
         description: 123,
@@ -140,7 +140,7 @@ describe("MeetupController", () => {
       expect(response.status).toBe(400)
     })
     it("should return 400 if date is not a valid date", async () => {
-      const meetupId = uuidv4()
+      const meetupId = uuid.v4()
       const data = {
         title: "title",
         description: "desc",
@@ -152,7 +152,7 @@ describe("MeetupController", () => {
       expect(response.status).toBe(400)
     })
     it("should return 400 if location is not a string", async () => {
-      const meetupId = uuidv4()
+      const meetupId = uuid.v4()
       const data = {
         title: "title",
         description: "desc",
@@ -164,7 +164,7 @@ describe("MeetupController", () => {
       expect(response.status).toBe(400)
     })
     it("should return 400 if imageUrl is not a string", async () => {
-      const meetupId = uuidv4()
+      const meetupId = uuid.v4()
       const data = {
         title: "title",
         description: "desc",
@@ -192,7 +192,7 @@ describe("MeetupController", () => {
   describe("PATCH /meetups/:id (update)", () => {
     it("should update a meetup", async () => {
       // Create a meetup first
-      const meetupId = uuidv4()
+      const meetupId = uuid.v4()
       const meetupData = {
         title: "Original Title",
         description: "Original Description",
@@ -224,7 +224,7 @@ describe("MeetupController", () => {
     })
 
     it("should return 404 for non-existent meetup", async () => {
-      const nonExistentId = uuidv4()
+      const nonExistentId = uuid.v4()
       const updateData = { title: "Updated Title" }
       const response = await request(app)
         .patch(`/meetups/${nonExistentId}`)
@@ -243,7 +243,7 @@ describe("MeetupController", () => {
   describe("DELETE /meetups/:id", () => {
     it("should delete a meetup", async () => {
       // Create a meetup to delete
-      const meetupId = uuidv4()
+      const meetupId = uuid.v4()
       const meetupData = {
         title: "To Be Deleted",
         description: "This meetup will be deleted",
@@ -263,7 +263,7 @@ describe("MeetupController", () => {
     })
 
     it("should return 404 for non-existent meetup", async () => {
-      const nonExistentId = uuidv4()
+      const nonExistentId = uuid.v4()
       const response = await request(app).delete(`/meetups/${nonExistentId}`)
       expect(response.status).toBe(404)
     })
