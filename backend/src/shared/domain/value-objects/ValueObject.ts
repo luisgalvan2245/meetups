@@ -7,10 +7,10 @@ export abstract class ValueObject<T extends Primitives> {
 
   constructor(value: T) {
     this.value = value
-    this.ensureValueIsDefined(value)
+    this.assertValueIsDefined(value)
   }
 
-  private ensureValueIsDefined(value: T): void {
+  private assertValueIsDefined(value: T): void {
     if (value === null || value === undefined) {
       throw new InvalidArgumentError("Value must be defined")
     }

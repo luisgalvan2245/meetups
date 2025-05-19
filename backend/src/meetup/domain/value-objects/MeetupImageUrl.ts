@@ -3,10 +3,10 @@ import { StringValueObject } from "@/shared/domain/value-objects/StringValueObje
 export class MeetupImageUrl extends StringValueObject {
   constructor(value: string) {
     super(value)
-    this.ensureIsValidUrl()
+    this.assertIsValidUrl()
   }
 
-  private ensureIsValidUrl(): void {
+  private assertIsValidUrl(): void {
     try {
       new URL(this.value)
     } catch {

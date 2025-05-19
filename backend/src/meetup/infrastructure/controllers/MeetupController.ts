@@ -14,7 +14,6 @@ import {
   SuccessResponse
 } from "@tsoa/runtime"
 import { validate as uuidValidate } from "uuid"
-import express from "express"
 
 export interface MeetupModel {
   id: string
@@ -28,16 +27,16 @@ export interface MeetupModel {
 @Route("meetups")
 @Tags("Meetups")
 export class MeetupController {
-  private meetupService: MeetupService
+  private service: MeetupService
 
   constructor() {
-    const meetupRepository = new InMemoryMeetupRepository()
-    this.meetupService = new MeetupService(meetupRepository)
+    const repository = new InMemoryMeetupRepository()
+    this.service = new MeetupService(repository)
   }
 
   @Get()
   public async getAllMeetups(): Promise<MeetupModel[]> {
-    const meetups = await this.meetupService.getAllMeetups()
+    const meetups = await this.service.getAllMeetups()
     return meetups.map(meetup => meetup.toPrimitives())
   }
 
@@ -49,7 +48,7 @@ export class MeetupController {
       throw { status: 400, message: "Invalid UUID format" }
     }
 
-    const meetup = await this.meetupService.getMeetupById(new MeetupId(id))
+    const meetup = await this.service.getMeetupById(new MeetupId(id))
     if (!meetup) {
       throw { status: 404, message: "Not found" }
     }
@@ -63,7 +62,7 @@ export class MeetupController {
   public async createMeetup(
     @Path() id: string,
     @Body()
-    meetupData: {
+    data: {
       title: string
       description: string
       date: Date
@@ -75,11 +74,7 @@ export class MeetupController {
       throw { status: 400, message: "Invalid UUID format" }
     }
 
-    const meetup = await this.meetupService.createMeetup({
-      ...meetupData,
-      id
-    })
-
+    const meetup = await this.service.createMeetup({ id, ...data })
     return meetup.toPrimitives()
   }
 
@@ -90,7 +85,7 @@ export class MeetupController {
   public async updateMeetup(
     @Path() id: string,
     @Body()
-    meetupData: {
+    data: {
       title?: string
       description?: string
       date?: Date
@@ -102,10 +97,7 @@ export class MeetupController {
       throw { status: 400, message: "Invalid UUID format" }
     }
 
-    const meetup = await this.meetupService.updateMeetup(
-      new MeetupId(id),
-      meetupData
-    )
+    const meetup = await this.service.updateMeetup(new MeetupId(id), data)
     if (!meetup) {
       throw { status: 404, message: "Not found" }
     }
@@ -122,7 +114,7 @@ export class MeetupController {
       throw { status: 400, message: "Invalid UUID format" }
     }
 
-    const deleted = await this.meetupService.deleteMeetup(new MeetupId(id))
+    const deleted = await this.service.deleteMeetup(new MeetupId(id))
     if (!deleted) {
       throw { status: 404, message: "Not found" }
     }

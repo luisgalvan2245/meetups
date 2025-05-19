@@ -8,14 +8,14 @@ import { MeetupImageUrl } from "@/meetup/domain/value-objects/MeetupImageUrl"
 import { MeetupCreatedDomainEvent } from "@/meetup/domain/events/MeetupCreatedDomainEvent"
 
 export class Meetup extends AggregateRoot {
-  readonly id: MeetupId
-  readonly title: MeetupTitle
-  readonly description: MeetupDescription
-  readonly date: MeetupDate
-  readonly location: MeetupLocation
-  readonly imageUrl: MeetupImageUrl
+  private readonly _id: MeetupId
+  private _title: MeetupTitle
+  private _description: MeetupDescription
+  private _date: MeetupDate
+  private _location: MeetupLocation
+  private _imageUrl: MeetupImageUrl
 
-  constructor(
+  private constructor(
     id: MeetupId,
     title: MeetupTitle,
     description: MeetupDescription,
@@ -24,12 +24,12 @@ export class Meetup extends AggregateRoot {
     imageUrl: MeetupImageUrl
   ) {
     super()
-    this.id = id
-    this.title = title
-    this.description = description
-    this.date = date
-    this.location = location
-    this.imageUrl = imageUrl
+    this._id = id
+    this._title = title
+    this._description = description
+    this._date = date
+    this._location = location
+    this._imageUrl = imageUrl
   }
 
   static create(
@@ -76,12 +76,51 @@ export class Meetup extends AggregateRoot {
 
   public toPrimitives() {
     return {
-      id: this.id.value,
-      title: this.title.value,
-      description: this.description.value,
-      date: this.date.toString(),
-      location: this.location.value,
-      imageUrl: this.imageUrl.value
+      id: this._id.value,
+      title: this._title.value,
+      description: this._description.value,
+      date: this._date.toString(),
+      location: this._location.value,
+      imageUrl: this._imageUrl.value
     }
+  }
+
+  get id() {
+    return this._id
+  }
+  get title() {
+    return this._title
+  }
+  get description() {
+    return this._description
+  }
+  get date() {
+    return this._date
+  }
+  get location() {
+    return this._location
+  }
+  get imageUrl() {
+    return this._imageUrl
+  }
+
+  public updateTitle(title: MeetupTitle): void {
+    this._title = title
+  }
+
+  public updateDescription(description: MeetupDescription): void {
+    this._description = description
+  }
+
+  public updateDate(date: MeetupDate): void {
+    this._date = date
+  }
+
+  public updateLocation(location: MeetupLocation): void {
+    this._location = location
+  }
+
+  public updateImageUrl(imageUrl: MeetupImageUrl): void {
+    this._imageUrl = imageUrl
   }
 }

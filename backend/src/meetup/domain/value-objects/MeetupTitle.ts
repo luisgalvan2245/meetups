@@ -3,10 +3,10 @@ import { StringValueObject } from "@/shared/domain/value-objects/StringValueObje
 export class MeetupTitle extends StringValueObject {
   constructor(value: string) {
     super(value)
-    this.ensureLengthIsLessThan(100)
+    this.assertLengthIsLessThan(100)
   }
 
-  private ensureLengthIsLessThan(maxLength: number): void {
+  private assertLengthIsLessThan(maxLength: number): void {
     if (this.value.length > maxLength) {
       throw new Error(
         `The Meetup Title <${this.value}> has more than ${maxLength} characters`

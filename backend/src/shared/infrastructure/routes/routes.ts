@@ -103,7 +103,7 @@ export function RegisterRoutes(app: Router) {
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         const argsMeetupController_createMeetup: Record<string, TsoaRoute.ParameterSchema> = {
                 id: {"in":"path","name":"id","required":true,"dataType":"string"},
-                meetupData: {"in":"body","name":"meetupData","required":true,"dataType":"nestedObjectLiteral","nestedProperties":{"imageUrl":{"dataType":"string","required":true},"location":{"dataType":"string","required":true},"date":{"dataType":"datetime","required":true},"description":{"dataType":"string","required":true},"title":{"dataType":"string","required":true}}},
+                data: {"in":"body","name":"data","required":true,"dataType":"nestedObjectLiteral","nestedProperties":{"imageUrl":{"dataType":"string","required":true},"location":{"dataType":"string","required":true},"date":{"dataType":"datetime","required":true},"description":{"dataType":"string","required":true},"title":{"dataType":"string","required":true}}},
         };
         app.put('/meetups/:id',
             ...(fetchMiddlewares<RequestHandler>(MeetupController)),
@@ -134,7 +134,7 @@ export function RegisterRoutes(app: Router) {
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         const argsMeetupController_updateMeetup: Record<string, TsoaRoute.ParameterSchema> = {
                 id: {"in":"path","name":"id","required":true,"dataType":"string"},
-                meetupData: {"in":"body","name":"meetupData","required":true,"dataType":"nestedObjectLiteral","nestedProperties":{"imageUrl":{"dataType":"string"},"location":{"dataType":"string"},"date":{"dataType":"datetime"},"description":{"dataType":"string"},"title":{"dataType":"string"}}},
+                data: {"in":"body","name":"data","required":true,"dataType":"nestedObjectLiteral","nestedProperties":{"imageUrl":{"dataType":"string"},"location":{"dataType":"string"},"date":{"dataType":"datetime"},"description":{"dataType":"string"},"title":{"dataType":"string"}}},
         };
         app.patch('/meetups/:id',
             ...(fetchMiddlewares<RequestHandler>(MeetupController)),

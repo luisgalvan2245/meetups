@@ -1,4 +1,6 @@
-import { Uuid } from "@/shared/domain/value-objects/Uuid"
+import { UUID } from "@/shared/domain/value-objects/UUID"
+
+type DomainEventAttributes = any
 
 export abstract class DomainEvent {
   static EVENT_NAME: string
@@ -23,7 +25,7 @@ export abstract class DomainEvent {
   }) {
     const { aggregateId, eventName, eventId, occurredOn } = params
     this.aggregateId = aggregateId
-    this.eventId = eventId || Uuid.random().value
+    this.eventId = eventId || UUID.random().value
     this.occurredOn = occurredOn || new Date()
     this.eventName = eventName
   }
@@ -40,5 +42,3 @@ export type DomainEventClass = {
     attributes: DomainEventAttributes
   }): DomainEvent
 }
-
-type DomainEventAttributes = any

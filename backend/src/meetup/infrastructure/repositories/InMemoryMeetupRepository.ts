@@ -3,7 +3,7 @@ import { MeetupRepository } from "@/meetup/domain/repositories/MeetupRepository"
 import { v4 as uuidv4 } from "uuid"
 
 const futureDate = new Date()
-futureDate.setDate(futureDate.getDate() + 7) // 7 días en el futuro
+futureDate.setDate(futureDate.getDate() + 7)
 
 const meetup1 = Meetup.fromPrimitives({
   id: uuidv4(),
