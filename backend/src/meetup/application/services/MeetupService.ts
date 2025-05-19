@@ -7,7 +7,6 @@ import { MeetupLocation } from "@/meetup/domain/value-objects/MeetupLocation"
 import { MeetupImageUrl } from "@/meetup/domain/value-objects/MeetupImageUrl"
 import { MeetupId } from "@/shared/domain/value-objects/MeetupId"
 import { MeetupFinder } from "@/meetup/domain/services/MeetupFinder"
-import { InvalidArgumentError } from "@/shared/domain/errors/InvalidArgumentError"
 
 export class MeetupService {
   private meetupFinder: MeetupFinder
@@ -24,7 +23,7 @@ export class MeetupService {
     return this.meetupFinder.run(id.value)
   }
 
-  async createMeetup(meetupData: {
+  async createMeetup(data: {
     id: string
     title: string
     description: string
@@ -32,25 +31,20 @@ export class MeetupService {
     location: string
     imageUrl: string
   }): Promise<void> {
-    // Solo validar que date sea una fecha válida
-    if (isNaN(new Date(meetupData.date).getTime())) {
-      throw new InvalidArgumentError("Date must be a valid date")
-    }
-
     const meetup = Meetup.create(
-      new MeetupId(meetupData.id),
-      new MeetupTitle(meetupData.title),
-      new MeetupDescription(meetupData.description),
-      new MeetupDate(new Date(meetupData.date)),
-      new MeetupLocation(meetupData.location),
-      new MeetupImageUrl(meetupData.imageUrl)
+      new MeetupId(data.id),
+      new MeetupTitle(data.title),
+      new MeetupDescription(data.description),
+      new MeetupDate(new Date(data.date)),
+      new MeetupLocation(data.location),
+      new MeetupImageUrl(data.imageUrl)
     )
     await this.meetupRepository.create(meetup)
   }
 
   async updateMeetup(
     id: MeetupId,
-    meetupData: {
+    data: {
       title?: string
       description?: string
       date?: Date
@@ -62,13 +56,11 @@ export class MeetupService {
 
     const updatedMeetup = Meetup.create(
       new MeetupId(meetup.id.value),
-      new MeetupTitle(meetupData.title ?? meetup.title.value),
-      new MeetupDescription(meetupData.description ?? meetup.description.value),
-      new MeetupDate(
-        meetupData.date ? new Date(meetupData.date) : meetup.date.value
-      ),
-      new MeetupLocation(meetupData.location ?? meetup.location.value),
-      new MeetupImageUrl(meetupData.imageUrl ?? meetup.imageUrl.value)
+      new MeetupTitle(data.title ?? meetup.title.value),
+      new MeetupDescription(data.description ?? meetup.description.value),
+      new MeetupDate(data.date ? new Date(data.date) : meetup.date.value),
+      new MeetupLocation(data.location ?? meetup.location.value),
+      new MeetupImageUrl(data.imageUrl ?? meetup.imageUrl.value)
     )
     await this.meetupRepository.update(id.value, updatedMeetup)
   }
