@@ -9,18 +9,18 @@ import { MeetupId } from "@/shared/domain/value-objects/MeetupId"
 import { MeetupFinder } from "@/meetup/domain/services/MeetupFinder"
 
 export class MeetupService {
-  private meetupFinder: MeetupFinder
+  private finder: MeetupFinder
 
-  constructor(private meetupRepository: MeetupRepository) {
-    this.meetupFinder = new MeetupFinder(meetupRepository)
+  constructor(private repository: MeetupRepository) {
+    this.finder = new MeetupFinder(repository)
   }
 
   async getAllMeetups(): Promise<Meetup[]> {
-    return this.meetupRepository.findAll()
+    return this.repository.findAll()
   }
 
   async getMeetupById(id: MeetupId): Promise<Meetup> {
-    return this.meetupFinder.run(id.value)
+    return this.finder.run(id.value)
   }
 
   async createMeetup(data: {
@@ -39,7 +39,7 @@ export class MeetupService {
       new MeetupLocation(data.location),
       new MeetupImageUrl(data.imageUrl)
     )
-    await this.meetupRepository.create(meetup)
+    await this.repository.create(meetup)
   }
 
   async updateMeetup(
@@ -52,21 +52,29 @@ export class MeetupService {
       imageUrl?: string
     }
   ): Promise<void> {
-    const meetup = await this.meetupFinder.run(id.value)
+    const meetup = await this.finder.run(id.value)
 
-    const updatedMeetup = Meetup.create(
-      new MeetupId(meetup.id.value),
-      new MeetupTitle(data.title ?? meetup.title.value),
-      new MeetupDescription(data.description ?? meetup.description.value),
-      new MeetupDate(data.date ? new Date(data.date) : meetup.date.value),
-      new MeetupLocation(data.location ?? meetup.location.value),
-      new MeetupImageUrl(data.imageUrl ?? meetup.imageUrl.value)
-    )
-    await this.meetupRepository.update(id.value, updatedMeetup)
+    if (data.title) {
+      meetup.updateTitle(new MeetupTitle(data.title))
+    }
+    if (data.description) {
+      meetup.updateDescription(new MeetupDescription(data.description))
+    }
+    if (data.date) {
+      meetup.updateDate(new MeetupDate(new Date(data.date)))
+    }
+    if (data.location) {
+      meetup.updateLocation(new MeetupLocation(data.location))
+    }
+    if (data.imageUrl) {
+      meetup.updateImageUrl(new MeetupImageUrl(data.imageUrl))
+    }
+
+    await this.repository.update(id.value, meetup)
   }
 
   async deleteMeetup(id: MeetupId): Promise<void> {
-    await this.meetupFinder.run(id.value)
-    await this.meetupRepository.delete(id.value)
+    await this.finder.run(id.value)
+    await this.repository.delete(id.value)
   }
 }
