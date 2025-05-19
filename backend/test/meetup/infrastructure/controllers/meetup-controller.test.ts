@@ -33,9 +33,13 @@ describe("MeetupController", () => {
       const response = await request(app).get(`/meetups/${uuidv4()}`)
       expect(response.status).toBe(404)
     })
-    it("should return 422 for invalid UUID format", async () => {
+    it("should return 400 for invalid UUID format", async () => {
       const response = await request(app).get("/meetups/not-a-uuid")
-      expect(response.status).toBe(422)
+      expect(response.status).toBe(400)
+      expect(response.body).toHaveProperty(
+        "message",
+        "Invalid UUID format: not-a-uuid"
+      )
     })
   })
 
@@ -175,7 +179,7 @@ describe("MeetupController", () => {
       const response = await request(app).put(`/meetups/${meetupId}`).send(data)
       expect(response.status).toBe(400)
     })
-    it("should return 422 for invalid UUID format", async () => {
+    it("should return 400 for invalid UUID format", async () => {
       const response = await request(app)
         .put("/meetups/not-a-uuid")
         .send({
@@ -185,7 +189,11 @@ describe("MeetupController", () => {
           location: "loc",
           imageUrl: "https://example.com/test.jpg"
         })
-      expect(response.status).toBe(422)
+      expect(response.status).toBe(400)
+      expect(response.body).toHaveProperty(
+        "message",
+        "Invalid UUID format: not-a-uuid"
+      )
     })
   })
 
@@ -210,7 +218,7 @@ describe("MeetupController", () => {
       const response = await request(app)
         .patch(`/meetups/${meetupId}`)
         .send(updateData)
-      expect(response.status).toBe(200)
+      expect(response.status).toBe(204)
 
       // Verify the update
       const getResponse = await request(app).get(`/meetups/${meetupId}`)
@@ -232,11 +240,15 @@ describe("MeetupController", () => {
       expect(response.status).toBe(404)
     })
 
-    it("should return 422 for invalid UUID format", async () => {
+    it("should return 400 for invalid UUID format", async () => {
       const response = await request(app).patch("/meetups/not-a-uuid").send({
         title: "Updated Title"
       })
-      expect(response.status).toBe(422)
+      expect(response.status).toBe(400)
+      expect(response.body).toHaveProperty(
+        "message",
+        "Invalid UUID format: not-a-uuid"
+      )
     })
   })
 
@@ -268,9 +280,13 @@ describe("MeetupController", () => {
       expect(response.status).toBe(404)
     })
 
-    it("should return 422 for invalid UUID format", async () => {
+    it("should return 400 for invalid UUID format", async () => {
       const response = await request(app).delete("/meetups/not-a-uuid")
-      expect(response.status).toBe(422)
+      expect(response.status).toBe(400)
+      expect(response.body).toHaveProperty(
+        "message",
+        "Invalid UUID format: not-a-uuid"
+      )
     })
   })
 })

@@ -103,7 +103,7 @@ export function RegisterRoutes(app: Router) {
                 response,
                 next,
                 validatedArgs,
-                successStatus: 200,
+                successStatus: 204,
               });
             } catch (err) {
                 return next(err);

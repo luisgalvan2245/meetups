@@ -22,9 +22,9 @@ export class MeetupDeleteController {
 
   @Delete("{id}")
   @SuccessResponse(204, "No Content")
+  @Response(400, "Bad Request")
   @Response(404, "Not found")
-  @Response(422, "Validation Error")
-  public async deleteMeetup(@Path() id: string): Promise<void> {
+  async deleteMeetup(@Path() id: string): Promise<void> {
     await this.service.deleteMeetup(new MeetupId(id))
   }
 }

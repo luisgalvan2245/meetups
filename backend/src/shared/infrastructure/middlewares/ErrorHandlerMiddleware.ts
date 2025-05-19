@@ -1,6 +1,7 @@
 import { DomainError } from "@/shared/domain/errors/DomainError"
 import { InvalidArgumentError } from "@/shared/domain/errors/InvalidArgumentError"
 import { NotFoundError } from "@/shared/domain/errors/NotFoundError"
+import { InvalidUUIDError } from "@/shared/domain/errors/InvalidUUIDError"
 import { Request, Response, NextFunction } from "express"
 import { ValidateError } from "tsoa"
 
@@ -16,6 +17,13 @@ export class ErrorHandlerMiddleware {
     }
 
     // Handle domain errors
+    if (err instanceof InvalidUUIDError) {
+      return res.status(400).json({
+        status: 400,
+        message: err.message
+      })
+    }
+
     if (err instanceof NotFoundError) {
       return res.status(404).json({
         status: 404,
@@ -29,6 +37,7 @@ export class ErrorHandlerMiddleware {
         message: err.message
       })
     }
+
     if (err instanceof DomainError) {
       return res.status(400).json({
         status: 400,

@@ -5,7 +5,7 @@ import { InvalidUUIDError } from "@/shared/domain/errors/InvalidUUIDError"
 export class UUIDValueObject extends ValueObject<string> {
   constructor(value: string) {
     super(value)
-    this.assertIsValidUuid(value)
+    this.assertIsValidUUID(value)
   }
 
   static create(id?: string): UUIDValueObject {
@@ -19,7 +19,7 @@ export class UUIDValueObject extends ValueObject<string> {
     return new UUIDValueObject(uuidv4())
   }
 
-  private assertIsValidUuid(id: string): void {
+  private assertIsValidUUID(id: string): void {
     if (!uuidValidate(id)) {
       throw new InvalidUUIDError(`Invalid UUID format: ${id}`)
     }

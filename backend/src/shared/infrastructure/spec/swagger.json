@@ -119,8 +119,8 @@
 			"patch": {
 				"operationId": "UpdateMeetup",
 				"responses": {
-					"200": {
-						"description": "Updated"
+					"204": {
+						"description": "No Content"
 					},
 					"400": {
 						"description": "Bad Request"
@@ -188,11 +188,11 @@
 							}
 						}
 					},
+					"400": {
+						"description": "Bad Request"
+					},
 					"404": {
 						"description": "Not found"
-					},
-					"422": {
-						"description": "Validation Error"
 					}
 				},
 				"tags": [
@@ -216,11 +216,11 @@
 					"204": {
 						"description": "No Content"
 					},
+					"400": {
+						"description": "Bad Request"
+					},
 					"404": {
 						"description": "Not found"
-					},
-					"422": {
-						"description": "Validation Error"
 					}
 				},
 				"tags": [

@@ -22,11 +22,11 @@ export class MeetupPatchController {
   }
 
   @Patch("{id}")
-  @SuccessResponse(200, "Updated")
+  @SuccessResponse(204, "No Content")
+  @Response(400, "Bad Request")
   @Response(404, "Not found")
   @Response(422, "Validation Error")
-  @Response(400, "Bad Request")
-  public async updateMeetup(
+  async updateMeetup(
     @Path() id: string,
     @Body()
     data: {

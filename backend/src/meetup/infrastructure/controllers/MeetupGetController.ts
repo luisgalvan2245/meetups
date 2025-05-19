@@ -23,15 +23,15 @@ export class MeetupGetController {
   }
 
   @Get()
-  public async getAllMeetups(): Promise<MeetupModel[]> {
+  async getAllMeetups(): Promise<MeetupModel[]> {
     const meetups = await this.service.getAllMeetups()
     return meetups.map(meetup => meetup.toPrimitives())
   }
 
   @Get("{id}")
+  @Response(400, "Bad Request")
   @Response(404, "Not found")
-  @Response(422, "Validation Error")
-  public async getMeetupById(@Path() id: string): Promise<MeetupModel> {
+  async getMeetupById(@Path() id: string): Promise<MeetupModel> {
     const meetup = await this.service.getMeetupById(new MeetupId(id))
     return meetup.toPrimitives()
   }
