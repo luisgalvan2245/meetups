@@ -10,7 +10,6 @@ import {
   SuccessResponse
 } from "@tsoa/runtime"
 import { validate as uuidValidate } from "uuid"
-import { MeetupModel } from "./MeetupGetController"
 
 @Route("meetups")
 @Tags("Meetups")
@@ -35,12 +34,11 @@ export class MeetupPutController {
       location: string
       imageUrl: string
     }
-  ): Promise<MeetupModel> {
+  ): Promise<void> {
     if (!uuidValidate(id)) {
       throw { status: 400, message: "Invalid UUID format" }
     }
 
-    const meetup = await this.service.createMeetup({ id, ...data })
-    return meetup.toPrimitives()
+    await this.service.createMeetup({ id, ...data })
   }
 }

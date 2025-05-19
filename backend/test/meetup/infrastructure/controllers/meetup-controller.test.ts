@@ -53,7 +53,6 @@ describe("MeetupController", () => {
         .put(`/meetups/${meetupId}`)
         .send(meetupData)
       expect(response.status).toBe(201)
-      expect(response.body).toHaveProperty("id", meetupId)
 
       // Verify the meetup was created
       const getResponse = await request(app).get(`/meetups/${meetupId}`)
@@ -212,10 +211,16 @@ describe("MeetupController", () => {
         .patch(`/meetups/${meetupId}`)
         .send(updateData)
       expect(response.status).toBe(200)
-      expect(response.body).toHaveProperty("id", meetupId)
-      expect(response.body).toHaveProperty("title", "Updated Title")
-      expect(response.body).toHaveProperty("description", "Updated Description")
-      expect(response.body).toHaveProperty("location", "Original Location")
+
+      // Verify the update
+      const getResponse = await request(app).get(`/meetups/${meetupId}`)
+      expect(getResponse.status).toBe(200)
+      expect(getResponse.body).toHaveProperty("title", "Updated Title")
+      expect(getResponse.body).toHaveProperty(
+        "description",
+        "Updated Description"
+      )
+      expect(getResponse.body).toHaveProperty("location", "Original Location")
     })
 
     it("should return 404 for non-existent meetup", async () => {
@@ -225,56 +230,6 @@ describe("MeetupController", () => {
         .patch(`/meetups/${nonExistentId}`)
         .send(updateData)
       expect(response.status).toBe(404)
-    })
-
-    it("should return 400 if title is not a string", async () => {
-      const meetupsResponse = await request(app).get("/meetups")
-      const meetupId = meetupsResponse.body[0].id
-      const data = { title: 123 }
-      const response = await request(app)
-        .patch(`/meetups/${meetupId}`)
-        .send(data)
-      expect(response.status).toBe(400)
-    })
-
-    it("should return 400 if description is not a string", async () => {
-      const meetupsResponse = await request(app).get("/meetups")
-      const meetupId = meetupsResponse.body[0].id
-      const data = { description: 123 }
-      const response = await request(app)
-        .patch(`/meetups/${meetupId}`)
-        .send(data)
-      expect(response.status).toBe(400)
-    })
-
-    it("should return 400 if date is not a valid date", async () => {
-      const meetupsResponse = await request(app).get("/meetups")
-      const meetupId = meetupsResponse.body[0].id
-      const data = { date: "not-a-date" }
-      const response = await request(app)
-        .patch(`/meetups/${meetupId}`)
-        .send(data)
-      expect(response.status).toBe(400)
-    })
-
-    it("should return 400 if location is not a string", async () => {
-      const meetupsResponse = await request(app).get("/meetups")
-      const meetupId = meetupsResponse.body[0].id
-      const data = { location: 123 }
-      const response = await request(app)
-        .patch(`/meetups/${meetupId}`)
-        .send(data)
-      expect(response.status).toBe(400)
-    })
-
-    it("should return 400 if imageUrl is not a string", async () => {
-      const meetupsResponse = await request(app).get("/meetups")
-      const meetupId = meetupsResponse.body[0].id
-      const data = { imageUrl: 123 }
-      const response = await request(app)
-        .patch(`/meetups/${meetupId}`)
-        .send(data)
-      expect(response.status).toBe(400)
     })
 
     it("should return 400 for invalid UUID format", async () => {

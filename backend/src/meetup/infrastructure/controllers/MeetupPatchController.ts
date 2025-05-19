@@ -11,7 +11,6 @@ import {
   SuccessResponse
 } from "@tsoa/runtime"
 import { validate as uuidValidate } from "uuid"
-import { MeetupModel } from "./MeetupGetController"
 
 @Route("meetups")
 @Tags("Meetups")
@@ -37,7 +36,7 @@ export class MeetupPatchController {
       location?: string
       imageUrl?: string
     }
-  ): Promise<MeetupModel | null> {
+  ): Promise<void> {
     if (!uuidValidate(id)) {
       throw { status: 400, message: "Invalid UUID format" }
     }
@@ -46,7 +45,5 @@ export class MeetupPatchController {
     if (!meetup) {
       throw { status: 404, message: "Not found" }
     }
-
-    return meetup.toPrimitives()
   }
 }

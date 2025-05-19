@@ -52,84 +52,12 @@
 		"contact": {}
 	},
 	"paths": {
-		"/meetups": {
-			"get": {
-				"operationId": "GetAllMeetups",
-				"responses": {
-					"200": {
-						"description": "Ok",
-						"content": {
-							"application/json": {
-								"schema": {
-									"items": {
-										"$ref": "#/components/schemas/MeetupModel"
-									},
-									"type": "array"
-								}
-							}
-						}
-					}
-				},
-				"tags": [
-					"Meetups"
-				],
-				"security": [],
-				"parameters": []
-			}
-		},
 		"/meetups/{id}": {
-			"get": {
-				"operationId": "GetMeetupById",
-				"responses": {
-					"200": {
-						"description": "Ok",
-						"content": {
-							"application/json": {
-								"schema": {
-									"allOf": [
-										{
-											"$ref": "#/components/schemas/MeetupModel"
-										}
-									],
-									"nullable": true
-								}
-							}
-						}
-					},
-					"400": {
-						"description": "Bad Request"
-					},
-					"404": {
-						"description": "Not found"
-					}
-				},
-				"tags": [
-					"Meetups"
-				],
-				"security": [],
-				"parameters": [
-					{
-						"in": "path",
-						"name": "id",
-						"required": true,
-						"schema": {
-							"type": "string"
-						}
-					}
-				]
-			},
 			"put": {
 				"operationId": "CreateMeetup",
 				"responses": {
 					"201": {
-						"description": "Created",
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/MeetupModel"
-								}
-							}
-						}
+						"description": "Created"
 					},
 					"400": {
 						"description": "Bad Request"
@@ -189,19 +117,7 @@
 				"operationId": "UpdateMeetup",
 				"responses": {
 					"200": {
-						"description": "Updated",
-						"content": {
-							"application/json": {
-								"schema": {
-									"allOf": [
-										{
-											"$ref": "#/components/schemas/MeetupModel"
-										}
-									],
-									"nullable": true
-								}
-							}
-						}
+						"description": "Updated"
 					},
 					"400": {
 						"description": "Bad Request"
@@ -253,6 +169,46 @@
 					}
 				}
 			},
+			"get": {
+				"operationId": "GetMeetupById",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"allOf": [
+										{
+											"$ref": "#/components/schemas/MeetupModel"
+										}
+									],
+									"nullable": true
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request"
+					},
+					"404": {
+						"description": "Not found"
+					}
+				},
+				"tags": [
+					"Meetups"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			},
 			"delete": {
 				"operationId": "DeleteMeetup",
 				"responses": {
@@ -280,6 +236,31 @@
 						}
 					}
 				]
+			}
+		},
+		"/meetups": {
+			"get": {
+				"operationId": "GetAllMeetups",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": {
+										"$ref": "#/components/schemas/MeetupModel"
+									},
+									"type": "array"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Meetups"
+				],
+				"security": [],
+				"parameters": []
 			}
 		}
 	},
