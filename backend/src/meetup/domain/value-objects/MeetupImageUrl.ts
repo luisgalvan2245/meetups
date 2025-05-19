@@ -1,3 +1,4 @@
+import { MeetupImageUrlInvalidFormat } from "@/meetup/errors/MeetupImageUrlInvalidFormat"
 import { StringValueObject } from "@/shared/domain/value-objects/StringValueObject"
 
 export class MeetupImageUrl extends StringValueObject {
@@ -9,8 +10,10 @@ export class MeetupImageUrl extends StringValueObject {
   private assertIsValidUrl(): void {
     try {
       new URL(this.value)
-    } catch {
-      throw new Error(`The Meetup Image URL <${this.value}> is not a valid URL`)
+    } catch (error) {
+      throw new MeetupImageUrlInvalidFormat(
+        `The Meetup Image URL <${this.value}> is not a valid URL`
+      )
     }
   }
 }

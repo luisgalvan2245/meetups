@@ -1,3 +1,4 @@
+import { MeetupDescriptionLengthExceeded } from "@/meetup/errors/MeetupDescriptionLengthExceeded"
 import { StringValueObject } from "@/shared/domain/value-objects/StringValueObject"
 
 export class MeetupDescription extends StringValueObject {
@@ -8,7 +9,7 @@ export class MeetupDescription extends StringValueObject {
 
   private assertLengthIsLessThan(maxLength: number): void {
     if (this.value.length > maxLength) {
-      throw new Error(
+      throw new MeetupDescriptionLengthExceeded(
         `The Meetup Description <${this.value}> has more than ${maxLength} characters`
       )
     }
