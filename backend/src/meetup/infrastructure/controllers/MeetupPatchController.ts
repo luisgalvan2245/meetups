@@ -41,9 +41,11 @@ export class MeetupPatchController {
       throw { status: 400, message: "Invalid UUID format" }
     }
 
-    const meetup = await this.service.updateMeetup(new MeetupId(id), data)
+    const meetup = await this.service.getMeetupById(new MeetupId(id))
     if (!meetup) {
       throw { status: 404, message: "Not found" }
     }
+
+    await this.service.updateMeetup(new MeetupId(id), data)
   }
 }

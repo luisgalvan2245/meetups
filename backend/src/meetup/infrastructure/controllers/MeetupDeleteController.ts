@@ -30,9 +30,11 @@ export class MeetupDeleteController {
       throw { status: 400, message: "Invalid UUID format" }
     }
 
-    const deleted = await this.service.deleteMeetup(new MeetupId(id))
-    if (!deleted) {
+    const meetup = await this.service.getMeetupById(new MeetupId(id))
+    if (!meetup) {
       throw { status: 404, message: "Not found" }
     }
+
+    await this.service.deleteMeetup(new MeetupId(id))
   }
 }

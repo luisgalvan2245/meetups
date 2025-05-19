@@ -25,7 +25,7 @@ export class MeetupService {
     date: Date
     location: string
     imageUrl: string
-  }): Promise<Meetup> {
+  }): Promise<void> {
     const meetup = Meetup.create(
       new MeetupId(meetupData.id),
       new MeetupTitle(meetupData.title),
@@ -34,7 +34,7 @@ export class MeetupService {
       new MeetupLocation(meetupData.location),
       new MeetupImageUrl(meetupData.imageUrl)
     )
-    return this.meetupRepository.create(meetup)
+    await this.meetupRepository.create(meetup)
   }
 
   async updateMeetup(
@@ -46,9 +46,9 @@ export class MeetupService {
       location?: string
       imageUrl?: string
     }
-  ): Promise<Meetup | null> {
+  ): Promise<void> {
     const meetup = await this.meetupRepository.findById(id.value)
-    if (!meetup) return null
+    if (!meetup) return
 
     const updatedMeetup = Meetup.create(
       new MeetupId(meetup.id.value),
@@ -58,10 +58,10 @@ export class MeetupService {
       new MeetupLocation(meetupData.location ?? meetup.location.value),
       new MeetupImageUrl(meetupData.imageUrl ?? meetup.imageUrl.value)
     )
-    return this.meetupRepository.update(id.value, updatedMeetup)
+    await this.meetupRepository.update(id.value, updatedMeetup)
   }
 
-  async deleteMeetup(id: MeetupId): Promise<boolean> {
-    return this.meetupRepository.delete(id.value)
+  async deleteMeetup(id: MeetupId): Promise<void> {
+    await this.meetupRepository.delete(id.value)
   }
 }

@@ -46,27 +46,22 @@ export class InMemoryMeetupRepository implements MeetupRepository {
     )
   }
 
-  async create(meetup: Meetup): Promise<Meetup> {
+  async create(meetup: Meetup): Promise<void> {
     InMemoryMeetupRepository.meetups.push(meetup)
-    return meetup
   }
 
-  async update(id: string, meetup: Meetup): Promise<Meetup | null> {
+  async update(id: string, meetup: Meetup): Promise<void> {
     const index = InMemoryMeetupRepository.meetups.findIndex(
       m => m.id.value === id
     )
     if (index >= 0) {
       InMemoryMeetupRepository.meetups[index] = meetup
-      return meetup
     }
-    return null
   }
 
-  async delete(id: string): Promise<boolean> {
-    const initialLength = InMemoryMeetupRepository.meetups.length
+  async delete(id: string): Promise<void> {
     InMemoryMeetupRepository.meetups = InMemoryMeetupRepository.meetups.filter(
       meetup => meetup.id.value !== id
     )
-    return InMemoryMeetupRepository.meetups.length !== initialLength
   }
 }
