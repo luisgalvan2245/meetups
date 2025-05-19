@@ -4,7 +4,13 @@
 import type { TsoaRoute } from '@tsoa/runtime';
 import {  fetchMiddlewares, ExpressTemplateService } from '@tsoa/runtime';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-import { MeetupController } from './../../../meetup/infrastructure/controllers/MeetupController';
+import { MeetupGetController } from './../../../meetup/infrastructure/controllers/MeetupGetController';
+// WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+import { MeetupPutController } from './../../../meetup/infrastructure/controllers/MeetupPutController';
+// WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+import { MeetupPatchController } from './../../../meetup/infrastructure/controllers/MeetupPatchController';
+// WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+import { MeetupDeleteController } from './../../../meetup/infrastructure/controllers/MeetupDeleteController';
 import type { Request as ExRequest, Response as ExResponse, RequestHandler, Router } from 'express';
 
 
@@ -42,21 +48,21 @@ export function RegisterRoutes(app: Router) {
 
 
     
-        const argsMeetupController_getAllMeetups: Record<string, TsoaRoute.ParameterSchema> = {
+        const argsMeetupGetController_getAllMeetups: Record<string, TsoaRoute.ParameterSchema> = {
         };
         app.get('/meetups',
-            ...(fetchMiddlewares<RequestHandler>(MeetupController)),
-            ...(fetchMiddlewares<RequestHandler>(MeetupController.prototype.getAllMeetups)),
+            ...(fetchMiddlewares<RequestHandler>(MeetupGetController)),
+            ...(fetchMiddlewares<RequestHandler>(MeetupGetController.prototype.getAllMeetups)),
 
-            async function MeetupController_getAllMeetups(request: ExRequest, response: ExResponse, next: any) {
+            async function MeetupGetController_getAllMeetups(request: ExRequest, response: ExResponse, next: any) {
 
             // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 
             let validatedArgs: any[] = [];
             try {
-                validatedArgs = templateService.getValidatedArgs({ args: argsMeetupController_getAllMeetups, request, response });
+                validatedArgs = templateService.getValidatedArgs({ args: argsMeetupGetController_getAllMeetups, request, response });
 
-                const controller = new MeetupController();
+                const controller = new MeetupGetController();
 
               await templateService.apiHandler({
                 methodName: 'getAllMeetups',
@@ -71,22 +77,22 @@ export function RegisterRoutes(app: Router) {
             }
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        const argsMeetupController_getMeetupById: Record<string, TsoaRoute.ParameterSchema> = {
+        const argsMeetupGetController_getMeetupById: Record<string, TsoaRoute.ParameterSchema> = {
                 id: {"in":"path","name":"id","required":true,"dataType":"string"},
         };
         app.get('/meetups/:id',
-            ...(fetchMiddlewares<RequestHandler>(MeetupController)),
-            ...(fetchMiddlewares<RequestHandler>(MeetupController.prototype.getMeetupById)),
+            ...(fetchMiddlewares<RequestHandler>(MeetupGetController)),
+            ...(fetchMiddlewares<RequestHandler>(MeetupGetController.prototype.getMeetupById)),
 
-            async function MeetupController_getMeetupById(request: ExRequest, response: ExResponse, next: any) {
+            async function MeetupGetController_getMeetupById(request: ExRequest, response: ExResponse, next: any) {
 
             // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 
             let validatedArgs: any[] = [];
             try {
-                validatedArgs = templateService.getValidatedArgs({ args: argsMeetupController_getMeetupById, request, response });
+                validatedArgs = templateService.getValidatedArgs({ args: argsMeetupGetController_getMeetupById, request, response });
 
-                const controller = new MeetupController();
+                const controller = new MeetupGetController();
 
               await templateService.apiHandler({
                 methodName: 'getMeetupById',
@@ -101,23 +107,23 @@ export function RegisterRoutes(app: Router) {
             }
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        const argsMeetupController_createMeetup: Record<string, TsoaRoute.ParameterSchema> = {
+        const argsMeetupPutController_createMeetup: Record<string, TsoaRoute.ParameterSchema> = {
                 id: {"in":"path","name":"id","required":true,"dataType":"string"},
                 data: {"in":"body","name":"data","required":true,"dataType":"nestedObjectLiteral","nestedProperties":{"imageUrl":{"dataType":"string","required":true},"location":{"dataType":"string","required":true},"date":{"dataType":"datetime","required":true},"description":{"dataType":"string","required":true},"title":{"dataType":"string","required":true}}},
         };
         app.put('/meetups/:id',
-            ...(fetchMiddlewares<RequestHandler>(MeetupController)),
-            ...(fetchMiddlewares<RequestHandler>(MeetupController.prototype.createMeetup)),
+            ...(fetchMiddlewares<RequestHandler>(MeetupPutController)),
+            ...(fetchMiddlewares<RequestHandler>(MeetupPutController.prototype.createMeetup)),
 
-            async function MeetupController_createMeetup(request: ExRequest, response: ExResponse, next: any) {
+            async function MeetupPutController_createMeetup(request: ExRequest, response: ExResponse, next: any) {
 
             // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 
             let validatedArgs: any[] = [];
             try {
-                validatedArgs = templateService.getValidatedArgs({ args: argsMeetupController_createMeetup, request, response });
+                validatedArgs = templateService.getValidatedArgs({ args: argsMeetupPutController_createMeetup, request, response });
 
-                const controller = new MeetupController();
+                const controller = new MeetupPutController();
 
               await templateService.apiHandler({
                 methodName: 'createMeetup',
@@ -132,23 +138,23 @@ export function RegisterRoutes(app: Router) {
             }
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        const argsMeetupController_updateMeetup: Record<string, TsoaRoute.ParameterSchema> = {
+        const argsMeetupPatchController_updateMeetup: Record<string, TsoaRoute.ParameterSchema> = {
                 id: {"in":"path","name":"id","required":true,"dataType":"string"},
                 data: {"in":"body","name":"data","required":true,"dataType":"nestedObjectLiteral","nestedProperties":{"imageUrl":{"dataType":"string"},"location":{"dataType":"string"},"date":{"dataType":"datetime"},"description":{"dataType":"string"},"title":{"dataType":"string"}}},
         };
         app.patch('/meetups/:id',
-            ...(fetchMiddlewares<RequestHandler>(MeetupController)),
-            ...(fetchMiddlewares<RequestHandler>(MeetupController.prototype.updateMeetup)),
+            ...(fetchMiddlewares<RequestHandler>(MeetupPatchController)),
+            ...(fetchMiddlewares<RequestHandler>(MeetupPatchController.prototype.updateMeetup)),
 
-            async function MeetupController_updateMeetup(request: ExRequest, response: ExResponse, next: any) {
+            async function MeetupPatchController_updateMeetup(request: ExRequest, response: ExResponse, next: any) {
 
             // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 
             let validatedArgs: any[] = [];
             try {
-                validatedArgs = templateService.getValidatedArgs({ args: argsMeetupController_updateMeetup, request, response });
+                validatedArgs = templateService.getValidatedArgs({ args: argsMeetupPatchController_updateMeetup, request, response });
 
-                const controller = new MeetupController();
+                const controller = new MeetupPatchController();
 
               await templateService.apiHandler({
                 methodName: 'updateMeetup',
@@ -163,22 +169,22 @@ export function RegisterRoutes(app: Router) {
             }
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        const argsMeetupController_deleteMeetup: Record<string, TsoaRoute.ParameterSchema> = {
+        const argsMeetupDeleteController_deleteMeetup: Record<string, TsoaRoute.ParameterSchema> = {
                 id: {"in":"path","name":"id","required":true,"dataType":"string"},
         };
         app.delete('/meetups/:id',
-            ...(fetchMiddlewares<RequestHandler>(MeetupController)),
-            ...(fetchMiddlewares<RequestHandler>(MeetupController.prototype.deleteMeetup)),
+            ...(fetchMiddlewares<RequestHandler>(MeetupDeleteController)),
+            ...(fetchMiddlewares<RequestHandler>(MeetupDeleteController.prototype.deleteMeetup)),
 
-            async function MeetupController_deleteMeetup(request: ExRequest, response: ExResponse, next: any) {
+            async function MeetupDeleteController_deleteMeetup(request: ExRequest, response: ExResponse, next: any) {
 
             // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 
             let validatedArgs: any[] = [];
             try {
-                validatedArgs = templateService.getValidatedArgs({ args: argsMeetupController_deleteMeetup, request, response });
+                validatedArgs = templateService.getValidatedArgs({ args: argsMeetupDeleteController_deleteMeetup, request, response });
 
-                const controller = new MeetupController();
+                const controller = new MeetupDeleteController();
 
               await templateService.apiHandler({
                 methodName: 'deleteMeetup',
