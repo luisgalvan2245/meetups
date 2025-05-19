@@ -6,6 +6,11 @@ import { MeetupDate } from "@/meetup/domain/value-objects/MeetupDate"
 import { MeetupLocation } from "@/meetup/domain/value-objects/MeetupLocation"
 import { MeetupImageUrl } from "@/meetup/domain/value-objects/MeetupImageUrl"
 import { MeetupCreatedDomainEvent } from "@/meetup/domain/events/MeetupCreatedDomainEvent"
+import { MeetupTitleUpdatedDomainEvent } from "@/meetup/domain/events/MeetupTitleUpdatedDomainEvent"
+import { MeetupDescriptionUpdatedDomainEvent } from "@/meetup/domain/events/MeetupDescriptionUpdatedDomainEvent"
+import { MeetupDateUpdatedDomainEvent } from "@/meetup/domain/events/MeetupDateUpdatedDomainEvent"
+import { MeetupLocationUpdatedDomainEvent } from "@/meetup/domain/events/MeetupLocationUpdatedDomainEvent"
+import { MeetupImageUrlUpdatedDomainEvent } from "@/meetup/domain/events/MeetupImageUrlUpdatedDomainEvent"
 
 export class Meetup extends AggregateRoot {
   private readonly _id: MeetupId
@@ -106,21 +111,51 @@ export class Meetup extends AggregateRoot {
 
   public updateTitle(title: MeetupTitle): void {
     this._title = title
+    this.record(
+      new MeetupTitleUpdatedDomainEvent({
+        aggregateId: this.id.value,
+        title: title.value
+      })
+    )
   }
 
   public updateDescription(description: MeetupDescription): void {
     this._description = description
+    this.record(
+      new MeetupDescriptionUpdatedDomainEvent({
+        aggregateId: this.id.value,
+        description: description.value
+      })
+    )
   }
 
   public updateDate(date: MeetupDate): void {
     this._date = date
+    this.record(
+      new MeetupDateUpdatedDomainEvent({
+        aggregateId: this.id.value,
+        date: date.toString()
+      })
+    )
   }
 
   public updateLocation(location: MeetupLocation): void {
     this._location = location
+    this.record(
+      new MeetupLocationUpdatedDomainEvent({
+        aggregateId: this.id.value,
+        location: location.value
+      })
+    )
   }
 
   public updateImageUrl(imageUrl: MeetupImageUrl): void {
     this._imageUrl = imageUrl
+    this.record(
+      new MeetupImageUrlUpdatedDomainEvent({
+        aggregateId: this.id.value,
+        imageUrl: imageUrl.value
+      })
+    )
   }
 }
