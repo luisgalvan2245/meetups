@@ -10,7 +10,6 @@ import {
   Response,
   SuccessResponse
 } from "@tsoa/runtime"
-import { validate as uuidValidate } from "uuid"
 
 @Route("meetups")
 @Tags("Meetups")
@@ -37,10 +36,6 @@ export class MeetupPatchController {
       imageUrl?: string
     }
   ): Promise<void> {
-    if (!uuidValidate(id)) {
-      throw { status: 400, message: "Invalid UUID format" }
-    }
-
     const meetup = await this.service.getMeetupById(new MeetupId(id))
     if (!meetup) {
       throw { status: 404, message: "Not found" }

@@ -1,3 +1,3 @@
 import { InvalidArgumentError } from "@/shared/domain/errors/InvalidArgumentError"
 
-export class MeetupTitleDescriptionLengthExceeded extends InvalidArgumentError {}
+export class InvalidUUIDError extends InvalidArgumentError {}

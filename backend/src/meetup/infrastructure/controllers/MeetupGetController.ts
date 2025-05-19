@@ -2,7 +2,6 @@ import { MeetupService } from "@/meetup/application/services/MeetupService"
 import { InMemoryMeetupRepository } from "@/meetup/infrastructure/repositories/InMemoryMeetupRepository"
 import { MeetupId } from "@/shared/domain/value-objects/MeetupId"
 import { Route, Tags, Get, Path, Response } from "@tsoa/runtime"
-import { validate as uuidValidate } from "uuid"
 
 export interface MeetupModel {
   id: string
@@ -33,10 +32,6 @@ export class MeetupGetController {
   @Response(404, "Not found")
   @Response(400, "Bad Request")
   public async getMeetupById(@Path() id: string): Promise<MeetupModel | null> {
-    if (!uuidValidate(id)) {
-      throw { status: 400, message: "Invalid UUID format" }
-    }
-
     const meetup = await this.service.getMeetupById(new MeetupId(id))
     if (!meetup) {
       throw { status: 404, message: "Not found" }

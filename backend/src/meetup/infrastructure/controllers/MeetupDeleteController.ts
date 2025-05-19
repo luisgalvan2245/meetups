@@ -1,6 +1,7 @@
 import { MeetupService } from "@/meetup/application/services/MeetupService"
 import { InMemoryMeetupRepository } from "@/meetup/infrastructure/repositories/InMemoryMeetupRepository"
 import { MeetupId } from "@/shared/domain/value-objects/MeetupId"
+import { InvalidUUIDError } from "@/shared/domain/errors/InvalidUUIDError"
 import {
   Route,
   Tags,
@@ -27,7 +28,7 @@ export class MeetupDeleteController {
   @Response(400, "Bad Request")
   public async deleteMeetup(@Path() id: string): Promise<void> {
     if (!uuidValidate(id)) {
-      throw { status: 400, message: "Invalid UUID format" }
+      throw new InvalidUUIDError(id)
     }
 
     const meetup = await this.service.getMeetupById(new MeetupId(id))

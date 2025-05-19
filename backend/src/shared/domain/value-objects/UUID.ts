@@ -1,5 +1,6 @@
 import { v4 as uuidv4, validate as uuidValidate } from "uuid"
 import { ValueObject } from "@/shared/domain/value-objects/ValueObject"
+import { InvalidUUIDError } from "@/shared/domain/errors/InvalidUUIDError"
 
 export class UUID extends ValueObject<string> {
   constructor(value: string) {
@@ -20,9 +21,7 @@ export class UUID extends ValueObject<string> {
 
   private assertIsValidUuid(id: string): void {
     if (!uuidValidate(id)) {
-      throw new Error(
-        `<${this.constructor.name}> does not allow the invalid uuid format: ${id}`
-      )
+      throw new InvalidUUIDError(`Invalid UUID format: ${id}`)
     }
   }
 }
