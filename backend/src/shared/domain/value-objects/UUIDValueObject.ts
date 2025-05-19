@@ -2,21 +2,21 @@ import { v4 as uuidv4, validate as uuidValidate } from "uuid"
 import { ValueObject } from "@/shared/domain/value-objects/ValueObject"
 import { InvalidUUIDError } from "@/shared/domain/errors/InvalidUUIDError"
 
-export class UUID extends ValueObject<string> {
+export class UUIDValueObject extends ValueObject<string> {
   constructor(value: string) {
     super(value)
     this.assertIsValidUuid(value)
   }
 
-  static create(id?: string): UUID {
+  static create(id?: string): UUIDValueObject {
     if (id) {
-      return new UUID(id)
+      return new UUIDValueObject(id)
     }
-    return new UUID(uuidv4())
+    return new UUIDValueObject(uuidv4())
   }
 
-  static random(): UUID {
-    return new UUID(uuidv4())
+  static random(): UUIDValueObject {
+    return new UUIDValueObject(uuidv4())
   }
 
   private assertIsValidUuid(id: string): void {

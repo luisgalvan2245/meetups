@@ -1,4 +1,4 @@
-import { UUID } from "@/shared/domain/value-objects/UUID"
+import { UUIDValueObject } from "@/shared/domain/value-objects/UUIDValueObject"
 
 type DomainEventAttributes = any
 
@@ -25,7 +25,7 @@ export abstract class DomainEvent {
   }) {
     const { aggregateId, eventName, eventId, occurredOn } = params
     this.aggregateId = aggregateId
-    this.eventId = eventId || UUID.random().value
+    this.eventId = eventId || UUIDValueObject.random().value
     this.occurredOn = occurredOn || new Date()
     this.eventName = eventName
   }
