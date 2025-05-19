@@ -1,4 +1,4 @@
-import { MeetupTitleDescriptionLengthExceeded } from "@/meetup/errors/MeetupTitleDescriptionLengthExceeded"
+import { MeetupTitleDescriptionLengthExceeded } from "@/meetup/domain/errors/MeetupTitleDescriptionLengthExceeded"
 import { StringValueObject } from "@/shared/domain/value-objects/StringValueObject"
 
 export class MeetupTitle extends StringValueObject {

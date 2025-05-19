@@ -1,4 +1,4 @@
-import { MeetupDateInvalidFormat } from "@/meetup/errors/MeetupDateInvalidFormat"
+import { MeetupDateInvalidFormat } from "@/meetup/domain/errors/MeetupDateInvalidFormat"
 import { DateValueObject } from "@/shared/domain/value-objects/DateValueObject"
 
 export class MeetupDate extends DateValueObject {

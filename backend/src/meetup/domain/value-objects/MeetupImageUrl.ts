@@ -1,4 +1,4 @@
-import { MeetupImageUrlInvalidFormat } from "@/meetup/errors/MeetupImageUrlInvalidFormat"
+import { MeetupImageUrlInvalidFormat } from "@/meetup/domain/errors/MeetupImageUrlInvalidFormat"
 import { StringValueObject } from "@/shared/domain/value-objects/StringValueObject"
 
 export class MeetupImageUrl extends StringValueObject {
