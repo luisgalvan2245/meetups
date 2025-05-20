@@ -8,11 +8,8 @@ export class UUIDValueObject extends ValueObject<string> {
     this.assertIsValidUUID(value)
   }
 
-  static create(id?: string): UUIDValueObject {
-    if (id) {
-      return new UUIDValueObject(id)
-    }
-    return new UUIDValueObject(uuidv4())
+  static create(id: string): UUIDValueObject {
+    return new UUIDValueObject(id)
   }
 
   static random(): UUIDValueObject {

@@ -1,4 +1,4 @@
-import { DomainEvent } from "@/shared/domain/DomainEvent"
+import { DomainEvent } from "@/shared/domain/events/DomainEvent"
 
 type MeetupDateUpdatedDomainEventAttributes = {
   readonly date: string

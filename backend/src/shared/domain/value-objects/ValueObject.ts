@@ -1,4 +1,4 @@
-import { InvalidArgumentError } from "@/shared/domain/errors/InvalidArgumentError"
+import { InvalidValueError } from "@/shared/domain/errors/InvalidValueError"
 
 export type Primitives = String | string | number | Boolean | boolean | Date
 
@@ -12,7 +12,7 @@ export abstract class ValueObject<T extends Primitives> {
 
   private assertValueIsDefined(value: T): void {
     if (value === null || value === undefined) {
-      throw new InvalidArgumentError("Value must be defined")
+      throw new InvalidValueError("Value must be defined")
     }
   }
 

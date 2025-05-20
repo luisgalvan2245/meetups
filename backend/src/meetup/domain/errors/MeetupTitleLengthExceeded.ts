@@ -1,3 +1,3 @@
-import { InvalidArgumentError } from "@/shared/domain/errors/InvalidArgumentError"
+import { InvalidStringError } from "@/shared/domain/errors/InvalidStringError"
 
-export class MeetupTitleLengthExceeded extends InvalidArgumentError {}
+export class MeetupTitleLengthExceeded extends InvalidStringError {}

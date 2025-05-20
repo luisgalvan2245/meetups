@@ -1,4 +1,4 @@
-import { DomainEvent } from "@/shared/domain/DomainEvent"
+import { DomainEvent } from "@/shared/domain/events/DomainEvent"
 
 type MeetupLocationUpdatedDomainEventAttributes = {
   readonly location: string

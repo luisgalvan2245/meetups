@@ -1,3 +1,3 @@
-import { InvalidArgumentError } from "@/shared/domain/errors/InvalidArgumentError"
+import { InvalidStringError } from "@/shared/domain/errors/InvalidStringError"
 
-export class MeetupImageUrlInvalidFormat extends InvalidArgumentError {}
+export class MeetupImageUrlInvalidFormat extends InvalidStringError {}

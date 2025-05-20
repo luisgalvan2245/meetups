@@ -1,3 +1,3 @@
 import { InvalidValueError } from "@/shared/domain/errors/InvalidValueError"
 
-export class InvalidUUIDError extends InvalidValueError {}
+export class InvalidStringError extends InvalidValueError {}

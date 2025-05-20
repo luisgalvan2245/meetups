@@ -1,3 +1,3 @@
-import { InvalidArgumentError } from "@/shared/domain/errors/InvalidArgumentError"
+import { InvalidDateError } from "@/shared/domain/errors/InvalidDateError"
 
-export class MeetupDateInvalidFormat extends InvalidArgumentError {}
+export class MeetupDateInvalidFormat extends InvalidDateError {}

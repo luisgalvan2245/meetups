@@ -1,5 +1,5 @@
 import { DomainError } from "@/shared/domain/errors/DomainError"
-import { InvalidArgumentError } from "@/shared/domain/errors/InvalidArgumentError"
+import { InvalidValueError } from "@/shared/domain/errors/InvalidValueError"
 import { NotFoundError } from "@/shared/domain/errors/NotFoundError"
 import { InvalidUUIDError } from "@/shared/domain/errors/InvalidUUIDError"
 import { Request, Response, NextFunction } from "express"
@@ -31,7 +31,7 @@ export class ErrorHandlerMiddleware {
       })
     }
 
-    if (err instanceof InvalidArgumentError) {
+    if (err instanceof InvalidValueError) {
       return res.status(422).json({
         status: 422,
         message: err.message

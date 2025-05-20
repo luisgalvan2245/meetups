@@ -1,3 +1,3 @@
 import { DomainError } from "@/shared/domain/errors/DomainError"
 
-export class InvalidArgumentError extends DomainError {}
+export class InvalidValueError extends DomainError {}

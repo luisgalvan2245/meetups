@@ -1,4 +1,4 @@
-import { AggregateRoot } from "@/shared/domain/AggregateRoot"
+import { AggregateRoot } from "@/shared/domain/entities/AggregateRoot"
 import { MeetupId } from "@/shared/domain/value-objects/MeetupId"
 import { MeetupTitle } from "@/meetup/domain/value-objects/MeetupTitle"
 import { MeetupDescription } from "@/meetup/domain/value-objects/MeetupDescription"
