@@ -1,4 +1,4 @@
-import { DomainEvent } from "@/shared/domain/events/DomainEvent"
+import { DomainEvent } from "@/shared/domain/DomainEvent"
 
 type MeetupImageUrlUpdatedDomainEventAttributes = {
   readonly imageUrl: string
