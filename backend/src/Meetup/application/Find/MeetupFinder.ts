@@ -2,7 +2,7 @@ import { Meetup } from "../../domain/entities/Meetup"
 import { MeetupRepository } from "../../domain/repositories/MeetupRepository"
 import { MeetupFinder as DomainMeetupFinder } from "../../domain/services/MeetupFinder"
 
-export class MeetupByIdFinder {
+export class MeetupFinder {
   private finder: DomainMeetupFinder
 
   constructor(private repository: MeetupRepository) {

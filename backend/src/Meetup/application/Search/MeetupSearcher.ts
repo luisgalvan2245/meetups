@@ -1,7 +1,7 @@
 import { Meetup } from "../../domain/entities/Meetup"
 import { MeetupRepository } from "../../domain/repositories/MeetupRepository"
 
-export class MeetupLister {
+export class MeetupSearcher {
   constructor(private repository: MeetupRepository) {}
 
   async run(): Promise<Meetup[]> {

@@ -1,7 +1,7 @@
 import { InMemoryMeetupRepository } from "../repositories/InMemoryMeetupRepository"
 import { Route, Tags, Get, Path, Response } from "@tsoa/runtime"
-import { MeetupLister } from "../../application/Find/MeetupLister"
-import { MeetupByIdFinder } from "../../application/Find/MeetupByIdFinder"
+import { MeetupSearcher } from "../../application/Search/MeetupSearcher"
+import { MeetupFinder } from "../../application/Find/MeetupFinder"
 
 export interface MeetupModel {
   id: string
@@ -15,18 +15,18 @@ export interface MeetupModel {
 @Route("meetups")
 @Tags("Meetups")
 export class MeetupGetController {
-  private lister: MeetupLister
-  private finder: MeetupByIdFinder
+  private searcher: MeetupSearcher
+  private finder: MeetupFinder
 
   constructor() {
     const repository = new InMemoryMeetupRepository()
-    this.lister = new MeetupLister(repository)
-    this.finder = new MeetupByIdFinder(repository)
+    this.searcher = new MeetupSearcher(repository)
+    this.finder = new MeetupFinder(repository)
   }
 
   @Get()
   async getAllMeetups(): Promise<MeetupModel[]> {
-    const meetups = await this.lister.run()
+    const meetups = await this.searcher.run()
     return meetups.map(meetup => meetup.toPrimitives())
   }
 
