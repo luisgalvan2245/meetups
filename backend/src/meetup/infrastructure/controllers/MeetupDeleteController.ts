@@ -1,6 +1,4 @@
-import { MeetupService } from "../../application/services/MeetupService"
 import { InMemoryMeetupRepository } from "../repositories/InMemoryMeetupRepository"
-import { MeetupId } from "../../../shared/domain/value-objects/MeetupId"
 import {
   Route,
   Tags,
@@ -9,15 +7,16 @@ import {
   Response,
   SuccessResponse
 } from "@tsoa/runtime"
+import { MeetupDeleter } from "../../application/delete/MeetupDeleter"
 
 @Route("meetups")
 @Tags("Meetups")
 export class MeetupDeleteController {
-  private service: MeetupService
+  private deleter: MeetupDeleter
 
   constructor() {
     const repository = new InMemoryMeetupRepository()
-    this.service = new MeetupService(repository)
+    this.deleter = new MeetupDeleter(repository)
   }
 
   @Delete("{id}")
@@ -25,6 +24,6 @@ export class MeetupDeleteController {
   @Response(400, "Bad Request")
   @Response(404, "Not found")
   async deleteMeetup(@Path() id: string): Promise<void> {
-    await this.service.deleteMeetup(new MeetupId(id))
+    await this.deleter.run(id)
   }
 }

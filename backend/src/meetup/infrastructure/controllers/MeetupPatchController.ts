@@ -1,6 +1,4 @@
-import { MeetupService } from "../../application/services/MeetupService"
 import { InMemoryMeetupRepository } from "../repositories/InMemoryMeetupRepository"
-import { MeetupId } from "../../../shared/domain/value-objects/MeetupId"
 import {
   Route,
   Tags,
@@ -10,15 +8,16 @@ import {
   Response,
   SuccessResponse
 } from "@tsoa/runtime"
+import { MeetupUpdater } from "../../application/update/MeetupUpdater"
 
 @Route("meetups")
 @Tags("Meetups")
 export class MeetupPatchController {
-  private service: MeetupService
+  private updater: MeetupUpdater
 
   constructor() {
     const repository = new InMemoryMeetupRepository()
-    this.service = new MeetupService(repository)
+    this.updater = new MeetupUpdater(repository)
   }
 
   @Patch("{id}")
@@ -37,6 +36,6 @@ export class MeetupPatchController {
       imageUrl?: string
     }
   ): Promise<void> {
-    await this.service.updateMeetup(new MeetupId(id), data)
+    await this.updater.run(id, data)
   }
 }

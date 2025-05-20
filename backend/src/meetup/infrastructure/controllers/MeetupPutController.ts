@@ -1,4 +1,3 @@
-import { MeetupService } from "../../application/services/MeetupService"
 import { InMemoryMeetupRepository } from "../repositories/InMemoryMeetupRepository"
 import {
   Route,
@@ -9,15 +8,16 @@ import {
   Response,
   SuccessResponse
 } from "@tsoa/runtime"
+import { MeetupCreator } from "../../application/create/MeetupCreator"
 
 @Route("meetups")
 @Tags("Meetups")
 export class MeetupPutController {
-  private service: MeetupService
+  private creator: MeetupCreator
 
   constructor() {
     const repository = new InMemoryMeetupRepository()
-    this.service = new MeetupService(repository)
+    this.creator = new MeetupCreator(repository)
   }
 
   @Put("{id}")
@@ -35,6 +35,6 @@ export class MeetupPutController {
       imageUrl: string
     }
   ): Promise<void> {
-    await this.service.createMeetup({ id, ...data })
+    await this.creator.run({ id, ...data })
   }
 }
