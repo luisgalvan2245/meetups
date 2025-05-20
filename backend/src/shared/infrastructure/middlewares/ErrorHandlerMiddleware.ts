@@ -1,7 +1,7 @@
-import { DomainError } from "@/shared/domain/errors/DomainError"
-import { InvalidValueError } from "@/shared/domain/errors/InvalidValueError"
-import { NotFoundError } from "@/shared/domain/errors/NotFoundError"
-import { InvalidUUIDError } from "@/shared/domain/errors/InvalidUUIDError"
+import { DomainError } from "../../domain/errors/DomainError"
+import { InvalidValueError } from "../../domain/errors/InvalidValueError"
+import { NotFoundError } from "../../domain/errors/NotFoundError"
+import { InvalidUUIDError } from "../../domain/errors/InvalidUUIDError"
 import { Request, Response, NextFunction } from "express"
 import { ValidateError } from "tsoa"
 

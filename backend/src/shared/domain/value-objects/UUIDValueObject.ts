@@ -1,8 +1,8 @@
 // NOTE: We are using an external library in the domain layer (be aware of the risks).
 import { v4 as uuidV4, validate as uuidValidate } from "uuid"
 
-import { ValueObject } from "@/shared/domain/value-objects/ValueObject"
-import { InvalidUUIDError } from "@/shared/domain/errors/InvalidUUIDError"
+import { ValueObject } from "./ValueObject"
+import { InvalidUUIDError } from "../errors/InvalidUUIDError"
 
 export class UUIDValueObject extends ValueObject<string> {
   constructor(value: string) {

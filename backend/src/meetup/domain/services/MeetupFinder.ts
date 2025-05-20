@@ -1,6 +1,6 @@
-import { MeetupRepository } from "@/meetup/domain/repositories/MeetupRepository"
-import { Meetup } from "@/meetup/domain/entities/Meetup"
-import { MeetupNotFound } from "@/meetup/domain/errors/MeetupNotFound"
+import { MeetupRepository } from "../repositories/MeetupRepository"
+import { Meetup } from "../entities/Meetup"
+import { MeetupNotFound } from "../errors/MeetupNotFound"
 
 export class MeetupFinder {
   constructor(private meetupRepository: MeetupRepository) {}

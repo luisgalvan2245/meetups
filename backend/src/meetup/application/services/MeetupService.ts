@@ -1,12 +1,12 @@
-import { Meetup } from "@/meetup/domain/entities/Meetup"
-import { MeetupRepository } from "@/meetup/domain/repositories/MeetupRepository"
-import { MeetupDescription } from "@/meetup/domain/value-objects/MeetupDescription"
-import { MeetupTitle } from "@/meetup/domain/value-objects/MeetupTitle"
-import { MeetupDate } from "@/meetup/domain/value-objects/MeetupDate"
-import { MeetupLocation } from "@/meetup/domain/value-objects/MeetupLocation"
-import { MeetupImageUrl } from "@/meetup/domain/value-objects/MeetupImageUrl"
-import { MeetupId } from "@/shared/domain/value-objects/MeetupId"
-import { MeetupFinder } from "@/meetup/domain/services/MeetupFinder"
+import { Meetup } from "../../domain/entities/Meetup"
+import { MeetupRepository } from "../../domain/repositories/MeetupRepository"
+import { MeetupDescription } from "../../domain/value-objects/MeetupDescription"
+import { MeetupTitle } from "../../domain/value-objects/MeetupTitle"
+import { MeetupDate } from "../../domain/value-objects/MeetupDate"
+import { MeetupLocation } from "../../domain/value-objects/MeetupLocation"
+import { MeetupImageUrl } from "../../domain/value-objects/MeetupImageUrl"
+import { MeetupId } from "../../../shared/domain/value-objects/MeetupId"
+import { MeetupFinder } from "../../domain/services/MeetupFinder"
 
 export class MeetupService {
   private finder: MeetupFinder

@@ -1,3 +1,3 @@
-import { DomainError } from "@/shared/domain/errors/DomainError"
+import { DomainError } from "./DomainError"
 
 export class InvalidValueError extends DomainError {}

@@ -1,5 +1,5 @@
-import { MeetupImageUrlInvalidFormat } from "@/meetup/domain/errors/MeetupImageUrlInvalidFormat"
-import { StringValueObject } from "@/shared/domain/value-objects/StringValueObject"
+import { MeetupImageUrlInvalidFormat } from "../errors/MeetupImageUrlInvalidFormat"
+import { StringValueObject } from "../../../shared/domain/value-objects/StringValueObject"
 
 export class MeetupImageUrl extends StringValueObject {
   constructor(value: string) {

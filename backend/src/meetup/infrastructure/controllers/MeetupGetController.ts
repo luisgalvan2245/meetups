@@ -1,6 +1,6 @@
-import { MeetupService } from "@/meetup/application/services/MeetupService"
-import { InMemoryMeetupRepository } from "@/meetup/infrastructure/repositories/InMemoryMeetupRepository"
-import { MeetupId } from "@/shared/domain/value-objects/MeetupId"
+import { MeetupService } from "../../application/services/MeetupService"
+import { InMemoryMeetupRepository } from "../repositories/InMemoryMeetupRepository"
+import { MeetupId } from "../../../shared/domain/value-objects/MeetupId"
 import { Route, Tags, Get, Path, Response } from "@tsoa/runtime"
 
 export interface MeetupModel {

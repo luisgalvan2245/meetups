@@ -1,5 +1,5 @@
-import { MeetupDescriptionLengthExceeded } from "@/meetup/domain/errors/MeetupDescriptionLengthExceeded"
-import { StringValueObject } from "@/shared/domain/value-objects/StringValueObject"
+import { MeetupDescriptionLengthExceeded } from "../errors/MeetupDescriptionLengthExceeded"
+import { StringValueObject } from "../../../shared/domain/value-objects/StringValueObject"
 
 export class MeetupDescription extends StringValueObject {
   constructor(value: string) {

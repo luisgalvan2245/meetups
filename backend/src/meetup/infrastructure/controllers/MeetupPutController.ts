@@ -1,5 +1,5 @@
-import { MeetupService } from "@/meetup/application/services/MeetupService"
-import { InMemoryMeetupRepository } from "@/meetup/infrastructure/repositories/InMemoryMeetupRepository"
+import { MeetupService } from "../../application/services/MeetupService"
+import { InMemoryMeetupRepository } from "../repositories/InMemoryMeetupRepository"
 import {
   Route,
   Tags,

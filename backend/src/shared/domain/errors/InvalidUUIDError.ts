@@ -1,3 +1,3 @@
-import { InvalidValueError } from "@/shared/domain/errors/InvalidValueError"
+import { InvalidValueError } from "./InvalidValueError"
 
 export class InvalidUUIDError extends InvalidValueError {}

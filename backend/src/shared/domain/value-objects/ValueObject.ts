@@ -1,4 +1,4 @@
-import { InvalidValueError } from "@/shared/domain/errors/InvalidValueError"
+import { InvalidValueError } from "../errors/InvalidValueError"
 
 export type Primitives = String | string | number | Boolean | boolean | Date
 
