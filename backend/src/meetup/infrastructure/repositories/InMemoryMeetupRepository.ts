@@ -1,12 +1,12 @@
 import { Meetup } from "@/meetup/domain/entities/Meetup"
 import { MeetupRepository } from "@/meetup/domain/repositories/MeetupRepository"
-import { v4 as uuidv4 } from "uuid"
+import { v4 as uuidV4 } from "uuid"
 
 const futureDate = new Date()
 futureDate.setDate(futureDate.getDate() + 7)
 
 const meetup1 = Meetup.fromPrimitives({
-  id: uuidv4(),
+  id: uuidV4(),
   title: "Meetup 1",
   description: "Description 1",
   date: futureDate.toISOString(),
@@ -15,7 +15,7 @@ const meetup1 = Meetup.fromPrimitives({
 })
 
 const meetup2 = Meetup.fromPrimitives({
-  id: uuidv4(),
+  id: uuidV4(),
   title: "Meetup 2",
   description: "Description 2",
   date: futureDate.toISOString(),
@@ -24,7 +24,7 @@ const meetup2 = Meetup.fromPrimitives({
 })
 
 const meetup3 = Meetup.fromPrimitives({
-  id: uuidv4(),
+  id: uuidV4(),
   title: "Meetup 3",
   description: "Description 3",
   date: futureDate.toISOString(),

@@ -1,4 +1,6 @@
-import { v4 as uuidv4, validate as uuidValidate } from "uuid"
+// NOTE: We are using an external library in the domain layer (be aware of the risks).
+import { v4 as uuidV4, validate as uuidValidate } from "uuid"
+
 import { ValueObject } from "@/shared/domain/value-objects/ValueObject"
 import { InvalidUUIDError } from "@/shared/domain/errors/InvalidUUIDError"
 
@@ -13,7 +15,7 @@ export class UUIDValueObject extends ValueObject<string> {
   }
 
   static random(): UUIDValueObject {
-    return new UUIDValueObject(uuidv4())
+    return new UUIDValueObject(uuidV4())
   }
 
   private assertIsValidUUID(id: string): void {
