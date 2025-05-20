@@ -5,7 +5,7 @@ import { MeetupFinder as DomainMeetupFinder } from "../../domain/services/Meetup
 export class MeetupFinder {
   private finder: DomainMeetupFinder
 
-  constructor(private repository: MeetupRepository) {
+  constructor(repository: MeetupRepository) {
     this.finder = new DomainMeetupFinder(repository)
   }
 
