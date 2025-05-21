@@ -1,7 +1,5 @@
-import {
-  CommandHandler,
-  CommandClass
-} from "../../../Shared/domain/CommandHandler"
+import { CommandHandler } from "../../../Shared/domain/CommandHandler"
+import { Command } from "../../../Shared/domain/Command"
 import { MeetupCreator } from "./MeetupCreator"
 import { CreateMeetupCommand } from "./CreateMeetupCommand"
 
@@ -10,7 +8,7 @@ export class CreateMeetupCommandHandler
 {
   constructor(private meetupCreator: MeetupCreator) {}
 
-  subscribedTo(): CommandClass<CreateMeetupCommand> {
+  subscribedTo(): Command {
     return CreateMeetupCommand
   }
 
