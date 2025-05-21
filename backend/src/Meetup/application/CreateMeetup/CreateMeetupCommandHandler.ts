@@ -1,13 +1,13 @@
-import { CommandHandler } from "../../../../Shared/domain/CommandHandler"
-import { Command } from "../../../../Shared/domain/Command"
+import { CommandHandler } from "../../../Shared/domain/CommandHandler"
+import { Command } from "../../../Shared/domain/Command"
 import { MeetupCreator } from "./MeetupCreator"
 import { CreateMeetupCommand } from "./CreateMeetupCommand"
-import { MeetupId } from "../../../domain/Aggregates/Meetup/MeetupId"
-import { MeetupTitle } from "../../../domain/ValueObjects/MeetupTitle"
-import { MeetupDescription } from "../../../domain/ValueObjects/MeetupDescription"
-import { MeetupDate } from "../../../domain/ValueObjects/MeetupDate"
-import { MeetupLocation } from "../../../domain/ValueObjects/MeetupLocation"
-import { MeetupImageUrl } from "../../../domain/ValueObjects/MeetupImageUrl"
+import { MeetupId } from "../../domain/ValueObjects/MeetupId"
+import { MeetupTitle } from "../../domain/ValueObjects/MeetupTitle"
+import { MeetupDescription } from "../../domain/ValueObjects/MeetupDescription"
+import { MeetupDate } from "../../domain/ValueObjects/MeetupDate"
+import { MeetupLocation } from "../../domain/ValueObjects/MeetupLocation"
+import { MeetupImageUrl } from "../../domain/ValueObjects/MeetupImageUrl"
 
 export class CreateMeetupCommandHandler
   implements CommandHandler<CreateMeetupCommand>

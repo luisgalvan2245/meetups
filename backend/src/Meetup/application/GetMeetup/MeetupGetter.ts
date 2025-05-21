@@ -1,6 +1,6 @@
-import { Meetup } from "../../../domain/Aggregates/Meetup/Meetup"
-import { MeetupRepository } from "../../../domain/Aggregates/Meetup/MeetupRepository"
-import { MeetupFinder } from "../../../domain/Services/MeetupFinder"
+import { Meetup } from "../../domain/Meetup"
+import { MeetupRepository } from "../../domain/MeetupRepository"
+import { MeetupFinder } from "../../domain/Services/MeetupFinder"
 
 export class MeetupGetter {
   private finder: MeetupFinder

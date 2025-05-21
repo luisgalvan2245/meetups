@@ -1,7 +1,7 @@
-import { MeetupRepository } from "../Aggregates/Meetup/MeetupRepository"
-import { Meetup } from "../Aggregates/Meetup/Meetup"
-import { MeetupNotFound } from "../Exceptions/MeetupNotFound"
-import { MeetupId } from "../Aggregates/Meetup/MeetupId"
+import { MeetupRepository } from "../MeetupRepository"
+import { Meetup } from "../Meetup"
+import { MeetupNotFoundError } from "../Exceptions/MeetupNotFoundError"
+import { MeetupId } from "../ValueObjects/MeetupId"
 
 export class MeetupFinder {
   constructor(private repository: MeetupRepository) {}
@@ -10,7 +10,7 @@ export class MeetupFinder {
     const meetupId = new MeetupId(id)
     const meetup = await this.repository.findById(meetupId.value)
     if (!meetup) {
-      throw new MeetupNotFound(id)
+      throw new MeetupNotFoundError(id)
     }
     return meetup
   }

@@ -1,4 +1,4 @@
-import { MeetupTitleLengthExceeded } from "../../domain/Exceptions/MeetupTitleLengthExceeded"
+import { MeetupTitleLengthExceededError } from "../Exceptions/MeetupTitleLengthExceededError"
 import { StringValueObject } from "../../../Shared/domain/ValueObjects/StringValueObject"
 
 export class MeetupTitle extends StringValueObject {
@@ -10,7 +10,7 @@ export class MeetupTitle extends StringValueObject {
   private assertLengthIsLessThan(maxLength: number): void {
     if (this.value.length > maxLength) {
       const msg = `The Meetup Title <${this.value}> has more than ${maxLength} characters`
-      throw new MeetupTitleLengthExceeded(msg)
+      throw new MeetupTitleLengthExceededError(msg)
     }
   }
 }

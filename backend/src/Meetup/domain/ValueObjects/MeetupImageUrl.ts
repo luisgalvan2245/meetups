@@ -1,4 +1,4 @@
-import { MeetupImageUrlInvalidFormat } from "../../domain/Exceptions/MeetupImageUrlInvalidFormat"
+import { MeetupImageUrlInvalidFormatError } from "../Exceptions/MeetupImageUrlInvalidFormatError"
 import { StringValueObject } from "../../../Shared/domain/ValueObjects/StringValueObject"
 
 export class MeetupImageUrl extends StringValueObject {
@@ -12,7 +12,7 @@ export class MeetupImageUrl extends StringValueObject {
       new URL(this.value)
     } catch (error) {
       const msg = `The Meetup Image URL <${this.value}> is not a valid URL`
-      throw new MeetupImageUrlInvalidFormat(msg)
+      throw new MeetupImageUrlInvalidFormatError(msg)
     }
   }
 }

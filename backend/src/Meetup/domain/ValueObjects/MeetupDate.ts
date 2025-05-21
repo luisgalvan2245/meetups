@@ -1,4 +1,4 @@
-import { MeetupDateInvalidFormat } from "../../domain/Exceptions/MeetupDateInvalidFormat"
+import { MeetupDateInvalidFormatError } from "../Exceptions/MeetupDateInvalidFormatError"
 import { DateValueObject } from "../../../Shared/domain/ValueObjects/DateValueObject"
 
 export class MeetupDate extends DateValueObject {
@@ -10,7 +10,7 @@ export class MeetupDate extends DateValueObject {
   private assertIsValidDate(): void {
     if (isNaN(this.value.getTime())) {
       const msg = `The Meetup Date <${this.value}> is not a valid date`
-      throw new MeetupDateInvalidFormat(msg)
+      throw new MeetupDateInvalidFormatError(msg)
     }
   }
 }
