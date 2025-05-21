@@ -9,9 +9,8 @@ export class MeetupLocation extends StringValueObject {
 
   private assertLengthIsLessThan(maxLength: number): void {
     if (this.value.length > maxLength) {
-      throw new MeetupLocationLengthExceeded(
-        `The Meetup Location <${this.value}> has more than ${maxLength} characters`
-      )
+      const msg = `The Meetup Location <${this.value}> has more than ${maxLength} characters`
+      throw new MeetupLocationLengthExceeded(msg)
     }
   }
 }

@@ -9,9 +9,8 @@ export class MeetupDate extends DateValueObject {
 
   private assertIsValidDate(): void {
     if (isNaN(this.value.getTime())) {
-      throw new MeetupDateInvalidFormat(
-        `The Meetup Date <${this.value}> is not a valid date`
-      )
+      const msg = `The Meetup Date <${this.value}> is not a valid date`
+      throw new MeetupDateInvalidFormat(msg)
     }
   }
 }

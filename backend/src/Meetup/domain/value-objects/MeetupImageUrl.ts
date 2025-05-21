@@ -11,9 +11,8 @@ export class MeetupImageUrl extends StringValueObject {
     try {
       new URL(this.value)
     } catch (error) {
-      throw new MeetupImageUrlInvalidFormat(
-        `The Meetup Image URL <${this.value}> is not a valid URL`
-      )
+      const msg = `The Meetup Image URL <${this.value}> is not a valid URL`
+      throw new MeetupImageUrlInvalidFormat(msg)
     }
   }
 }
