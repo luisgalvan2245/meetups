@@ -1,4 +1,4 @@
-import { MeetupRepository } from "../MeetupRepository"
+import { MeetupRepository } from "../Repositories/MeetupRepository"
 import { Meetup } from "../Meetup"
 import { MeetupNotFoundError } from "../Exceptions/MeetupNotFoundError"
 import { MeetupId } from "../ValueObjects/MeetupId"

@@ -1,6 +1,6 @@
-import { MeetupRepository } from "../../domain/MeetupRepository"
+import { MeetupRepository } from "../../domain/Repositories/MeetupRepository"
 import { MeetupFinder } from "../../domain/Services/MeetupFinder"
-import { EventBus } from "../../../Shared/domain/Events/EventBus"
+import { EventBus } from "../../../Shared/domain/EventBus/EventBus"
 import { MeetupId } from "../../domain/ValueObjects/MeetupId"
 
 export class MeetupDeleter {

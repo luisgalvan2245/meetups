@@ -1,12 +1,12 @@
 import { Meetup } from "../../domain/Meetup"
-import { MeetupRepository } from "../../domain/MeetupRepository"
+import { MeetupRepository } from "../../domain/Repositories/MeetupRepository"
 import { MeetupId } from "../../domain/ValueObjects/MeetupId"
 import { MeetupTitle } from "../../domain/ValueObjects/MeetupTitle"
 import { MeetupDescription } from "../../domain/ValueObjects/MeetupDescription"
 import { MeetupDate } from "../../domain/ValueObjects/MeetupDate"
 import { MeetupLocation } from "../../domain/ValueObjects/MeetupLocation"
 import { MeetupImageUrl } from "../../domain/ValueObjects/MeetupImageUrl"
-import { EventBus } from "../../../Shared/domain/Events/EventBus"
+import { EventBus } from "../../../Shared/domain/EventBus/EventBus"
 
 export class MeetupCreator {
   constructor(

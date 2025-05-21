@@ -1,6 +1,6 @@
 import { EventEmitter } from "events"
-import { DomainEvent } from "../../domain/Events/DomainEvent"
-import { EventBus } from "../../domain/Events/EventBus"
+import { DomainEvent } from "../../domain/EventBus/DomainEvent"
+import { EventBus } from "../../domain/EventBus/EventBus"
 import { DomainEventSubscribers } from "../../domain/DomainEventSubscribers"
 
 export class InMemoryAsyncEventBus extends EventEmitter implements EventBus {

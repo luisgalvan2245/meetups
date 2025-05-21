@@ -1,5 +1,5 @@
 import { Meetup } from "../../domain/Meetup"
-import { MeetupRepository } from "../../domain/MeetupRepository"
+import { MeetupRepository } from "../../domain/Repositories/Repositories/MeetupRepository"
 import { v4 as uuidV4 } from "uuid"
 
 const futureDate = new Date()

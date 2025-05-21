@@ -1,4 +1,4 @@
-import { InMemoryMeetupRepository } from "../../../Meetup/infrastructure/Persistence/InMemoryMeetupRepository"
+import { InMemoryMeetupRepository } from "../../../Meetup/infrastructure/Repositories/InMemoryMeetupRepository"
 import { CreateMeetupCommand } from "../../application/CreateMeetup/CreateMeetupCommand"
 import { CreateMeetupCommandHandler } from "../../application/CreateMeetup/CreateMeetupCommandHandler"
 import { MeetupCreator } from "../../application/CreateMeetup/MeetupCreator"

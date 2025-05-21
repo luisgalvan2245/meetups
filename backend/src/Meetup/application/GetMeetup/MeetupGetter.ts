@@ -1,5 +1,5 @@
 import { Meetup } from "../../domain/Meetup"
-import { MeetupRepository } from "../../domain/MeetupRepository"
+import { MeetupRepository } from "../../domain/Repositories/MeetupRepository"
 import { MeetupFinder } from "../../domain/Services/MeetupFinder"
 
 export class MeetupGetter {

@@ -1,4 +1,4 @@
-import { InMemoryMeetupRepository } from "../../../Meetup/infrastructure/Persistence/InMemoryMeetupRepository"
+import { InMemoryMeetupRepository } from "../../../Meetup/infrastructure/Repositories/InMemoryMeetupRepository"
 import { MeetupLister } from "../../application/ListMeetups/MeetupLister"
 import { MeetupGetter } from "../../application/GetMeetup/MeetupGetter"
 import { Route, Tags, Get, Path, Response } from "@tsoa/runtime"
