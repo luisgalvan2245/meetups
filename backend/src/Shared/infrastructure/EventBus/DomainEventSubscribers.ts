@@ -2,12 +2,10 @@ import { DomainEventSubscriber } from "../../domain/DomainEventSubscriber"
 import { DomainEvent } from "../../domain/DomainEvent"
 
 export class DomainEventSubscribers {
-  constructor(
-    public readonly items: Array<DomainEventSubscriber<DomainEvent>>
-  ) {}
+  constructor(public readonly items: DomainEventSubscriber<DomainEvent>[]) {}
 
   static from(
-    subscribers: Array<DomainEventSubscriber<DomainEvent>>
+    subscribers: DomainEventSubscriber<DomainEvent>[]
   ): DomainEventSubscribers {
     return new DomainEventSubscribers(subscribers)
   }

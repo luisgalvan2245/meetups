@@ -63,7 +63,7 @@
 						"description": "Bad Request"
 					},
 					"422": {
-						"description": "Validation Error"
+						"description": "Unprocessable Entity"
 					}
 				},
 				"tags": [
@@ -129,7 +129,7 @@
 						"description": "Not found"
 					},
 					"422": {
-						"description": "Validation Error"
+						"description": "Unprocessable Entity"
 					}
 				},
 				"tags": [

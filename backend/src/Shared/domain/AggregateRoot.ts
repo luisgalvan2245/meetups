@@ -1,13 +1,13 @@
 import { DomainEvent } from "./DomainEvent"
 
 export abstract class AggregateRoot {
-  private domainEvents: Array<DomainEvent>
+  private domainEvents: DomainEvent[]
 
   constructor() {
     this.domainEvents = []
   }
 
-  pullDomainEvents(): Array<DomainEvent> {
+  pullDomainEvents(): DomainEvent[] {
     const domainEvents = this.domainEvents.slice()
     this.domainEvents = []
 
