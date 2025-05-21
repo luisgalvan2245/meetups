@@ -1,0 +1,29 @@
+import {
+  CommandHandler,
+  CommandClass
+} from "../../../Shared/domain/CommandHandler"
+import { MeetupCreator } from "./MeetupCreator"
+import { CreateMeetupCommand } from "./CreateMeetupCommand"
+
+export class CreateMeetupCommandHandler
+  implements CommandHandler<CreateMeetupCommand>
+{
+  private meetupCreator: MeetupCreator
+
+  constructor(private meetupCreator: MeetupCreator) {}
+
+  subscribedTo(): CommandClass<CreateMeetupCommand> {
+    return CreateMeetupCommand
+  }
+
+  async handle(command: CreateMeetupCommand): Promise<void> {
+    await this.meetupCreator.run({
+      id: command.id,
+      title: command.title,
+      description: command.description,
+      date: command.date,
+      location: command.location,
+      imageUrl: command.imageUrl
+    })
+  }
+}

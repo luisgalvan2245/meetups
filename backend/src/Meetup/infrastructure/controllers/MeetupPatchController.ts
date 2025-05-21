@@ -1,30 +1,32 @@
 import { InMemoryMeetupRepository } from "../repositories/InMemoryMeetupRepository"
-import {
-  Route,
-  Tags,
-  Patch,
-  Path,
-  Body,
-  Response,
-  SuccessResponse
-} from "@tsoa/runtime"
+import { Route, Tags, Patch, Path, Body, Response } from "@tsoa/runtime"
+import { UpdateMeetupCommand } from "../../application/Update/UpdateMeetupCommand"
+import { UpdateMeetupCommandHandler } from "../../application/Update/UpdateMeetupCommandHandler"
 import { MeetupUpdater } from "../../application/Update/MeetupUpdater"
+import { InMemoryCommandBus } from "../../../Shared/infrastructure/CommandBus/InMemoryCommandBus"
+import { CommandHandlers } from "../../../Shared/infrastructure/CommandBus/CommandHandlers"
+import { InMemoryAsyncEventBus } from "../../../Shared/infrastructure/EventBus/InMemoryAsyncEventBus"
 
 @Route("meetups")
 @Tags("Meetups")
 export class MeetupPatchController {
-  private updater: MeetupUpdater
+  private commandBus: InMemoryCommandBus
 
   constructor() {
     const repository = new InMemoryMeetupRepository()
-    this.updater = new MeetupUpdater(repository)
+    const eventBus = new InMemoryAsyncEventBus()
+    const meetupUpdater = new MeetupUpdater(repository, eventBus)
+    const updateMeetupCommandHandler = new UpdateMeetupCommandHandler(
+      meetupUpdater
+    )
+
+    const commandHandlers = new CommandHandlers([updateMeetupCommandHandler])
+    this.commandBus = new InMemoryCommandBus(commandHandlers)
   }
 
   @Patch("{id}")
-  @SuccessResponse(204, "No Content")
   @Response(400, "Bad Request")
   @Response(404, "Not found")
-  @Response(422, "Validation Error")
   async updateMeetup(
     @Path() id: string,
     @Body()
@@ -36,6 +38,7 @@ export class MeetupPatchController {
       imageUrl?: string
     }
   ): Promise<void> {
-    await this.updater.run(id, data)
+    const command = new UpdateMeetupCommand({ id, ...data })
+    await this.commandBus.dispatch(command)
   }
 }

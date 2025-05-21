@@ -11,6 +11,7 @@ import { MeetupDescriptionUpdatedDomainEvent } from "../events/MeetupDescription
 import { MeetupDateUpdatedDomainEvent } from "../events/MeetupDateUpdatedDomainEvent"
 import { MeetupLocationUpdatedDomainEvent } from "../events/MeetupLocationUpdatedDomainEvent"
 import { MeetupImageUrlUpdatedDomainEvent } from "../events/MeetupImageUrlUpdatedDomainEvent"
+import { MeetupDeletedDomainEvent } from "../events/MeetupDeletedDomainEvent"
 
 export class Meetup extends AggregateRoot {
   readonly id: MeetupId
@@ -19,6 +20,8 @@ export class Meetup extends AggregateRoot {
   private _date: MeetupDate
   private _location: MeetupLocation
   private _imageUrl: MeetupImageUrl
+
+  private _isDeleted = false
 
   constructor(
     id: MeetupId,
@@ -105,6 +108,9 @@ export class Meetup extends AggregateRoot {
   get imageUrl() {
     return this._imageUrl
   }
+  get isDeleted() {
+    return this._isDeleted
+  }
 
   updateTitle(title: MeetupTitle): void {
     this._title = title
@@ -152,6 +158,15 @@ export class Meetup extends AggregateRoot {
       new MeetupImageUrlUpdatedDomainEvent({
         aggregateId: this.id.value,
         imageUrl: imageUrl.value
+      })
+    )
+  }
+
+  markAsDeleted(): void {
+    this._isDeleted = true
+    this.record(
+      new MeetupDeletedDomainEvent({
+        aggregateId: this.id.value
       })
     )
   }

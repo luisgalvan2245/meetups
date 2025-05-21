@@ -6,9 +6,13 @@ import { MeetupDescription } from "../../domain/value-objects/MeetupDescription"
 import { MeetupDate } from "../../domain/value-objects/MeetupDate"
 import { MeetupLocation } from "../../domain/value-objects/MeetupLocation"
 import { MeetupImageUrl } from "../../domain/value-objects/MeetupImageUrl"
+import { EventBus } from "../../../Shared/domain/EventBus"
 
 export class MeetupCreator {
-  constructor(private repository: MeetupRepository) {}
+  constructor(
+    private repository: MeetupRepository,
+    private eventBus: EventBus
+  ) {}
 
   async run(params: {
     id: string
@@ -28,5 +32,6 @@ export class MeetupCreator {
     )
 
     await this.repository.create(meetup)
+    await this.eventBus.publish(meetup.pullDomainEvents())
   }
 }

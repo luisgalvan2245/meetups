@@ -8,16 +8,28 @@ import {
   Response,
   SuccessResponse
 } from "@tsoa/runtime"
+import { CreateMeetupCommand } from "../../application/Create/CreateMeetupCommand"
+import { CreateMeetupCommandHandler } from "../../application/Create/CreateMeetupCommandHandler"
 import { MeetupCreator } from "../../application/Create/MeetupCreator"
+import { InMemoryCommandBus } from "../../../Shared/infrastructure/CommandBus/InMemoryCommandBus"
+import { CommandHandlers } from "../../../Shared/infrastructure/CommandBus/CommandHandlers"
+import { InMemoryAsyncEventBus } from "../../../Shared/infrastructure/EventBus/InMemoryAsyncEventBus"
 
 @Route("meetups")
 @Tags("Meetups")
 export class MeetupPutController {
-  private creator: MeetupCreator
+  private commandBus: InMemoryCommandBus
 
   constructor() {
     const repository = new InMemoryMeetupRepository()
-    this.creator = new MeetupCreator(repository)
+    const eventBus = new InMemoryAsyncEventBus()
+    const meetupCreator = new MeetupCreator(repository, eventBus)
+    const createMeetupCommandHandler = new CreateMeetupCommandHandler(
+      meetupCreator
+    )
+
+    const commandHandlers = new CommandHandlers([createMeetupCommandHandler])
+    this.commandBus = new InMemoryCommandBus(commandHandlers)
   }
 
   @Put("{id}")
@@ -35,6 +47,7 @@ export class MeetupPutController {
       imageUrl: string
     }
   ): Promise<void> {
-    await this.creator.run({ id, ...data })
+    const command = new CreateMeetupCommand({ id, ...data })
+    await this.commandBus.dispatch(command)
   }
 }
