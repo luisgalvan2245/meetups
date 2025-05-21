@@ -3,7 +3,7 @@ import express, { Application } from "express"
 import swaggerUi from "swagger-ui-express"
 import { RegisterRoutes } from "./Shared/infrastructure/Routes/routes"
 import swaggerJson from "./Shared/infrastructure/Spec/swagger.json"
-import { logger } from "./Shared/infrastructure/Logger/logger"
+import { logger } from "./Shared/infrastructure/Logger/Logger"
 import { ErrorHandlerMiddleware } from "./Shared/infrastructure/Middlewares/ErrorHandlerMiddleware"
 
 export function createApp() {
