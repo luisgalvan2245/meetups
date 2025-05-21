@@ -1,4 +1,10 @@
-import { InMemoryMeetupRepository } from "../repositories/InMemoryMeetupRepository"
+import { InMemoryMeetupRepository } from "../../../Meetup/Infrastructure/Persistence/InMemoryMeetupRepository"
+import { CreateMeetupCommand } from "../../Application/Commands/CreateMeetup/CreateMeetupCommand"
+import { CreateMeetupCommandHandler } from "../../Application/Commands/CreateMeetup/CreateMeetupCommandHandler"
+import { MeetupCreator } from "../../Application/Commands/CreateMeetup/MeetupCreator"
+import { InMemoryCommandBus } from "../../../Shared/Infrastructure/Bus/InMemoryCommandBus"
+import { CommandHandlers } from "../../../Shared/Infrastructure/Bus/CommandHandlers"
+import { InMemoryAsyncEventBus } from "../../../Shared/Infrastructure/Bus/InMemoryAsyncEventBus"
 import {
   Route,
   Tags,
@@ -8,12 +14,6 @@ import {
   Response,
   SuccessResponse
 } from "@tsoa/runtime"
-import { CreateMeetupCommand } from "../../application/Create/CreateMeetupCommand"
-import { CreateMeetupCommandHandler } from "../../Application/Commands/CreateMeetup/CreateMeetupCommandHandler"
-import { MeetupCreator } from "../../application/Create/MeetupCreator"
-import { InMemoryCommandBus } from "../../../Shared/Infrastructure/Bus/InMemoryCommandBus"
-import { CommandHandlers } from "../../../Shared/Infrastructure/Bus/CommandHandlers"
-import { InMemoryAsyncEventBus } from "../../../Shared/Infrastructure/Bus/InMemoryAsyncEventBus"
 
 @Route("meetups")
 @Tags("Meetups")

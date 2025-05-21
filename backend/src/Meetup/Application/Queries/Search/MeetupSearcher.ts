@@ -1,5 +1,5 @@
-import { Meetup } from "../../domain/entities/Meetup"
-import { MeetupRepository } from "../../domain/repositories/MeetupRepository"
+import { Meetup } from "../../../Domain/Aggregates/Meetup/Meetup"
+import { MeetupRepository } from "../../../Domain/Aggregates/Meetup/MeetupRepository"
 
 export class MeetupSearcher {
   constructor(private repository: MeetupRepository) {}

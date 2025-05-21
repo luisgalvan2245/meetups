@@ -1,5 +1,5 @@
 import { MeetupTitleLengthExceeded } from "../../Domain/Exceptions/MeetupTitleLengthExceeded"
-import { StringValueObject } from "../../../Shared/domain/value-objects/StringValueObject"
+import { StringValueObject } from "../../../Shared/Domain/ValueObjects/StringValueObject"
 
 export class MeetupTitle extends StringValueObject {
   constructor(value: string) {

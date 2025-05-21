@@ -1,7 +1,7 @@
-import { InMemoryMeetupRepository } from "../repositories/InMemoryMeetupRepository"
+import { InMemoryMeetupRepository } from "../../../Meetup/Infrastructure/Persistence/InMemoryMeetupRepository"
+import { MeetupSearcher } from "../../Application/Queries/Search/MeetupSearcher"
+import { MeetupFinder } from "../../Application/Queries/Find/MeetupFinder"
 import { Route, Tags, Get, Path, Response } from "@tsoa/runtime"
-import { MeetupSearcher } from "../../application/Search/MeetupSearcher"
-import { MeetupFinder } from "../../application/Find/MeetupFinder"
 
 export interface MeetupModel {
   id: string

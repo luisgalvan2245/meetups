@@ -1,5 +1,5 @@
-import { DomainEventSubscriber } from "../../domain/DomainEventSubscriber"
-import { DomainEvent } from "../../Domain/Events/DomainEvent"
+import { DomainEventSubscriber } from "./Events/DomainEventSubscriber"
+import { DomainEvent } from "./Events/DomainEvent"
 
 export class DomainEventSubscribers {
   constructor(readonly items: DomainEventSubscriber<DomainEvent>[]) {}

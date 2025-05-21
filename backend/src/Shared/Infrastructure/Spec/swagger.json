@@ -1,0 +1,273 @@
+{
+	"openapi": "3.0.0",
+	"components": {
+		"examples": {},
+		"headers": {},
+		"parameters": {},
+		"requestBodies": {},
+		"responses": {},
+		"schemas": {
+			"MeetupModel": {
+				"properties": {
+					"id": {
+						"type": "string"
+					},
+					"title": {
+						"type": "string"
+					},
+					"description": {
+						"type": "string"
+					},
+					"date": {
+						"type": "string"
+					},
+					"location": {
+						"type": "string"
+					},
+					"imageUrl": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"id",
+					"title",
+					"description",
+					"date",
+					"location",
+					"imageUrl"
+				],
+				"type": "object",
+				"additionalProperties": false
+			}
+		},
+		"securitySchemes": {}
+	},
+	"info": {
+		"title": "backend",
+		"version": "1.0.0",
+		"description": "API for Meetup App",
+		"license": {
+			"name": "ISC"
+		},
+		"contact": {}
+	},
+	"paths": {
+		"/meetups/{id}": {
+			"put": {
+				"operationId": "CreateMeetup",
+				"responses": {
+					"201": {
+						"description": "Created"
+					},
+					"400": {
+						"description": "Bad Request"
+					},
+					"422": {
+						"description": "Unprocessable Entity"
+					}
+				},
+				"tags": [
+					"Meetups"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"properties": {
+									"imageUrl": {
+										"type": "string"
+									},
+									"location": {
+										"type": "string"
+									},
+									"date": {
+										"type": "string",
+										"format": "date-time"
+									},
+									"description": {
+										"type": "string"
+									},
+									"title": {
+										"type": "string"
+									}
+								},
+								"required": [
+									"imageUrl",
+									"location",
+									"date",
+									"description",
+									"title"
+								],
+								"type": "object"
+							}
+						}
+					}
+				}
+			},
+			"patch": {
+				"operationId": "UpdateMeetup",
+				"responses": {
+					"204": {
+						"description": "No Content"
+					},
+					"400": {
+						"description": "Bad Request"
+					},
+					"404": {
+						"description": "Not found"
+					},
+					"422": {
+						"description": "Unprocessable Entity"
+					}
+				},
+				"tags": [
+					"Meetups"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"properties": {
+									"imageUrl": {
+										"type": "string"
+									},
+									"location": {
+										"type": "string"
+									},
+									"date": {
+										"type": "string",
+										"format": "date-time"
+									},
+									"description": {
+										"type": "string"
+									},
+									"title": {
+										"type": "string"
+									}
+								},
+								"type": "object"
+							}
+						}
+					}
+				}
+			},
+			"get": {
+				"operationId": "GetMeetupById",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/MeetupModel"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request"
+					},
+					"404": {
+						"description": "Not found"
+					}
+				},
+				"tags": [
+					"Meetups"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			},
+			"delete": {
+				"operationId": "DeleteMeetup",
+				"responses": {
+					"204": {
+						"description": "No Content"
+					},
+					"400": {
+						"description": "Bad Request"
+					},
+					"404": {
+						"description": "Not found"
+					}
+				},
+				"tags": [
+					"Meetups"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/meetups": {
+			"get": {
+				"operationId": "GetAllMeetups",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": {
+										"$ref": "#/components/schemas/MeetupModel"
+									},
+									"type": "array"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Meetups"
+				],
+				"security": [],
+				"parameters": []
+			}
+		}
+	},
+	"servers": [
+		{
+			"url": "/"
+		}
+	]
+}

@@ -1,4 +1,4 @@
-import { NotFoundError } from "../../../Shared/domain/errors/NotFoundError"
+import { NotFoundError } from "../../../Shared/Domain/Exceptions/NotFoundError"
 
 export class MeetupNotFound extends NotFoundError {
   constructor(meetupId: string) {

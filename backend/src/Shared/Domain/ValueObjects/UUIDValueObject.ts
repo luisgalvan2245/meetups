@@ -2,7 +2,7 @@
 import { v4 as uuidV4, validate as uuidValidate } from "uuid"
 
 import { ValueObject } from "./ValueObject"
-import { InvalidUUIDError } from "../errors/InvalidUUIDError"
+import { InvalidUUIDError } from "../Exceptions/InvalidUUIDError"
 
 export class UUIDValueObject extends ValueObject<string> {
   constructor(value: string) {

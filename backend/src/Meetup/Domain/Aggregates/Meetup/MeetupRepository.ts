@@ -1,4 +1,4 @@
-import { Meetup } from "../entities/Meetup"
+import { Meetup } from "../../../Domain/Aggregates/Meetup/Meetup"
 
 export interface MeetupRepository {
   findAll(): Promise<Meetup[]>

@@ -1,4 +1,4 @@
-import { DomainEventSubscribers } from "../infrastructure/EventBus/DomainEventSubscribers"
+import { DomainEventSubscribers } from "../DomainEventSubscribers"
 import { DomainEvent } from "./DomainEvent"
 
 export interface EventBus {

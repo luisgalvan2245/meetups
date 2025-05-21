@@ -1,7 +1,7 @@
-import { MeetupRepository } from "../../domain/repositories/MeetupRepository"
-import { MeetupFinder } from "../../domain/services/MeetupFinder"
-import { EventBus } from "../../../Shared/domain/EventBus"
-import { MeetupId } from "../../../Shared/domain/value-objects/MeetupId"
+import { MeetupRepository } from "../../../Domain/Aggregates/Meetup/MeetupRepository"
+import { MeetupFinder } from "../../../Domain/Services/MeetupFinder"
+import { EventBus } from "../../../../Shared/Domain/Events/EventBus"
+import { MeetupId } from "../../../Domain/Aggregates/Meetup/MeetupId"
 
 export class MeetupDeleter {
   private finder: MeetupFinder

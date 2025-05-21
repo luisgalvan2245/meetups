@@ -1,4 +1,4 @@
-import { Meetup } from "../../domain/entities/Meetup"
+import { Meetup } from "../../Domain/Aggregates/Meetup/Meetup"
 import { MeetupRepository } from "../../Domain/Aggregates/Meetup/MeetupRepository"
 import { v4 as uuidV4 } from "uuid"
 

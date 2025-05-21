@@ -1,7 +1,7 @@
 import { Query } from "../../Domain/Query"
-import { QueryHandler } from "../../domain/QueryHandler"
+import { QueryHandler } from "../../Domain/QueryHandler"
 import { Response } from "../../Domain/Response"
-import { QueryNotRegisteredError } from "../../domain/QueryNotRegisteredError"
+import { QueryNotRegisteredError } from "../../Domain/QueryNotRegisteredError"
 
 export class QueryHandlers extends Map<Query, QueryHandler<Query, Response>> {
   constructor(queryHandlers: QueryHandler<Query, Response>[]) {

@@ -1,6 +1,6 @@
 import { Command } from "../../Domain/Command"
-import { CommandHandler } from "../../domain/CommandHandler"
-import { CommandNotRegisteredError } from "../../domain/CommandNotRegisteredError"
+import { CommandHandler } from "../../Domain/CommandHandler"
+import { CommandNotRegisteredError } from "../../Domain/CommandNotRegisteredError"
 
 export class CommandHandlers extends Map<Command, CommandHandler<Command>> {
   constructor(commandHandlers: CommandHandler<Command>[]) {

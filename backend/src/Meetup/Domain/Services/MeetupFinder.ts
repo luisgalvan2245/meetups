@@ -1,7 +1,7 @@
 import { MeetupRepository } from "../Aggregates/Meetup/MeetupRepository"
-import { Meetup } from "../entities/Meetup"
+import { Meetup } from "../Aggregates/Meetup/Meetup"
 import { MeetupNotFound } from "../Exceptions/MeetupNotFound"
-import { MeetupId } from "../../../Shared/domain/value-objects/MeetupId"
+import { MeetupId } from "../Aggregates/Meetup/MeetupId"
 
 export class MeetupFinder {
   constructor(private repository: MeetupRepository) {}

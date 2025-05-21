@@ -1,7 +1,7 @@
-import { DomainError } from "../../domain/errors/DomainError"
-import { InvalidValueError } from "../../domain/errors/InvalidValueError"
-import { NotFoundError } from "../../domain/errors/NotFoundError"
-import { InvalidUUIDError } from "../../domain/errors/InvalidUUIDError"
+import { DomainError } from "../../Domain/Exceptions/DomainError"
+import { InvalidValueError } from "../../Domain/Exceptions/InvalidValueError"
+import { NotFoundError } from "../../Domain/Exceptions/NotFoundError"
+import { InvalidUUIDError } from "../../Domain/Exceptions/InvalidUUIDError"
 import { Request, Response, NextFunction } from "express"
 import { ValidateError } from "tsoa"
 

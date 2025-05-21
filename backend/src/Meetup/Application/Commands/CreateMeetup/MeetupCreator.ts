@@ -1,12 +1,12 @@
-import { Meetup } from "../../domain/entities/Meetup"
-import { MeetupRepository } from "../../domain/repositories/MeetupRepository"
-import { MeetupId } from "../../../Shared/domain/value-objects/MeetupId"
-import { MeetupTitle } from "../../domain/value-objects/MeetupTitle"
-import { MeetupDescription } from "../../domain/value-objects/MeetupDescription"
-import { MeetupDate } from "../../domain/value-objects/MeetupDate"
-import { MeetupLocation } from "../../domain/value-objects/MeetupLocation"
-import { MeetupImageUrl } from "../../domain/value-objects/MeetupImageUrl"
-import { EventBus } from "../../../Shared/domain/EventBus"
+import { Meetup } from "../../../Domain/Aggregates/Meetup/Meetup"
+import { MeetupRepository } from "../../../Domain/Aggregates/Meetup/MeetupRepository"
+import { MeetupId } from "../../../Domain/Aggregates/Meetup/MeetupId"
+import { MeetupTitle } from "../../../Domain/ValueObjects/MeetupTitle"
+import { MeetupDescription } from "../../../Domain/ValueObjects/MeetupDescription"
+import { MeetupDate } from "../../../Domain/ValueObjects/MeetupDate"
+import { MeetupLocation } from "../../../Domain/ValueObjects/MeetupLocation"
+import { MeetupImageUrl } from "../../../Domain/ValueObjects/MeetupImageUrl"
+import { EventBus } from "../../../../Shared/Domain/Events/EventBus"
 
 export class MeetupCreator {
   constructor(
