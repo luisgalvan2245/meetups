@@ -23,13 +23,10 @@ export class MeetupPutController {
   constructor() {
     const repository = new InMemoryMeetupRepository()
     const eventBus = new InMemoryAsyncEventBus()
-    const meetupCreator = new MeetupCreator(repository, eventBus)
-    const createMeetupCommandHandler = new CreateMeetupCommandHandler(
-      meetupCreator
-    )
-
-    const commandHandlers = new CommandHandlers([createMeetupCommandHandler])
-    this.commandBus = new InMemoryCommandBus(commandHandlers)
+    const creator = new MeetupCreator(repository, eventBus)
+    const handler = new CreateMeetupCommandHandler(creator)
+    const handlers = new CommandHandlers([handler])
+    this.commandBus = new InMemoryCommandBus(handlers)
   }
 
   @Put("{id}")

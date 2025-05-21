@@ -18,6 +18,7 @@ export class MeetupDeleter {
     meetup.markAsDeleted()
 
     await this.repository.delete(id.value)
-    await this.eventBus.publish(meetup.pullDomainEvents())
+    const events = meetup.pullDomainEvents()
+    await this.eventBus.publish(events)
   }
 }

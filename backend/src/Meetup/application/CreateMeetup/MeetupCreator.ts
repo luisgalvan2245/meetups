@@ -32,6 +32,7 @@ export class MeetupCreator {
     )
 
     await this.repository.create(meetup)
-    await this.eventBus.publish(meetup.pullDomainEvents())
+    const events = meetup.pullDomainEvents()
+    await this.eventBus.publish(events)
   }
 }

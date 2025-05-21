@@ -23,13 +23,10 @@ export class MeetupPatchController {
   constructor() {
     const repository = new InMemoryMeetupRepository()
     const eventBus = new InMemoryAsyncEventBus()
-    const meetupUpdater = new MeetupUpdater(repository, eventBus)
-    const updateMeetupCommandHandler = new UpdateMeetupCommandHandler(
-      meetupUpdater
-    )
-
-    const commandHandlers = new CommandHandlers([updateMeetupCommandHandler])
-    this.commandBus = new InMemoryCommandBus(commandHandlers)
+    const updater = new MeetupUpdater(repository, eventBus)
+    const handler = new UpdateMeetupCommandHandler(updater)
+    const handlers = new CommandHandlers([handler])
+    this.commandBus = new InMemoryCommandBus(handlers)
   }
 
   @Patch("{id}")

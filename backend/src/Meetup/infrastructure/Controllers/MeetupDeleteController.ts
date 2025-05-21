@@ -22,13 +22,10 @@ export class MeetupDeleteController {
   constructor() {
     const repository = new InMemoryMeetupRepository()
     const eventBus = new InMemoryAsyncEventBus()
-    const meetupDeleter = new MeetupDeleter(repository, eventBus)
-    const deleteMeetupCommandHandler = new DeleteMeetupCommandHandler(
-      meetupDeleter
-    )
-
-    const commandHandlers = new CommandHandlers([deleteMeetupCommandHandler])
-    this.commandBus = new InMemoryCommandBus(commandHandlers)
+    const deleter = new MeetupDeleter(repository, eventBus)
+    const handler = new DeleteMeetupCommandHandler(deleter)
+    const handlers = new CommandHandlers([handler])
+    this.commandBus = new InMemoryCommandBus(handlers)
   }
 
   @Delete("{id}")

@@ -45,6 +45,7 @@ export class MeetupUpdater {
     }
 
     await this.repository.update(params.id.value, meetup)
-    await this.eventBus.publish(meetup.pullDomainEvents())
+    const events = meetup.pullDomainEvents()
+    await this.eventBus.publish(events)
   }
 }
