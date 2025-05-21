@@ -1,13 +1,13 @@
 import { Command } from "../../../Shared/domain/Command"
 
-type DeleteMeetupCommandParams = {
+type Params = {
   id: string
 }
 
 export class DeleteMeetupCommand extends Command {
-  id: string
+  readonly id: string
 
-  constructor({ id }: DeleteMeetupCommandParams) {
+  constructor({ id }: Params) {
     super()
     this.id = id
   }

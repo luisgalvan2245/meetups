@@ -8,8 +8,6 @@ import { CreateMeetupCommand } from "./CreateMeetupCommand"
 export class CreateMeetupCommandHandler
   implements CommandHandler<CreateMeetupCommand>
 {
-  private meetupCreator: MeetupCreator
-
   constructor(private meetupCreator: MeetupCreator) {}
 
   subscribedTo(): CommandClass<CreateMeetupCommand> {

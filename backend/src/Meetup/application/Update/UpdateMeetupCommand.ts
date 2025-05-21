@@ -1,6 +1,6 @@
 import { Command } from "../../../Shared/domain/Command"
 
-type UpdateMeetupCommandParams = {
+type Params = {
   id: string
   title?: string
   description?: string
@@ -10,21 +10,14 @@ type UpdateMeetupCommandParams = {
 }
 
 export class UpdateMeetupCommand extends Command {
-  id: string
-  title?: string
-  description?: string
-  date?: Date
-  location?: string
-  imageUrl?: string
+  readonly id: string
+  readonly title?: string
+  readonly description?: string
+  readonly date?: Date
+  readonly location?: string
+  readonly imageUrl?: string
 
-  constructor({
-    id,
-    title,
-    description,
-    date,
-    location,
-    imageUrl
-  }: UpdateMeetupCommandParams) {
+  constructor({ id, title, description, date, location, imageUrl }: Params) {
     super()
     this.id = id
     this.title = title
