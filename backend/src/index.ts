@@ -1,10 +1,10 @@
 import "dotenv/config"
 import express, { Application } from "express"
 import swaggerUi from "swagger-ui-express"
-import { RegisterRoutes } from "./Shared/Infrastructure/Routes/routes"
-import swaggerJson from "./Shared/Infrastructure/Spec/swagger.json"
-import { logger } from "./Shared/Infrastructure/Logger/logger"
-import { ErrorHandlerMiddleware } from "./Shared/Infrastructure/Middlewares/ErrorHandlerMiddleware"
+import { RegisterRoutes } from "./Shared/infrastructure/Routes/routes"
+import swaggerJson from "./Shared/infrastructure/Spec/swagger.json"
+import { logger } from "./Shared/infrastructure/Logger/logger"
+import { ErrorHandlerMiddleware } from "./Shared/infrastructure/Middlewares/ErrorHandlerMiddleware"
 
 export function createApp() {
   const app = express()
