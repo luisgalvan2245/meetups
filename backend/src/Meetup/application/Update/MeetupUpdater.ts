@@ -6,6 +6,7 @@ import { MeetupLocation } from "../../domain/value-objects/MeetupLocation"
 import { MeetupImageUrl } from "../../domain/value-objects/MeetupImageUrl"
 import { MeetupFinder } from "../../domain/services/MeetupFinder"
 import { EventBus } from "../../../Shared/domain/EventBus"
+import { MeetupId } from "../../../Shared/domain/value-objects/MeetupId"
 
 export class MeetupUpdater {
   private finder: MeetupFinder
@@ -17,33 +18,33 @@ export class MeetupUpdater {
     this.finder = new MeetupFinder(this.repository)
   }
 
-  async run(
-    id: string,
-    title?: string,
-    description?: string,
-    date?: Date,
-    location?: string,
-    imageUrl?: string
-  ): Promise<void> {
-    const meetup = await this.finder.run(id)
+  async run(params: {
+    id: MeetupId
+    title?: MeetupTitle
+    description?: MeetupDescription
+    date?: MeetupDate
+    location?: MeetupLocation
+    imageUrl?: MeetupImageUrl
+  }): Promise<void> {
+    const meetup = await this.finder.run(params.id.value)
 
-    if (title) {
-      meetup.updateTitle(new MeetupTitle(title))
+    if (params.title) {
+      meetup.updateTitle(params.title)
     }
-    if (description) {
-      meetup.updateDescription(new MeetupDescription(description))
+    if (params.description) {
+      meetup.updateDescription(params.description)
     }
-    if (date) {
-      meetup.updateDate(new MeetupDate(new Date(date)))
+    if (params.date) {
+      meetup.updateDate(params.date)
     }
-    if (location) {
-      meetup.updateLocation(new MeetupLocation(location))
+    if (params.location) {
+      meetup.updateLocation(params.location)
     }
-    if (imageUrl) {
-      meetup.updateImageUrl(new MeetupImageUrl(imageUrl))
+    if (params.imageUrl) {
+      meetup.updateImageUrl(params.imageUrl)
     }
 
-    await this.repository.update(id, meetup)
+    await this.repository.update(params.id.value, meetup)
     await this.eventBus.publish(meetup.pullDomainEvents())
   }
 }

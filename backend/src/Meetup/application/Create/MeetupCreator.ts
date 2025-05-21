@@ -15,20 +15,20 @@ export class MeetupCreator {
   ) {}
 
   async run(params: {
-    id: string
-    title: string
-    description: string
-    date: Date
-    location: string
-    imageUrl: string
+    id: MeetupId
+    title: MeetupTitle
+    description: MeetupDescription
+    date: MeetupDate
+    location: MeetupLocation
+    imageUrl: MeetupImageUrl
   }): Promise<void> {
     const meetup = Meetup.create(
-      new MeetupId(params.id),
-      new MeetupTitle(params.title),
-      new MeetupDescription(params.description),
-      new MeetupDate(new Date(params.date)),
-      new MeetupLocation(params.location),
-      new MeetupImageUrl(params.imageUrl)
+      params.id,
+      params.title,
+      params.description,
+      params.date,
+      params.location,
+      params.imageUrl
     )
 
     await this.repository.create(meetup)

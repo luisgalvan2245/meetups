@@ -2,6 +2,7 @@ import { CommandHandler } from "../../../Shared/domain/CommandHandler"
 import { Command } from "../../../Shared/domain/Command"
 import { DeleteMeetupCommand } from "./DeleteMeetupCommand"
 import { MeetupDeleter } from "./MeetupDeleter"
+import { MeetupId } from "../../../Shared/domain/value-objects/MeetupId"
 
 export class DeleteMeetupCommandHandler
   implements CommandHandler<DeleteMeetupCommand>
@@ -13,6 +14,6 @@ export class DeleteMeetupCommandHandler
   }
 
   async handle(command: DeleteMeetupCommand): Promise<void> {
-    await this.meetupDeleter.run(command.id)
+    await this.meetupDeleter.run(new MeetupId(command.id))
   }
 }

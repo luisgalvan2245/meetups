@@ -2,6 +2,12 @@ import { CommandHandler } from "../../../Shared/domain/CommandHandler"
 import { Command } from "../../../Shared/domain/Command"
 import { MeetupCreator } from "./MeetupCreator"
 import { CreateMeetupCommand } from "./CreateMeetupCommand"
+import { MeetupId } from "../../../Shared/domain/value-objects/MeetupId"
+import { MeetupTitle } from "../../domain/value-objects/MeetupTitle"
+import { MeetupDescription } from "../../domain/value-objects/MeetupDescription"
+import { MeetupDate } from "../../domain/value-objects/MeetupDate"
+import { MeetupLocation } from "../../domain/value-objects/MeetupLocation"
+import { MeetupImageUrl } from "../../domain/value-objects/MeetupImageUrl"
 
 export class CreateMeetupCommandHandler
   implements CommandHandler<CreateMeetupCommand>
@@ -14,12 +20,12 @@ export class CreateMeetupCommandHandler
 
   async handle(command: CreateMeetupCommand): Promise<void> {
     await this.meetupCreator.run({
-      id: command.id,
-      title: command.title,
-      description: command.description,
-      date: command.date,
-      location: command.location,
-      imageUrl: command.imageUrl
+      id: new MeetupId(command.id),
+      title: new MeetupTitle(command.title),
+      description: new MeetupDescription(command.description),
+      date: new MeetupDate(new Date(command.date)),
+      location: new MeetupLocation(command.location),
+      imageUrl: new MeetupImageUrl(command.imageUrl)
     })
   }
 }
