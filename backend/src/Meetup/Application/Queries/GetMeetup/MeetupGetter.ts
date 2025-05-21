@@ -1,12 +1,12 @@
 import { Meetup } from "../../../Domain/Aggregates/Meetup/Meetup"
 import { MeetupRepository } from "../../../Domain/Aggregates/Meetup/MeetupRepository"
-import { MeetupFinder as DomainMeetupFinder } from "../../../Domain/Services/MeetupFinder"
+import { MeetupFinder } from "../../../Domain/Services/MeetupFinder"
 
-export class MeetupFinder {
-  private finder: DomainMeetupFinder
+export class MeetupGetter {
+  private finder: MeetupFinder
 
   constructor(repository: MeetupRepository) {
-    this.finder = new DomainMeetupFinder(repository)
+    this.finder = new MeetupFinder(repository)
   }
 
   async run(id: string): Promise<Meetup> {
