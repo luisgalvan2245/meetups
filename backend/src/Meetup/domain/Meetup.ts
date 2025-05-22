@@ -49,18 +49,15 @@ export class Meetup extends AggregateRoot {
     imageUrl: MeetupImageUrl
   ): Meetup {
     const meetup = new Meetup(id, title, description, date, location, imageUrl)
-
-    meetup.record(
-      new MeetupCreatedDomainEvent({
-        aggregateId: meetup.id.value,
-        title: meetup.title.value,
-        description: meetup.description.value,
-        date: meetup.date.toString(),
-        location: meetup.location.value,
-        imageUrl: meetup.imageUrl.value
-      })
-    )
-
+    const event = new MeetupCreatedDomainEvent({
+      aggregateId: meetup.id.value,
+      title: meetup.title.value,
+      description: meetup.description.value,
+      date: meetup.date.toString(),
+      location: meetup.location.value,
+      imageUrl: meetup.imageUrl.value
+    })
+    meetup.record(event)
     return meetup
   }
 
