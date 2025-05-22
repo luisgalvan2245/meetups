@@ -26,7 +26,7 @@ export class MeetupUpdater {
     location?: MeetupLocation
     imageUrl?: MeetupImageUrl
   }): Promise<void> {
-    const meetup = await this.finder.run(params.id.value)
+    const meetup = await this.finder.run(params.id)
 
     if (params.title) {
       meetup.updateTitle(params.title)
@@ -44,7 +44,7 @@ export class MeetupUpdater {
       meetup.updateImageUrl(params.imageUrl)
     }
 
-    await this.repository.update(params.id.value, meetup)
+    await this.repository.update(params.id, meetup)
     const events = meetup.pullDomainEvents()
     await this.eventBus.publish(events)
   }

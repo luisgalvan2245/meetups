@@ -1,3 +1,4 @@
+import { MeetupId } from "src/Meetup/domain/ValueObjects/MeetupId"
 import { Meetup } from "../../domain/Meetup"
 import { MeetupRepository } from "../../domain/Repositories/MeetupRepository"
 import { MeetupFinder } from "../../domain/Services/MeetupFinder"
@@ -9,7 +10,7 @@ export class MeetupGetter {
     this.finder = new MeetupFinder(repository)
   }
 
-  async run(id: string): Promise<Meetup> {
+  async run(id: MeetupId): Promise<Meetup> {
     return this.finder.run(id)
   }
 }

@@ -1,7 +1,7 @@
 import { describe, it, expect } from "vitest"
 import request from "supertest"
 import { v4 as uuidV4 } from "uuid"
-import { createApp } from "@/index"
+import { createApp } from "../src/index"
 
 describe("MeetupController", () => {
   const app = createApp()

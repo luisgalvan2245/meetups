@@ -1,6 +1,7 @@
 import { InMemoryMeetupRepository } from "../../../Meetup/infrastructure/Repositories/InMemoryMeetupRepository"
 import { MeetupLister } from "../../application/ListMeetups/MeetupLister"
 import { MeetupGetter } from "../../application/GetMeetup/MeetupGetter"
+import { MeetupId } from "../../domain/ValueObjects/MeetupId"
 import { Route, Tags, Get, Path, Response } from "@tsoa/runtime"
 
 export interface MeetupModel {
@@ -34,7 +35,7 @@ export class MeetupGetController {
   @Response(400, "Bad Request")
   @Response(404, "Not found")
   async getMeetupById(@Path() id: string): Promise<MeetupModel> {
-    const meetup = await this.getter.run(id)
+    const meetup = await this.getter.run(new MeetupId(id))
     return meetup.toPrimitives()
   }
 }

@@ -6,11 +6,10 @@ import { MeetupId } from "../ValueObjects/MeetupId"
 export class MeetupFinder {
   constructor(private repository: MeetupRepository) {}
 
-  async run(id: string): Promise<Meetup> {
-    const meetupId = new MeetupId(id)
-    const meetup = await this.repository.findById(meetupId.value)
+  async run(id: MeetupId): Promise<Meetup> {
+    const meetup = await this.repository.findById(id)
     if (!meetup) {
-      throw new MeetupNotFoundError(id)
+      throw new MeetupNotFoundError(id.value)
     }
     return meetup
   }

@@ -14,10 +14,9 @@ export class MeetupDeleter {
   }
 
   async run(id: MeetupId): Promise<void> {
-    const meetup = await this.finder.run(id.value)
+    const meetup = await this.finder.run(id)
     meetup.markAsDeleted()
-
-    await this.repository.delete(id.value)
+    await this.repository.delete(id)
     const events = meetup.pullDomainEvents()
     await this.eventBus.publish(events)
   }

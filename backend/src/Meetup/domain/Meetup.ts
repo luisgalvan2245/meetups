@@ -114,60 +114,54 @@ export class Meetup extends AggregateRoot {
 
   updateTitle(title: MeetupTitle): void {
     this._title = title
-    this.record(
-      new MeetupTitleUpdatedDomainEvent({
-        aggregateId: this.id.value,
-        title: title.value
-      })
-    )
+    const event = new MeetupTitleUpdatedDomainEvent({
+      aggregateId: this.id.value,
+      title: title.value
+    })
+    this.record(event)
   }
 
   updateDescription(description: MeetupDescription): void {
     this._description = description
-    this.record(
-      new MeetupDescriptionUpdatedDomainEvent({
-        aggregateId: this.id.value,
-        description: description.value
-      })
-    )
+    const event = new MeetupDescriptionUpdatedDomainEvent({
+      aggregateId: this.id.value,
+      description: description.value
+    })
+    this.record(event)
   }
 
   updateDate(date: MeetupDate): void {
     this._date = date
-    this.record(
-      new MeetupDateUpdatedDomainEvent({
-        aggregateId: this.id.value,
-        date: date.toString()
-      })
-    )
+    const event = new MeetupDateUpdatedDomainEvent({
+      aggregateId: this.id.value,
+      date: date.toString()
+    })
+    this.record(event)
   }
 
   updateLocation(location: MeetupLocation): void {
     this._location = location
-    this.record(
-      new MeetupLocationUpdatedDomainEvent({
-        aggregateId: this.id.value,
-        location: location.value
-      })
-    )
+    const event = new MeetupLocationUpdatedDomainEvent({
+      aggregateId: this.id.value,
+      location: location.value
+    })
+    this.record(event)
   }
 
   updateImageUrl(imageUrl: MeetupImageUrl): void {
     this._imageUrl = imageUrl
-    this.record(
-      new MeetupImageUrlUpdatedDomainEvent({
-        aggregateId: this.id.value,
-        imageUrl: imageUrl.value
-      })
-    )
+    const event = new MeetupImageUrlUpdatedDomainEvent({
+      aggregateId: this.id.value,
+      imageUrl: imageUrl.value
+    })
+    this.record(event)
   }
 
   markAsDeleted(): void {
     this._isDeleted = true
-    this.record(
-      new MeetupDeletedDomainEvent({
-        aggregateId: this.id.value
-      })
-    )
+    const event = new MeetupDeletedDomainEvent({
+      aggregateId: this.id.value
+    })
+    this.record(event)
   }
 }
