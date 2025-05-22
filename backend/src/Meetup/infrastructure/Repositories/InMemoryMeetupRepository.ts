@@ -51,9 +51,9 @@ export class InMemoryMeetupRepository implements MeetupRepository {
     InMemoryMeetupRepository.meetups.push(meetup)
   }
 
-  async update(id: MeetupId, meetup: Meetup): Promise<void> {
+  async update(meetup: Meetup): Promise<void> {
     const index = InMemoryMeetupRepository.meetups.findIndex(m =>
-      m.id.equals(id)
+      m.id.equals(meetup.id)
     )
     if (index >= 0) {
       InMemoryMeetupRepository.meetups[index] = meetup

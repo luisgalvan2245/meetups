@@ -44,7 +44,7 @@ export class MeetupUpdater {
       meetup.updateImageUrl(params.imageUrl)
     }
 
-    await this.repository.update(params.id, meetup)
+    await this.repository.update(meetup)
     const events = meetup.pullDomainEvents()
     await this.eventBus.publish(events)
   }
