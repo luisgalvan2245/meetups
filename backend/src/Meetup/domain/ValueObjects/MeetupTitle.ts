@@ -9,8 +9,9 @@ export class MeetupTitle extends StringValueObject {
 
   private assertLengthIsLessThan(maxLength: number): void {
     if (this.value.length > maxLength) {
-      const msg = `The Meetup Title <${this.value}> has more than ${maxLength} characters`
-      throw new MeetupTitleLengthExceededError(msg)
+      throw new MeetupTitleLengthExceededError(
+        `The Meetup Title <${this.value}> has more than ${maxLength} characters`
+      )
     }
   }
 }
