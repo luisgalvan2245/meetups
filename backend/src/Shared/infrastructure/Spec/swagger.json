@@ -7,7 +7,7 @@
 		"requestBodies": {},
 		"responses": {},
 		"schemas": {
-			"MeetupModel": {
+			"MeetupResponse": {
 				"properties": {
 					"id": {
 						"type": "string"
@@ -183,7 +183,7 @@
 						"content": {
 							"application/json": {
 								"schema": {
-									"$ref": "#/components/schemas/MeetupModel"
+									"$ref": "#/components/schemas/MeetupResponse"
 								}
 							}
 						}
@@ -249,7 +249,7 @@
 							"application/json": {
 								"schema": {
 									"items": {
-										"$ref": "#/components/schemas/MeetupModel"
+										"$ref": "#/components/schemas/MeetupResponse"
 									},
 									"type": "array"
 								}

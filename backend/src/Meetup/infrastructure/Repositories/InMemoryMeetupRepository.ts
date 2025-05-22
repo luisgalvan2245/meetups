@@ -1,4 +1,4 @@
-import { MeetupId } from "src/Meetup/domain/ValueObjects/MeetupId"
+import { MeetupId } from "../../domain/ValueObjects/MeetupId"
 import { Meetup } from "../../domain/Meetup"
 import { MeetupRepository } from "../../domain/Repositories/MeetupRepository"
 import { v4 as uuidV4 } from "uuid"

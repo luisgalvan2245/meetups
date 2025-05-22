@@ -12,14 +12,14 @@ import { MeetupImageUrl } from "../../domain/ValueObjects/MeetupImageUrl"
 export class CreateMeetupCommandHandler
   implements CommandHandler<CreateMeetupCommand>
 {
-  constructor(private meetupCreator: MeetupCreator) {}
+  constructor(private creator: MeetupCreator) {}
 
   subscribedTo(): Command {
     return CreateMeetupCommand
   }
 
   async handle(command: CreateMeetupCommand): Promise<void> {
-    await this.meetupCreator.run({
+    await this.creator.run({
       id: new MeetupId(command.id),
       title: new MeetupTitle(command.title),
       description: new MeetupDescription(command.description),

@@ -21,6 +21,7 @@ export class MeetupPutController {
   private commandBus: InMemoryCommandBus
 
   constructor() {
+    // TODO: Inject CommandBus
     const repository = new InMemoryMeetupRepository()
     const eventBus = new InMemoryAsyncEventBus()
     const creator = new MeetupCreator(repository, eventBus)

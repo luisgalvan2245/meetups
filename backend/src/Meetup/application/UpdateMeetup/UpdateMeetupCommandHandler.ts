@@ -12,14 +12,14 @@ import { MeetupImageUrl } from "../../domain/ValueObjects/MeetupImageUrl"
 export class UpdateMeetupCommandHandler
   implements CommandHandler<UpdateMeetupCommand>
 {
-  constructor(private meetupUpdater: MeetupUpdater) {}
+  constructor(private updater: MeetupUpdater) {}
 
   subscribedTo(): Command {
     return UpdateMeetupCommand
   }
 
   async handle(command: UpdateMeetupCommand): Promise<void> {
-    await this.meetupUpdater.run({
+    await this.updater.run({
       id: new MeetupId(command.id),
       title: command.title ? new MeetupTitle(command.title) : undefined,
       description: command.description

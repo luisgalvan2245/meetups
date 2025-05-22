@@ -20,6 +20,7 @@ export class MeetupDeleteController {
   private commandBus: InMemoryCommandBus
 
   constructor() {
+    // TODO: Inject CommandBus
     const repository = new InMemoryMeetupRepository()
     const eventBus = new InMemoryAsyncEventBus()
     const deleter = new MeetupDeleter(repository, eventBus)
