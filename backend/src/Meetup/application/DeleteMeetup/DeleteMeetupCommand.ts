@@ -1,14 +1,14 @@
-import { Command } from "../../../Shared/domain/Bus/CommandBus/Command"
+import { Command } from '../../../Shared/domain/Bus/CommandBus/Command';
 
 type Params = {
-  id: string
-}
+  id: string;
+};
 
 export class DeleteMeetupCommand extends Command {
-  readonly id: string
+  readonly id: string;
 
   constructor({ id }: Params) {
-    super()
-    this.id = id
+    super();
+    this.id = id;
   }
 }

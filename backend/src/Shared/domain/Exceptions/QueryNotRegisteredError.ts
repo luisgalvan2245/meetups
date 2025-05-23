@@ -1,9 +1,7 @@
-import { Query } from "../Bus/QueryBus/Query"
+import { Query } from '../Bus/QueryBus/Query';
 
 export class QueryNotRegisteredError extends Error {
   constructor(query: Query) {
-    super(
-      `The query <${query.constructor.name}> hasn't a query handler associated`
-    )
+    super(`The query <${query.constructor.name}> hasn't a query handler associated`);
   }
 }

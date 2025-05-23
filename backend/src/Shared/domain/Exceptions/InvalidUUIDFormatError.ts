@@ -1,7 +1,7 @@
-import { FormatError } from "./FormatError"
+import { FormatError } from './FormatError';
 
 export class InvalidUUIDFormatError extends FormatError {
   constructor(uuid: string) {
-    super(uuid)
+    super(uuid);
   }
 }

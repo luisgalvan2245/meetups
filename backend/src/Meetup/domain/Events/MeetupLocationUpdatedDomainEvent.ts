@@ -1,53 +1,53 @@
-import { DomainEvent } from "../../../Shared/domain/Bus/EventBus/DomainEvent"
+import { DomainEvent } from '../../../Shared/domain/Bus/EventBus/DomainEvent';
 
 type MeetupLocationUpdatedDomainEventAttributes = {
-  readonly location: string
-}
+  readonly location: string;
+};
 
 export class MeetupLocationUpdatedDomainEvent extends DomainEvent {
-  static readonly EVENT_NAME = "meetup.location.updated"
+  static readonly EVENT_NAME = 'meetup.location.updated';
 
-  readonly location: string
+  readonly location: string;
 
   constructor({
     aggregateId,
     location,
     eventId,
-    occurredOn
+    occurredOn,
   }: {
-    aggregateId: string
-    eventId?: string
-    location: string
-    occurredOn?: Date
+    aggregateId: string;
+    eventId?: string;
+    location: string;
+    occurredOn?: Date;
   }) {
     super({
       eventName: MeetupLocationUpdatedDomainEvent.EVENT_NAME,
       aggregateId,
       eventId,
-      occurredOn
-    })
-    this.location = location
+      occurredOn,
+    });
+    this.location = location;
   }
 
   toPrimitives(): MeetupLocationUpdatedDomainEventAttributes {
-    const { location } = this
+    const { location } = this;
     return {
-      location
-    }
+      location,
+    };
   }
 
   static fromPrimitives(params: {
-    aggregateId: string
-    attributes: MeetupLocationUpdatedDomainEventAttributes
-    eventId: string
-    occurredOn: Date
+    aggregateId: string;
+    attributes: MeetupLocationUpdatedDomainEventAttributes;
+    eventId: string;
+    occurredOn: Date;
   }): DomainEvent {
-    const { aggregateId, attributes, occurredOn, eventId } = params
+    const { aggregateId, attributes, occurredOn, eventId } = params;
     return new MeetupLocationUpdatedDomainEvent({
       aggregateId,
       location: attributes.location,
       eventId,
-      occurredOn
-    })
+      occurredOn,
+    });
   }
 }

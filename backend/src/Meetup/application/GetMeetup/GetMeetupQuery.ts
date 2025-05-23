@@ -1,14 +1,14 @@
-import { Query } from "../../../Shared/domain/Bus/QueryBus/Query"
+import { Query } from '../../../Shared/domain/Bus/QueryBus/Query';
 
 type Params = {
-  id: string
-}
+  id: string;
+};
 
 export class GetMeetupQuery extends Query {
-  readonly id: string
+  readonly id: string;
 
   constructor({ id }: Params) {
-    super()
-    this.id = id
+    super();
+    this.id = id;
   }
 }

@@ -1,8 +1,8 @@
 export interface MeetupResponse {
-  id: string
-  title: string
-  description: string
-  date: string
-  location: string
-  imageUrl: string
+  id: string;
+  title: string;
+  description: string;
+  date: string;
+  location: string;
+  imageUrl: string;
 }

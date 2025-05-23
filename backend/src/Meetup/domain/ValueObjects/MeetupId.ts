@@ -1,3 +1,3 @@
-import { UUIDValueObject } from "../../../Shared/domain/ValueObjects/UUIDValueObject"
+import { UUIDValueObject } from '../../../Shared/domain/ValueObjects/UUIDValueObject';
 
 export class MeetupId extends UUIDValueObject {}

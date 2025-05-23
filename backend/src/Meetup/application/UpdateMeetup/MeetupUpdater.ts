@@ -1,51 +1,51 @@
-import { MeetupRepository } from "../../domain/Repositories/MeetupRepository"
-import { MeetupTitle } from "../../domain/ValueObjects/MeetupTitle"
-import { MeetupDescription } from "../../domain/ValueObjects/MeetupDescription"
-import { MeetupDate } from "../../domain/ValueObjects/MeetupDate"
-import { MeetupLocation } from "../../domain/ValueObjects/MeetupLocation"
-import { MeetupImageUrl } from "../../domain/ValueObjects/MeetupImageUrl"
-import { MeetupFinder } from "../../domain/Services/MeetupFinder"
-import { EventBus } from "../../../Shared/domain/Bus/EventBus/EventBus"
-import { MeetupId } from "../../domain/ValueObjects/MeetupId"
+import { MeetupRepository } from '../../domain/Repositories/MeetupRepository';
+import { MeetupTitle } from '../../domain/ValueObjects/MeetupTitle';
+import { MeetupDescription } from '../../domain/ValueObjects/MeetupDescription';
+import { MeetupDate } from '../../domain/ValueObjects/MeetupDate';
+import { MeetupLocation } from '../../domain/ValueObjects/MeetupLocation';
+import { MeetupImageUrl } from '../../domain/ValueObjects/MeetupImageUrl';
+import { MeetupFinder } from '../../domain/Services/MeetupFinder';
+import { EventBus } from '../../../Shared/domain/Bus/EventBus/EventBus';
+import { MeetupId } from '../../domain/ValueObjects/MeetupId';
 
 export class MeetupUpdater {
-  private finder: MeetupFinder
+  private finder: MeetupFinder;
 
   constructor(
     private repository: MeetupRepository,
     private eventBus: EventBus
   ) {
-    this.finder = new MeetupFinder(this.repository)
+    this.finder = new MeetupFinder(this.repository);
   }
 
   async run(params: {
-    id: MeetupId
-    title?: MeetupTitle
-    description?: MeetupDescription
-    date?: MeetupDate
-    location?: MeetupLocation
-    imageUrl?: MeetupImageUrl
+    id: MeetupId;
+    title?: MeetupTitle;
+    description?: MeetupDescription;
+    date?: MeetupDate;
+    location?: MeetupLocation;
+    imageUrl?: MeetupImageUrl;
   }): Promise<void> {
-    const meetup = await this.finder.run(params.id)
+    const meetup = await this.finder.run(params.id);
 
     if (params.title) {
-      meetup.updateTitle(params.title)
+      meetup.updateTitle(params.title);
     }
     if (params.description) {
-      meetup.updateDescription(params.description)
+      meetup.updateDescription(params.description);
     }
     if (params.date) {
-      meetup.updateDate(params.date)
+      meetup.updateDate(params.date);
     }
     if (params.location) {
-      meetup.updateLocation(params.location)
+      meetup.updateLocation(params.location);
     }
     if (params.imageUrl) {
-      meetup.updateImageUrl(params.imageUrl)
+      meetup.updateImageUrl(params.imageUrl);
     }
 
-    await this.repository.update(meetup)
-    const events = meetup.pullDomainEvents()
-    await this.eventBus.publish(events)
+    await this.repository.update(meetup);
+    const events = meetup.pullDomainEvents();
+    await this.eventBus.publish(events);
   }
 }

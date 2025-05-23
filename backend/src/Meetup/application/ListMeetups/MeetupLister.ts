@@ -1,10 +1,10 @@
-import { Meetup } from "../../domain/Meetup"
-import { MeetupRepository } from "../../domain/Repositories/MeetupRepository"
+import { Meetup } from '../../domain/Meetup';
+import { MeetupRepository } from '../../domain/Repositories/MeetupRepository';
 
 export class MeetupLister {
   constructor(private repository: MeetupRepository) {}
 
   async run(): Promise<Meetup[]> {
-    return this.repository.findAll()
+    return this.repository.findAll();
   }
 }
