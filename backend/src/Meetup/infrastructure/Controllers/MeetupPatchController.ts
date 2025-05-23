@@ -1,25 +1,33 @@
-import { InMemoryMeetupRepository } from '../../../Meetup/infrastructure/Repositories/InMemoryMeetupRepository';
-import { UpdateMeetupCommand } from '../../application/UpdateMeetup/UpdateMeetupCommand';
-import { UpdateMeetupCommandHandler } from '../../application/UpdateMeetup/UpdateMeetupCommandHandler';
-import { MeetupUpdater } from '../../application/UpdateMeetup/MeetupUpdater';
-import { InMemoryCommandBus } from '../../../Shared/infrastructure/Bus/CommandBus/InMemoryCommandBus';
-import { CommandHandlers } from '../../../Shared/infrastructure/Bus/CommandBus/CommandHandlers';
-import { InMemoryAsyncEventBus } from '../../../Shared/infrastructure/Bus/EventBus/InMemoryAsyncEventBus';
-import { Route, Tags, Patch, Path, Body, Response, SuccessResponse } from '@tsoa/runtime';
+import { InMemoryMeetupRepository } from '../../../Meetup/infrastructure/Repositories/InMemoryMeetupRepository'
+import { UpdateMeetupCommand } from '../../application/UpdateMeetup/UpdateMeetupCommand'
+import { UpdateMeetupCommandHandler } from '../../application/UpdateMeetup/UpdateMeetupCommandHandler'
+import { MeetupUpdater } from '../../application/UpdateMeetup/MeetupUpdater'
+import { InMemoryCommandBus } from '../../../Shared/infrastructure/Bus/CommandBus/InMemoryCommandBus'
+import { CommandHandlers } from '../../../Shared/infrastructure/Bus/CommandBus/CommandHandlers'
+import { InMemoryAsyncEventBus } from '../../../Shared/infrastructure/Bus/EventBus/InMemoryAsyncEventBus'
+import {
+  Route,
+  Tags,
+  Patch,
+  Path,
+  Body,
+  Response,
+  SuccessResponse,
+} from '@tsoa/runtime'
 
 @Route('meetups')
 @Tags('Meetups')
 export class MeetupPatchController {
-  private commandBus: InMemoryCommandBus;
+  private commandBus: InMemoryCommandBus
 
   constructor() {
     // TODO: Inject CommandBus
-    const repository = new InMemoryMeetupRepository();
-    const eventBus = new InMemoryAsyncEventBus();
-    const updater = new MeetupUpdater(repository, eventBus);
-    const handler = new UpdateMeetupCommandHandler(updater);
-    const handlers = new CommandHandlers([handler]);
-    this.commandBus = new InMemoryCommandBus(handlers);
+    const repository = new InMemoryMeetupRepository()
+    const eventBus = new InMemoryAsyncEventBus()
+    const updater = new MeetupUpdater(repository, eventBus)
+    const handler = new UpdateMeetupCommandHandler(updater)
+    const handlers = new CommandHandlers([handler])
+    this.commandBus = new InMemoryCommandBus(handlers)
   }
 
   @Patch('{id}')
@@ -31,14 +39,14 @@ export class MeetupPatchController {
     @Path() id: string,
     @Body()
     data: {
-      title?: string;
-      description?: string;
-      date?: Date;
-      location?: string;
-      imageUrl?: string;
+      title?: string
+      description?: string
+      date?: Date
+      location?: string
+      imageUrl?: string
     }
   ): Promise<void> {
-    const command = new UpdateMeetupCommand({ id, ...data });
-    await this.commandBus.dispatch(command);
+    const command = new UpdateMeetupCommand({ id, ...data })
+    await this.commandBus.dispatch(command)
   }
 }

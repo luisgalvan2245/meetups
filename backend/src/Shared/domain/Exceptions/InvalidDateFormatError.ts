@@ -1,7 +1,7 @@
-import { FormatError } from './FormatError';
+import { FormatError } from './FormatError'
 
 export class InvalidDateFormatError extends FormatError {
   constructor(date: Date) {
-    super(`Invalid date format: ${date}`);
+    super(`Invalid date format: ${date}`)
   }
 }

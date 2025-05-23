@@ -1,7 +1,7 @@
-import { FormatError } from './FormatError';
+import { FormatError } from './FormatError'
 
 export class NotNullError extends FormatError {
   constructor(value: string) {
-    super(`Value must not be null: ${value}`);
+    super(`Value must not be null: ${value}`)
   }
 }

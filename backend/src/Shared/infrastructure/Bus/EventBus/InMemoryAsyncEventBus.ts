@@ -1,18 +1,18 @@
-import { EventEmitter } from 'events';
-import { DomainEvent } from '../../../domain/Bus/EventBus/DomainEvent';
-import { EventBus } from '../../../domain/Bus/EventBus/EventBus';
-import { DomainEventSubscribers } from '../../../domain/Bus/EventBus/DomainEventSubscribers';
+import { EventEmitter } from 'events'
+import { DomainEvent } from '../../../domain/Bus/EventBus/DomainEvent'
+import { EventBus } from '../../../domain/Bus/EventBus/EventBus'
+import { DomainEventSubscribers } from '../../../domain/Bus/EventBus/DomainEventSubscribers'
 
 export class InMemoryAsyncEventBus extends EventEmitter implements EventBus {
   async publish(events: DomainEvent[]): Promise<void> {
-    events.forEach(event => this.emit(event.eventName, event));
+    events.forEach(event => this.emit(event.eventName, event))
   }
 
   addSubscribers(subscribers: DomainEventSubscribers): void {
     subscribers.items.forEach(subscriber => {
       subscriber.subscribedTo().forEach(eventClass => {
-        this.on(eventClass.EVENT_NAME, subscriber.on.bind(subscriber));
-      });
-    });
+        this.on(eventClass.EVENT_NAME, subscriber.on.bind(subscriber))
+      })
+    })
   }
 }
