@@ -33,7 +33,7 @@ export class MeetupPatchController {
   @Patch("{id}")
   @SuccessResponse(204, "No Content")
   @Response(400, "Bad Request")
-  @Response(404, "Not found")
+  @Response(404, "Not Found")
   @Response(422, "Unprocessable Entity")
   async updateMeetup(
     @Path() id: string,

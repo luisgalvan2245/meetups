@@ -126,7 +126,7 @@
 						"description": "Bad Request"
 					},
 					"404": {
-						"description": "Not found"
+						"description": "Not Found"
 					},
 					"422": {
 						"description": "Unprocessable Entity"
@@ -192,7 +192,7 @@
 						"description": "Bad Request"
 					},
 					"404": {
-						"description": "Not found"
+						"description": "Not Found"
 					}
 				},
 				"tags": [
@@ -220,7 +220,7 @@
 						"description": "Bad Request"
 					},
 					"404": {
-						"description": "Not found"
+						"description": "Not Found"
 					}
 				},
 				"tags": [

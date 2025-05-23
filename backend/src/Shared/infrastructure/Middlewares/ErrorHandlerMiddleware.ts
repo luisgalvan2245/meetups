@@ -4,51 +4,49 @@ import { NotFoundError } from "../../domain/Exceptions/NotFoundError"
 import { InvalidUUIDError } from "../../domain/Exceptions/InvalidUUIDError"
 import { Request, Response, NextFunction } from "express"
 import { ValidateError } from "tsoa"
+import status from "http-status"
+
+type ErrorResponse = {
+  status: number
+  message: string
+  fields?: unknown
+}
 
 export class ErrorHandlerMiddleware {
   static handle(err: Error, _req: Request, res: Response, _next: NextFunction) {
-    // Handle TSOA validation errors
-    if (err?.name === "ValidateError") {
-      return res.status(400).json({
-        status: 400,
-        message: "Validation error",
-        fields: (err as ValidateError).fields
-      })
+    const response: ErrorResponse = {
+      status: status.INTERNAL_SERVER_ERROR,
+      message: "Internal Server Error"
     }
 
-    // Handle domain errors
+    // Handle TSOA validation errors
+    if (err?.name === "ValidateError") {
+      response.status = status.BAD_REQUEST
+      response.message = "Validation Error"
+      response.fields = (err as ValidateError).fields
+    }
+
     if (err instanceof InvalidUUIDError) {
-      return res.status(400).json({
-        status: 400,
-        message: err.message
-      })
+      response.status = status.BAD_REQUEST
+      response.message = err.message
     }
 
     if (err instanceof NotFoundError) {
-      return res.status(404).json({
-        status: 404,
-        message: err.errorMessage()
-      })
+      response.status = status.NOT_FOUND
+      response.message = err.errorMessage()
     }
 
     if (err instanceof InvalidValueError) {
-      return res.status(422).json({
-        status: 422,
-        message: err.message
-      })
+      response.status = status.UNPROCESSABLE_ENTITY
+      response.message = err.message
     }
 
-    if (err instanceof DomainError) {
-      return res.status(400).json({
-        status: 400,
-        message: err.message
-      })
+    if (err instanceof DomainError && !(err instanceof NotFoundError)) {
+      response.status = status.BAD_REQUEST
+      response.message = err.message
     }
 
     console.error(err)
-    return res.status(500).json({
-      status: 500,
-      message: "Internal server error"
-    })
+    return res.status(response.status).json(response)
   }
 }

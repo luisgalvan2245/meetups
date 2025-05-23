@@ -32,7 +32,7 @@ export class MeetupDeleteController {
   @Delete("{id}")
   @SuccessResponse(204, "No Content")
   @Response(400, "Bad Request")
-  @Response(404, "Not found")
+  @Response(404, "Not Found")
   async deleteMeetup(@Path() id: string): Promise<void> {
     const command = new DeleteMeetupCommand({ id })
     await this.commandBus.dispatch(command)

@@ -35,7 +35,7 @@ export class MeetupGetController {
 
   @Get("{id}")
   @Response(400, "Bad Request")
-  @Response(404, "Not found")
+  @Response(404, "Not Found")
   async getMeetupById(@Path() id: string): Promise<MeetupResponse> {
     const query = new GetMeetupQuery({ id })
     return await this.queryBus.ask(query)

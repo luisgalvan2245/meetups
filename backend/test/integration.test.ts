@@ -2,6 +2,7 @@ import { describe, it, expect } from "vitest"
 import request from "supertest"
 import { v4 as uuidV4 } from "uuid"
 import { createApp } from "../src/index"
+import status from "http-status"
 
 describe("MeetupController", () => {
   const app = createApp()
@@ -9,7 +10,7 @@ describe("MeetupController", () => {
   describe("GET /meetups", () => {
     it("should return all meetups", async () => {
       const response = await request(app).get("/meetups")
-      expect(response.status).toBe(200)
+      expect(response.status).toBe(status.OK)
       expect(Array.isArray(response.body)).toBe(true)
       expect(response.body.length).toBeGreaterThan(0)
       expect(response.body[0]).toHaveProperty("id")
@@ -26,16 +27,16 @@ describe("MeetupController", () => {
       const meetupsResponse = await request(app).get("/meetups")
       const meetupId = meetupsResponse.body[0].id
       const response = await request(app).get(`/meetups/${meetupId}`)
-      expect(response.status).toBe(200)
+      expect(response.status).toBe(status.OK)
       expect(response.body).toHaveProperty("id", meetupId)
     })
     it("should return 404 for non-existent meetup", async () => {
       const response = await request(app).get(`/meetups/${uuidV4()}`)
-      expect(response.status).toBe(404)
+      expect(response.status).toBe(status.NOT_FOUND)
     })
     it("should return 400 for invalid UUID format", async () => {
       const response = await request(app).get("/meetups/not-a-uuid")
-      expect(response.status).toBe(400)
+      expect(response.status).toBe(status.BAD_REQUEST)
       expect(response.body).toHaveProperty(
         "message",
         "Invalid UUID format: not-a-uuid"
@@ -56,11 +57,11 @@ describe("MeetupController", () => {
       const response = await request(app)
         .put(`/meetups/${meetupId}`)
         .send(meetupData)
-      expect(response.status).toBe(201)
+      expect(response.status).toBe(status.CREATED)
 
       // Verify the meetup was created
       const getResponse = await request(app).get(`/meetups/${meetupId}`)
-      expect(getResponse.status).toBe(200)
+      expect(getResponse.status).toBe(status.OK)
       expect(getResponse.body).toHaveProperty("id", meetupId)
     })
 
@@ -73,7 +74,7 @@ describe("MeetupController", () => {
         imageUrl: "https://example.com/test.jpg"
       }
       const response = await request(app).put(`/meetups/${meetupId}`).send(data)
-      expect(response.status).toBe(400)
+      expect(response.status).toBe(status.BAD_REQUEST)
     })
     it("should return 400 if description is missing", async () => {
       const meetupId = uuidV4()
@@ -84,7 +85,7 @@ describe("MeetupController", () => {
         imageUrl: "https://example.com/test.jpg"
       }
       const response = await request(app).put(`/meetups/${meetupId}`).send(data)
-      expect(response.status).toBe(400)
+      expect(response.status).toBe(status.BAD_REQUEST)
     })
     it("should return 400 if date is missing", async () => {
       const meetupId = uuidV4()
@@ -95,7 +96,7 @@ describe("MeetupController", () => {
         imageUrl: "https://example.com/test.jpg"
       }
       const response = await request(app).put(`/meetups/${meetupId}`).send(data)
-      expect(response.status).toBe(400)
+      expect(response.status).toBe(status.BAD_REQUEST)
     })
     it("should return 400 if location is missing", async () => {
       const meetupId = uuidV4()
@@ -106,7 +107,7 @@ describe("MeetupController", () => {
         imageUrl: "https://example.com/test.jpg"
       }
       const response = await request(app).put(`/meetups/${meetupId}`).send(data)
-      expect(response.status).toBe(400)
+      expect(response.status).toBe(status.BAD_REQUEST)
     })
     it("should return 400 if imageUrl is missing", async () => {
       const meetupId = uuidV4()
@@ -117,7 +118,7 @@ describe("MeetupController", () => {
         location: "loc"
       }
       const response = await request(app).put(`/meetups/${meetupId}`).send(data)
-      expect(response.status).toBe(400)
+      expect(response.status).toBe(status.BAD_REQUEST)
     })
     it("should return 400 if title is not a string", async () => {
       const meetupId = uuidV4()
@@ -129,7 +130,7 @@ describe("MeetupController", () => {
         imageUrl: "https://example.com/test.jpg"
       }
       const response = await request(app).put(`/meetups/${meetupId}`).send(data)
-      expect(response.status).toBe(400)
+      expect(response.status).toBe(status.BAD_REQUEST)
     })
     it("should return 400 if description is not a string", async () => {
       const meetupId = uuidV4()
@@ -141,7 +142,7 @@ describe("MeetupController", () => {
         imageUrl: "https://example.com/test.jpg"
       }
       const response = await request(app).put(`/meetups/${meetupId}`).send(data)
-      expect(response.status).toBe(400)
+      expect(response.status).toBe(status.BAD_REQUEST)
     })
     it("should return 400 if date is not a valid date", async () => {
       const meetupId = uuidV4()
@@ -153,7 +154,7 @@ describe("MeetupController", () => {
         imageUrl: "https://example.com/test.jpg"
       }
       const response = await request(app).put(`/meetups/${meetupId}`).send(data)
-      expect(response.status).toBe(400)
+      expect(response.status).toBe(status.BAD_REQUEST)
     })
     it("should return 400 if location is not a string", async () => {
       const meetupId = uuidV4()
@@ -165,7 +166,7 @@ describe("MeetupController", () => {
         imageUrl: "https://example.com/test.jpg"
       }
       const response = await request(app).put(`/meetups/${meetupId}`).send(data)
-      expect(response.status).toBe(400)
+      expect(response.status).toBe(status.BAD_REQUEST)
     })
     it("should return 400 if imageUrl is not a string", async () => {
       const meetupId = uuidV4()
@@ -177,7 +178,7 @@ describe("MeetupController", () => {
         imageUrl: 123
       }
       const response = await request(app).put(`/meetups/${meetupId}`).send(data)
-      expect(response.status).toBe(400)
+      expect(response.status).toBe(status.BAD_REQUEST)
     })
     it("should return 400 for invalid UUID format", async () => {
       const response = await request(app)
@@ -189,7 +190,7 @@ describe("MeetupController", () => {
           location: "loc",
           imageUrl: "https://example.com/test.jpg"
         })
-      expect(response.status).toBe(400)
+      expect(response.status).toBe(status.BAD_REQUEST)
       expect(response.body).toHaveProperty(
         "message",
         "Invalid UUID format: not-a-uuid"
@@ -218,11 +219,11 @@ describe("MeetupController", () => {
       const response = await request(app)
         .patch(`/meetups/${meetupId}`)
         .send(updateData)
-      expect(response.status).toBe(204)
+      expect(response.status).toBe(status.NO_CONTENT)
 
       // Verify the update
       const getResponse = await request(app).get(`/meetups/${meetupId}`)
-      expect(getResponse.status).toBe(200)
+      expect(getResponse.status).toBe(status.OK)
       expect(getResponse.body).toHaveProperty("title", "Updated Title")
       expect(getResponse.body).toHaveProperty(
         "description",
@@ -237,14 +238,14 @@ describe("MeetupController", () => {
       const response = await request(app)
         .patch(`/meetups/${nonExistentId}`)
         .send(updateData)
-      expect(response.status).toBe(404)
+      expect(response.status).toBe(status.NOT_FOUND)
     })
 
     it("should return 400 for invalid UUID format", async () => {
       const response = await request(app).patch("/meetups/not-a-uuid").send({
         title: "Updated Title"
       })
-      expect(response.status).toBe(400)
+      expect(response.status).toBe(status.BAD_REQUEST)
       expect(response.body).toHaveProperty(
         "message",
         "Invalid UUID format: not-a-uuid"
@@ -267,22 +268,22 @@ describe("MeetupController", () => {
 
       // Delete it
       const response = await request(app).delete(`/meetups/${meetupId}`)
-      expect(response.status).toBe(204)
+      expect(response.status).toBe(status.NO_CONTENT)
 
       // Verify it's gone
       const getResponse = await request(app).get(`/meetups/${meetupId}`)
-      expect(getResponse.status).toBe(404)
+      expect(getResponse.status).toBe(status.NOT_FOUND)
     })
 
     it("should return 404 for non-existent meetup", async () => {
       const nonExistentId = uuidV4()
       const response = await request(app).delete(`/meetups/${nonExistentId}`)
-      expect(response.status).toBe(404)
+      expect(response.status).toBe(status.NOT_FOUND)
     })
 
     it("should return 400 for invalid UUID format", async () => {
       const response = await request(app).delete("/meetups/not-a-uuid")
-      expect(response.status).toBe(400)
+      expect(response.status).toBe(status.BAD_REQUEST)
       expect(response.body).toHaveProperty(
         "message",
         "Invalid UUID format: not-a-uuid"
