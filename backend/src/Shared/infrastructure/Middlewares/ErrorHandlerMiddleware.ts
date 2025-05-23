@@ -1,43 +1,42 @@
-import { NotFoundError } from "../../domain/Exceptions/NotFoundError"
-import { FormatError } from "../../domain/Exceptions/FormatError"
-import { BusinessRuleError } from "../../domain/Exceptions/BusinessRuleError"
-
 import { Request, Response, NextFunction } from "express"
 import { ValidateError } from "tsoa"
 import status from "http-status"
 
+import { NotFoundError } from "../../domain/Exceptions/NotFoundError"
+import { FormatError } from "../../domain/Exceptions/FormatError"
+import { BusinessRuleError } from "../../domain/Exceptions/BusinessRuleError"
+import { DomainError } from "src/Shared/domain/Exceptions/DomainError"
+
 type ErrorResponse = {
-  status: number
   message: string
   fields?: unknown
 }
 
 export class ErrorHandlerMiddleware {
   static handle(err: Error, _req: Request, res: Response, _next: NextFunction) {
+    let statusCode: number = status.INTERNAL_SERVER_ERROR
     const response: ErrorResponse = {
-      status: status.INTERNAL_SERVER_ERROR,
       message: "Internal Server Error"
     }
 
-    // Handle TSOA validation errors
     if (err?.name === "ValidateError") {
-      response.status = status.BAD_REQUEST
+      statusCode = status.BAD_REQUEST
       response.message = "Validation Error"
       response.fields = (err as ValidateError).fields
-    }
-    if (err instanceof FormatError) {
-      response.status = status.BAD_REQUEST
+    } else if (err instanceof FormatError) {
+      statusCode = status.BAD_REQUEST
+      response.message = err.message
+    } else if (err instanceof NotFoundError) {
+      statusCode = status.NOT_FOUND
+      response.message = err.message
+    } else if (err instanceof BusinessRuleError) {
+      statusCode = status.UNPROCESSABLE_ENTITY
+      response.message = err.message
+    } else if (err instanceof DomainError) {
+      statusCode = status.BAD_REQUEST
       response.message = err.message
     }
-    if (err instanceof NotFoundError) {
-      response.status = status.NOT_FOUND
-      response.message = err.message
-    }
-    if (err instanceof BusinessRuleError) {
-      response.status = status.UNPROCESSABLE_ENTITY
-      response.message = err.message
-    }
-    console.error(err)
-    return res.status(response.status).json(response)
+
+    return res.status(statusCode).json(response)
   }
 }
