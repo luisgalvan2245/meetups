@@ -1,11 +1,7 @@
 import { NotFoundError } from "../../../Shared/domain/Exceptions/NotFoundError"
 
 export class MeetupNotFoundError extends NotFoundError {
-  constructor(meetupId: string) {
-    super(meetupId)
-  }
-
-  protected resourceType(): string {
-    return "meetup"
+  constructor(id: string) {
+    super(`The meetup with id <${id}> has not been found`)
   }
 }

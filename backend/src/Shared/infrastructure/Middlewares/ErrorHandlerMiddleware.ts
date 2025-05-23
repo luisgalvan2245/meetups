@@ -1,7 +1,8 @@
 import { DomainError } from "../../domain/Exceptions/DomainError"
-import { InvalidValueError } from "../../domain/Exceptions/InvalidValueError"
 import { NotFoundError } from "../../domain/Exceptions/NotFoundError"
-import { InvalidUUIDError } from "../../domain/Exceptions/InvalidUUIDError"
+import { FormatError } from "../../domain/Exceptions/FormatError"
+import { BusinessRuleError } from "../../domain/Exceptions/BusinessRuleError"
+
 import { Request, Response, NextFunction } from "express"
 import { ValidateError } from "tsoa"
 import status from "http-status"
@@ -26,17 +27,17 @@ export class ErrorHandlerMiddleware {
       response.fields = (err as ValidateError).fields
     }
 
-    if (err instanceof InvalidUUIDError) {
+    if (err instanceof NotFoundError) {
+      response.status = status.NOT_FOUND
+      response.message = err.message
+    }
+
+    if (err instanceof FormatError) {
       response.status = status.BAD_REQUEST
       response.message = err.message
     }
 
-    if (err instanceof NotFoundError) {
-      response.status = status.NOT_FOUND
-      response.message = err.errorMessage()
-    }
-
-    if (err instanceof InvalidValueError) {
+    if (err instanceof BusinessRuleError) {
       response.status = status.UNPROCESSABLE_ENTITY
       response.message = err.message
     }

@@ -1,4 +1,4 @@
-import { InvalidValueError } from "../Exceptions/InvalidValueError"
+import { NotNullError } from "../Exceptions/NotNullError"
 
 export type Primitives = String | string | number | Boolean | boolean | Date
 
@@ -12,7 +12,7 @@ export abstract class ValueObject<T extends Primitives> {
 
   private assertValueIsDefined(value: T): void {
     if (value === null || value === undefined) {
-      throw new InvalidValueError("Value must be defined")
+      throw new NotNullError("Value must be defined")
     }
   }
 

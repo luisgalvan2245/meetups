@@ -2,7 +2,7 @@
 import { v4 as uuidV4, validate as uuidValidate } from "uuid"
 
 import { ValueObject } from "./ValueObject"
-import { InvalidUUIDError } from "../Exceptions/InvalidUUIDError"
+import { InvalidUUIDFormatError } from "../Exceptions/InvalidUUIDFormatError"
 
 export class UUIDValueObject extends ValueObject<string> {
   constructor(value: string) {
@@ -20,7 +20,7 @@ export class UUIDValueObject extends ValueObject<string> {
 
   private assertIsValidUUID(id: string): void {
     if (!uuidValidate(id)) {
-      throw new InvalidUUIDError(`Invalid UUID format: ${id}`)
+      throw new InvalidUUIDFormatError(`Invalid UUID format: ${id}`)
     }
   }
 }

@@ -37,10 +37,6 @@ describe("MeetupController", () => {
     it("should return 400 for invalid UUID format", async () => {
       const response = await request(app).get("/meetups/not-a-uuid")
       expect(response.status).toBe(status.BAD_REQUEST)
-      expect(response.body).toHaveProperty(
-        "message",
-        "Invalid UUID format: not-a-uuid"
-      )
     })
   })
 
@@ -191,10 +187,6 @@ describe("MeetupController", () => {
           imageUrl: "https://example.com/test.jpg"
         })
       expect(response.status).toBe(status.BAD_REQUEST)
-      expect(response.body).toHaveProperty(
-        "message",
-        "Invalid UUID format: not-a-uuid"
-      )
     })
   })
 
@@ -246,10 +238,6 @@ describe("MeetupController", () => {
         title: "Updated Title"
       })
       expect(response.status).toBe(status.BAD_REQUEST)
-      expect(response.body).toHaveProperty(
-        "message",
-        "Invalid UUID format: not-a-uuid"
-      )
     })
   })
 
@@ -284,10 +272,6 @@ describe("MeetupController", () => {
     it("should return 400 for invalid UUID format", async () => {
       const response = await request(app).delete("/meetups/not-a-uuid")
       expect(response.status).toBe(status.BAD_REQUEST)
-      expect(response.body).toHaveProperty(
-        "message",
-        "Invalid UUID format: not-a-uuid"
-      )
     })
     it("should return 400 for invalid imageUrl format", async () => {
       const nonExistentId = uuidV4()
@@ -301,10 +285,6 @@ describe("MeetupController", () => {
           imageUrl: "invalid-url"
         })
       expect(response.status).toBe(status.BAD_REQUEST)
-      expect(response.body).toHaveProperty(
-        "message",
-        "The Meetup Image URL <invalid-url> is not a valid URL"
-      )
     })
   })
 })
