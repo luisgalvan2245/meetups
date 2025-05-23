@@ -1,4 +1,4 @@
-import { DomainEvent } from "../../../Shared/domain/EventBus/DomainEvent"
+import { DomainEvent } from "../../../Shared/domain/Bus/EventBus/DomainEvent"
 
 type MeetupDescriptionUpdatedDomainEventAttributes = {
   readonly description: string

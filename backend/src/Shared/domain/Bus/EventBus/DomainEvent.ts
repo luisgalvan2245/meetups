@@ -1,4 +1,4 @@
-import { UUIDValueObject } from "../ValueObjects/UUIDValueObject"
+import { UUIDValueObject } from "../../ValueObjects/UUIDValueObject"
 
 type DomainEventAttributes = any
 

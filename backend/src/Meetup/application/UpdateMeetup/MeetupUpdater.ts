@@ -5,7 +5,7 @@ import { MeetupDate } from "../../domain/ValueObjects/MeetupDate"
 import { MeetupLocation } from "../../domain/ValueObjects/MeetupLocation"
 import { MeetupImageUrl } from "../../domain/ValueObjects/MeetupImageUrl"
 import { MeetupFinder } from "../../domain/Services/MeetupFinder"
-import { EventBus } from "../../../Shared/domain/EventBus/EventBus"
+import { EventBus } from "../../../Shared/domain/Bus/EventBus/EventBus"
 import { MeetupId } from "../../domain/ValueObjects/MeetupId"
 
 export class MeetupUpdater {

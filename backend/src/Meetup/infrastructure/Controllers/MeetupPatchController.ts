@@ -2,9 +2,9 @@ import { InMemoryMeetupRepository } from "../../../Meetup/infrastructure/Reposit
 import { UpdateMeetupCommand } from "../../application/UpdateMeetup/UpdateMeetupCommand"
 import { UpdateMeetupCommandHandler } from "../../application/UpdateMeetup/UpdateMeetupCommandHandler"
 import { MeetupUpdater } from "../../application/UpdateMeetup/MeetupUpdater"
-import { InMemoryCommandBus } from "../../../Shared/infrastructure/Bus/InMemoryCommandBus"
-import { CommandHandlers } from "../../../Shared/infrastructure/Bus/CommandHandlers"
-import { InMemoryAsyncEventBus } from "../../../Shared/infrastructure/Bus/InMemoryAsyncEventBus"
+import { InMemoryCommandBus } from "../../../Shared/infrastructure/CommandBus/InMemoryCommandBus"
+import { CommandHandlers } from "../../../Shared/infrastructure/CommandBus/CommandHandlers"
+import { InMemoryAsyncEventBus } from "../../../Shared/infrastructure/EventBus/InMemoryAsyncEventBus"
 import {
   Route,
   Tags,

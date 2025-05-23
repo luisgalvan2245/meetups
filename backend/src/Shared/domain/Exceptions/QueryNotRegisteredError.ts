@@ -1,4 +1,4 @@
-import { Query } from "../domain/Query"
+import { Query } from "../Bus/QueryBus/Query"
 
 export class QueryNotRegisteredError extends Error {
   constructor(query: Query) {

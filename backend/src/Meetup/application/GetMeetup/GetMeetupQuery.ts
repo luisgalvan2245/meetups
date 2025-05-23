@@ -1,4 +1,4 @@
-import { Query } from "../../../Shared/domain/Query"
+import { Query } from "../../../Shared/domain/Bus/QueryBus/Query"
 
 type Params = {
   id: string

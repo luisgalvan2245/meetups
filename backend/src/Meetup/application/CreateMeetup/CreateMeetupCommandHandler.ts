@@ -1,5 +1,5 @@
-import { CommandHandler } from "../../../Shared/domain/CommandHandler"
-import { Command } from "../../../Shared/domain/Command"
+import { CommandHandler } from "../../../Shared/domain/Bus/CommandBus/CommandHandler"
+import { Command } from "../../../Shared/domain/Bus/CommandBus/Command"
 import { MeetupCreator } from "./MeetupCreator"
 import { CreateMeetupCommand } from "./CreateMeetupCommand"
 import { MeetupId } from "../../domain/ValueObjects/MeetupId"

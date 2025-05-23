@@ -1,6 +1,6 @@
-import { Query } from "../../domain/Query"
+import { Query } from "../../domain/Bus/QueryBus/Query"
 import { Response } from "../../domain/Response"
-import { QueryBus } from "../../domain/QueryBus"
+import { QueryBus } from "../../domain/Bus/Query/QueryBus"
 import { QueryHandlers } from "./QueryHandlers"
 
 export class InMemoryQueryBus implements QueryBus {
