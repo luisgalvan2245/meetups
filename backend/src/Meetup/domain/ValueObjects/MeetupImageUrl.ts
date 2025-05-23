@@ -8,9 +8,7 @@ export class MeetupImageUrl extends StringValueObject {
   }
 
   private assertIsValidUrl(): void {
-    try {
-      new URL(this.value)
-    } catch (error) {
+    if (!URL.canParse(this.value)) {
       throw new MeetupImageUrlInvalidFormatError(
         `The Meetup Image URL <${this.value}> is not a valid URL`
       )

@@ -289,5 +289,22 @@ describe("MeetupController", () => {
         "Invalid UUID format: not-a-uuid"
       )
     })
+    it("should return 400 for invalid imageUrl format", async () => {
+      const nonExistentId = uuidV4()
+      const response = await request(app)
+        .put(`/meetups/${nonExistentId}`)
+        .send({
+          title: "title",
+          description: "desc",
+          date: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(),
+          location: "loc",
+          imageUrl: "invalid-url"
+        })
+      expect(response.status).toBe(status.BAD_REQUEST)
+      expect(response.body).toHaveProperty(
+        "message",
+        "The Meetup Image URL <invalid-url> is not a valid URL"
+      )
+    })
   })
 })
