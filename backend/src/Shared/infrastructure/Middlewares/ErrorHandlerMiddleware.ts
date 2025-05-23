@@ -1,4 +1,3 @@
-import { DomainError } from "../../domain/Exceptions/DomainError"
 import { NotFoundError } from "../../domain/Exceptions/NotFoundError"
 import { FormatError } from "../../domain/Exceptions/FormatError"
 import { BusinessRuleError } from "../../domain/Exceptions/BusinessRuleError"
@@ -26,27 +25,18 @@ export class ErrorHandlerMiddleware {
       response.message = "Validation Error"
       response.fields = (err as ValidateError).fields
     }
-
-    if (err instanceof NotFoundError) {
-      response.status = status.NOT_FOUND
-      response.message = err.message
-    }
-
     if (err instanceof FormatError) {
       response.status = status.BAD_REQUEST
       response.message = err.message
     }
-
+    if (err instanceof NotFoundError) {
+      response.status = status.NOT_FOUND
+      response.message = err.message
+    }
     if (err instanceof BusinessRuleError) {
       response.status = status.UNPROCESSABLE_ENTITY
       response.message = err.message
     }
-
-    if (err instanceof DomainError && !(err instanceof NotFoundError)) {
-      response.status = status.BAD_REQUEST
-      response.message = err.message
-    }
-
     console.error(err)
     return res.status(response.status).json(response)
   }
