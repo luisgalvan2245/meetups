@@ -1,8 +1,8 @@
-import { CommandHandler } from '../../../Shared/domain/Bus/CommandBus/CommandHandler'
 import { Command } from '../../../Shared/domain/Bus/CommandBus/Command'
+import { CommandHandler } from '../../../Shared/domain/Bus/CommandBus/CommandHandler'
+import { MeetupId } from '../../domain/ValueObjects/MeetupId'
 import { DeleteMeetupCommand } from './DeleteMeetupCommand'
 import { MeetupDeleter } from './MeetupDeleter'
-import { MeetupId } from '../../domain/ValueObjects/MeetupId'
 
 export class DeleteMeetupCommandHandler
   implements CommandHandler<DeleteMeetupCommand>

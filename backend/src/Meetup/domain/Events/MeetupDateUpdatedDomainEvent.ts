@@ -13,7 +13,7 @@ export class MeetupDateUpdatedDomainEvent extends DomainEvent {
     aggregateId,
     date,
     eventId,
-    occurredOn,
+    occurredOn
   }: {
     aggregateId: string
     eventId?: string
@@ -24,7 +24,7 @@ export class MeetupDateUpdatedDomainEvent extends DomainEvent {
       eventName: MeetupDateUpdatedDomainEvent.EVENT_NAME,
       aggregateId,
       eventId,
-      occurredOn,
+      occurredOn
     })
     this.date = date
   }
@@ -32,7 +32,7 @@ export class MeetupDateUpdatedDomainEvent extends DomainEvent {
   toPrimitives(): MeetupDateUpdatedDomainEventAttributes {
     const { date } = this
     return {
-      date,
+      date
     }
   }
 
@@ -47,7 +47,7 @@ export class MeetupDateUpdatedDomainEvent extends DomainEvent {
       aggregateId,
       date: attributes.date,
       eventId,
-      occurredOn,
+      occurredOn
     })
   }
 }

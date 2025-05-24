@@ -13,7 +13,7 @@ export class MeetupImageUrlUpdatedDomainEvent extends DomainEvent {
     aggregateId,
     imageUrl,
     eventId,
-    occurredOn,
+    occurredOn
   }: {
     aggregateId: string
     eventId?: string
@@ -24,7 +24,7 @@ export class MeetupImageUrlUpdatedDomainEvent extends DomainEvent {
       eventName: MeetupImageUrlUpdatedDomainEvent.EVENT_NAME,
       aggregateId,
       eventId,
-      occurredOn,
+      occurredOn
     })
     this.imageUrl = imageUrl
   }
@@ -32,7 +32,7 @@ export class MeetupImageUrlUpdatedDomainEvent extends DomainEvent {
   toPrimitives(): MeetupImageUrlUpdatedDomainEventAttributes {
     const { imageUrl } = this
     return {
-      imageUrl,
+      imageUrl
     }
   }
 
@@ -47,7 +47,7 @@ export class MeetupImageUrlUpdatedDomainEvent extends DomainEvent {
       aggregateId,
       imageUrl: attributes.imageUrl,
       eventId,
-      occurredOn,
+      occurredOn
     })
   }
 }

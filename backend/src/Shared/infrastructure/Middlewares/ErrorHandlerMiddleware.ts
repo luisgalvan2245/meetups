@@ -1,11 +1,11 @@
-import { Request, Response, NextFunction } from 'express'
-import { ValidateError } from 'tsoa'
+import { NextFunction, Request, Response } from 'express'
 import status from 'http-status'
+import { ValidateError } from 'tsoa'
 
-import { NotFoundError } from '../../domain/Exceptions/NotFoundError'
-import { FormatError } from '../../domain/Exceptions/FormatError'
 import { BusinessRuleError } from '../../domain/Exceptions/BusinessRuleError'
-import { DomainError } from 'src/Shared/domain/Exceptions/DomainError'
+import { DomainError } from '../../domain/Exceptions/DomainError'
+import { FormatError } from '../../domain/Exceptions/FormatError'
+import { NotFoundError } from '../../domain/Exceptions/NotFoundError'
 
 type ErrorResponse = {
   message: string
@@ -16,7 +16,7 @@ export class ErrorHandlerMiddleware {
   static handle(err: Error, _req: Request, res: Response, _next: NextFunction) {
     let statusCode: number = status.INTERNAL_SERVER_ERROR
     const response: ErrorResponse = {
-      message: 'Internal Server Error',
+      message: 'Internal Server Error'
     }
 
     if (err?.name === 'ValidateError') {

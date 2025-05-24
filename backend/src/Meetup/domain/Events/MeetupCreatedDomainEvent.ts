@@ -25,7 +25,7 @@ export class MeetupCreatedDomainEvent extends DomainEvent {
     location,
     imageUrl,
     eventId,
-    occurredOn,
+    occurredOn
   }: {
     aggregateId: string
     eventId?: string
@@ -40,7 +40,7 @@ export class MeetupCreatedDomainEvent extends DomainEvent {
       eventName: MeetupCreatedDomainEvent.EVENT_NAME,
       aggregateId,
       eventId,
-      occurredOn,
+      occurredOn
     })
     this.title = title
     this.description = description
@@ -56,7 +56,7 @@ export class MeetupCreatedDomainEvent extends DomainEvent {
       description,
       date,
       location,
-      imageUrl,
+      imageUrl
     }
   }
 
@@ -75,7 +75,7 @@ export class MeetupCreatedDomainEvent extends DomainEvent {
       location: attributes.location,
       imageUrl: attributes.imageUrl,
       eventId,
-      occurredOn,
+      occurredOn
     })
   }
 }

@@ -1,12 +1,12 @@
-import { MeetupRepository } from '../../domain/Repositories/MeetupRepository'
-import { MeetupTitle } from '../../domain/ValueObjects/MeetupTitle'
-import { MeetupDescription } from '../../domain/ValueObjects/MeetupDescription'
-import { MeetupDate } from '../../domain/ValueObjects/MeetupDate'
-import { MeetupLocation } from '../../domain/ValueObjects/MeetupLocation'
-import { MeetupImageUrl } from '../../domain/ValueObjects/MeetupImageUrl'
-import { MeetupFinder } from '../../domain/Services/MeetupFinder'
 import { EventBus } from '../../../Shared/domain/Bus/EventBus/EventBus'
+import { MeetupRepository } from '../../domain/Repositories/MeetupRepository'
+import { MeetupFinder } from '../../domain/Services/MeetupFinder'
+import { MeetupDate } from '../../domain/ValueObjects/MeetupDate'
+import { MeetupDescription } from '../../domain/ValueObjects/MeetupDescription'
 import { MeetupId } from '../../domain/ValueObjects/MeetupId'
+import { MeetupImageUrl } from '../../domain/ValueObjects/MeetupImageUrl'
+import { MeetupLocation } from '../../domain/ValueObjects/MeetupLocation'
+import { MeetupTitle } from '../../domain/ValueObjects/MeetupTitle'
 
 export class MeetupUpdater {
   private finder: MeetupFinder

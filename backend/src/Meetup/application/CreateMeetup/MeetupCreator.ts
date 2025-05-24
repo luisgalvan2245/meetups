@@ -1,12 +1,12 @@
+import { EventBus } from '../../../Shared/domain/Bus/EventBus/EventBus'
 import { Meetup } from '../../domain/Meetup'
 import { MeetupRepository } from '../../domain/Repositories/MeetupRepository'
-import { MeetupId } from '../../domain/ValueObjects/MeetupId'
-import { MeetupTitle } from '../../domain/ValueObjects/MeetupTitle'
-import { MeetupDescription } from '../../domain/ValueObjects/MeetupDescription'
 import { MeetupDate } from '../../domain/ValueObjects/MeetupDate'
-import { MeetupLocation } from '../../domain/ValueObjects/MeetupLocation'
+import { MeetupDescription } from '../../domain/ValueObjects/MeetupDescription'
+import { MeetupId } from '../../domain/ValueObjects/MeetupId'
 import { MeetupImageUrl } from '../../domain/ValueObjects/MeetupImageUrl'
-import { EventBus } from '../../../Shared/domain/Bus/EventBus/EventBus'
+import { MeetupLocation } from '../../domain/ValueObjects/MeetupLocation'
+import { MeetupTitle } from '../../domain/ValueObjects/MeetupTitle'
 
 export class MeetupCreator {
   constructor(

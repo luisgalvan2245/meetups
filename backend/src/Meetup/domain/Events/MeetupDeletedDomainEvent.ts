@@ -12,7 +12,7 @@ export class MeetupDeletedDomainEvent extends DomainEvent {
   constructor({
     aggregateId,
     eventId,
-    occurredOn,
+    occurredOn
   }: {
     aggregateId: string
     eventId?: string
@@ -22,14 +22,14 @@ export class MeetupDeletedDomainEvent extends DomainEvent {
       eventName: MeetupDeletedDomainEvent.EVENT_NAME,
       aggregateId,
       eventId,
-      occurredOn,
+      occurredOn
     })
     this.aggregateId = aggregateId
   }
 
   toPrimitives(): MeetupDeletedDomainEventAttributes {
     return {
-      aggregateId: this.aggregateId,
+      aggregateId: this.aggregateId
     }
   }
 
@@ -43,7 +43,7 @@ export class MeetupDeletedDomainEvent extends DomainEvent {
     return new MeetupDeletedDomainEvent({
       aggregateId,
       eventId,
-      occurredOn,
+      occurredOn
     })
   }
 }

@@ -1,7 +1,8 @@
-import { MeetupId } from '../../domain/ValueObjects/MeetupId'
+import { v4 as uuidV4 } from 'uuid'
+
 import { Meetup } from '../../domain/Meetup'
 import { MeetupRepository } from '../../domain/Repositories/MeetupRepository'
-import { v4 as uuidV4 } from 'uuid'
+import { MeetupId } from '../../domain/ValueObjects/MeetupId'
 
 function createMeetups() {
   const futureDate = new Date()
@@ -13,7 +14,7 @@ function createMeetups() {
     description: 'Description 1',
     date: futureDate.toISOString(),
     location: 'Location 1',
-    imageUrl: 'https://example.com/1.jpg',
+    imageUrl: 'https://example.com/1.jpg'
   })
 
   const meetup2 = Meetup.fromPrimitives({
@@ -22,7 +23,7 @@ function createMeetups() {
     description: 'Description 2',
     date: futureDate.toISOString(),
     location: 'Location 2',
-    imageUrl: 'https://example.com/2.jpg',
+    imageUrl: 'https://example.com/2.jpg'
   })
 
   const meetup3 = Meetup.fromPrimitives({
@@ -31,7 +32,7 @@ function createMeetups() {
     description: 'Description 3',
     date: futureDate.toISOString(),
     location: 'Location 3',
-    imageUrl: 'https://example.com/3.jpg',
+    imageUrl: 'https://example.com/3.jpg'
   })
 
   return [meetup1, meetup2, meetup3]

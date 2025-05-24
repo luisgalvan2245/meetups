@@ -14,7 +14,7 @@ function createLogger(): Logger {
   return winston.createLogger({
     level: process.env.NODE_ENV === 'development' ? 'debug' : 'info',
     format: wf.combine(wf.colorize(), timestamp, errors, logFormat),
-    transports: [new winston.transports.Console()],
+    transports: [new winston.transports.Console()]
   })
 }
 

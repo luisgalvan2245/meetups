@@ -1,17 +1,17 @@
 import { AggregateRoot } from '../../Shared/domain/AggregateRoot'
-import { MeetupId } from './ValueObjects/MeetupId'
-import { MeetupTitle } from './ValueObjects/MeetupTitle'
-import { MeetupDescription } from './ValueObjects/MeetupDescription'
-import { MeetupDate } from './ValueObjects/MeetupDate'
-import { MeetupLocation } from './ValueObjects/MeetupLocation'
-import { MeetupImageUrl } from './ValueObjects/MeetupImageUrl'
 import { MeetupCreatedDomainEvent } from './Events/MeetupCreatedDomainEvent'
-import { MeetupTitleUpdatedDomainEvent } from './Events/MeetupTitleUpdatedDomainEvent'
-import { MeetupDescriptionUpdatedDomainEvent } from './Events/MeetupDescriptionUpdatedDomainEvent'
 import { MeetupDateUpdatedDomainEvent } from './Events/MeetupDateUpdatedDomainEvent'
-import { MeetupLocationUpdatedDomainEvent } from './Events/MeetupLocationUpdatedDomainEvent'
-import { MeetupImageUrlUpdatedDomainEvent } from './Events/MeetupImageUrlUpdatedDomainEvent'
 import { MeetupDeletedDomainEvent } from './Events/MeetupDeletedDomainEvent'
+import { MeetupDescriptionUpdatedDomainEvent } from './Events/MeetupDescriptionUpdatedDomainEvent'
+import { MeetupImageUrlUpdatedDomainEvent } from './Events/MeetupImageUrlUpdatedDomainEvent'
+import { MeetupLocationUpdatedDomainEvent } from './Events/MeetupLocationUpdatedDomainEvent'
+import { MeetupTitleUpdatedDomainEvent } from './Events/MeetupTitleUpdatedDomainEvent'
+import { MeetupDate } from './ValueObjects/MeetupDate'
+import { MeetupDescription } from './ValueObjects/MeetupDescription'
+import { MeetupId } from './ValueObjects/MeetupId'
+import { MeetupImageUrl } from './ValueObjects/MeetupImageUrl'
+import { MeetupLocation } from './ValueObjects/MeetupLocation'
+import { MeetupTitle } from './ValueObjects/MeetupTitle'
 
 export class Meetup extends AggregateRoot {
   readonly id: MeetupId
@@ -55,7 +55,7 @@ export class Meetup extends AggregateRoot {
       description: meetup.description.value,
       date: meetup.date.toString(),
       location: meetup.location.value,
-      imageUrl: meetup.imageUrl.value,
+      imageUrl: meetup.imageUrl.value
     })
     meetup.record(event)
     return meetup
@@ -86,7 +86,7 @@ export class Meetup extends AggregateRoot {
       description: this._description.value,
       date: this._date.toString(),
       location: this._location.value,
-      imageUrl: this._imageUrl.value,
+      imageUrl: this._imageUrl.value
     }
   }
 
@@ -113,7 +113,7 @@ export class Meetup extends AggregateRoot {
     this._title = title
     const event = new MeetupTitleUpdatedDomainEvent({
       aggregateId: this.id.value,
-      title: title.value,
+      title: title.value
     })
     this.record(event)
   }
@@ -122,7 +122,7 @@ export class Meetup extends AggregateRoot {
     this._description = description
     const event = new MeetupDescriptionUpdatedDomainEvent({
       aggregateId: this.id.value,
-      description: description.value,
+      description: description.value
     })
     this.record(event)
   }
@@ -131,7 +131,7 @@ export class Meetup extends AggregateRoot {
     this._date = date
     const event = new MeetupDateUpdatedDomainEvent({
       aggregateId: this.id.value,
-      date: date.toString(),
+      date: date.toString()
     })
     this.record(event)
   }
@@ -140,7 +140,7 @@ export class Meetup extends AggregateRoot {
     this._location = location
     const event = new MeetupLocationUpdatedDomainEvent({
       aggregateId: this.id.value,
-      location: location.value,
+      location: location.value
     })
     this.record(event)
   }
@@ -149,7 +149,7 @@ export class Meetup extends AggregateRoot {
     this._imageUrl = imageUrl
     const event = new MeetupImageUrlUpdatedDomainEvent({
       aggregateId: this.id.value,
-      imageUrl: imageUrl.value,
+      imageUrl: imageUrl.value
     })
     this.record(event)
   }
@@ -157,7 +157,7 @@ export class Meetup extends AggregateRoot {
   markAsDeleted(): void {
     this._isDeleted = true
     const event = new MeetupDeletedDomainEvent({
-      aggregateId: this.id.value,
+      aggregateId: this.id.value
     })
     this.record(event)
   }
