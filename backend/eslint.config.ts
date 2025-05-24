@@ -2,8 +2,6 @@ import tsPlugin from '@typescript-eslint/eslint-plugin'
 import tsParser from '@typescript-eslint/parser'
 import { FlatESLintConfig } from 'eslint-define-config'
 
-console.log('✅ ESLint config loaded')
-
 const config: FlatESLintConfig[] = [
   {
     ignores: ['**/routes.ts', '*.config.ts']
