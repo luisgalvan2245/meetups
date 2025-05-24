@@ -12,4 +12,8 @@ export class MeetupDate extends DateValueObject {
       throw new InvalidDateFormatError(this.value)
     }
   }
+
+  toString(): string {
+    return this.value.toISOString()
+  }
 }
