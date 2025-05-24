@@ -86,6 +86,9 @@
 						"application/json": {
 							"schema": {
 								"properties": {
+									"organizerId": {
+										"type": "string"
+									},
 									"imageUrl": {
 										"type": "string"
 									},
@@ -104,6 +107,7 @@
 									}
 								},
 								"required": [
+									"organizerId",
 									"imageUrl",
 									"location",
 									"date",

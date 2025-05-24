@@ -1,4 +1,6 @@
 import { EventBus } from '../../../Shared/domain/Bus/EventBus/EventBus'
+import { TagId } from '../../../Tag/domain/ValueObjects/TagId'
+import { UserId } from '../../../User/domain/ValueObjects/UserId'
 import { MeetupRepository } from '../../domain/Repositories/MeetupRepository'
 import { MeetupFinder } from '../../domain/Services/MeetupFinder'
 import { MeetupDate } from '../../domain/ValueObjects/MeetupDate'
@@ -25,6 +27,8 @@ export class MeetupUpdater {
     date?: MeetupDate
     location?: MeetupLocation
     imageUrl?: MeetupImageUrl
+    attendees?: UserId[]
+    tags?: TagId[]
   }): Promise<void> {
     const meetup = await this.finder.run(params.id)
 
@@ -42,6 +46,36 @@ export class MeetupUpdater {
     }
     if (params.imageUrl) {
       meetup.updateImageUrl(params.imageUrl)
+    }
+    if (params.attendees) {
+      const currentAttendees = meetup.attendeeIds
+      const newAttendees = new Set(params.attendees)
+
+      currentAttendees.forEach(attendee => {
+        if (!newAttendees.has(attendee)) {
+          meetup.removeAttendee(attendee)
+        }
+      })
+      newAttendees.forEach(attendee => {
+        if (!currentAttendees.has(attendee)) {
+          meetup.addAttendee(attendee)
+        }
+      })
+    }
+    if (params.tags) {
+      const currentTags = meetup.tagIds
+      const newTags = new Set(params.tags)
+
+      currentTags.forEach(tag => {
+        if (!newTags.has(tag)) {
+          meetup.removeTag(tag)
+        }
+      })
+      newTags.forEach(tag => {
+        if (!currentTags.has(tag)) {
+          meetup.addTag(tag)
+        }
+      })
     }
 
     await this.repository.update(meetup)

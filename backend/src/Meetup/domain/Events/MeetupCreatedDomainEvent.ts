@@ -6,6 +6,7 @@ type CreatedMeetupDomainEventAttributes = {
   readonly date: string
   readonly location: string
   readonly imageUrl: string
+  readonly organizerId: string
 }
 
 export class MeetupCreatedDomainEvent extends DomainEvent {
@@ -16,6 +17,7 @@ export class MeetupCreatedDomainEvent extends DomainEvent {
   readonly date: string
   readonly location: string
   readonly imageUrl: string
+  readonly organizerId: string
 
   constructor({
     aggregateId,
@@ -24,6 +26,7 @@ export class MeetupCreatedDomainEvent extends DomainEvent {
     date,
     location,
     imageUrl,
+    organizerId,
     eventId,
     occurredOn
   }: {
@@ -34,6 +37,7 @@ export class MeetupCreatedDomainEvent extends DomainEvent {
     date: string
     location: string
     imageUrl: string
+    organizerId: string
     occurredOn?: Date
   }) {
     super({
@@ -47,6 +51,7 @@ export class MeetupCreatedDomainEvent extends DomainEvent {
     this.date = date
     this.location = location
     this.imageUrl = imageUrl
+    this.organizerId = organizerId
   }
 
   toPrimitives(): CreatedMeetupDomainEventAttributes {
@@ -56,7 +61,8 @@ export class MeetupCreatedDomainEvent extends DomainEvent {
       description,
       date,
       location,
-      imageUrl
+      imageUrl,
+      organizerId: ''
     }
   }
 
@@ -74,6 +80,7 @@ export class MeetupCreatedDomainEvent extends DomainEvent {
       date: attributes.date,
       location: attributes.location,
       imageUrl: attributes.imageUrl,
+      organizerId: attributes.organizerId,
       eventId,
       occurredOn
     })

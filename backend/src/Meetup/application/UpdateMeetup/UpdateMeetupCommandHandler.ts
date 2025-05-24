@@ -1,5 +1,7 @@
 import { Command } from '../../../Shared/domain/Bus/CommandBus/Command'
 import { CommandHandler } from '../../../Shared/domain/Bus/CommandBus/CommandHandler'
+import { TagId } from '../../../Tag/domain/ValueObjects/TagId'
+import { UserId } from '../../../User/domain/ValueObjects/UserId'
 import { MeetupDate } from '../../domain/ValueObjects/MeetupDate'
 import { MeetupDescription } from '../../domain/ValueObjects/MeetupDescription'
 import { MeetupId } from '../../domain/ValueObjects/MeetupId'
@@ -31,7 +33,11 @@ export class UpdateMeetupCommandHandler
         : undefined,
       imageUrl: command.imageUrl
         ? new MeetupImageUrl(command.imageUrl)
-        : undefined
+        : undefined,
+      attendees: command.attendees
+        ? command.attendees.map(id => new UserId(id))
+        : undefined,
+      tags: command.tags ? command.tags.map(id => new TagId(id)) : undefined
     })
   }
 }

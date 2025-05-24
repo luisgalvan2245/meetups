@@ -50,7 +50,7 @@ export function RegisterRoutes(app: Router) {
     
         const argsMeetupPutController_createMeetup: Record<string, TsoaRoute.ParameterSchema> = {
                 id: {"in":"path","name":"id","required":true,"dataType":"string"},
-                data: {"in":"body","name":"data","required":true,"dataType":"nestedObjectLiteral","nestedProperties":{"imageUrl":{"dataType":"string","required":true},"location":{"dataType":"string","required":true},"date":{"dataType":"datetime","required":true},"description":{"dataType":"string","required":true},"title":{"dataType":"string","required":true}}},
+                data: {"in":"body","name":"data","required":true,"dataType":"nestedObjectLiteral","nestedProperties":{"organizerId":{"dataType":"string","required":true},"imageUrl":{"dataType":"string","required":true},"location":{"dataType":"string","required":true},"date":{"dataType":"datetime","required":true},"description":{"dataType":"string","required":true},"title":{"dataType":"string","required":true}}},
         };
         app.put('/meetups/:id',
             ...(fetchMiddlewares<RequestHandler>(MeetupPutController)),

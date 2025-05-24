@@ -7,6 +7,7 @@ type Params = {
   date: Date
   location: string
   imageUrl: string
+  organizerId: string
 }
 
 export class CreateMeetupCommand extends Command {
@@ -16,14 +17,16 @@ export class CreateMeetupCommand extends Command {
   readonly date: Date
   readonly location: string
   readonly imageUrl: string
+  readonly organizerId: string
 
-  constructor({ id, title, description, date, location, imageUrl }: Params) {
+  constructor(params: Params) {
     super()
-    this.id = id
-    this.title = title
-    this.description = description
-    this.date = date
-    this.location = location
-    this.imageUrl = imageUrl
+    this.id = params.id
+    this.title = params.title
+    this.description = params.description
+    this.date = params.date
+    this.location = params.location
+    this.imageUrl = params.imageUrl
+    this.organizerId = params.organizerId
   }
 }

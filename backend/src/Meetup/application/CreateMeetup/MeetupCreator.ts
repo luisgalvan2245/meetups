@@ -1,4 +1,5 @@
 import { EventBus } from '../../../Shared/domain/Bus/EventBus/EventBus'
+import { UserId } from '../../../User/domain/ValueObjects/UserId'
 import { Meetup } from '../../domain/Meetup'
 import { MeetupRepository } from '../../domain/Repositories/MeetupRepository'
 import { MeetupDate } from '../../domain/ValueObjects/MeetupDate'
@@ -21,6 +22,7 @@ export class MeetupCreator {
     date: MeetupDate
     location: MeetupLocation
     imageUrl: MeetupImageUrl
+    organizerId: UserId
   }): Promise<void> {
     const meetup = Meetup.create(
       params.id,
@@ -28,7 +30,8 @@ export class MeetupCreator {
       params.description,
       params.date,
       params.location,
-      params.imageUrl
+      params.imageUrl,
+      params.organizerId
     )
     await this.repository.create(meetup)
     const events = meetup.pullDomainEvents()

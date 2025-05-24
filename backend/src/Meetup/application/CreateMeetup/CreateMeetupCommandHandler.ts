@@ -1,5 +1,6 @@
 import { Command } from '../../../Shared/domain/Bus/CommandBus/Command'
 import { CommandHandler } from '../../../Shared/domain/Bus/CommandBus/CommandHandler'
+import { UserId } from '../../../User/domain/ValueObjects/UserId'
 import { MeetupDate } from '../../domain/ValueObjects/MeetupDate'
 import { MeetupDescription } from '../../domain/ValueObjects/MeetupDescription'
 import { MeetupId } from '../../domain/ValueObjects/MeetupId'
@@ -25,7 +26,8 @@ export class CreateMeetupCommandHandler
       description: new MeetupDescription(command.description),
       date: new MeetupDate(new Date(command.date)),
       location: new MeetupLocation(command.location),
-      imageUrl: new MeetupImageUrl(command.imageUrl)
+      imageUrl: new MeetupImageUrl(command.imageUrl),
+      organizerId: new UserId(command.organizerId)
     })
   }
 }

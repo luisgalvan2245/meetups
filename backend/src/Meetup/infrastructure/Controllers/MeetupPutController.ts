@@ -43,6 +43,7 @@ export class MeetupPutController {
       date: Date
       location: string
       imageUrl: string
+      organizerId: string
     }
   ): Promise<void> {
     const command = new CreateMeetupCommand({ id, ...data })

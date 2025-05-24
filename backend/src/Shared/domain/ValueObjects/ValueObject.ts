@@ -2,7 +2,7 @@ import { NotNullError } from '../Exceptions/NotNullError'
 
 export type Primitives = string | number | boolean | Date
 
-export abstract class ValueObject<T extends Primitives> {
+export abstract class ValueObject<T> {
   readonly value: T
 
   constructor(value: T) {
@@ -17,13 +17,10 @@ export abstract class ValueObject<T extends Primitives> {
   }
 
   equals(other: ValueObject<T>): boolean {
-    return (
-      other.constructor.name === this.constructor.name &&
-      other.value === this.value
-    )
+    return this.value === other.value
   }
 
   toString(): string {
-    return this.value.toString()
+    return String(this.value)
   }
 }
