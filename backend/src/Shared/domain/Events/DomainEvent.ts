@@ -1,5 +1,3 @@
-import { AggregateRoot } from './AggregateRoot'
-
 export abstract class DomainEvent {
   readonly eventId: string
   readonly eventName: string

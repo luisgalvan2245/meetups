@@ -1,4 +1,4 @@
-import { DomainEvent } from '../../../Shared/domain/DomainEvent'
+import { DomainEvent } from '../../../Shared/domain/Events/DomainEvent'
 
 export class CommentDeletedDomainEvent extends DomainEvent {
   static readonly EVENT_NAME = 'comment.deleted'

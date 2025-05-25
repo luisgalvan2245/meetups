@@ -1,4 +1,4 @@
-import { DomainEvent } from '../../../Shared/domain/DomainEvent'
+import { DomainEvent } from '../../../Shared/domain/Events/DomainEvent'
 
 export class UserUpdatedDomainEvent extends DomainEvent {
   static readonly EVENT_NAME = 'user.updated'
