@@ -1,13 +1,13 @@
 import { Query } from '../../../Shared/domain/Bus/QueryBus/Query'
 import { QueryHandler } from '../../../Shared/domain/Bus/QueryBus/QueryHandler'
 import { MeetupResponse } from '../MeetupResponse'
-import { ListMeetup } from './ListMeetup'
 import { ListMeetupsQuery } from './ListMeetupsQuery'
+import { MeetupsLister } from './MeetupsLister'
 
 export class ListMeetupsQueryHandler
   implements QueryHandler<ListMeetupsQuery, MeetupResponse[]>
 {
-  constructor(private lister: ListMeetup) {}
+  constructor(private lister: MeetupsLister) {}
 
   subscribedTo(): Query {
     return ListMeetupsQuery

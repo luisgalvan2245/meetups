@@ -1,6 +1,6 @@
 import { InMemoryMeetupRepository } from '../../../Meetup/infrastructure/Repositories/InMemoryMeetupRepository'
-import { ListMeetup } from '../../application/List/ListMeetup'
-import { GetMeetup } from '../../application/Get/GetMeetup'
+import { MeetupsLister } from '../../application/List/MeetupsLister'
+import { MeetupGetter } from '../../application/Get/MeetupGetter'
 import { Route, Tags, Get, Path, Response } from '@tsoa/runtime'
 import { InMemoryQueryBus } from '../../../Shared/infrastructure/Bus/QueryBus/InMemoryQueryBus'
 import { QueryHandlers } from '../../../Shared/infrastructure/Bus/QueryBus/QueryHandlers'
@@ -18,8 +18,8 @@ export class MeetupGetController {
   constructor() {
     // TODO: Inject QueryBus
     const repository = new InMemoryMeetupRepository()
-    const lister = new ListMeetup(repository)
-    const getter = new GetMeetup(repository)
+    const lister = new MeetupsLister(repository)
+    const getter = new MeetupGetter(repository)
     const handlers = new QueryHandlers([
       new ListMeetupsQueryHandler(lister),
       new GetMeetupQueryHandler(getter),

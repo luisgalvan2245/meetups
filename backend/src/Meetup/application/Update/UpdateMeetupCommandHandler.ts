@@ -8,7 +8,7 @@ import { MeetupId } from '../../domain/ValueObjects/MeetupId'
 import { MeetupImageUrl } from '../../domain/ValueObjects/MeetupImageUrl'
 import { MeetupLocation } from '../../domain/ValueObjects/MeetupLocation'
 import { MeetupTitle } from '../../domain/ValueObjects/MeetupTitle'
-import { UpdateMeetup } from './UpdateMeetup'
+import { UpdateMeetup } from './MeetupUpdater'
 import { UpdateMeetupCommand } from './UpdateMeetupCommand'
 
 export class UpdateMeetupCommandHandler

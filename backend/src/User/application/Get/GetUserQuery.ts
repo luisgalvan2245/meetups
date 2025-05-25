@@ -1,9 +1,14 @@
-import { Query } from '../../../Shared/domain/Query'
+import { Query } from '../../../Shared/domain/Bus/QueryBus/Query'
 
-export class GetUserQuery implements Query {
+type Params = {
+  id: string
+}
+
+export class GetUserQuery extends Query {
   readonly id: string
 
-  constructor(params: { id: string }) {
-    this.id = params.id
+  constructor({ id }: Params) {
+    super()
+    this.id = id
   }
 }

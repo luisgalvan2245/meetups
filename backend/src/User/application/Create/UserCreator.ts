@@ -6,7 +6,7 @@ import { UserEmail } from '../../domain/ValueObjects/UserEmail'
 import { UserName } from '../../domain/ValueObjects/UserName'
 import { UserPassword } from '../../domain/ValueObjects/UserPassword'
 
-export class CreateUser {
+export class UserCreator {
   constructor(private repository: UserRepository) {}
 
   async run(params: {

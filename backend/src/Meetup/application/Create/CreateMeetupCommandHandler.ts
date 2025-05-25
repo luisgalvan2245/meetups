@@ -7,13 +7,13 @@ import { MeetupId } from '../../domain/ValueObjects/MeetupId'
 import { MeetupImageUrl } from '../../domain/ValueObjects/MeetupImageUrl'
 import { MeetupLocation } from '../../domain/ValueObjects/MeetupLocation'
 import { MeetupTitle } from '../../domain/ValueObjects/MeetupTitle'
-import { CreateMeetup } from './CreateMeetup'
 import { CreateMeetupCommand } from './CreateMeetupCommand'
+import { MeetupCreator } from './MeetupCreator'
 
 export class CreateMeetupCommandHandler
   implements CommandHandler<CreateMeetupCommand>
 {
-  constructor(private creator: CreateMeetup) {}
+  constructor(private creator: MeetupCreator) {}
 
   subscribedTo(): Command {
     return CreateMeetupCommand

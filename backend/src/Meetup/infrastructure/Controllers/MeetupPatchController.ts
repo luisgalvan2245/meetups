@@ -1,7 +1,7 @@
 import { InMemoryMeetupRepository } from '../../../Meetup/infrastructure/Repositories/InMemoryMeetupRepository'
 import { UpdateMeetupCommand } from '../../application/Update/UpdateMeetupCommand'
 import { UpdateMeetupCommandHandler } from '../../application/Update/UpdateMeetupCommandHandler'
-import { UpdateMeetup } from '../../application/Update/UpdateMeetup'
+import { UpdateMeetup } from '../../application/Update/MeetupUpdater'
 import { InMemoryCommandBus } from '../../../Shared/infrastructure/Bus/CommandBus/InMemoryCommandBus'
 import { CommandHandlers } from '../../../Shared/infrastructure/Bus/CommandBus/CommandHandlers'
 import { InMemoryAsyncEventBus } from '../../../Shared/infrastructure/Bus/EventBus/InMemoryAsyncEventBus'

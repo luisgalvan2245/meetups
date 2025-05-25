@@ -1,7 +1,7 @@
 import { UserRepository } from '../../domain/Repositories/UserRepository'
 import { User } from '../../domain/User'
 
-export class ListUsers {
+export class UsersLister {
   constructor(private repository: UserRepository) {}
 
   async run(): Promise<User[]> {

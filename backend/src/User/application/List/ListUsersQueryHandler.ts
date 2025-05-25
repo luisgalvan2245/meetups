@@ -1,17 +1,19 @@
-import { QueryHandler } from '../../../Shared/domain/QueryHandler'
-import { ListUsers } from './ListUsers'
+import { Query } from '../../../Shared/domain/Bus/QueryBus/Query'
+import { QueryHandler } from '../../../Shared/domain/Bus/QueryBus/QueryHandler'
+import { UserResponse } from '../UserResponse'
 import { ListUsersQuery } from './ListUsersQuery'
+import { UsersLister } from './UsersLister'
 
 export class ListUsersQueryHandler
-  implements QueryHandler<ListUsersQuery, Record<string, unknown>[]>
+  implements QueryHandler<ListUsersQuery, UserResponse[]>
 {
-  constructor(private lister: ListUsers) {}
+  constructor(private lister: UsersLister) {}
 
-  subscribedTo(): ListUsersQuery {
+  subscribedTo(): Query {
     return ListUsersQuery
   }
 
-  async handle(): Promise<Record<string, unknown>[]> {
+  async handle(_query: ListUsersQuery): Promise<UserResponse[]> {
     const users = await this.lister.run()
     return users.map(user => user.toPrimitives())
   }

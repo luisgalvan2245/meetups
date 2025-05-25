@@ -1,12 +1,12 @@
 import { Command } from '../../../Shared/domain/Bus/CommandBus/Command'
 import { CommandHandler } from '../../../Shared/domain/Bus/CommandBus/CommandHandler'
-import { CreateUser } from './CreateUser'
 import { CreateUserCommand } from './CreateUserCommand'
+import { UserCreator } from './UserCreator'
 
 export class CreateUserCommandHandler
   implements CommandHandler<CreateUserCommand>
 {
-  constructor(private creator: CreateUser) {}
+  constructor(private creator: UserCreator) {}
   subscribedTo(): Command {
     return CreateUserCommand
   }

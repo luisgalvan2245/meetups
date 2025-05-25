@@ -2,7 +2,7 @@ import { EventBus } from '../../../Shared/domain/Bus/EventBus/EventBus'
 import { UserId } from '../../../Shared/domain/ValueObjects/UserId'
 import { TagId } from '../../../Tag/domain/ValueObjects/TagId'
 import { MeetupRepository } from '../../domain/Repositories/MeetupRepository'
-import { FindMeetup } from '../../domain/Services/FindMeetup'
+import { MeetupFinder } from '../../domain/Services/MeetupFinder'
 import { MeetupDate } from '../../domain/ValueObjects/MeetupDate'
 import { MeetupDescription } from '../../domain/ValueObjects/MeetupDescription'
 import { MeetupId } from '../../domain/ValueObjects/MeetupId'
@@ -11,13 +11,13 @@ import { MeetupLocation } from '../../domain/ValueObjects/MeetupLocation'
 import { MeetupTitle } from '../../domain/ValueObjects/MeetupTitle'
 
 export class UpdateMeetup {
-  private finder: FindMeetup
+  private finder: MeetupFinder
 
   constructor(
     private repository: MeetupRepository,
     private eventBus: EventBus
   ) {
-    this.finder = new FindMeetup(this.repository)
+    this.finder = new MeetupFinder(this.repository)
   }
 
   async run(params: {

@@ -1,7 +1,7 @@
 import { InMemoryMeetupRepository } from '../../../Meetup/infrastructure/Repositories/InMemoryMeetupRepository'
 import { CreateMeetupCommand } from '../../application/Create/CreateMeetupCommand'
 import { CreateMeetupCommandHandler } from '../../application/Create/CreateMeetupCommandHandler'
-import { CreateMeetup } from '../../application/Create/CreateMeetup'
+import { MeetupCreator } from '../../application/Create/MeetupCreator'
 import { InMemoryCommandBus } from '../../../Shared/infrastructure/Bus/CommandBus/InMemoryCommandBus'
 import { CommandHandlers } from '../../../Shared/infrastructure/Bus/CommandBus/CommandHandlers'
 import { InMemoryAsyncEventBus } from '../../../Shared/infrastructure/Bus/EventBus/InMemoryAsyncEventBus'
@@ -24,7 +24,7 @@ export class MeetupPutController {
     // TODO: Inject CommandBus
     const repository = new InMemoryMeetupRepository()
     const eventBus = new InMemoryAsyncEventBus()
-    const creator = new CreateMeetup(repository, eventBus)
+    const creator = new MeetupCreator(repository, eventBus)
     const handler = new CreateMeetupCommandHandler(creator)
     const handlers = new CommandHandlers([handler])
     this.commandBus = new InMemoryCommandBus(handlers)
