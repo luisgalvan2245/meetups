@@ -8,13 +8,13 @@ import { MeetupId } from '../../domain/ValueObjects/MeetupId'
 import { MeetupImageUrl } from '../../domain/ValueObjects/MeetupImageUrl'
 import { MeetupLocation } from '../../domain/ValueObjects/MeetupLocation'
 import { MeetupTitle } from '../../domain/ValueObjects/MeetupTitle'
-import { UpdateMeetup } from './MeetupUpdater'
+import { MeetupUpdater } from './MeetupUpdater'
 import { UpdateMeetupCommand } from './UpdateMeetupCommand'
 
 export class UpdateMeetupCommandHandler
   implements CommandHandler<UpdateMeetupCommand>
 {
-  constructor(private updater: UpdateMeetup) {}
+  constructor(private updater: MeetupUpdater) {}
 
   subscribedTo(): Command {
     return UpdateMeetupCommand

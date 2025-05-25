@@ -9,21 +9,23 @@ import { MeetupImageUrl } from '../../domain/ValueObjects/MeetupImageUrl'
 import { MeetupLocation } from '../../domain/ValueObjects/MeetupLocation'
 import { MeetupTitle } from '../../domain/ValueObjects/MeetupTitle'
 
+type Params = {
+  id: MeetupId
+  title: MeetupTitle
+  description: MeetupDescription
+  date: MeetupDate
+  location: MeetupLocation
+  imageUrl: MeetupImageUrl
+  organizerId: UserId
+}
+
 export class MeetupCreator {
   constructor(
     private repository: MeetupRepository,
     private eventBus: EventBus
   ) {}
 
-  async run(params: {
-    id: MeetupId
-    title: MeetupTitle
-    description: MeetupDescription
-    date: MeetupDate
-    location: MeetupLocation
-    imageUrl: MeetupImageUrl
-    organizerId: UserId
-  }): Promise<void> {
+  async run(params: Params): Promise<void> {
     const meetup = Meetup.create(
       params.id,
       params.title,

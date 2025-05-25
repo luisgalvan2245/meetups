@@ -10,7 +10,19 @@ import { MeetupImageUrl } from '../../domain/ValueObjects/MeetupImageUrl'
 import { MeetupLocation } from '../../domain/ValueObjects/MeetupLocation'
 import { MeetupTitle } from '../../domain/ValueObjects/MeetupTitle'
 
-export class UpdateMeetup {
+type Params = {
+  id: MeetupId
+  title?: MeetupTitle
+  description?: MeetupDescription
+  date?: MeetupDate
+  location?: MeetupLocation
+  imageUrl?: MeetupImageUrl
+  attendees?: UserId[]
+  tags?: TagId[]
+  organizerId?: UserId
+}
+
+export class MeetupUpdater {
   private finder: MeetupFinder
 
   constructor(
@@ -20,16 +32,7 @@ export class UpdateMeetup {
     this.finder = new MeetupFinder(this.repository)
   }
 
-  async run(params: {
-    id: MeetupId
-    title?: MeetupTitle
-    description?: MeetupDescription
-    date?: MeetupDate
-    location?: MeetupLocation
-    imageUrl?: MeetupImageUrl
-    attendees?: UserId[]
-    tags?: TagId[]
-  }): Promise<void> {
+  async run(params: Params): Promise<void> {
     const meetup = await this.finder.run(params.id)
 
     if (params.title) {
