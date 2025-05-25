@@ -1,6 +1,6 @@
 import { DomainEvent } from '../../../Shared/domain/Bus/EventBus/DomainEvent'
 
-type CreatedMeetupDomainEventAttributes = {
+type Attributes = {
   readonly title: string
   readonly description: string
   readonly date: string
@@ -54,7 +54,7 @@ export class MeetupCreatedDomainEvent extends DomainEvent {
     this.organizerId = organizerId
   }
 
-  toPrimitives(): CreatedMeetupDomainEventAttributes {
+  toPrimitives(): Attributes {
     const { title, description, date, location, imageUrl } = this
     return {
       title,
@@ -68,7 +68,7 @@ export class MeetupCreatedDomainEvent extends DomainEvent {
 
   static fromPrimitives(params: {
     aggregateId: string
-    attributes: CreatedMeetupDomainEventAttributes
+    attributes: Attributes
     eventId: string
     occurredOn: Date
   }): DomainEvent {

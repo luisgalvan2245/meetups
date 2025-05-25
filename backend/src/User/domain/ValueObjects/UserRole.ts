@@ -1,4 +1,5 @@
 import { StringValueObject } from '../../../Shared/domain/ValueObjects/StringValueObject'
+import { InvalidUserRoleError } from '../Exceptions/InvalidUserRoleError'
 
 export class UserRole extends StringValueObject {
   constructor(value: string) {
@@ -8,7 +9,7 @@ export class UserRole extends StringValueObject {
 
   private ensureValidRole(value: string): void {
     if (!['USER', 'ADMIN'].includes(value)) {
-      throw new Error(`Invalid user role: ${value}`)
+      throw new InvalidUserRoleError(`Invalid user role: ${value}`)
     }
   }
 

@@ -1,14 +1,33 @@
 import { DomainEvent } from '../../../Shared/domain/DomainEvent'
 
+type UserCreatedDomainEventAttributes = {
+  readonly name: string
+  readonly email: string
+}
+
 export class UserCreatedDomainEvent extends DomainEvent {
   static readonly EVENT_NAME = 'user.created'
 
-  constructor(data: {
+  constructor(params: {
     aggregateId: string
-    username: string
+    name: string
     email: string
-    role: string
+    eventId?: string
+    occurredOn?: Date
   }) {
-    super(UserCreatedDomainEvent.EVENT_NAME, data.aggregateId, data)
+    const { aggregateId, name, email, eventId, occurredOn } = params
+    super(UserCreatedDomainEvent.EVENT_NAME, aggregateId, eventId, occurredOn)
+    this.name = name
+    this.email = email
+  }
+
+  readonly name: string
+  readonly email: string
+
+  toPrimitives(): Record<string, unknown> {
+    return {
+      name: this.name,
+      email: this.email
+    }
   }
 }

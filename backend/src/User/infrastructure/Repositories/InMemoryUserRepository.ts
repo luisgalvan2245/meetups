@@ -1,36 +1,51 @@
-import { InMemoryStore } from '../../../Shared/infrastructure/InMemoryStore'
+import { UserId } from '../../../Shared/domain/ValueObjects/UserId'
+import { inMemoryStore } from '../../../Shared/infrastructure/InMemoryStore'
+import { UserRepository } from '../../domain/Repositories/UserRepository'
 import { User } from '../../domain/User'
-import { UserRepository } from '../../domain/UserRepository'
-import { Email } from '../../domain/ValueObjects/Email'
-import { UserId } from '../../domain/ValueObjects/UserId'
-import { Username } from '../../domain/ValueObjects/Username'
+import { UserEmail } from '../../domain/ValueObjects/UserEmail'
+import { UserName } from '../../domain/ValueObjects/UserName'
 
 export class InMemoryUserRepository implements UserRepository {
-  private store: InMemoryStore
+  private static users: User[] = inMemoryStore.getUsers()
 
-  constructor() {
-    this.store = InMemoryStore.getInstance()
-  }
-
-  async save(user: User): Promise<void> {
-    this.store.getUsers().set(user.id.toString(), user)
+  async findAll(): Promise<User[]> {
+    return InMemoryUserRepository.users
   }
 
   async findById(id: UserId): Promise<User | null> {
-    return this.store.getUsers().get(id.toString()) || null
+    return InMemoryUserRepository.users.find(user => user.id.equals(id)) || null
   }
 
-  async findByEmail(email: Email): Promise<User | null> {
-    const users = Array.from(this.store.getUsers().values())
-    return users.find(user => user.email.equals(email)) || null
+  async create(user: User): Promise<void> {
+    InMemoryUserRepository.users.push(user)
   }
 
-  async findByUsername(username: Username): Promise<User | null> {
-    const users = Array.from(this.store.getUsers().values())
-    return users.find(user => user.username.equals(username)) || null
+  async update(user: User): Promise<void> {
+    const index = InMemoryUserRepository.users.findIndex(u =>
+      u.id.equals(user.id)
+    )
+    if (index >= 0) {
+      InMemoryUserRepository.users[index] = user
+    }
   }
 
   async delete(id: UserId): Promise<void> {
-    this.store.getUsers().delete(id.toString())
+    InMemoryUserRepository.users = InMemoryUserRepository.users.filter(
+      user => !user.id.equals(id)
+    )
+  }
+
+  async findByEmail(email: UserEmail): Promise<User | null> {
+    return (
+      InMemoryUserRepository.users.find(user => user.email.equals(email)) ||
+      null
+    )
+  }
+
+  async findByUsername(username: UserName): Promise<User | null> {
+    return (
+      InMemoryUserRepository.users.find(user => user.name.equals(username)) ||
+      null
+    )
   }
 }

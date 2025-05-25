@@ -1,7 +1,7 @@
 import { DomainEvent } from '../../../Shared/domain/DomainEvent'
 
-export class UserDeletedDomainEvent extends DomainEvent {
-  static readonly EVENT_NAME = 'user.deleted'
+export class UserPasswordUpdatedDomainEvent extends DomainEvent {
+  static readonly EVENT_NAME = 'user.password.updated'
 
   constructor(params: {
     aggregateId: string
@@ -9,7 +9,12 @@ export class UserDeletedDomainEvent extends DomainEvent {
     occurredOn?: Date
   }) {
     const { aggregateId, eventId, occurredOn } = params
-    super(UserDeletedDomainEvent.EVENT_NAME, aggregateId, eventId, occurredOn)
+    super(
+      UserPasswordUpdatedDomainEvent.EVENT_NAME,
+      aggregateId,
+      eventId,
+      occurredOn
+    )
   }
 
   toPrimitives(): Record<string, unknown> {

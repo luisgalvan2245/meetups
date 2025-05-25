@@ -1,158 +1,124 @@
 import { AggregateRoot } from '../../Shared/domain/AggregateRoot'
+import { UserId } from '../../Shared/domain/ValueObjects/UserId'
 import { UserCreatedDomainEvent } from './Events/UserCreatedDomainEvent'
 import { UserDeletedDomainEvent } from './Events/UserDeletedDomainEvent'
-import { UserUpdatedDomainEvent } from './Events/UserUpdatedDomainEvent'
-import { Email } from './ValueObjects/Email'
-import { Password } from './ValueObjects/Password'
-import { UserId } from './ValueObjects/UserId'
-import { Username } from './ValueObjects/Username'
-
-export interface UserPrimitives {
-  id: string
-  username: string
-  email: string
-  password: string
-  role: string
-  createdAt: string
-  isActive: boolean
-}
+import { UserEmailUpdatedDomainEvent } from './Events/UserEmailUpdatedDomainEvent'
+import { UserNameUpdatedDomainEvent } from './Events/UserNameUpdatedDomainEvent'
+import { UserPasswordUpdatedDomainEvent } from './Events/UserPasswordUpdatedDomainEvent'
+import { UserEmail } from './ValueObjects/UserEmail'
+import { UserName } from './ValueObjects/UserName'
+import { UserPassword } from './ValueObjects/UserPassword'
 
 export class User extends AggregateRoot {
   readonly id: UserId
-  private _username: Username
-  private _email: Email
-  private _password: Password
-  private _role: string
-  private _createdAt: Date
-  private _isActive: boolean
+  private _name: UserName
+  private _email: UserEmail
+  private _password: UserPassword
+  private _isDeleted: boolean
 
   constructor(
     id: UserId,
-    username: Username,
-    email: Email,
-    password: Password,
-    role: string,
-    createdAt: Date,
-    isActive: boolean
+    name: UserName,
+    email: UserEmail,
+    password: UserPassword
   ) {
     super()
     this.id = id
-    this._username = username
+    this._name = name
     this._email = email
     this._password = password
-    this._role = role
-    this._createdAt = createdAt
-    this._isActive = isActive
+    this._isDeleted = false
   }
 
   static create(
     id: UserId,
-    username: Username,
-    email: Email,
-    password: Password,
-    role: string
+    name: UserName,
+    email: UserEmail,
+    password: UserPassword
   ): User {
-    const user = new User(id, username, email, password, role, new Date(), true)
-
+    const user = new User(id, name, email, password)
     const event = new UserCreatedDomainEvent({
-      aggregateId: user.id.toString(),
-      username: user.username.toString(),
-      email: user.email.toString(),
-      role: user.role
+      aggregateId: user.id.value,
+      name: user.name.value,
+      email: user.email.value
     })
-
     user.record(event)
     return user
   }
 
-  static fromPrimitives(data: UserPrimitives): User {
-    return new User(
+  static fromPrimitives(data: {
+    id: string
+    name: string
+    email: string
+    password: string
+    isDeleted: boolean
+  }): User {
+    const user = new User(
       new UserId(data.id),
-      new Username(data.username),
-      new Email(data.email),
-      new Password(data.password),
-      data.role,
-      new Date(data.createdAt),
-      data.isActive
+      new UserName(data.name),
+      new UserEmail(data.email),
+      new UserPassword(data.password)
     )
+    user._isDeleted = data.isDeleted
+    return user
   }
 
-  toPrimitives(): UserPrimitives {
+  toPrimitives() {
     return {
-      id: this.id.toString(),
-      username: this.username.toString(),
-      email: this.email.toString(),
-      password: this.password.toString(),
-      role: this.role,
-      createdAt: this.createdAt.toISOString(),
-      isActive: this.isActive
+      id: this.id.value,
+      name: this._name.value,
+      email: this._email.value,
+      password: this._password.value,
+      isDeleted: this._isDeleted
     }
   }
 
-  get username(): Username {
-    return this._username
+  get name() {
+    return this._name
   }
 
-  get email(): Email {
+  get email() {
     return this._email
   }
 
-  get password(): Password {
+  get password() {
     return this._password
   }
 
-  get role(): string {
-    return this._role
+  get isDeleted() {
+    return this._isDeleted
   }
 
-  get createdAt(): Date {
-    return this._createdAt
-  }
-
-  get isActive(): boolean {
-    return this._isActive
-  }
-
-  updateUsername(username: Username): void {
-    this._username = username
-    const event = new UserUpdatedDomainEvent({
-      aggregateId: this.id.toString(),
-      username: username.toString()
+  updateName(name: UserName): void {
+    this._name = name
+    const event = new UserNameUpdatedDomainEvent({
+      aggregateId: this.id.value,
+      name: name.value
     })
     this.record(event)
   }
 
-  updateEmail(email: Email): void {
+  updateEmail(email: UserEmail): void {
     this._email = email
-    const event = new UserUpdatedDomainEvent({
-      aggregateId: this.id.toString(),
-      email: email.toString()
+    const event = new UserEmailUpdatedDomainEvent({
+      aggregateId: this.id.value,
+      email: email.value
     })
     this.record(event)
   }
 
-  updatePassword(password: Password): void {
+  updatePassword(password: UserPassword): void {
     this._password = password
-    const event = new UserUpdatedDomainEvent({
-      aggregateId: this.id.toString(),
-      password: password.toString()
+    const event = new UserPasswordUpdatedDomainEvent({
+      aggregateId: this.id.value
     })
     this.record(event)
   }
 
-  updateRole(role: string): void {
-    this._role = role
-    const event = new UserUpdatedDomainEvent({
-      aggregateId: this.id.toString(),
-      role: role
-    })
-    this.record(event)
-  }
-
-  deactivate(): void {
-    this._isActive = false
+  markAsDeleted(): void {
+    this._isDeleted = true
     const event = new UserDeletedDomainEvent({
-      aggregateId: this.id.toString()
+      aggregateId: this.id.value
     })
     this.record(event)
   }

@@ -1,6 +1,6 @@
 import { AggregateRoot } from '../../Shared/domain/AggregateRoot'
+import { UserId } from '../../Shared/domain/ValueObjects/UserId'
 import { TagId } from '../../Tag/domain/ValueObjects/TagId'
-import { UserId } from '../../User/domain/ValueObjects/UserId'
 import { MeetupCreatedDomainEvent } from './Events/MeetupCreatedDomainEvent'
 import { MeetupDateUpdatedDomainEvent } from './Events/MeetupDateUpdatedDomainEvent'
 import { MeetupDeletedDomainEvent } from './Events/MeetupDeletedDomainEvent'
@@ -98,17 +98,14 @@ export class Meetup extends AggregateRoot {
     commentCount: number
     isDeleted: boolean
   }): Meetup {
-    const meetupId = new MeetupId(data.id)
-    const organizerId = new UserId(data.organizerId)
-
     const meetup = new Meetup(
-      meetupId,
+      new MeetupId(data.id),
       new MeetupTitle(data.title),
       new MeetupDescription(data.description),
       new MeetupDate(new Date(data.date)),
       new MeetupLocation(data.location),
       new MeetupImageUrl(data.imageUrl),
-      organizerId
+      new UserId(data.organizerId)
     )
     meetup._attendeeIds = new Set(data.attendeeIds.map(id => new UserId(id)))
     meetup._tagIds = new Set(data.tagIds.map(id => new TagId(id)))
@@ -120,15 +117,15 @@ export class Meetup extends AggregateRoot {
 
   toPrimitives() {
     return {
-      id: this.id.toString(),
-      title: this._title.toString(),
-      description: this._description.toString(),
+      id: this.id.value,
+      title: this._title.value,
+      description: this._description.value,
       date: this._date.toString(),
-      location: this._location.toString(),
-      imageUrl: this._imageUrl.toString(),
-      organizerId: this._organizerId.toString(),
-      attendeeIds: Array.from(this._attendeeIds).map(id => id.toString()),
-      tagIds: Array.from(this._tagIds).map(id => id.toString()),
+      location: this._location.value,
+      imageUrl: this._imageUrl.value,
+      organizerId: this._organizerId.value,
+      attendeeIds: Array.from(this._attendeeIds).map(id => id.value),
+      tagIds: Array.from(this._tagIds).map(id => id.value),
       likeCount: this._likeCount,
       commentCount: this._commentCount,
       isDeleted: this._isDeleted

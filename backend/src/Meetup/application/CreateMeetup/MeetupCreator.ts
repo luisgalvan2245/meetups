@@ -1,5 +1,5 @@
 import { EventBus } from '../../../Shared/domain/Bus/EventBus/EventBus'
-import { UserId } from '../../../User/domain/ValueObjects/UserId'
+import { UserId } from '../../../Shared/domain/ValueObjects/UserId'
 import { Meetup } from '../../domain/Meetup'
 import { MeetupRepository } from '../../domain/Repositories/MeetupRepository'
 import { MeetupDate } from '../../domain/ValueObjects/MeetupDate'
