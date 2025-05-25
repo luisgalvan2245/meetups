@@ -1,7 +1,7 @@
 import { InMemoryMeetupRepository } from '../../../Meetup/infrastructure/Repositories/InMemoryMeetupRepository'
-import { DeleteMeetupCommand } from '../../application/DeleteMeetup/DeleteMeetupCommand'
-import { DeleteMeetupCommandHandler } from '../../application/DeleteMeetup/DeleteMeetupCommandHandler'
-import { MeetupDeleter } from '../../application/DeleteMeetup/MeetupDeleter'
+import { DeleteMeetupCommand } from '../../application/Delete/DeleteMeetupCommand'
+import { DeleteMeetupCommandHandler } from '../../application/Delete/DeleteMeetupCommandHandler'
+import { DeleteMeetup } from '../../application/Delete/DeleteMeetup'
 import { InMemoryCommandBus } from '../../../Shared/infrastructure/Bus/CommandBus/InMemoryCommandBus'
 import { CommandHandlers } from '../../../Shared/infrastructure/Bus/CommandBus/CommandHandlers'
 import { InMemoryAsyncEventBus } from '../../../Shared/infrastructure/Bus/EventBus/InMemoryAsyncEventBus'
@@ -23,7 +23,7 @@ export class MeetupDeleteController {
     // TODO: Inject CommandBus
     const repository = new InMemoryMeetupRepository()
     const eventBus = new InMemoryAsyncEventBus()
-    const deleter = new MeetupDeleter(repository, eventBus)
+    const deleter = new DeleteMeetup(repository, eventBus)
     const handler = new DeleteMeetupCommandHandler(deleter)
     const handlers = new CommandHandlers([handler])
     this.commandBus = new InMemoryCommandBus(handlers)

@@ -3,7 +3,7 @@ import { Meetup } from '../Meetup'
 import { MeetupRepository } from '../Repositories/MeetupRepository'
 import { MeetupId } from '../ValueObjects/MeetupId'
 
-export class MeetupFinder {
+export class FindMeetup {
   constructor(private repository: MeetupRepository) {}
 
   async run(id: MeetupId): Promise<Meetup> {

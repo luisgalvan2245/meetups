@@ -9,7 +9,7 @@ import { MeetupImageUrl } from '../../domain/ValueObjects/MeetupImageUrl'
 import { MeetupLocation } from '../../domain/ValueObjects/MeetupLocation'
 import { MeetupTitle } from '../../domain/ValueObjects/MeetupTitle'
 
-export class MeetupCreator {
+export class CreateMeetup {
   constructor(
     private repository: MeetupRepository,
     private eventBus: EventBus

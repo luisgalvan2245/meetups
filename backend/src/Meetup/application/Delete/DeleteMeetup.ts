@@ -1,16 +1,16 @@
 import { EventBus } from '../../../Shared/domain/Bus/EventBus/EventBus'
 import { MeetupRepository } from '../../domain/Repositories/MeetupRepository'
-import { MeetupFinder } from '../../domain/Services/MeetupFinder'
+import { FindMeetup } from '../../domain/Services/FindMeetup'
 import { MeetupId } from '../../domain/ValueObjects/MeetupId'
 
-export class MeetupDeleter {
-  private finder: MeetupFinder
+export class DeleteMeetup {
+  private finder: FindMeetup
 
   constructor(
     private repository: MeetupRepository,
     private eventBus: EventBus
   ) {
-    this.finder = new MeetupFinder(repository)
+    this.finder = new FindMeetup(repository)
   }
 
   async run(id: MeetupId): Promise<void> {

@@ -1,13 +1,13 @@
 import { Meetup } from '../../domain/Meetup'
 import { MeetupRepository } from '../../domain/Repositories/MeetupRepository'
-import { MeetupFinder } from '../../domain/Services/MeetupFinder'
+import { FindMeetup } from '../../domain/Services/FindMeetup'
 import { MeetupId } from '../../domain/ValueObjects/MeetupId'
 
-export class MeetupGetter {
-  private finder: MeetupFinder
+export class GetMeetup {
+  private finder: FindMeetup
 
   constructor(repository: MeetupRepository) {
-    this.finder = new MeetupFinder(repository)
+    this.finder = new FindMeetup(repository)
   }
 
   async run(id: MeetupId): Promise<Meetup> {

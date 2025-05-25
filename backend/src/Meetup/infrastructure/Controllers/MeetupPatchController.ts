@@ -1,7 +1,7 @@
 import { InMemoryMeetupRepository } from '../../../Meetup/infrastructure/Repositories/InMemoryMeetupRepository'
-import { UpdateMeetupCommand } from '../../application/UpdateMeetup/UpdateMeetupCommand'
-import { UpdateMeetupCommandHandler } from '../../application/UpdateMeetup/UpdateMeetupCommandHandler'
-import { MeetupUpdater } from '../../application/UpdateMeetup/MeetupUpdater'
+import { UpdateMeetupCommand } from '../../application/Update/UpdateMeetupCommand'
+import { UpdateMeetupCommandHandler } from '../../application/Update/UpdateMeetupCommandHandler'
+import { UpdateMeetup } from '../../application/Update/UpdateMeetup'
 import { InMemoryCommandBus } from '../../../Shared/infrastructure/Bus/CommandBus/InMemoryCommandBus'
 import { CommandHandlers } from '../../../Shared/infrastructure/Bus/CommandBus/CommandHandlers'
 import { InMemoryAsyncEventBus } from '../../../Shared/infrastructure/Bus/EventBus/InMemoryAsyncEventBus'
@@ -24,7 +24,7 @@ export class MeetupPatchController {
     // TODO: Inject CommandBus
     const repository = new InMemoryMeetupRepository()
     const eventBus = new InMemoryAsyncEventBus()
-    const updater = new MeetupUpdater(repository, eventBus)
+    const updater = new UpdateMeetup(repository, eventBus)
     const handler = new UpdateMeetupCommandHandler(updater)
     const handlers = new CommandHandlers([handler])
     this.commandBus = new InMemoryCommandBus(handlers)
