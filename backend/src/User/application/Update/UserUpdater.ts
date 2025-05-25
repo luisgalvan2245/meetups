@@ -1,4 +1,4 @@
-import { UserRepository } from 'src/User/domain/Repositories/UserRepository'
+import { UserRepository } from 'src/User/domain/Persistance/UserRepository'
 import { UserFinder } from 'src/User/domain/Services/UserFinder'
 import { UserEmail } from 'src/User/domain/ValueObjects/UserEmail'
 import { UserName } from 'src/User/domain/ValueObjects/UserName'

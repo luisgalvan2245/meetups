@@ -1,5 +1,5 @@
 import { Meetup } from '../../domain/Meetup'
-import { MeetupRepository } from '../../domain/Repositories/MeetupRepository'
+import { MeetupRepository } from '../../domain/Persistance/MeetupRepository'
 
 export class MeetupsLister {
   constructor(private repository: MeetupRepository) {}

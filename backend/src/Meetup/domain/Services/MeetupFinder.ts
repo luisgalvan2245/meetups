@@ -1,6 +1,6 @@
 import { MeetupNotFoundError } from '../Exceptions/MeetupNotFoundError'
 import { Meetup } from '../Meetup'
-import { MeetupRepository } from '../Repositories/MeetupRepository'
+import { MeetupRepository } from '../Persistance/MeetupRepository'
 import { MeetupId } from '../ValueObjects/MeetupId'
 
 export class MeetupFinder {

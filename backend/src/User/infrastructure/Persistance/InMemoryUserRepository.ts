@@ -1,6 +1,6 @@
 import { UserId } from '../../../Shared/domain/ValueObjects/UserId'
-import { inMemoryStore } from '../../../Shared/infrastructure/InMemoryStore'
-import { UserRepository } from '../../domain/Repositories/UserRepository'
+import { inMemoryStore } from '../../../Shared/infrastructure/Persistance/InMemoryStore'
+import { UserRepository } from '../../domain/Persistance/UserRepository'
 import { User } from '../../domain/User'
 
 export class InMemoryUserRepository implements UserRepository {
@@ -17,7 +17,7 @@ export class InMemoryUserRepository implements UserRepository {
   }
 
   async update(user: User): Promise<void> {
-    const index = inMemoryStore.users.findIndex(u => u.id.equals(user.id))
+    const index = inMemoryStore.users.findIndex(user => user.id.equals(user.id))
     if (index >= 0) {
       inMemoryStore.users[index] = user
     }

@@ -1,4 +1,4 @@
-import { InMemoryStore } from '../../../Shared/infrastructure/InMemoryStore'
+import { InMemoryStore } from '../../../Shared/infrastructure/Persistance/InMemoryStore'
 import { Tag } from '../../domain/Tag'
 import { TagRepository } from '../../domain/TagRepository'
 import { TagId } from '../../domain/ValueObjects/TagId'

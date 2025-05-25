@@ -13,7 +13,7 @@ import { QueryBus } from '../../../Shared/domain/QueryBus'
 import { CreateUserCommand } from '../../application/Create/CreateUserCommand'
 import { GetUserQuery } from '../../application/Get/GetUserQuery'
 import { ListUsersQuery } from '../../application/List/ListUsersQuery'
-import { InMemoryUserRepository } from '../Repositories/InMemoryUserRepository'
+import { InMemoryUserRepository } from '../Persistance/InMemoryUserRepository'
 
 @Route('users')
 export class UserController extends Controller {

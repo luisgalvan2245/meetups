@@ -1,7 +1,7 @@
 import { EventBus } from 'src/Shared/domain/Bus/EventBus/EventBus'
 import { UserId } from 'src/Shared/domain/ValueObjects/UserId'
 
-import { UserRepository } from '../../domain/Repositories/UserRepository'
+import { UserRepository } from '../../domain/Persistance/UserRepository'
 import { User } from '../../domain/User'
 import { UserEmail } from '../../domain/ValueObjects/UserEmail'
 import { UserName } from '../../domain/ValueObjects/UserName'

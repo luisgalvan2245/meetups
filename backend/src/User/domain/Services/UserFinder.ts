@@ -1,6 +1,6 @@
 import { UserId } from '../../../Shared/domain/ValueObjects/UserId'
 import { UserNotFoundError } from '../Exceptions/UserNotFoundError'
-import { UserRepository } from '../Repositories/UserRepository'
+import { UserRepository } from '../Persistance/UserRepository'
 import { User } from '../User'
 
 export class UserFinder {

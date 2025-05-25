@@ -1,4 +1,4 @@
-import { UserRepository } from 'src/User/domain/Repositories/UserRepository'
+import { UserRepository } from 'src/User/domain/Persistance/UserRepository'
 import { UserFinder } from 'src/User/domain/Services/UserFinder'
 
 import { EventBus } from '../../../Shared/domain/Bus/EventBus/EventBus'

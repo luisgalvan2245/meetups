@@ -1,7 +1,7 @@
 import { EventBus } from '../../../Shared/domain/Bus/EventBus/EventBus'
 import { UserId } from '../../../Shared/domain/ValueObjects/UserId'
 import { TagId } from '../../../Tag/domain/ValueObjects/TagId'
-import { MeetupRepository } from '../../domain/Repositories/MeetupRepository'
+import { MeetupRepository } from '../../domain/Persistance/MeetupRepository'
 import { MeetupFinder } from '../../domain/Services/MeetupFinder'
 import { MeetupDate } from '../../domain/ValueObjects/MeetupDate'
 import { MeetupDescription } from '../../domain/ValueObjects/MeetupDescription'

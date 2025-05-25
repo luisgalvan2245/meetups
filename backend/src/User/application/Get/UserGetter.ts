@@ -1,5 +1,5 @@
 import { UserId } from '../../../Shared/domain/ValueObjects/UserId'
-import { UserRepository } from '../../domain/Repositories/UserRepository'
+import { UserRepository } from '../../domain/Persistance/UserRepository'
 import { UserFinder } from '../../domain/Services/UserFinder'
 import { User } from '../../domain/User'
 

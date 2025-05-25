@@ -1,4 +1,4 @@
-import { UserRepository } from '../../domain/Repositories/UserRepository'
+import { UserRepository } from '../../domain/Persistance/UserRepository'
 import { User } from '../../domain/User'
 
 export class UsersLister {

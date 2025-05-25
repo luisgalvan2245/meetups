@@ -1,5 +1,5 @@
 import { Meetup } from '../../domain/Meetup'
-import { MeetupRepository } from '../../domain/Repositories/MeetupRepository'
+import { MeetupRepository } from '../../domain/Persistance/MeetupRepository'
 import { MeetupFinder } from '../../domain/Services/MeetupFinder'
 import { MeetupId } from '../../domain/ValueObjects/MeetupId'
 

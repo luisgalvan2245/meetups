@@ -1,6 +1,6 @@
-import { inMemoryStore } from '../../../Shared/infrastructure/InMemoryStore'
+import { inMemoryStore } from '../../../Shared/infrastructure/Persistance/InMemoryStore'
 import { Meetup } from '../../domain/Meetup'
-import { MeetupRepository } from '../../domain/Repositories/MeetupRepository'
+import { MeetupRepository } from '../../domain/Persistance/MeetupRepository'
 import { MeetupId } from '../../domain/ValueObjects/MeetupId'
 
 export class InMemoryMeetupRepository implements MeetupRepository {

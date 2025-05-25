@@ -1,5 +1,5 @@
 import { MeetupId } from '../../../Meetup/domain/ValueObjects/MeetupId'
-import { inMemoryStore } from '../../../Shared/infrastructure/InMemoryStore'
+import { inMemoryStore } from '../../../Shared/infrastructure/Persistance/InMemoryStore'
 import { UserId } from '../../../User/domain/ValueObjects/UserId'
 import { Like } from '../../domain/Like'
 import { LikeRepository } from '../../domain/LikeRepository'
