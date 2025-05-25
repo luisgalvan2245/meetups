@@ -4,10 +4,10 @@ import { InvalidUserEmailError } from '../Exceptions/InvalidUserEmailError'
 export class UserEmail extends StringValueObject {
   constructor(value: string) {
     super(value)
-    this.ensureIsValidEmail()
+    this.assertIsValidEmail()
   }
 
-  private ensureIsValidEmail(): void {
+  private assertIsValidEmail(): void {
     if (!this.value) {
       throw new InvalidUserEmailError('Email cannot be empty')
     }

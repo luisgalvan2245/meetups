@@ -4,10 +4,10 @@ import { InvalidUserNameError } from '../Exceptions/InvalidUserNameError'
 export class UserName extends StringValueObject {
   constructor(value: string) {
     super(value)
-    this.ensureIsValidName(value)
+    this.assertIsValidName(value)
   }
 
-  private ensureIsValidName(value: string): void {
+  private assertIsValidName(value: string): void {
     if (value.length < 2) {
       throw new InvalidUserNameError('Name must be at least 2 characters long')
     }

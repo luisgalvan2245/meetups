@@ -4,10 +4,10 @@ import { InvalidUserPasswordError } from '../Exceptions/InvalidUserPasswordError
 export class UserPassword extends StringValueObject {
   constructor(value: string) {
     super(value)
-    this.ensureIsValidPassword(value)
+    this.assertIsValidPassword(value)
   }
 
-  private ensureIsValidPassword(value: string): void {
+  private assertIsValidPassword(value: string): void {
     if (value.length < 8) {
       throw new InvalidUserPasswordError(
         'Password must be at least 8 characters long'
