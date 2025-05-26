@@ -1,11 +1,10 @@
 import 'dotenv/config'
 import express, { Express } from 'express'
 import { Server as HttpServer } from 'http'
-import 'reflect-metadata'
 import swaggerUi from 'swagger-ui-express'
-import { container } from 'tsyringe'
 
 import Logger from '../../../contexts/platform/Shared/domain/logger/Logger'
+import { container } from '../../../contexts/platform/Shared/infrastructure/dependencies/container'
 import { ErrorHandlerMiddleware } from '../../../contexts/platform/Shared/infrastructure/middlewares/ErrorHandlerMiddleware'
 import { RegisterRoutes } from './routes/routes'
 import swaggerJson from './spec/swagger.json'
@@ -16,7 +15,7 @@ export class Server {
   private logger: Logger
   private httpServer?: HttpServer
 
-  constructor(logger: Logger = container.resolve('Logger')) {
+  constructor(logger: Logger = container.logger) {
     this.port = process.env.PORT || '3000'
     this.logger = logger
     this.express = express()

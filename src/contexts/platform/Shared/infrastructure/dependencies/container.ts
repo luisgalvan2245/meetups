@@ -1,5 +1,3 @@
-import { container } from 'tsyringe'
-
 import { CreateMeetupCommandHandler } from '../../../Meetup/application/Create/CreateMeetupCommandHandler'
 import { MeetupCreator } from '../../../Meetup/application/Create/MeetupCreator'
 import { DeleteMeetupCommandHandler } from '../../../Meetup/application/Delete/DeleteMeetupCommandHandler'
@@ -18,52 +16,35 @@ import { InMemoryQueryBus } from '../Bus/QueryBus/InMemoryQueryBus'
 import { QueryHandlers } from '../Bus/QueryBus/QueryHandlers'
 import { WinstonLogger } from '../logger/WinstonLogger'
 
-// Logger
-container.register('Logger', { useClass: WinstonLogger })
+class Container {
+  // Shared Infrastructure
+  logger = new WinstonLogger()
+  meetupRepository = new InMemoryMeetupRepository()
+  eventBus = new InMemoryAsyncEventBus()
 
-// Shared instances
-container.register('MeetupRepository', { useClass: InMemoryMeetupRepository })
-container.register('EventBus', { useClass: InMemoryAsyncEventBus })
+  // Application Services
+  meetupCreator = new MeetupCreator(this.meetupRepository, this.eventBus)
+  meetupUpdater = new MeetupUpdater(this.meetupRepository, this.eventBus)
+  meetupDeleter = new MeetupDeleter(this.meetupRepository, this.eventBus)
+  meetupGetter = new MeetupGetter(this.meetupRepository)
+  meetupsLister = new MeetupsLister(this.meetupRepository)
 
-// Application services
-const meetupCreator = new MeetupCreator(
-  container.resolve('MeetupRepository'),
-  container.resolve('EventBus')
-)
-const meetupUpdater = new MeetupUpdater(
-  container.resolve('MeetupRepository'),
-  container.resolve('EventBus')
-)
-const meetupDeleter = new MeetupDeleter(
-  container.resolve('MeetupRepository'),
-  container.resolve('EventBus')
-)
-const meetupGetter = new MeetupGetter(container.resolve('MeetupRepository'))
-const meetupsLister = new MeetupsLister(container.resolve('MeetupRepository'))
-
-// Command handlers
-container.register(CommandHandlers, {
-  useValue: new CommandHandlers([
-    new CreateMeetupCommandHandler(meetupCreator),
-    new UpdateMeetupCommandHandler(meetupUpdater),
-    new DeleteMeetupCommandHandler(meetupDeleter)
+  // Command Bus
+  commandHandlers = new CommandHandlers([
+    new CreateMeetupCommandHandler(this.meetupCreator),
+    new UpdateMeetupCommandHandler(this.meetupUpdater),
+    new DeleteMeetupCommandHandler(this.meetupDeleter)
   ])
-})
 
-container.register('CommandBus', {
-  useValue: new InMemoryCommandBus(container.resolve(CommandHandlers))
-})
+  commandBus = new InMemoryCommandBus(this.commandHandlers)
 
-// Query handlers
-container.register(QueryHandlers, {
-  useValue: new QueryHandlers([
-    new GetMeetupQueryHandler(meetupGetter),
-    new ListMeetupsQueryHandler(meetupsLister)
+  // Query Bus
+  queryHandlers = new QueryHandlers([
+    new GetMeetupQueryHandler(this.meetupGetter),
+    new ListMeetupsQueryHandler(this.meetupsLister)
   ])
-})
 
-container.register('QueryBus', {
-  useValue: new InMemoryQueryBus(container.resolve(QueryHandlers))
-})
+  queryBus = new InMemoryQueryBus(this.queryHandlers)
+}
 
-export { container }
+export const container = new Container()
