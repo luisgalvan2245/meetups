@@ -3,11 +3,11 @@
   "noImplicitAdditionalProperties": "throw-on-extras",
   "controllerPathGlobs": ["src/**/*Controller.ts"],
   "spec": {
-    "outputDirectory": "src/Apps/Platform/backend/spec",
+    "outputDirectory": "src/apps/platform/backend/spec",
     "specVersion": 3
   },
   "routes": {
-    "routesDir": "src/Apps/Platform/backend/routes",
+    "routesDir": "src/apps/platform/backend/routes",
     "middleware": "express"
   }
 }

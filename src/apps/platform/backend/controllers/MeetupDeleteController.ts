@@ -1,10 +1,10 @@
-import { InMemoryMeetupRepository } from '../../../../Contexts/Platform/Meetup/infrastructure/Persistance/InMemoryMeetupRepository'
-import { DeleteMeetupCommand } from '../../../../Contexts/Platform/Meetup/application/Delete/DeleteMeetupCommand'
-import { DeleteMeetupCommandHandler } from '../../../../Contexts/Platform/Meetup/application/Delete/DeleteMeetupCommandHandler'
-import { MeetupDeleter } from '../../../../Contexts/Platform/Meetup/application/Delete/MeetupDeleter'
-import { InMemoryCommandBus } from '../../../../Contexts/Platform/Shared/infrastructure/Bus/CommandBus/InMemoryCommandBus'
-import { CommandHandlers } from '../../../../Contexts/Platform/Shared/infrastructure/Bus/CommandBus/CommandHandlers'
-import { InMemoryAsyncEventBus } from '../../../../Contexts/Platform/Shared/infrastructure/Bus/EventBus/InMemoryAsyncEventBus'
+import { InMemoryMeetupRepository } from '../../../../contexts/platform/Meetup/infrastructure/Persistance/InMemoryMeetupRepository'
+import { DeleteMeetupCommand } from '../../../../contexts/platform/Meetup/application/Delete/DeleteMeetupCommand'
+import { DeleteMeetupCommandHandler } from '../../../../contexts/platform/Meetup/application/Delete/DeleteMeetupCommandHandler'
+import { MeetupDeleter } from '../../../../contexts/platform/Meetup/application/Delete/MeetupDeleter'
+import { InMemoryCommandBus } from '../../../../contexts/platform/Shared/infrastructure/Bus/CommandBus/InMemoryCommandBus'
+import { CommandHandlers } from '../../../../contexts/platform/Shared/infrastructure/Bus/CommandBus/CommandHandlers'
+import { InMemoryAsyncEventBus } from '../../../../contexts/platform/Shared/infrastructure/Bus/EventBus/InMemoryAsyncEventBus'
 import {
   Route,
   Tags,

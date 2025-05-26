@@ -1,10 +1,10 @@
-import { InMemoryMeetupRepository } from '../../../../Contexts/Platform/Meetup/infrastructure/Persistance/InMemoryMeetupRepository'
-import { CreateMeetupCommand } from '../../../../Contexts/Platform/Meetup/application/Create/CreateMeetupCommand'
-import { CreateMeetupCommandHandler } from '../../../../Contexts/Platform/Meetup/application/Create/CreateMeetupCommandHandler'
-import { MeetupCreator } from '../../../../Contexts/Platform/Meetup/application/Create/MeetupCreator'
-import { InMemoryCommandBus } from '../../../../Contexts/Platform/Shared/infrastructure/Bus/CommandBus/InMemoryCommandBus'
-import { CommandHandlers } from '../../../../Contexts/Platform/Shared/infrastructure/Bus/CommandBus/CommandHandlers'
-import { InMemoryAsyncEventBus } from '../../../../Contexts/Platform/Shared/infrastructure/Bus/EventBus/InMemoryAsyncEventBus'
+import { InMemoryMeetupRepository } from '../../../../contexts/platform/Meetup/infrastructure/Persistance/InMemoryMeetupRepository'
+import { CreateMeetupCommand } from '../../../../contexts/platform/Meetup/application/Create/CreateMeetupCommand'
+import { CreateMeetupCommandHandler } from '../../../../contexts/platform/Meetup/application/Create/CreateMeetupCommandHandler'
+import { MeetupCreator } from '../../../../contexts/platform/Meetup/application/Create/MeetupCreator'
+import { InMemoryCommandBus } from '../../../../contexts/platform/Shared/infrastructure/Bus/CommandBus/InMemoryCommandBus'
+import { CommandHandlers } from '../../../../contexts/platform/Shared/infrastructure/Bus/CommandBus/CommandHandlers'
+import { InMemoryAsyncEventBus } from '../../../../contexts/platform/Shared/infrastructure/Bus/EventBus/InMemoryAsyncEventBus'
 import {
   Route,
   Tags,
