@@ -1,11 +1,10 @@
-import { UserRepository } from 'src/User/domain/Persistance/UserRepository'
-import { UserFinder } from 'src/User/domain/Services/UserFinder'
-import { UserEmail } from 'src/User/domain/ValueObjects/UserEmail'
-import { UserName } from 'src/User/domain/ValueObjects/UserName'
-import { UserPassword } from 'src/User/domain/ValueObjects/UserPassword'
-
 import { EventBus } from '../../../Shared/domain/Bus/EventBus/EventBus'
 import { UserId } from '../../../Shared/domain/ValueObjects/UserId'
+import { UserRepository } from '../../../User/domain/Persistance/UserRepository'
+import { UserFinder } from '../../../User/domain/Services/UserFinder'
+import { UserEmail } from '../../../User/domain/ValueObjects/UserEmail'
+import { UserName } from '../../../User/domain/ValueObjects/UserName'
+import { UserPassword } from '../../../User/domain/ValueObjects/UserPassword'
 
 type Params = {
   id: UserId

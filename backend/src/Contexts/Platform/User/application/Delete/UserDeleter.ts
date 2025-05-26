@@ -1,8 +1,7 @@
-import { UserRepository } from 'src/User/domain/Persistance/UserRepository'
-import { UserFinder } from 'src/User/domain/Services/UserFinder'
-
 import { EventBus } from '../../../Shared/domain/Bus/EventBus/EventBus'
 import { UserId } from '../../../Shared/domain/ValueObjects/UserId'
+import { UserRepository } from '../../domain/Persistance/UserRepository'
+import { UserFinder } from '../../domain/Services/UserFinder'
 
 export class UserDeleter {
   private finder: UserFinder

@@ -1,7 +1,6 @@
-import { UserId } from 'src/Shared/domain/ValueObjects/UserId'
-
 import { Command } from '../../../Shared/domain/Bus/CommandBus/Command'
 import { CommandHandler } from '../../../Shared/domain/Bus/CommandBus/CommandHandler'
+import { UserId } from '../../../Shared/domain/ValueObjects/UserId'
 import { DeleteUserCommand } from './DeleteUserCommand'
 import { UserDeleter } from './UserDeleter'
 
