@@ -1,6 +1,6 @@
-import { Query } from '../../../domain/Bus/QueryBus/Query'
-import { QueryHandler } from '../../../domain/Bus/QueryBus/QueryHandler'
 import { Response } from '../../../domain/Response'
+import { Query } from '../../../domain/bus/QueryBus/Query'
+import { QueryHandler } from '../../../domain/bus/QueryBus/QueryHandler'
 import { QueryNotRegisteredError } from '../../../domain/exceptions/QueryNotRegisteredError'
 
 export class QueryHandlers extends Map<Query, QueryHandler<Query, Response>> {

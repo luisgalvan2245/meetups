@@ -1,5 +1,5 @@
-import { Command } from '../../../domain/Bus/CommandBus/Command'
-import { CommandHandler } from '../../../domain/Bus/CommandBus/CommandHandler'
+import { Command } from '../../../domain/bus/CommandBus/Command'
+import { CommandHandler } from '../../../domain/bus/CommandBus/CommandHandler'
 import { CommandNotRegisteredError } from '../../../domain/exceptions/CommandNotRegisteredError'
 
 export class CommandHandlers extends Map<Command, CommandHandler<Command>> {

@@ -1,5 +1,5 @@
-import { Query } from '../../../Shared/domain/Bus/QueryBus/Query'
-import { QueryHandler } from '../../../Shared/domain/Bus/QueryBus/QueryHandler'
+import { Query } from '../../../Shared/domain/bus/QueryBus/Query'
+import { QueryHandler } from '../../../Shared/domain/bus/QueryBus/QueryHandler'
 import { MeetupId } from '../../domain/value-objects/MeetupId'
 import { MeetupResponse } from '../MeetupResponse'
 import { GetMeetupQuery } from './GetMeetupQuery'

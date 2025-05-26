@@ -2,7 +2,7 @@ import { Route, Tags, Patch, SuccessResponse, Response, Path, Body } from '@tsoa
 
 import { UpdateMeetupCommand } from '../../../../contexts/platform/Meetup/application/Update/UpdateMeetupCommand'
 import { container } from '../../../../contexts/platform/Shared/infrastructure/dependencies/container'
-import { CommandBus } from '../../../../contexts/platform/Shared/domain/Bus/CommandBus/CommandBus'
+import { CommandBus } from '../../../../contexts/platform/Shared/domain/bus/CommandBus/CommandBus'
 
 @Route('meetups')
 @Tags('Meetups')

@@ -1,4 +1,4 @@
-import { EventBus } from '../../../Shared/domain/Bus/EventBus/EventBus'
+import { EventBus } from '../../../Shared/domain/bus/EventBus/EventBus'
 import { MeetupRepository } from '../../domain/persistance/MeetupRepository'
 import { MeetupFinder } from '../../domain/services/MeetupFinder'
 import { MeetupId } from '../../domain/value-objects/MeetupId'

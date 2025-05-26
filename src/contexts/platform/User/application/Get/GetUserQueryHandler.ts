@@ -1,5 +1,5 @@
-import { Query } from '../../../Shared/domain/Bus/QueryBus/Query'
-import { QueryHandler } from '../../../Shared/domain/Bus/QueryBus/QueryHandler'
+import { Query } from '../../../Shared/domain/bus/QueryBus/Query'
+import { QueryHandler } from '../../../Shared/domain/bus/QueryBus/QueryHandler'
 import { UserId } from '../../../Shared/domain/value-objects/UserId'
 import { UserResponse } from '../UserResponse'
 import { GetUserQuery } from './GetUserQuery'

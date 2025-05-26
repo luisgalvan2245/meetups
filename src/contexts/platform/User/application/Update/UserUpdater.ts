@@ -1,4 +1,4 @@
-import { EventBus } from '../../../Shared/domain/Bus/EventBus/EventBus'
+import { EventBus } from '../../../Shared/domain/bus/EventBus/EventBus'
 import { UserId } from '../../../Shared/domain/value-objects/UserId'
 import { UserRepository } from '../../../User/domain/persistance/UserRepository'
 import { UserFinder } from '../../../User/domain/services/UserFinder'

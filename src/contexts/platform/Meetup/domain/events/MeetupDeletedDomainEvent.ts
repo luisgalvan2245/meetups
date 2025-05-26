@@ -1,4 +1,4 @@
-import { DomainEvent } from '../../../Shared/domain/Bus/EventBus/DomainEvent'
+import { DomainEvent } from '../../../Shared/domain/bus/EventBus/DomainEvent'
 
 type MeetupDeletedDomainEventAttributes = {
   readonly aggregateId: string

@@ -1,5 +1,5 @@
-import { Command } from '../../../Shared/domain/Bus/CommandBus/Command'
-import { CommandHandler } from '../../../Shared/domain/Bus/CommandBus/CommandHandler'
+import { Command } from '../../../Shared/domain/bus/CommandBus/Command'
+import { CommandHandler } from '../../../Shared/domain/bus/CommandBus/CommandHandler'
 import { UserId } from '../../../Shared/domain/value-objects/UserId'
 import { DeleteUserCommand } from './DeleteUserCommand'
 import { UserDeleter } from './UserDeleter'

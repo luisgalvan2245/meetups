@@ -1,3 +1,3 @@
-import { Query } from '../../../Shared/domain/Bus/QueryBus/Query'
+import { Query } from '../../../Shared/domain/bus/QueryBus/Query'
 
 export class ListUsersQuery implements Query {}
