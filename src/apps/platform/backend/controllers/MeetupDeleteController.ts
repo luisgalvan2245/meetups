@@ -2,12 +2,12 @@ import { Route, Tags, SuccessResponse, Delete, Path, Response } from '@tsoa/runt
 
 import { DeleteMeetupCommand } from '../../../../contexts/platform/Meetup/application/Delete/DeleteMeetupCommand'
 import { CommandBus } from '../../../../contexts/platform/Shared/domain/Bus/CommandBus/CommandBus'
-import { commandBus } from '../../../../contexts/platform/Shared/infrastructure/dependencies/dependencies'
+import { container } from '../../../../contexts/platform/Shared/infrastructure/dependencies/container'
 
 @Route('meetups')
 @Tags('Meetups')
 export class MeetupDeleteController {
-  constructor(private bus: CommandBus = commandBus) {}
+  constructor(private bus: CommandBus = container.resolve<CommandBus>('CommandBus')) {}
 
   @Delete('{id}')
   @SuccessResponse(204, 'No Content')

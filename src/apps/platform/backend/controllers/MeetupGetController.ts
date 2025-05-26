@@ -3,13 +3,13 @@ import { Route, Tags, Get, Path, Response } from '@tsoa/runtime'
 import { ListMeetupsQuery } from '../../../../contexts/platform/Meetup/application/List/ListMeetupsQuery'
 import { GetMeetupQuery } from '../../../../contexts/platform/Meetup/application/Get/GetMeetupQuery'
 import { MeetupResponse } from '../../../../contexts/platform/Meetup/application/MeetupResponse'
-import { queryBus } from '../../../../contexts/platform/Shared/infrastructure/dependencies/dependencies'
+import { container } from '../../../../contexts/platform/Shared/infrastructure/dependencies/container'
 import { QueryBus } from '../../../../contexts/platform/Shared/domain/Bus/QueryBus/QueryBus'
 
 @Route('meetups')
 @Tags('Meetups')
 export class MeetupGetController {
-  constructor(private bus: QueryBus = queryBus) {}
+  constructor(private bus: QueryBus = container.resolve<QueryBus>('QueryBus')) {}
 
   @Get()
   async getAllMeetups(): Promise<MeetupResponse[]> {
