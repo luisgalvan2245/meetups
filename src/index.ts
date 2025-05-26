@@ -1,31 +1,6 @@
 import 'dotenv/config'
-import express, { Application } from 'express'
-import swaggerUi from 'swagger-ui-express'
 
-import { RegisterRoutes } from './apps/platform/backend/routes/routes'
-import swaggerJson from './apps/platform/backend/spec/swagger.json'
-import { WinstonLogger } from './contexts/platform/Shared/infrastructure/logger/WinstonLogger'
-import { ErrorHandlerMiddleware } from './contexts/platform/Shared/infrastructure/middlewares/ErrorHandlerMiddleware'
+import { Server } from './apps/platform/backend/server'
 
-export function createApp() {
-  const app = express()
-  app.use(express.json())
-  RegisterRoutes(app)
-  app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerJson))
-  app.use(ErrorHandlerMiddleware.handle)
-  return app
-}
-
-function startServer(app: Application) {
-  const host = process.env.HOST || 'localhost'
-  const port = process.env.PORT || 3000
-
-  app.listen(port, () => {
-    const logger = WinstonLogger.getLogger()
-    logger.warn(`Running on ${process.env.NODE_ENV} mode`)
-    logger.info(`Server listening on http://${host}:${port}`)
-  })
-}
-
-const app = createApp()
-startServer(app)
+const server = new Server(process.env.PORT || '3000')
+server.listen()

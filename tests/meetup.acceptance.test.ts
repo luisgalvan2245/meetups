@@ -3,10 +3,10 @@ import request from 'supertest'
 import { v4 as uuidV4 } from 'uuid'
 import { describe, expect, it } from 'vitest'
 
-import { createApp } from '../src/index'
+import { Server } from '../src/apps/platform/backend/server'
 
 describe('MeetupController', () => {
-  const app = createApp()
+  const server = new Server(process.env.PORT || '3000')
 
   describe('GET /meetups', () => {
     it('should return all meetups', async () => {
@@ -27,11 +27,11 @@ describe('MeetupController', () => {
         imageUrl: 'https://example.com/test2.jpg',
         organizerId: uuidV4()
       }
-      await request(app).put(`/meetups/${uuidV4()}`).send(meetupData1)
-      await request(app).put(`/meetups/${uuidV4()}`).send(meetupData2)
+      await request(server.app).put(`/meetups/${uuidV4()}`).send(meetupData1)
+      await request(server.app).put(`/meetups/${uuidV4()}`).send(meetupData2)
 
       // Get the meetups
-      const response = await request(app).get('/meetups')
+      const response = await request(server.app).get('/meetups')
       expect(response.status).toBe(status.OK)
       expect(Array.isArray(response.body)).toBe(true)
       expect(response.body.length).toBe(2)
@@ -55,21 +55,21 @@ describe('MeetupController', () => {
         imageUrl: 'https://example.com/test.jpg',
         organizerId: uuidV4()
       }
-      await request(app).put(`/meetups/${uuidV4()}`).send(meetupData)
+      await request(server.app).put(`/meetups/${uuidV4()}`).send(meetupData)
 
       // Get the meetup
-      const meetupsResponse = await request(app).get('/meetups')
+      const meetupsResponse = await request(server.app).get('/meetups')
       const meetupId = meetupsResponse.body[0].id
-      const response = await request(app).get(`/meetups/${meetupId}`)
+      const response = await request(server.app).get(`/meetups/${meetupId}`)
       expect(response.status).toBe(status.OK)
       expect(response.body).toHaveProperty('id', meetupId)
     })
     it('should return 404 for non-existent meetup', async () => {
-      const response = await request(app).get(`/meetups/${uuidV4()}`)
+      const response = await request(server.app).get(`/meetups/${uuidV4()}`)
       expect(response.status).toBe(status.NOT_FOUND)
     })
     it('should return 400 for invalid UUID format', async () => {
-      const response = await request(app).get('/meetups/not-a-uuid')
+      const response = await request(server.app).get('/meetups/not-a-uuid')
       expect(response.status).toBe(status.BAD_REQUEST)
     })
   })
@@ -85,13 +85,13 @@ describe('MeetupController', () => {
         imageUrl: 'https://example.com/test.jpg',
         organizerId: uuidV4()
       }
-      const response = await request(app)
+      const response = await request(server.app)
         .put(`/meetups/${meetupId}`)
         .send(meetupData)
       expect(response.status).toBe(status.CREATED)
 
       // Verify the meetup was created
-      const getResponse = await request(app).get(`/meetups/${meetupId}`)
+      const getResponse = await request(server.app).get(`/meetups/${meetupId}`)
       expect(getResponse.status).toBe(status.OK)
       expect(getResponse.body).toHaveProperty('id', meetupId)
     })
@@ -105,7 +105,9 @@ describe('MeetupController', () => {
         imageUrl: 'https://example.com/test.jpg',
         organizerId: uuidV4()
       }
-      const response = await request(app).put(`/meetups/${meetupId}`).send(data)
+      const response = await request(server.app)
+        .put(`/meetups/${meetupId}`)
+        .send(data)
       expect(response.status).toBe(status.BAD_REQUEST)
     })
     it('should return 400 if description is missing', async () => {
@@ -117,7 +119,9 @@ describe('MeetupController', () => {
         imageUrl: 'https://example.com/test.jpg',
         organizerId: uuidV4()
       }
-      const response = await request(app).put(`/meetups/${meetupId}`).send(data)
+      const response = await request(server.app)
+        .put(`/meetups/${meetupId}`)
+        .send(data)
       expect(response.status).toBe(status.BAD_REQUEST)
     })
     it('should return 400 if date is missing', async () => {
@@ -129,7 +133,9 @@ describe('MeetupController', () => {
         imageUrl: 'https://example.com/test.jpg',
         organizerId: uuidV4()
       }
-      const response = await request(app).put(`/meetups/${meetupId}`).send(data)
+      const response = await request(server.app)
+        .put(`/meetups/${meetupId}`)
+        .send(data)
       expect(response.status).toBe(status.BAD_REQUEST)
     })
     it('should return 400 if location is missing', async () => {
@@ -141,7 +147,9 @@ describe('MeetupController', () => {
         imageUrl: 'https://example.com/test.jpg',
         organizerId: uuidV4()
       }
-      const response = await request(app).put(`/meetups/${meetupId}`).send(data)
+      const response = await request(server.app)
+        .put(`/meetups/${meetupId}`)
+        .send(data)
       expect(response.status).toBe(status.BAD_REQUEST)
     })
     it('should return 400 if imageUrl is missing', async () => {
@@ -153,7 +161,9 @@ describe('MeetupController', () => {
         location: 'loc',
         organizerId: uuidV4()
       }
-      const response = await request(app).put(`/meetups/${meetupId}`).send(data)
+      const response = await request(server.app)
+        .put(`/meetups/${meetupId}`)
+        .send(data)
       expect(response.status).toBe(status.BAD_REQUEST)
     })
     it('should return 400 if title is not a string', async () => {
@@ -166,7 +176,9 @@ describe('MeetupController', () => {
         imageUrl: 'https://example.com/test.jpg',
         organizerId: uuidV4()
       }
-      const response = await request(app).put(`/meetups/${meetupId}`).send(data)
+      const response = await request(server.app)
+        .put(`/meetups/${meetupId}`)
+        .send(data)
       expect(response.status).toBe(status.BAD_REQUEST)
     })
     it('should return 400 if description is not a string', async () => {
@@ -179,7 +191,9 @@ describe('MeetupController', () => {
         imageUrl: 'https://example.com/test.jpg',
         organizerId: uuidV4()
       }
-      const response = await request(app).put(`/meetups/${meetupId}`).send(data)
+      const response = await request(server.app)
+        .put(`/meetups/${meetupId}`)
+        .send(data)
       expect(response.status).toBe(status.BAD_REQUEST)
     })
     it('should return 400 if date is not a valid date', async () => {
@@ -192,7 +206,9 @@ describe('MeetupController', () => {
         imageUrl: 'https://example.com/test.jpg',
         organizerId: uuidV4()
       }
-      const response = await request(app).put(`/meetups/${meetupId}`).send(data)
+      const response = await request(server.app)
+        .put(`/meetups/${meetupId}`)
+        .send(data)
       expect(response.status).toBe(status.BAD_REQUEST)
     })
     it('should return 400 if location is not a string', async () => {
@@ -205,7 +221,9 @@ describe('MeetupController', () => {
         imageUrl: 'https://example.com/test.jpg',
         organizerId: uuidV4()
       }
-      const response = await request(app).put(`/meetups/${meetupId}`).send(data)
+      const response = await request(server.app)
+        .put(`/meetups/${meetupId}`)
+        .send(data)
       expect(response.status).toBe(status.BAD_REQUEST)
     })
     it('should return 400 if imageUrl is not a string', async () => {
@@ -218,11 +236,13 @@ describe('MeetupController', () => {
         imageUrl: 123,
         organizerId: uuidV4()
       }
-      const response = await request(app).put(`/meetups/${meetupId}`).send(data)
+      const response = await request(server.app)
+        .put(`/meetups/${meetupId}`)
+        .send(data)
       expect(response.status).toBe(status.BAD_REQUEST)
     })
     it('should return 400 for invalid UUID format', async () => {
-      const response = await request(app)
+      const response = await request(server.app)
         .put('/meetups/not-a-uuid')
         .send({
           title: 'title',
@@ -248,20 +268,20 @@ describe('MeetupController', () => {
         imageUrl: 'https://example.com/original.jpg',
         organizerId: uuidV4()
       }
-      await request(app).put(`/meetups/${meetupId}`).send(meetupData)
+      await request(server.app).put(`/meetups/${meetupId}`).send(meetupData)
 
       // Now update it
       const updateData = {
         title: 'Updated Title',
         description: 'Updated Description'
       }
-      const response = await request(app)
+      const response = await request(server.app)
         .patch(`/meetups/${meetupId}`)
         .send(updateData)
       expect(response.status).toBe(status.NO_CONTENT)
 
       // Verify the update
-      const getResponse = await request(app).get(`/meetups/${meetupId}`)
+      const getResponse = await request(server.app).get(`/meetups/${meetupId}`)
       expect(getResponse.status).toBe(status.OK)
       expect(getResponse.body).toHaveProperty('title', 'Updated Title')
       expect(getResponse.body).toHaveProperty(
@@ -274,16 +294,18 @@ describe('MeetupController', () => {
     it('should return 404 for non-existent meetup', async () => {
       const nonExistentId = uuidV4()
       const updateData = { title: 'Updated Title' }
-      const response = await request(app)
+      const response = await request(server.app)
         .patch(`/meetups/${nonExistentId}`)
         .send(updateData)
       expect(response.status).toBe(status.NOT_FOUND)
     })
 
     it('should return 400 for invalid UUID format', async () => {
-      const response = await request(app).patch('/meetups/not-a-uuid').send({
-        title: 'Updated Title'
-      })
+      const response = await request(server.app)
+        .patch('/meetups/not-a-uuid')
+        .send({
+          title: 'Updated Title'
+        })
       expect(response.status).toBe(status.BAD_REQUEST)
     })
   })
@@ -300,30 +322,32 @@ describe('MeetupController', () => {
         imageUrl: 'https://example.com/delete.jpg',
         organizerId: uuidV4()
       }
-      await request(app).put(`/meetups/${meetupId}`).send(meetupData)
+      await request(server.app).put(`/meetups/${meetupId}`).send(meetupData)
 
       // Delete it
-      const response = await request(app).delete(`/meetups/${meetupId}`)
+      const response = await request(server.app).delete(`/meetups/${meetupId}`)
       expect(response.status).toBe(status.NO_CONTENT)
 
       // Verify it's gone
-      const getResponse = await request(app).get(`/meetups/${meetupId}`)
+      const getResponse = await request(server.app).get(`/meetups/${meetupId}`)
       expect(getResponse.status).toBe(status.NOT_FOUND)
     })
 
     it('should return 404 for non-existent meetup', async () => {
       const nonExistentId = uuidV4()
-      const response = await request(app).delete(`/meetups/${nonExistentId}`)
+      const response = await request(server.app).delete(
+        `/meetups/${nonExistentId}`
+      )
       expect(response.status).toBe(status.NOT_FOUND)
     })
 
     it('should return 400 for invalid UUID format', async () => {
-      const response = await request(app).delete('/meetups/not-a-uuid')
+      const response = await request(server.app).delete('/meetups/not-a-uuid')
       expect(response.status).toBe(status.BAD_REQUEST)
     })
     it('should return 400 for invalid imageUrl format', async () => {
       const nonExistentId = uuidV4()
-      const response = await request(app)
+      const response = await request(server.app)
         .put(`/meetups/${nonExistentId}`)
         .send({
           title: 'title',
