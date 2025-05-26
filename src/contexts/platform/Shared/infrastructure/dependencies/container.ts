@@ -16,6 +16,7 @@ import { InMemoryCommandBus } from '../Bus/CommandBus/InMemoryCommandBus'
 import { InMemoryAsyncEventBus } from '../Bus/EventBus/InMemoryAsyncEventBus'
 import { InMemoryQueryBus } from '../Bus/QueryBus/InMemoryQueryBus'
 import { QueryHandlers } from '../Bus/QueryBus/QueryHandlers'
+import { WinstonLogger } from '../logger/WinstonLogger'
 
 // Shared instances
 container.register('MeetupRepository', { useClass: InMemoryMeetupRepository })
@@ -61,5 +62,8 @@ container.register(QueryHandlers, {
 container.register('QueryBus', {
   useValue: new InMemoryQueryBus(container.resolve(QueryHandlers))
 })
+
+// Logger
+container.register('Logger', { useClass: WinstonLogger })
 
 export { container }

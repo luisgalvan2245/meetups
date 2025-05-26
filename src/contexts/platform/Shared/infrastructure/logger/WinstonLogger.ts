@@ -1,29 +1,36 @@
-import winston, { Logger, format as wf } from 'winston'
+import winston, { Logger as WinstonLoggerTP } from 'winston'
 
-export class WinstonLogger {
-  private static instance: Logger
+import Logger from '../../domain/logger/Logger'
 
-  private constructor() {}
+export class WinstonLogger implements Logger {
+  private logger: WinstonLoggerTP
 
-  static getLogger(): Logger {
-    if (!this.instance) {
-      const timestamp = wf.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' })
-      const errors = wf.errors({ stack: true })
+  constructor() {
+    this.logger = winston.createLogger({
+      format: winston.format.combine(
+        winston.format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
+        winston.format.prettyPrint(),
+        winston.format.errors({ stack: true }),
+        winston.format.splat(),
+        winston.format.colorize(),
+        winston.format.printf(
+          ({ timestamp, level, message, stack }) =>
+            `\x1b[34m${timestamp}\x1b[0m ${level}: ${stack || message}`
+        )
+      ),
+      transports: [new winston.transports.Console()]
+    })
+  }
 
-      const logFormat = wf.printf(({ level, message, timestamp, ...meta }) => {
-        const metaStr = Object.keys(meta).length
-          ? JSON.stringify(meta, null, 2)
-          : ''
-        return `\x1b[34m[${timestamp}]\x1b[0m ${level}: ${message} ${metaStr}`
-      })
+  debug(message: string) {
+    this.logger.debug(message)
+  }
 
-      this.instance = winston.createLogger({
-        level: process.env.NODE_ENV === 'development' ? 'debug' : 'info',
-        format: wf.combine(wf.colorize(), timestamp, errors, logFormat),
-        transports: [new winston.transports.Console()]
-      })
-    }
+  error(message: string | Error) {
+    this.logger.error(message)
+  }
 
-    return this.instance
+  info(message: string) {
+    this.logger.info(message)
   }
 }
