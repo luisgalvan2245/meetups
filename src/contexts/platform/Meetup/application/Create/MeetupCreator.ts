@@ -1,13 +1,13 @@
 import { EventBus } from '../../../Shared/domain/Bus/EventBus/EventBus'
-import { UserId } from '../../../Shared/domain/ValueObjects/UserId'
+import { UserId } from '../../../Shared/domain/value-objects/UserId'
 import { Meetup } from '../../domain/Meetup'
-import { MeetupRepository } from '../../domain/Persistance/MeetupRepository'
-import { MeetupDate } from '../../domain/ValueObjects/MeetupDate'
-import { MeetupDescription } from '../../domain/ValueObjects/MeetupDescription'
-import { MeetupId } from '../../domain/ValueObjects/MeetupId'
-import { MeetupImageUrl } from '../../domain/ValueObjects/MeetupImageUrl'
-import { MeetupLocation } from '../../domain/ValueObjects/MeetupLocation'
-import { MeetupTitle } from '../../domain/ValueObjects/MeetupTitle'
+import { MeetupRepository } from '../../domain/persistance/MeetupRepository'
+import { MeetupDate } from '../../domain/value-objects/MeetupDate'
+import { MeetupDescription } from '../../domain/value-objects/MeetupDescription'
+import { MeetupId } from '../../domain/value-objects/MeetupId'
+import { MeetupImageUrl } from '../../domain/value-objects/MeetupImageUrl'
+import { MeetupLocation } from '../../domain/value-objects/MeetupLocation'
+import { MeetupTitle } from '../../domain/value-objects/MeetupTitle'
 
 type Params = {
   id: MeetupId

@@ -5,7 +5,7 @@ import swaggerUi from 'swagger-ui-express'
 import { RegisterRoutes } from './apps/platform/backend/routes/routes'
 import swaggerJson from './apps/platform/backend/spec/swagger.json'
 import { logger } from './contexts/platform/Shared/infrastructure/Logger/Logger'
-import { ErrorHandlerMiddleware } from './contexts/platform/Shared/infrastructure/Middlewares/ErrorHandlerMiddleware'
+import { ErrorHandlerMiddleware } from './contexts/platform/Shared/infrastructure/middlewares/ErrorHandlerMiddleware'
 
 export function createApp() {
   const app = express()

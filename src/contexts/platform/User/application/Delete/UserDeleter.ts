@@ -1,7 +1,7 @@
 import { EventBus } from '../../../Shared/domain/Bus/EventBus/EventBus'
-import { UserId } from '../../../Shared/domain/ValueObjects/UserId'
-import { UserRepository } from '../../domain/Persistance/UserRepository'
-import { UserFinder } from '../../domain/Services/UserFinder'
+import { UserId } from '../../../Shared/domain/value-objects/UserId'
+import { UserRepository } from '../../domain/persistance/UserRepository'
+import { UserFinder } from '../../domain/services/UserFinder'
 
 export class UserDeleter {
   private finder: UserFinder

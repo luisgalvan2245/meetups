@@ -1,13 +1,12 @@
 import { Command } from '../../../Shared/domain/Bus/CommandBus/Command'
 import { CommandHandler } from '../../../Shared/domain/Bus/CommandBus/CommandHandler'
-import { UserId } from '../../../Shared/domain/ValueObjects/UserId'
-import { TagId } from '../../../Tag/domain/ValueObjects/TagId'
-import { MeetupDate } from '../../domain/ValueObjects/MeetupDate'
-import { MeetupDescription } from '../../domain/ValueObjects/MeetupDescription'
-import { MeetupId } from '../../domain/ValueObjects/MeetupId'
-import { MeetupImageUrl } from '../../domain/ValueObjects/MeetupImageUrl'
-import { MeetupLocation } from '../../domain/ValueObjects/MeetupLocation'
-import { MeetupTitle } from '../../domain/ValueObjects/MeetupTitle'
+import { UserId } from '../../../Shared/domain/value-objects/UserId'
+import { MeetupDate } from '../../domain/value-objects/MeetupDate'
+import { MeetupDescription } from '../../domain/value-objects/MeetupDescription'
+import { MeetupId } from '../../domain/value-objects/MeetupId'
+import { MeetupImageUrl } from '../../domain/value-objects/MeetupImageUrl'
+import { MeetupLocation } from '../../domain/value-objects/MeetupLocation'
+import { MeetupTitle } from '../../domain/value-objects/MeetupTitle'
 import { MeetupUpdater } from './MeetupUpdater'
 import { UpdateMeetupCommand } from './UpdateMeetupCommand'
 
@@ -36,8 +35,7 @@ export class UpdateMeetupCommandHandler
         : undefined,
       attendees: command.attendees
         ? command.attendees.map(id => new UserId(id))
-        : undefined,
-      tags: command.tags ? command.tags.map(id => new TagId(id)) : undefined
+        : undefined
     })
   }
 }

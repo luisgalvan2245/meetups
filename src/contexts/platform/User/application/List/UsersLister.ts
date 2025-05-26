@@ -1,5 +1,5 @@
-import { UserRepository } from '../../domain/Persistance/UserRepository'
 import { User } from '../../domain/User'
+import { UserRepository } from '../../domain/persistance/UserRepository'
 
 export class UsersLister {
   constructor(private repository: UserRepository) {}

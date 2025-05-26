@@ -1,6 +1,6 @@
 import { Command } from '../../../Shared/domain/Bus/CommandBus/Command'
 import { CommandHandler } from '../../../Shared/domain/Bus/CommandBus/CommandHandler'
-import { MeetupId } from '../../domain/ValueObjects/MeetupId'
+import { MeetupId } from '../../domain/value-objects/MeetupId'
 import { DeleteMeetupCommand } from './DeleteMeetupCommand'
 import { MeetupDeleter } from './MeetupDeleter'
 

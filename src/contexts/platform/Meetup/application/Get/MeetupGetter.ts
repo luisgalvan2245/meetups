@@ -1,7 +1,7 @@
 import { Meetup } from '../../domain/Meetup'
-import { MeetupRepository } from '../../domain/Persistance/MeetupRepository'
-import { MeetupFinder } from '../../domain/Services/MeetupFinder'
-import { MeetupId } from '../../domain/ValueObjects/MeetupId'
+import { MeetupRepository } from '../../domain/persistance/MeetupRepository'
+import { MeetupFinder } from '../../domain/services/MeetupFinder'
+import { MeetupId } from '../../domain/value-objects/MeetupId'
 
 export class MeetupGetter {
   private finder: MeetupFinder

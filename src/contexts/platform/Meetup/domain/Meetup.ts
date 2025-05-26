@@ -1,19 +1,18 @@
 import { AggregateRoot } from '../../Shared/domain/AggregateRoot'
-import { UserId } from '../../Shared/domain/ValueObjects/UserId'
-import { TagId } from '../../Tag/domain/ValueObjects/TagId'
-import { MeetupCreatedDomainEvent } from './Events/MeetupCreatedDomainEvent'
-import { MeetupDateUpdatedDomainEvent } from './Events/MeetupDateUpdatedDomainEvent'
-import { MeetupDeletedDomainEvent } from './Events/MeetupDeletedDomainEvent'
-import { MeetupDescriptionUpdatedDomainEvent } from './Events/MeetupDescriptionUpdatedDomainEvent'
-import { MeetupImageUrlUpdatedDomainEvent } from './Events/MeetupImageUrlUpdatedDomainEvent'
-import { MeetupLocationUpdatedDomainEvent } from './Events/MeetupLocationUpdatedDomainEvent'
-import { MeetupTitleUpdatedDomainEvent } from './Events/MeetupTitleUpdatedDomainEvent'
-import { MeetupDate } from './ValueObjects/MeetupDate'
-import { MeetupDescription } from './ValueObjects/MeetupDescription'
-import { MeetupId } from './ValueObjects/MeetupId'
-import { MeetupImageUrl } from './ValueObjects/MeetupImageUrl'
-import { MeetupLocation } from './ValueObjects/MeetupLocation'
-import { MeetupTitle } from './ValueObjects/MeetupTitle'
+import { UserId } from '../../Shared/domain/value-objects/UserId'
+import { MeetupCreatedDomainEvent } from './events/MeetupCreatedDomainEvent'
+import { MeetupDateUpdatedDomainEvent } from './events/MeetupDateUpdatedDomainEvent'
+import { MeetupDeletedDomainEvent } from './events/MeetupDeletedDomainEvent'
+import { MeetupDescriptionUpdatedDomainEvent } from './events/MeetupDescriptionUpdatedDomainEvent'
+import { MeetupImageUrlUpdatedDomainEvent } from './events/MeetupImageUrlUpdatedDomainEvent'
+import { MeetupLocationUpdatedDomainEvent } from './events/MeetupLocationUpdatedDomainEvent'
+import { MeetupTitleUpdatedDomainEvent } from './events/MeetupTitleUpdatedDomainEvent'
+import { MeetupDate } from './value-objects/MeetupDate'
+import { MeetupDescription } from './value-objects/MeetupDescription'
+import { MeetupId } from './value-objects/MeetupId'
+import { MeetupImageUrl } from './value-objects/MeetupImageUrl'
+import { MeetupLocation } from './value-objects/MeetupLocation'
+import { MeetupTitle } from './value-objects/MeetupTitle'
 
 export class Meetup extends AggregateRoot {
   readonly id: MeetupId
@@ -24,9 +23,6 @@ export class Meetup extends AggregateRoot {
   private _imageUrl: MeetupImageUrl
   private _organizerId: UserId
   private _attendeeIds: Set<UserId>
-  private _tagIds: Set<TagId>
-  private _likeCount: number
-  private _commentCount: number
   private _isDeleted: boolean
 
   constructor(
@@ -47,9 +43,6 @@ export class Meetup extends AggregateRoot {
     this._imageUrl = imageUrl
     this._organizerId = organizerId
     this._attendeeIds = new Set()
-    this._tagIds = new Set()
-    this._likeCount = 0
-    this._commentCount = 0
     this._isDeleted = false
   }
 
@@ -108,9 +101,6 @@ export class Meetup extends AggregateRoot {
       new UserId(data.organizerId)
     )
     meetup._attendeeIds = new Set(data.attendeeIds.map(id => new UserId(id)))
-    meetup._tagIds = new Set(data.tagIds.map(id => new TagId(id)))
-    meetup._likeCount = data.likeCount
-    meetup._commentCount = data.commentCount
     meetup._isDeleted = data.isDeleted
     return meetup
   }
@@ -125,9 +115,6 @@ export class Meetup extends AggregateRoot {
       imageUrl: this._imageUrl.value,
       organizerId: this._organizerId.value,
       attendeeIds: Array.from(this._attendeeIds).map(id => id.value),
-      tagIds: Array.from(this._tagIds).map(id => id.value),
-      likeCount: this._likeCount,
-      commentCount: this._commentCount,
       isDeleted: this._isDeleted
     }
   }
@@ -158,18 +145,6 @@ export class Meetup extends AggregateRoot {
 
   get attendeeIds() {
     return this._attendeeIds
-  }
-
-  get tagIds() {
-    return this._tagIds
-  }
-
-  get likeCount() {
-    return this._likeCount
-  }
-
-  get commentCount() {
-    return this._commentCount
   }
 
   get isDeleted() {
@@ -227,30 +202,6 @@ export class Meetup extends AggregateRoot {
 
   removeAttendee(attendeeId: UserId): void {
     this._attendeeIds.delete(attendeeId)
-  }
-
-  addTag(tagId: TagId): void {
-    this._tagIds.add(tagId)
-  }
-
-  removeTag(tagId: TagId): void {
-    this._tagIds.delete(tagId)
-  }
-
-  incrementLikeCount(): void {
-    this._likeCount++
-  }
-
-  decrementLikeCount(): void {
-    this._likeCount--
-  }
-
-  incrementCommentCount(): void {
-    this._commentCount++
-  }
-
-  decrementCommentCount(): void {
-    this._commentCount--
   }
 
   markAsDeleted(): void {

@@ -1,14 +1,13 @@
 import { EventBus } from '../../../Shared/domain/Bus/EventBus/EventBus'
-import { UserId } from '../../../Shared/domain/ValueObjects/UserId'
-import { TagId } from '../../../Tag/domain/ValueObjects/TagId'
-import { MeetupRepository } from '../../domain/Persistance/MeetupRepository'
-import { MeetupFinder } from '../../domain/Services/MeetupFinder'
-import { MeetupDate } from '../../domain/ValueObjects/MeetupDate'
-import { MeetupDescription } from '../../domain/ValueObjects/MeetupDescription'
-import { MeetupId } from '../../domain/ValueObjects/MeetupId'
-import { MeetupImageUrl } from '../../domain/ValueObjects/MeetupImageUrl'
-import { MeetupLocation } from '../../domain/ValueObjects/MeetupLocation'
-import { MeetupTitle } from '../../domain/ValueObjects/MeetupTitle'
+import { UserId } from '../../../Shared/domain/value-objects/UserId'
+import { MeetupRepository } from '../../domain/persistance/MeetupRepository'
+import { MeetupFinder } from '../../domain/services/MeetupFinder'
+import { MeetupDate } from '../../domain/value-objects/MeetupDate'
+import { MeetupDescription } from '../../domain/value-objects/MeetupDescription'
+import { MeetupId } from '../../domain/value-objects/MeetupId'
+import { MeetupImageUrl } from '../../domain/value-objects/MeetupImageUrl'
+import { MeetupLocation } from '../../domain/value-objects/MeetupLocation'
+import { MeetupTitle } from '../../domain/value-objects/MeetupTitle'
 
 type Params = {
   id: MeetupId
@@ -18,7 +17,6 @@ type Params = {
   location?: MeetupLocation
   imageUrl?: MeetupImageUrl
   attendees?: UserId[]
-  tags?: TagId[]
   organizerId?: UserId
 }
 
@@ -62,21 +60,6 @@ export class MeetupUpdater {
       newAttendees.forEach(attendee => {
         if (!currentAttendees.has(attendee)) {
           meetup.addAttendee(attendee)
-        }
-      })
-    }
-    if (params.tags) {
-      const currentTags = meetup.tagIds
-      const newTags = new Set(params.tags)
-
-      currentTags.forEach(tag => {
-        if (!newTags.has(tag)) {
-          meetup.removeTag(tag)
-        }
-      })
-      newTags.forEach(tag => {
-        if (!currentTags.has(tag)) {
-          meetup.addTag(tag)
         }
       })
     }

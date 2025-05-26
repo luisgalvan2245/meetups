@@ -1,9 +1,9 @@
 import { Command } from '../../../Shared/domain/Bus/CommandBus/Command'
 import { CommandHandler } from '../../../Shared/domain/Bus/CommandBus/CommandHandler'
-import { UserId } from '../../../Shared/domain/ValueObjects/UserId'
-import { UserEmail } from '../../../User/domain/ValueObjects/UserEmail'
-import { UserName } from '../../../User/domain/ValueObjects/UserName'
-import { UserPassword } from '../../../User/domain/ValueObjects/UserPassword'
+import { UserId } from '../../../Shared/domain/value-objects/UserId'
+import { UserEmail } from '../../../User/domain/value-objects/UserEmail'
+import { UserName } from '../../../User/domain/value-objects/UserName'
+import { UserPassword } from '../../../User/domain/value-objects/UserPassword'
 import { UpdateUserCommand } from './UpdateUserCommand'
 import { UserUpdater } from './UserUpdater'
 

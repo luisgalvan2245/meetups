@@ -1,13 +1,13 @@
 import { AggregateRoot } from '../../Shared/domain/AggregateRoot'
-import { UserId } from '../../Shared/domain/ValueObjects/UserId'
-import { UserCreatedDomainEvent } from './Events/UserCreatedDomainEvent'
-import { UserDeletedDomainEvent } from './Events/UserDeletedDomainEvent'
-import { UserEmailUpdatedDomainEvent } from './Events/UserEmailUpdatedDomainEvent'
-import { UserNameUpdatedDomainEvent } from './Events/UserNameUpdatedDomainEvent'
-import { UserPasswordUpdatedDomainEvent } from './Events/UserPasswordUpdatedDomainEvent'
-import { UserEmail } from './ValueObjects/UserEmail'
-import { UserName } from './ValueObjects/UserName'
-import { UserPassword } from './ValueObjects/UserPassword'
+import { UserId } from '../../Shared/domain/value-objects/UserId'
+import { UserCreatedDomainEvent } from './eventsUserCreatedDomainEvent'
+import { UserDeletedDomainEvent } from './eventsUserDeletedDomainEvent'
+import { UserEmailUpdatedDomainEvent } from './eventsUserEmailUpdatedDomainEvent'
+import { UserNameUpdatedDomainEvent } from './eventsUserNameUpdatedDomainEvent'
+import { UserPasswordUpdatedDomainEvent } from './eventsUserPasswordUpdatedDomainEvent'
+import { UserEmail } from './value-objects/UserEmail'
+import { UserName } from './value-objects/UserName'
+import { UserPassword } from './value-objects/UserPassword'
 
 export class User extends AggregateRoot {
   readonly id: UserId

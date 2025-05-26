@@ -1,4 +1,4 @@
-import { InMemoryMeetupRepository } from '../../../../contexts/platform/Meetup/infrastructure/Persistance/InMemoryMeetupRepository'
+import { InMemoryMeetupRepository } from '../../../../contexts/platform/Meetup/infrastructure/persistance/InMemoryMeetupRepository'
 import { UpdateMeetupCommand } from '../../../../contexts/platform/Meetup/application/Update/UpdateMeetupCommand'
 import { UpdateMeetupCommandHandler } from '../../../../contexts/platform/Meetup/application/Update/UpdateMeetupCommandHandler'
 import { MeetupUpdater } from '../../../../contexts/platform/Meetup/application/Update/MeetupUpdater'

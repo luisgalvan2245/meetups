@@ -1,10 +1,10 @@
 import { EventBus } from '../../../Shared/domain/Bus/EventBus/EventBus'
-import { UserId } from '../../../Shared/domain/ValueObjects/UserId'
-import { UserRepository } from '../../domain/Persistance/UserRepository'
+import { UserId } from '../../../Shared/domain/value-objects/UserId'
 import { User } from '../../domain/User'
-import { UserEmail } from '../../domain/ValueObjects/UserEmail'
-import { UserName } from '../../domain/ValueObjects/UserName'
-import { UserPassword } from '../../domain/ValueObjects/UserPassword'
+import { UserRepository } from '../../domain/persistance/UserRepository'
+import { UserEmail } from '../../domain/value-objects/UserEmail'
+import { UserName } from '../../domain/value-objects/UserName'
+import { UserPassword } from '../../domain/value-objects/UserPassword'
 
 type Params = {
   id: UserId
