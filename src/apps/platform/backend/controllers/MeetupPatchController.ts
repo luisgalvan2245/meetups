@@ -1,34 +1,13 @@
-import { InMemoryMeetupRepository } from '../../../../contexts/platform/Meetup/infrastructure/persistance/InMemoryMeetupRepository'
+import { Route, Tags, Patch, SuccessResponse, Response, Path, Body } from '@tsoa/runtime'
+
 import { UpdateMeetupCommand } from '../../../../contexts/platform/Meetup/application/Update/UpdateMeetupCommand'
-import { UpdateMeetupCommandHandler } from '../../../../contexts/platform/Meetup/application/Update/UpdateMeetupCommandHandler'
-import { MeetupUpdater } from '../../../../contexts/platform/Meetup/application/Update/MeetupUpdater'
-import { InMemoryCommandBus } from '../../../../contexts/platform/Shared/infrastructure/Bus/CommandBus/InMemoryCommandBus'
-import { CommandHandlers } from '../../../../contexts/platform/Shared/infrastructure/Bus/CommandBus/CommandHandlers'
-import { InMemoryAsyncEventBus } from '../../../../contexts/platform/Shared/infrastructure/Bus/EventBus/InMemoryAsyncEventBus'
-import {
-  Route,
-  Tags,
-  Patch,
-  Path,
-  Body,
-  Response,
-  SuccessResponse,
-} from '@tsoa/runtime'
+import { commandBus } from '../../../../contexts/platform/Shared/infrastructure/dependencies/dependencies'
+import { CommandBus } from '../../../../contexts/platform/Shared/domain/Bus/CommandBus/CommandBus'
 
 @Route('meetups')
 @Tags('Meetups')
 export class MeetupPatchController {
-  private commandBus: InMemoryCommandBus
-
-  constructor() {
-    // TODO: Inject CommandBus
-    const repository = new InMemoryMeetupRepository()
-    const eventBus = new InMemoryAsyncEventBus()
-    const updater = new MeetupUpdater(repository, eventBus)
-    const handler = new UpdateMeetupCommandHandler(updater)
-    const handlers = new CommandHandlers([handler])
-    this.commandBus = new InMemoryCommandBus(handlers)
-  }
+  constructor(private bus: CommandBus = commandBus) {}
 
   @Patch('{id}')
   @SuccessResponse(204, 'No Content')
@@ -47,6 +26,6 @@ export class MeetupPatchController {
     }
   ): Promise<void> {
     const command = new UpdateMeetupCommand({ id, ...data })
-    await this.commandBus.dispatch(command)
+    await this.bus.dispatch(command)
   }
 }
