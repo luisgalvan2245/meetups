@@ -4,7 +4,7 @@ import swaggerUi from 'swagger-ui-express'
 
 import { RegisterRoutes } from './apps/platform/backend/routes/routes'
 import swaggerJson from './apps/platform/backend/spec/swagger.json'
-import { logger } from './contexts/platform/Shared/infrastructure/Logger/Logger'
+import { WinstonLogger } from './contexts/platform/Shared/infrastructure/logger/WinstonLogger'
 import { ErrorHandlerMiddleware } from './contexts/platform/Shared/infrastructure/middlewares/ErrorHandlerMiddleware'
 
 export function createApp() {
@@ -21,6 +21,7 @@ function startServer(app: Application) {
   const port = process.env.PORT || 3000
 
   app.listen(port, () => {
+    const logger = WinstonLogger.getLogger()
     logger.warn(`Running on ${process.env.NODE_ENV} mode`)
     logger.info(`Server listening on http://${host}:${port}`)
   })
