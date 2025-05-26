@@ -4,13 +4,13 @@
 import type { TsoaRoute } from '@tsoa/runtime';
 import {  fetchMiddlewares, ExpressTemplateService } from '@tsoa/runtime';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-import { MeetupPutController } from './../controllers/MeetupPutController';
+import { MeetupPutController } from './../controllers/Meetup/MeetupPutController';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-import { MeetupPatchController } from './../controllers/MeetupPatchController';
+import { MeetupPatchController } from './../controllers/Meetup/MeetupPatchController';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-import { MeetupGetController } from './../controllers/MeetupGetController';
+import { MeetupGetController } from './../controllers/Meetup/MeetupGetController';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-import { MeetupDeleteController } from './../controllers/MeetupDeleteController';
+import { MeetupDeleteController } from './../controllers/Meetup/MeetupDeleteController';
 import type { Request as ExRequest, Response as ExResponse, RequestHandler, Router } from 'express';
 
 

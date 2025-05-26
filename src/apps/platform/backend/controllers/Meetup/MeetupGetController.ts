@@ -1,10 +1,10 @@
 import { Route, Tags, Get, Path, Response } from '@tsoa/runtime'
 
-import { ListMeetupsQuery } from '../../../../contexts/platform/Meetup/application/List/ListMeetupsQuery'
-import { GetMeetupQuery } from '../../../../contexts/platform/Meetup/application/Get/GetMeetupQuery'
-import { MeetupResponse } from '../../../../contexts/platform/Meetup/application/MeetupResponse'
-import { container } from '../../../../contexts/platform/Shared/infrastructure/dependencies/container'
-import { QueryBus } from '../../../../contexts/platform/Shared/domain/bus/QueryBus/QueryBus'
+import { ListMeetupsQuery } from '../../../../../contexts/platform/Meetup/application/List/ListMeetupsQuery'
+import { GetMeetupQuery } from '../../../../../contexts/platform/Meetup/application/Get/GetMeetupQuery'
+import { MeetupResponse } from '../../../../../contexts/platform/Meetup/application/MeetupResponse'
+import { container } from '../../../../../contexts/platform/Shared/infrastructure/dependencies/container'
+import { QueryBus } from '../../../../../contexts/platform/Shared/domain/bus/QueryBus/QueryBus'
 
 @Route('meetups')
 @Tags('Meetups')

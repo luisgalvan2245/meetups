@@ -1,8 +1,8 @@
 import { Route, Tags, SuccessResponse, Delete, Path, Response } from '@tsoa/runtime'
 
-import { DeleteMeetupCommand } from '../../../../contexts/platform/Meetup/application/Delete/DeleteMeetupCommand'
-import { CommandBus } from '../../../../contexts/platform/Shared/domain/bus/CommandBus/CommandBus'
-import { container } from '../../../../contexts/platform/Shared/infrastructure/dependencies/container'
+import { DeleteMeetupCommand } from '../../../../../contexts/platform/Meetup/application/Delete/DeleteMeetupCommand'
+import { CommandBus } from '../../../../../contexts/platform/Shared/domain/bus/CommandBus/CommandBus'
+import { container } from '../../../../../contexts/platform/Shared/infrastructure/dependencies/container'
 
 @Route('meetups')
 @Tags('Meetups')
