@@ -2,6 +2,7 @@ import 'dotenv/config'
 import express, { Express } from 'express'
 import { Server as HttpServer } from 'http'
 import swaggerUi from 'swagger-ui-express'
+import { promisify } from 'util'
 
 import Logger from '../../../contexts/platform/Shared/domain/logger/Logger'
 import { container } from '../../../contexts/platform/Shared/infrastructure/dependencies/container'
@@ -9,44 +10,68 @@ import { ErrorHandlerMiddleware } from '../../../contexts/platform/Shared/infras
 import { RegisterRoutes } from './routes/routes'
 import swaggerJson from './spec/swagger.json'
 
+interface ServerOptions {
+  port?: number
+  silent?: boolean
+  logger?: Logger
+}
+
+type ListenAsync = (port: number) => Promise<HttpServer>
+
 export class Server {
-  readonly port: string
-  private express: Express
-  private logger: Logger
+  readonly app: Express
+
+  private readonly logger: Logger
+  private readonly port: number
+  private readonly silent: boolean
   private httpServer?: HttpServer
 
-  constructor(logger: Logger = container.logger) {
-    this.port = process.env.PORT || '3000'
+  constructor({
+    port = Number(process.env.PORT) || 3000,
+    silent = false,
+    logger = container.logger
+  }: ServerOptions = {}) {
+    this.port = port
+    this.silent = silent
     this.logger = logger
-    this.express = express()
-    this.express.use(express.json())
-    RegisterRoutes(this.express)
-    this.express.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerJson))
-    this.express.use(ErrorHandlerMiddleware.handle)
-  }
+    this.app = express()
 
-  get app(): Express {
-    return this.express
+    this.setupBodyParsing()
+    this.setupRoutes()
+    this.setupSwagger()
+    this.setupErrorHandling()
   }
 
   async listen(): Promise<void> {
-    return new Promise(resolve => {
-      this.httpServer = this.express.listen(this.port, () => {
-        this.logger.info(`Running on ${process.env.NODE_ENV} environment`)
-        this.logger.info(`Server is running on port ${this.port}`)
-        resolve()
-      })
-    })
+    const listenAsync: ListenAsync = promisify(this.app.listen.bind(this.app))
+    this.httpServer = await listenAsync(this.port)
+
+    if (!this.silent) {
+      this.logger.info(`Running on ${process.env.NODE_ENV} environment`)
+      this.logger.info(`Server is running on port ${this.port}`)
+    }
   }
 
   async close(): Promise<void> {
-    return new Promise((resolve, reject) => {
-      this.httpServer?.close(error => {
-        if (error) {
-          return reject(error)
-        }
-        resolve()
-      })
-    })
+    if (!this.httpServer) return
+
+    const closeAsync = promisify(this.httpServer.close.bind(this.httpServer))
+    await closeAsync()
+  }
+
+  private setupBodyParsing(): void {
+    this.app.use(express.json())
+  }
+
+  private setupRoutes(): void {
+    RegisterRoutes(this.app)
+  }
+
+  private setupSwagger(): void {
+    this.app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerJson))
+  }
+
+  private setupErrorHandling(): void {
+    this.app.use(ErrorHandlerMiddleware.handle)
   }
 }

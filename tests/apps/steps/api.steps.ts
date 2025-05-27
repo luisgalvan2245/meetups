@@ -1,21 +1,17 @@
 import { After, Before, Given, Then, When } from '@cucumber/cucumber'
+import { Application } from 'express'
 import request from 'supertest'
 import { v4 as uuidV4 } from 'uuid'
 
-import { Server } from '../../../../src/apps/platform/backend/server'
+import { Server } from '../../../src/apps/platform/backend/server'
 
 let response: any
-let server: Server
+let app: Application
 let meetupId: string
 let meetupData: any
 
 Before(async function () {
-  server = new Server()
-  await server.listen()
-})
-
-After(async function () {
-  await server.close()
+  app = new Server({ silent: true }).app
 })
 
 Given('I have created two meetups', async function () {
@@ -35,8 +31,8 @@ Given('I have created two meetups', async function () {
     imageUrl: 'https://example.com/test2.jpg',
     organizerId: uuidV4()
   }
-  await request(server.app).put(`/meetups/${uuidV4()}`).send(meetupData1)
-  await request(server.app).put(`/meetups/${uuidV4()}`).send(meetupData2)
+  await request(app).put(`/meetups/${uuidV4()}`).send(meetupData1)
+  await request(app).put(`/meetups/${uuidV4()}`).send(meetupData2)
 })
 
 Given('I have created a meetup', async function () {
@@ -49,21 +45,21 @@ Given('I have created a meetup', async function () {
     imageUrl: 'https://example.com/test.jpg',
     organizerId: uuidV4()
   }
-  await request(server.app).put(`/meetups/${meetupId}`).send(meetupData)
+  await request(app).put(`/meetups/${meetupId}`).send(meetupData)
 })
 
 When('I make a GET request to {string}', async function (endpoint: string) {
   const url = endpoint
     .replace('{meetupId}', meetupId)
     .replace('{nonExistentId}', uuidV4())
-  response = await request(server.app).get(url)
+  response = await request(app).get(url)
 })
 
 When(
   'I make a PUT request to {string} with valid meetup data',
   async function (endpoint: string) {
     const url = endpoint.replace('{meetupId}', meetupId)
-    response = await request(server.app).put(url).send(meetupData)
+    response = await request(app).put(url).send(meetupData)
   }
 )
 
@@ -78,7 +74,7 @@ When(
       organizerId: uuidV4()
     }
     const url = endpoint.replace('{meetupId}', meetupId)
-    response = await request(server.app).put(url).send(invalidData)
+    response = await request(app).put(url).send(invalidData)
   }
 )
 
@@ -90,13 +86,13 @@ When(
       description: 'Updated Description'
     }
     const url = endpoint.replace('{meetupId}', meetupId)
-    response = await request(server.app).patch(url).send(updateData)
+    response = await request(app).patch(url).send(updateData)
   }
 )
 
 When('I make a DELETE request to {string}', async function (endpoint: string) {
   const url = endpoint.replace('{meetupId}', meetupId)
-  response = await request(server.app).delete(url)
+  response = await request(app).delete(url)
 })
 
 Then('the response status code should be {int}', function (statusCode: number) {
@@ -150,7 +146,7 @@ Then('the response should contain the meetup data', function () {
 })
 
 Then('the meetup should be created with the provided data', async function () {
-  const getResponse = await request(server.app).get(`/meetups/${meetupId}`)
+  const getResponse = await request(app).get(`/meetups/${meetupId}`)
   if (getResponse.status !== 200) {
     throw new Error('Failed to get created meetup')
   }
@@ -164,7 +160,7 @@ Then('the meetup should be created with the provided data', async function () {
 })
 
 Then('the meetup should be updated with the new data', async function () {
-  const getResponse = await request(server.app).get(`/meetups/${meetupId}`)
+  const getResponse = await request(app).get(`/meetups/${meetupId}`)
   if (getResponse.status !== 200) {
     throw new Error('Failed to get updated meetup')
   }
@@ -177,7 +173,7 @@ Then('the meetup should be updated with the new data', async function () {
 })
 
 Then('the meetup should be deleted', async function () {
-  const getResponse = await request(server.app).get(`/meetups/${meetupId}`)
+  const getResponse = await request(app).get(`/meetups/${meetupId}`)
   if (getResponse.status !== 404) {
     throw new Error('Meetup was not deleted')
   }
