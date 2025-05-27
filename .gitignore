@@ -35,5 +35,8 @@ coverage/
 # Docker
 postgres_data/
 
+# Cucumber
+cucumber-report.html
+
 # Old project
 .old/
