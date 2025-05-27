@@ -12,14 +12,12 @@ export class InMemoryMeetupRepository implements MeetupRepository {
     return inMemoryStore.meetups.find(meetup => meetup.id.equals(id)) || null
   }
 
-  async create(meetup: Meetup): Promise<void> {
-    inMemoryStore.meetups.push(meetup)
-  }
-
-  async update(meetup: Meetup): Promise<void> {
+  async save(meetup: Meetup): Promise<void> {
     const index = inMemoryStore.meetups.findIndex(m => m.id.equals(meetup.id))
     if (index >= 0) {
       inMemoryStore.meetups[index] = meetup
+    } else {
+      inMemoryStore.meetups.push(meetup)
     }
   }
 

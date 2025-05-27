@@ -32,8 +32,8 @@ export class Server {
   async listen(): Promise<void> {
     return new Promise(resolve => {
       this.httpServer = this.express.listen(this.port, () => {
-        this.logger.info(`Running on ${process.env.NODE_ENV} mode`)
-        this.logger.info(`Server is running on port: ${this.port}`)
+        this.logger.info(`Running on ${process.env.NODE_ENV} environment`)
+        this.logger.info(`Server is running on port ${this.port}`)
         resolve()
       })
     })

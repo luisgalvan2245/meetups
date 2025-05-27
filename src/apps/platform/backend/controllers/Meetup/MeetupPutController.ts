@@ -7,7 +7,7 @@ import { CommandBus } from '../../../../../contexts/platform/Shared/domain/bus/C
 @Route('meetups')
 @Tags('Meetups')
 export class MeetupPutController {
-  constructor(private bus: CommandBus = container.commandBus) {}
+  constructor(private bus: CommandBus = container.meetup.commandBus) {}
 
   @Put('{id}')
   @SuccessResponse(201, 'Created')

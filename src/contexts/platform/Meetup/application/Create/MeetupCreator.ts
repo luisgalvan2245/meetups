@@ -35,7 +35,7 @@ export class MeetupCreator {
       params.imageUrl,
       params.organizerId
     )
-    await this.repository.create(meetup)
+    await this.repository.save(meetup)
     const events = meetup.pullDomainEvents()
     await this.eventBus.publish(events)
   }

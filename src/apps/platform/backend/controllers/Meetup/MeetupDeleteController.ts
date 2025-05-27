@@ -7,7 +7,7 @@ import { container } from '../../../../../contexts/platform/Shared/infrastructur
 @Route('meetups')
 @Tags('Meetups')
 export class MeetupDeleteController {
-  constructor(private bus: CommandBus = container.commandBus) {}
+  constructor(private bus: CommandBus = container.meetup.commandBus) {}
 
   @Delete('{id}')
   @SuccessResponse(204, 'No Content')

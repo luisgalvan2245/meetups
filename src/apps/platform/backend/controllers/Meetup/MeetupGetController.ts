@@ -9,7 +9,7 @@ import { QueryBus } from '../../../../../contexts/platform/Shared/domain/bus/Que
 @Route('meetups')
 @Tags('Meetups')
 export class MeetupGetController {
-  constructor(private bus: QueryBus = container.queryBus) {}
+  constructor(private bus: QueryBus = container.meetup.queryBus) {}
 
   @Get()
   async getAllMeetups(): Promise<MeetupResponse[]> {

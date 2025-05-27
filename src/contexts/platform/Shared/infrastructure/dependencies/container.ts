@@ -16,35 +16,40 @@ import { InMemoryQueryBus } from '../bus/QueryBus/InMemoryQueryBus'
 import { QueryHandlers } from '../bus/QueryBus/QueryHandlers'
 import { WinstonLogger } from '../logger/WinstonLogger'
 
+class MeetupContext {
+  readonly repository: InMemoryMeetupRepository
+  readonly commandBus: InMemoryCommandBus
+  readonly queryBus: InMemoryQueryBus
+
+  constructor(eventBus: InMemoryAsyncEventBus) {
+    this.repository = new InMemoryMeetupRepository()
+
+    const creator = new MeetupCreator(this.repository, eventBus)
+    const updater = new MeetupUpdater(this.repository, eventBus)
+    const deleter = new MeetupDeleter(this.repository, eventBus)
+    const getter = new MeetupGetter(this.repository)
+    const lister = new MeetupsLister(this.repository)
+
+    const commandHandlers = new CommandHandlers([
+      new CreateMeetupCommandHandler(creator),
+      new UpdateMeetupCommandHandler(updater),
+      new DeleteMeetupCommandHandler(deleter)
+    ])
+
+    const queryHandlers = new QueryHandlers([
+      new GetMeetupQueryHandler(getter),
+      new ListMeetupsQueryHandler(lister)
+    ])
+
+    this.commandBus = new InMemoryCommandBus(commandHandlers)
+    this.queryBus = new InMemoryQueryBus(queryHandlers)
+  }
+}
+
 class Container {
-  // Shared Infrastructure
   logger = new WinstonLogger()
-  meetupRepository = new InMemoryMeetupRepository()
   eventBus = new InMemoryAsyncEventBus()
-
-  // Application Services
-  meetupCreator = new MeetupCreator(this.meetupRepository, this.eventBus)
-  meetupUpdater = new MeetupUpdater(this.meetupRepository, this.eventBus)
-  meetupDeleter = new MeetupDeleter(this.meetupRepository, this.eventBus)
-  meetupGetter = new MeetupGetter(this.meetupRepository)
-  meetupsLister = new MeetupsLister(this.meetupRepository)
-
-  // Command Bus
-  commandHandlers = new CommandHandlers([
-    new CreateMeetupCommandHandler(this.meetupCreator),
-    new UpdateMeetupCommandHandler(this.meetupUpdater),
-    new DeleteMeetupCommandHandler(this.meetupDeleter)
-  ])
-
-  commandBus = new InMemoryCommandBus(this.commandHandlers)
-
-  // Query Bus
-  queryHandlers = new QueryHandlers([
-    new GetMeetupQueryHandler(this.meetupGetter),
-    new ListMeetupsQueryHandler(this.meetupsLister)
-  ])
-
-  queryBus = new InMemoryQueryBus(this.queryHandlers)
+  meetup = new MeetupContext(this.eventBus)
 }
 
 export const container = new Container()

@@ -64,7 +64,7 @@ export class MeetupUpdater {
       })
     }
 
-    await this.repository.update(meetup)
+    await this.repository.save(meetup)
     const events = meetup.pullDomainEvents()
     await this.eventBus.publish(events)
   }
