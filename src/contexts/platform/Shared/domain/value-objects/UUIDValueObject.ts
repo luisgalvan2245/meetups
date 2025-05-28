@@ -20,7 +20,7 @@ export class UUIDValueObject extends ValueObject<string> {
 
   private assertIsValidUUID(id: string): void {
     if (!uuidValidate(id)) {
-      throw new InvalidUUIDError(`Invalid UUID format: ${id}`)
+      throw new InvalidUUIDError(id)
     }
   }
 }
