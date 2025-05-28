@@ -25,8 +25,28 @@ Feature: API Endpoints
     Then the response status code should be 201
     And the meetup should be created with the provided data
 
-  Scenario: Create meetup with missing required fields
+  Scenario: Create meetup with missing title
     When I make a PUT request to "/meetups/{meetupId}" with missing required fields
+    Then the response status code should be 400
+
+  Scenario: Create meetup with missing description
+    When I make a PUT request to "/meetups/{meetupId}" with missing description
+    Then the response status code should be 400
+
+  Scenario: Create meetup with missing date
+    When I make a PUT request to "/meetups/{meetupId}" with missing date
+    Then the response status code should be 400
+
+  Scenario: Create meetup with missing location
+    When I make a PUT request to "/meetups/{meetupId}" with missing location
+    Then the response status code should be 400
+
+  Scenario: Create meetup with missing imageUrl
+    When I make a PUT request to "/meetups/{meetupId}" with missing imageUrl
+    Then the response status code should be 400
+
+  Scenario: Create meetup with missing organizerId
+    When I make a PUT request to "/meetups/{meetupId}" with missing organizerId
     Then the response status code should be 400
 
   Scenario: Update meetup
