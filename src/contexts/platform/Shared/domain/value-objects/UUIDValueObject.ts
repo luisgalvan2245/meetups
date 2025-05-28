@@ -1,7 +1,7 @@
 // NOTE: We are using an external library in the domain layer (be aware of the risks).
 import { validate as uuidValidate } from 'uuid'
 
-import { InvalidUUIDFormatError } from '../exceptions/InvalidUUIDFormatError'
+import { InvalidUUIDError } from '../exceptions/InvalidUUIDError'
 import { ValueObject } from './ValueObject'
 
 export class UUIDValueObject extends ValueObject<string> {
@@ -20,7 +20,7 @@ export class UUIDValueObject extends ValueObject<string> {
 
   private assertIsValidUUID(id: string): void {
     if (!uuidValidate(id)) {
-      throw new InvalidUUIDFormatError(`Invalid UUID format: ${id}`)
+      throw new InvalidUUIDError(`Invalid UUID format: ${id}`)
     }
   }
 }

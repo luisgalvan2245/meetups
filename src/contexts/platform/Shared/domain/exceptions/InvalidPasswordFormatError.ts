@@ -1,6 +1,6 @@
-import { FormatError } from './FormatError'
+import { ValidationError } from './ValidationError'
 
-export class InvalidPasswordFormatError extends FormatError {
+export class InvalidPasswordFormatError extends ValidationError {
   constructor(message: string) {
     super(message)
   }

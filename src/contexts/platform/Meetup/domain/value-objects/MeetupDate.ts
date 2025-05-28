@@ -1,4 +1,4 @@
-import { InvalidDateFormatError } from '../../../Shared/domain/exceptions/InvalidDateFormatError'
+import { InvalidDateError } from '../../../Shared/domain/exceptions/InvalidDateError'
 import { DateValueObject } from '../../../Shared/domain/value-objects/DateValueObject'
 
 export class MeetupDate extends DateValueObject {
@@ -9,7 +9,7 @@ export class MeetupDate extends DateValueObject {
 
   private assertIsValidDate(): void {
     if (isNaN(this.value.getTime())) {
-      throw new InvalidDateFormatError(this.value)
+      throw new InvalidDateError(this.value)
     }
   }
 

@@ -4,8 +4,8 @@ import { ValidateError } from 'tsoa'
 
 import { BusinessRuleError } from '../../domain/exceptions/BusinessRuleError'
 import { DomainError } from '../../domain/exceptions/DomainError'
-import { FormatError } from '../../domain/exceptions/FormatError'
 import { NotFoundError } from '../../domain/exceptions/NotFoundError'
+import { ValidationError } from '../../domain/exceptions/ValidationError'
 
 interface ErrorResponse {
   message: string
@@ -23,7 +23,7 @@ export class ErrorHandler {
       statusCode = status.BAD_REQUEST
       response.message = 'Validation Error'
       response.fields = (err as ValidateError).fields
-    } else if (err instanceof FormatError) {
+    } else if (err instanceof ValidationError) {
       statusCode = status.BAD_REQUEST
       response.message = err.message
     } else if (err instanceof NotFoundError) {
