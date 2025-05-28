@@ -1,5 +1,4 @@
 import {
-  After,
   Before,
   Given,
   Then,
@@ -18,7 +17,6 @@ class APIWorld extends World {
   response: any
   meetupId: string
   meetupData: any
-  server!: Server
 
   constructor(options: any) {
     super(options)
@@ -35,38 +33,7 @@ class APIWorld extends World {
 setWorldConstructor(APIWorld)
 
 Before(async function (this: APIWorld) {
-  this.server = new Server({ silent: true })
-  this.app = this.server.app
-})
-
-After(async function (this: APIWorld) {
-  if (this.server) {
-    if (typeof (this.server as any).stop === 'function') {
-      await (this.server as any).stop()
-    } else if (
-      typeof (this.server as any).getHttpServer === 'function' &&
-      (this.server as any).getHttpServer &&
-      (this.server as any).getHttpServer()
-    ) {
-      const httpServer = (this.server as any).getHttpServer()
-      if (httpServer && typeof httpServer.close === 'function') {
-        await new Promise<void>((resolve, reject) => {
-          httpServer.close((err?: Error) => {
-            if (err) return reject(err)
-            resolve()
-          })
-        })
-      }
-    } else if (typeof (this.server as any).close === 'function') {
-      await (this.server as any).close()
-    } else {
-      console.warn(
-        'Cucumber tests: APIWorld.server does not have a known stop/close method. ' +
-          'This might lead to resource leaks (e.g., EADDRINUSE errors). ' +
-          'Please ensure your Server class has a proper shutdown mechanism that is called in the After hook.'
-      )
-    }
-  }
+  this.app = new Server({ silent: true }).app
 })
 
 Given('I have created two meetups', async function (this: APIWorld) {
