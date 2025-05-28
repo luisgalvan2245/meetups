@@ -50,8 +50,8 @@ export class Server {
     this.server = await listen(this.port)
 
     if (!this.silent) {
-      this.logger.info(`Running on ${process.env.NODE_ENV} environment`)
-      this.logger.info(`Server is running on port ${this.port}`)
+      this.logger.info(`Server listening on port ${this.port}`)
+      this.logger.info(`Running in ${process.env.NODE_ENV} mode`)
     }
   }
 
