@@ -1,4 +1,4 @@
-import { After, Before, Given, Then, When } from '@cucumber/cucumber'
+import { Before, Given, Then, When } from '@cucumber/cucumber'
 import { Application } from 'express'
 import request from 'supertest'
 import { v4 as uuidV4 } from 'uuid'
@@ -10,6 +10,9 @@ let app: Application
 let meetupId: string
 let meetupData: any
 
+const getFutureDate = (days: number) =>
+  new Date(Date.now() + days * 24 * 60 * 60 * 1000).toISOString()
+
 Before(async function () {
   app = new Server({ silent: true }).app
 })
@@ -18,7 +21,7 @@ Given('I have created two meetups', async function () {
   const meetupData1 = {
     title: 'Test Meetup 1',
     description: 'Test Description 1',
-    date: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(),
+    date: getFutureDate(7),
     location: 'Test Location 1',
     imageUrl: 'https://example.com/test1.jpg',
     organizerId: uuidV4()
@@ -26,7 +29,7 @@ Given('I have created two meetups', async function () {
   const meetupData2 = {
     title: 'Test Meetup 2',
     description: 'Test Description 2',
-    date: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(),
+    date: getFutureDate(7),
     location: 'Test Location 2',
     imageUrl: 'https://example.com/test2.jpg',
     organizerId: uuidV4()
@@ -40,7 +43,7 @@ Given('I have created a meetup', async function () {
   meetupData = {
     title: 'Test Meetup',
     description: 'Test Description',
-    date: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(),
+    date: getFutureDate(7),
     location: 'Test Location',
     imageUrl: 'https://example.com/test.jpg',
     organizerId: uuidV4()
@@ -68,7 +71,7 @@ When(
   async function (endpoint: string) {
     const invalidData = {
       description: 'Test Description',
-      date: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(),
+      date: getFutureDate(7),
       location: 'Test Location',
       imageUrl: 'https://example.com/test.jpg',
       organizerId: uuidV4()

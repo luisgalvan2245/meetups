@@ -8,19 +8,22 @@ import { ListMeetupsQueryHandler } from '../../../Meetup/application/List/ListMe
 import { MeetupsLister } from '../../../Meetup/application/List/MeetupsLister'
 import { MeetupUpdater } from '../../../Meetup/application/Update/MeetupUpdater'
 import { UpdateMeetupCommandHandler } from '../../../Meetup/application/Update/UpdateMeetupCommandHandler'
+import { MeetupRepository } from '../../../Meetup/domain/persistance/MeetupRepository'
 import { InMemoryMeetupRepository } from '../../../Meetup/infrastructure/persistance/InMemoryMeetupRepository'
+import { CommandBus } from '../../domain/bus/CommandBus/CommandBus'
+import { EventBus } from '../../domain/bus/EventBus/EventBus'
+import { QueryBus } from '../../domain/bus/QueryBus/QueryBus'
 import { CommandHandlers } from '../bus/CommandBus/CommandHandlers'
 import { InMemoryCommandBus } from '../bus/CommandBus/InMemoryCommandBus'
-import { InMemoryAsyncEventBus } from '../bus/EventBus/InMemoryAsyncEventBus'
 import { InMemoryQueryBus } from '../bus/QueryBus/InMemoryQueryBus'
 import { QueryHandlers } from '../bus/QueryBus/QueryHandlers'
 
 export class MeetupDeps {
-  readonly repository: InMemoryMeetupRepository
-  readonly commandBus: InMemoryCommandBus
-  readonly queryBus: InMemoryQueryBus
+  readonly repository: MeetupRepository
+  readonly commandBus: CommandBus
+  readonly queryBus: QueryBus
 
-  constructor(eventBus: InMemoryAsyncEventBus) {
+  constructor(eventBus: EventBus) {
     this.repository = new InMemoryMeetupRepository()
 
     const creator = new MeetupCreator(this.repository, eventBus)

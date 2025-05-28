@@ -1,6 +1,6 @@
 import winston, { Logger as WinstonLoggerTP } from 'winston'
 
-import Logger from '../../domain/logger/Logger'
+import { Logger } from '../../domain/logger/Logger'
 
 export class WinstonLogger implements Logger {
   private logger: WinstonLoggerTP

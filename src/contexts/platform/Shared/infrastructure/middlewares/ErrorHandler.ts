@@ -7,12 +7,12 @@ import { DomainError } from '../../domain/exceptions/DomainError'
 import { FormatError } from '../../domain/exceptions/FormatError'
 import { NotFoundError } from '../../domain/exceptions/NotFoundError'
 
-type ErrorResponse = {
+interface ErrorResponse {
   message: string
   fields?: unknown
 }
 
-export class ErrorHandlerMiddleware {
+export class ErrorHandler {
   static handle(err: Error, _req: Request, res: Response, _next: NextFunction) {
     let statusCode: number = status.INTERNAL_SERVER_ERROR
     const response: ErrorResponse = {
