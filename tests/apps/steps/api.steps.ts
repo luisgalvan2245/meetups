@@ -27,8 +27,8 @@ class APIWorld extends World {
   }
 
   getFutureDate(days: number): string {
-    const sevenDays = days * 24 * 60 * 60 * 1000
-    return new Date(Date.now() + sevenDays).toISOString()
+    const daysInMs = days * 24 * 60 * 60 * 1000
+    return new Date(Date.now() + daysInMs).toISOString()
   }
 }
 
