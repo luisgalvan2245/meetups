@@ -1,5 +1,5 @@
 // NOTE: We are using an external library in the domain layer (be aware of the risks).
-import { v4 as uuidV4, validate as uuidValidate } from 'uuid'
+import { validate as uuidValidate } from 'uuid'
 
 import { InvalidUUIDFormatError } from '../exceptions/InvalidUUIDFormatError'
 import { ValueObject } from './ValueObject'
@@ -15,7 +15,7 @@ export class UUIDValueObject extends ValueObject<string> {
   }
 
   static random(): UUIDValueObject {
-    return new UUIDValueObject(uuidV4())
+    return new UUIDValueObject(crypto.randomUUID())
   }
 
   private assertIsValidUUID(id: string): void {
