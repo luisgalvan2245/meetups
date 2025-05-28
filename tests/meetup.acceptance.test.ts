@@ -321,7 +321,7 @@ describe('MeetupController', () => {
       const response = await request(app).delete('/meetups/not-a-uuid')
       expect(response.status).toBe(status.BAD_REQUEST)
     })
-    it('should return 400 for invalid imageUrl format', async () => {
+    it('should return 422 for invalid imageUrl format', async () => {
       const nonExistentId = uuidV4()
       const response = await request(app)
         .put(`/meetups/${nonExistentId}`)
@@ -333,7 +333,7 @@ describe('MeetupController', () => {
           imageUrl: 'invalid-url',
           organizerId: uuidV4()
         })
-      expect(response.status).toBe(status.BAD_REQUEST)
+      expect(response.status).toBe(status.UNPROCESSABLE_ENTITY)
     })
   })
 })

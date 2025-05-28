@@ -1,6 +1,6 @@
-import { ValidationError } from './ValidationError'
+import { BusinessRuleError } from './BusinessRuleError'
 
-export class StringLengthExceededError extends ValidationError {
+export class StringLengthExceededError extends BusinessRuleError {
   constructor(value: string, maxLength: number) {
     super(`String length exceeded (${maxLength} characters): ${value}`)
   }
