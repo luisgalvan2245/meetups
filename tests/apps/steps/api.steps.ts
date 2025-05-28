@@ -1,6 +1,7 @@
 import {
   Before,
   Given,
+  IWorldOptions,
   Then,
   When,
   World,
@@ -18,7 +19,7 @@ class APIWorld extends World {
   meetupId: string
   meetupData: any
 
-  constructor(options: any) {
+  constructor(options: IWorldOptions) {
     super(options)
     this.response = null
     this.meetupId = ''
@@ -26,7 +27,8 @@ class APIWorld extends World {
   }
 
   getFutureDate(days: number): string {
-    return new Date(Date.now() + days * 24 * 60 * 60 * 1000).toISOString()
+    const sevenDays = days * 24 * 60 * 60 * 1000
+    return new Date(Date.now() + sevenDays).toISOString()
   }
 }
 
