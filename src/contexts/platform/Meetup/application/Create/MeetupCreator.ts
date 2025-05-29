@@ -1,7 +1,9 @@
 import { EventBus } from '../../../Shared/domain/bus/EventBus/EventBus'
 import { UserId } from '../../../Shared/domain/value-objects/UserId'
 import { Meetup } from '../../domain/Meetup'
+import { MeetupAlreadyExists } from '../../domain/exceptions/MeetupAlreadyExists'
 import { MeetupRepository } from '../../domain/persistance/MeetupRepository'
+import { MeetupFinder } from '../../domain/services/MeetupFinder'
 import { MeetupDate } from '../../domain/value-objects/MeetupDate'
 import { MeetupDescription } from '../../domain/value-objects/MeetupDescription'
 import { MeetupId } from '../../domain/value-objects/MeetupId'
@@ -20,13 +22,22 @@ type Params = {
 }
 
 export class MeetupCreator {
+  private readonly finder: MeetupFinder
+
   constructor(
-    private repository: MeetupRepository,
-    private eventBus: EventBus
-  ) {}
+    private readonly repository: MeetupRepository,
+    private readonly bus: EventBus
+  ) {
+    this.finder = new MeetupFinder(repository)
+  }
 
   async run(params: Params): Promise<void> {
-    const meetup = Meetup.create(
+    // const meetup = await this.finder.run(params.id)
+    // if (meetup) {
+    //   throw new MeetupAlreadyExists(params.id.value)
+    // }
+
+    const newMeetup = Meetup.create(
       params.id,
       params.title,
       params.description,
@@ -35,8 +46,8 @@ export class MeetupCreator {
       params.imageUrl,
       params.organizerId
     )
-    await this.repository.save(meetup)
-    const events = meetup.pullDomainEvents()
-    await this.eventBus.publish(events)
+    await this.repository.save(newMeetup)
+    const events = newMeetup.pullDomainEvents()
+    await this.bus.publish(events)
   }
 }

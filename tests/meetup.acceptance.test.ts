@@ -68,9 +68,9 @@ describe('MeetupController', () => {
       const response = await request(app).get(`/meetups/${uuidV4()}`)
       expect(response.status).toBe(status.NOT_FOUND)
     })
-    it('should return 400 for invalid UUID format', async () => {
+    it('should return 422 for invalid UUID format', async () => {
       const response = await request(app).get('/meetups/not-a-uuid')
-      expect(response.status).toBe(status.BAD_REQUEST)
+      expect(response.status).toBe(status.UNPROCESSABLE_ENTITY)
     })
   })
 
@@ -96,7 +96,7 @@ describe('MeetupController', () => {
       expect(getResponse.body).toHaveProperty('id', meetupId)
     })
 
-    it('should return 400 if title is missing', async () => {
+    it('should return 422 if title is missing', async () => {
       const meetupId = uuidV4()
       const data = {
         description: 'desc',
@@ -106,9 +106,9 @@ describe('MeetupController', () => {
         organizerId: uuidV4()
       }
       const response = await request(app).put(`/meetups/${meetupId}`).send(data)
-      expect(response.status).toBe(status.BAD_REQUEST)
+      expect(response.status).toBe(status.UNPROCESSABLE_ENTITY)
     })
-    it('should return 400 if description is missing', async () => {
+    it('should return 422 if description is missing', async () => {
       const meetupId = uuidV4()
       const data = {
         title: 'title',
@@ -118,9 +118,9 @@ describe('MeetupController', () => {
         organizerId: uuidV4()
       }
       const response = await request(app).put(`/meetups/${meetupId}`).send(data)
-      expect(response.status).toBe(status.BAD_REQUEST)
+      expect(response.status).toBe(status.UNPROCESSABLE_ENTITY)
     })
-    it('should return 400 if date is missing', async () => {
+    it('should return 422 if date is missing', async () => {
       const meetupId = uuidV4()
       const data = {
         title: 'title',
@@ -130,9 +130,9 @@ describe('MeetupController', () => {
         organizerId: uuidV4()
       }
       const response = await request(app).put(`/meetups/${meetupId}`).send(data)
-      expect(response.status).toBe(status.BAD_REQUEST)
+      expect(response.status).toBe(status.UNPROCESSABLE_ENTITY)
     })
-    it('should return 400 if location is missing', async () => {
+    it('should return 422 if location is missing', async () => {
       const meetupId = uuidV4()
       const data = {
         title: 'title',
@@ -142,9 +142,9 @@ describe('MeetupController', () => {
         organizerId: uuidV4()
       }
       const response = await request(app).put(`/meetups/${meetupId}`).send(data)
-      expect(response.status).toBe(status.BAD_REQUEST)
+      expect(response.status).toBe(status.UNPROCESSABLE_ENTITY)
     })
-    it('should return 400 if imageUrl is missing', async () => {
+    it('should return 422 if imageUrl is missing', async () => {
       const meetupId = uuidV4()
       const data = {
         title: 'title',
@@ -154,9 +154,9 @@ describe('MeetupController', () => {
         organizerId: uuidV4()
       }
       const response = await request(app).put(`/meetups/${meetupId}`).send(data)
-      expect(response.status).toBe(status.BAD_REQUEST)
+      expect(response.status).toBe(status.UNPROCESSABLE_ENTITY)
     })
-    it('should return 400 if title is not a string', async () => {
+    it('should return 422 if title is not a string', async () => {
       const meetupId = uuidV4()
       const data = {
         title: 123,
@@ -167,9 +167,9 @@ describe('MeetupController', () => {
         organizerId: uuidV4()
       }
       const response = await request(app).put(`/meetups/${meetupId}`).send(data)
-      expect(response.status).toBe(status.BAD_REQUEST)
+      expect(response.status).toBe(status.UNPROCESSABLE_ENTITY)
     })
-    it('should return 400 if description is not a string', async () => {
+    it('should return 422 if description is not a string', async () => {
       const meetupId = uuidV4()
       const data = {
         title: 'title',
@@ -180,9 +180,9 @@ describe('MeetupController', () => {
         organizerId: uuidV4()
       }
       const response = await request(app).put(`/meetups/${meetupId}`).send(data)
-      expect(response.status).toBe(status.BAD_REQUEST)
+      expect(response.status).toBe(status.UNPROCESSABLE_ENTITY)
     })
-    it('should return 400 if date is not a valid date', async () => {
+    it('should return 422 if date is not a valid date', async () => {
       const meetupId = uuidV4()
       const data = {
         title: 'title',
@@ -193,9 +193,9 @@ describe('MeetupController', () => {
         organizerId: uuidV4()
       }
       const response = await request(app).put(`/meetups/${meetupId}`).send(data)
-      expect(response.status).toBe(status.BAD_REQUEST)
+      expect(response.status).toBe(status.UNPROCESSABLE_ENTITY)
     })
-    it('should return 400 if location is not a string', async () => {
+    it('should return 422 if location is not a string', async () => {
       const meetupId = uuidV4()
       const data = {
         title: 'title',
@@ -206,9 +206,9 @@ describe('MeetupController', () => {
         organizerId: uuidV4()
       }
       const response = await request(app).put(`/meetups/${meetupId}`).send(data)
-      expect(response.status).toBe(status.BAD_REQUEST)
+      expect(response.status).toBe(status.UNPROCESSABLE_ENTITY)
     })
-    it('should return 400 if imageUrl is not a string', async () => {
+    it('should return 422 if imageUrl is not a string', async () => {
       const meetupId = uuidV4()
       const data = {
         title: 'title',
@@ -219,9 +219,9 @@ describe('MeetupController', () => {
         organizerId: uuidV4()
       }
       const response = await request(app).put(`/meetups/${meetupId}`).send(data)
-      expect(response.status).toBe(status.BAD_REQUEST)
+      expect(response.status).toBe(status.UNPROCESSABLE_ENTITY)
     })
-    it('should return 400 for invalid UUID format', async () => {
+    it('should return 422 for invalid UUID format', async () => {
       const response = await request(app)
         .put('/meetups/not-a-uuid')
         .send({
@@ -232,7 +232,7 @@ describe('MeetupController', () => {
           imageUrl: 'https://example.com/test.jpg',
           organizerId: uuidV4()
         })
-      expect(response.status).toBe(status.BAD_REQUEST)
+      expect(response.status).toBe(status.UNPROCESSABLE_ENTITY)
     })
   })
 
@@ -280,11 +280,11 @@ describe('MeetupController', () => {
       expect(response.status).toBe(status.NOT_FOUND)
     })
 
-    it('should return 400 for invalid UUID format', async () => {
+    it('should return 422 for invalid UUID format', async () => {
       const response = await request(app).patch('/meetups/not-a-uuid').send({
         title: 'Updated Title'
       })
-      expect(response.status).toBe(status.BAD_REQUEST)
+      expect(response.status).toBe(status.UNPROCESSABLE_ENTITY)
     })
   })
 
@@ -317,9 +317,9 @@ describe('MeetupController', () => {
       expect(response.status).toBe(status.NOT_FOUND)
     })
 
-    it('should return 400 for invalid UUID format', async () => {
+    it('should return 422 for invalid UUID format', async () => {
       const response = await request(app).delete('/meetups/not-a-uuid')
-      expect(response.status).toBe(status.BAD_REQUEST)
+      expect(response.status).toBe(status.UNPROCESSABLE_ENTITY)
     })
     it('should return 422 for invalid imageUrl format', async () => {
       const nonExistentId = uuidV4()

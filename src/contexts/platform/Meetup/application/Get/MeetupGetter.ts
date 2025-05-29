@@ -4,7 +4,7 @@ import { MeetupFinder } from '../../domain/services/MeetupFinder'
 import { MeetupId } from '../../domain/value-objects/MeetupId'
 
 export class MeetupGetter {
-  private finder: MeetupFinder
+  private readonly finder: MeetupFinder
 
   constructor(repository: MeetupRepository) {
     this.finder = new MeetupFinder(repository)

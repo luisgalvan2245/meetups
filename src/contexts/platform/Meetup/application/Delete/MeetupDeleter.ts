@@ -4,11 +4,11 @@ import { MeetupFinder } from '../../domain/services/MeetupFinder'
 import { MeetupId } from '../../domain/value-objects/MeetupId'
 
 export class MeetupDeleter {
-  private finder: MeetupFinder
+  private readonly finder: MeetupFinder
 
   constructor(
-    private repository: MeetupRepository,
-    private eventBus: EventBus
+    private readonly repository: MeetupRepository,
+    private readonly bus: EventBus
   ) {
     this.finder = new MeetupFinder(repository)
   }
@@ -16,8 +16,7 @@ export class MeetupDeleter {
   async run(id: MeetupId): Promise<void> {
     const meetup = await this.finder.run(id)
     await this.repository.delete(id)
-    meetup.markAsDeleted()
     const events = meetup.pullDomainEvents()
-    await this.eventBus.publish(events)
+    await this.bus.publish(events)
   }
 }

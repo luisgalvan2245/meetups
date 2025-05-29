@@ -1,6 +1,6 @@
-import { BusinessRuleError } from './BusinessRuleError'
+import { InvalidArgumentError } from './InvalidArgumentError'
 
-export class InvalidURLError extends BusinessRuleError {
+export class InvalidURLError extends InvalidArgumentError {
   constructor(url: string) {
     super(`Invalid URL: ${url}`)
   }

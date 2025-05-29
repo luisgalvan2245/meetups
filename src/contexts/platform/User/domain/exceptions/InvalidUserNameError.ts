@@ -1,6 +1,6 @@
-import { BusinessRuleError } from '../../../Shared/domain/exceptions/BusinessRuleError'
+import { InvalidArgumentError } from '../../../Shared/domain/exceptions/InvalidArgumentError'
 
-export class InvalidUserNameError extends BusinessRuleError {
+export class InvalidUserNameError extends InvalidArgumentError {
   constructor(message: string) {
     super(message)
   }

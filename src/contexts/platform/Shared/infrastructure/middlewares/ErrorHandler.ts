@@ -2,14 +2,13 @@ import { NextFunction, Request, Response } from 'express'
 import status from 'http-status'
 import { ValidateError } from 'tsoa'
 
-import { BusinessRuleError } from '../../domain/exceptions/BusinessRuleError'
 import { DomainError } from '../../domain/exceptions/DomainError'
+import { InvalidArgumentError } from '../../domain/exceptions/InvalidArgumentError'
 import { NotFoundError } from '../../domain/exceptions/NotFoundError'
-import { ValidationError } from '../../domain/exceptions/ValidationError'
 
 interface ErrorResponse {
   message: string
-  fields?: unknown
+  details?: unknown
 }
 
 export class ErrorHandler {
@@ -20,17 +19,14 @@ export class ErrorHandler {
     }
 
     if (err?.name === 'ValidateError') {
-      statusCode = status.BAD_REQUEST
+      statusCode = status.UNPROCESSABLE_ENTITY
       response.message = 'Validation Error'
-      response.fields = (err as ValidateError).fields
-    } else if (err instanceof ValidationError) {
-      statusCode = status.BAD_REQUEST
+      response.details = (err as ValidateError).fields
+    } else if (err instanceof InvalidArgumentError) {
+      statusCode = status.UNPROCESSABLE_ENTITY
       response.message = err.message
     } else if (err instanceof NotFoundError) {
       statusCode = status.NOT_FOUND
-      response.message = err.message
-    } else if (err instanceof BusinessRuleError) {
-      statusCode = status.UNPROCESSABLE_ENTITY
       response.message = err.message
     } else if (err instanceof DomainError) {
       statusCode = status.BAD_REQUEST

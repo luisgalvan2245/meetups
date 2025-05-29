@@ -21,13 +21,13 @@ type Params = {
 }
 
 export class MeetupUpdater {
-  private finder: MeetupFinder
+  private readonly finder: MeetupFinder
 
   constructor(
-    private repository: MeetupRepository,
-    private eventBus: EventBus
+    private readonly repository: MeetupRepository,
+    private readonly bus: EventBus
   ) {
-    this.finder = new MeetupFinder(this.repository)
+    this.finder = new MeetupFinder(repository)
   }
 
   async run(params: Params): Promise<void> {
@@ -66,6 +66,6 @@ export class MeetupUpdater {
 
     await this.repository.save(meetup)
     const events = meetup.pullDomainEvents()
-    await this.eventBus.publish(events)
+    await this.bus.publish(events)
   }
 }
