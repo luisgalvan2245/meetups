@@ -69,7 +69,12 @@ Given('I have created a meetup', async function (this: APIWorld) {
     imageUrl: 'https://example.com/test.jpg',
     organizerId: uuidV4()
   }
-  await request(this.app).put(`/meetups/${this.meetupId}`).send(this.meetupData)
+  const response = await request(this.app)
+    .put(`/meetups/${this.meetupId}`)
+    .send(this.meetupData)
+  if (response.status !== 201) {
+    throw new Error(`Failed to create meetup: ${response.status}`)
+  }
 })
 
 When(

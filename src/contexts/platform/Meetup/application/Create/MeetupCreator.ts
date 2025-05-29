@@ -3,7 +3,6 @@ import { UserId } from '../../../Shared/domain/value-objects/UserId'
 import { Meetup } from '../../domain/Meetup'
 import { MeetupAlreadyExists } from '../../domain/exceptions/MeetupAlreadyExists'
 import { MeetupRepository } from '../../domain/persistance/MeetupRepository'
-import { MeetupFinder } from '../../domain/services/MeetupFinder'
 import { MeetupDate } from '../../domain/value-objects/MeetupDate'
 import { MeetupDescription } from '../../domain/value-objects/MeetupDescription'
 import { MeetupId } from '../../domain/value-objects/MeetupId'
@@ -22,20 +21,16 @@ type Params = {
 }
 
 export class MeetupCreator {
-  private readonly finder: MeetupFinder
-
   constructor(
     private readonly repository: MeetupRepository,
     private readonly bus: EventBus
-  ) {
-    this.finder = new MeetupFinder(repository)
-  }
+  ) {}
 
   async run(params: Params): Promise<void> {
-    // const meetup = await this.finder.run(params.id)
-    // if (meetup) {
-    //   throw new MeetupAlreadyExists(params.id.value)
-    // }
+    const meetup = await this.repository.findById(params.id)
+    if (meetup) {
+      throw new MeetupAlreadyExists(params.id.value)
+    }
 
     const newMeetup = Meetup.create(
       params.id,
