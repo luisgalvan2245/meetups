@@ -1,4 +1,4 @@
-import { NotFoundError } from '../../../Shared/domain/exceptions/NotFoundError'
+import { NotFoundError } from '../../../shared/domain/exceptions/NotFoundError'
 
 export class UserNotFoundError extends NotFoundError {
   constructor(id: string) {

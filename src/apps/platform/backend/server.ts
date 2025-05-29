@@ -4,9 +4,9 @@ import { Server as HttpServer } from 'http'
 import swaggerUi from 'swagger-ui-express'
 import { promisify } from 'util'
 
-import { Logger } from '../../../contexts/platform/Shared/domain/logger/Logger'
-import { container } from '../../../contexts/platform/Shared/infrastructure/dependencies/container'
-import { ErrorHandler } from '../../../contexts/platform/Shared/infrastructure/middlewares/ErrorHandler'
+import { Logger } from '../../../contexts/platform/shared/domain/logger/Logger'
+import { container } from '../../../contexts/platform/shared/infrastructure/dependencies/container'
+import { ErrorHandler } from '../../../contexts/platform/shared/infrastructure/middlewares/ErrorHandler'
 import { RegisterRoutes } from './routes/routes'
 import swaggerJson from './spec/swagger.json'
 

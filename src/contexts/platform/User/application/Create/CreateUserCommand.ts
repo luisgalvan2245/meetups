@@ -1,4 +1,4 @@
-import { Command } from '../../../Shared/domain/bus/CommandBus/Command'
+import { Command } from '../../../shared/domain/command/Command'
 
 type Params = {
   id: string

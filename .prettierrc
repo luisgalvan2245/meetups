@@ -11,11 +11,10 @@
   "importOrder": [
     "^node:",
     "<THIRD_PARTY_MODULES>",
-    "^@/Shared/(.*)$",
+    "^@/shared/(.*)$",
     "^@/.*",
     "^[./]"
   ],
   "importOrderSeparation": true,
   "importOrderSortSpecifiers": true
 }
-

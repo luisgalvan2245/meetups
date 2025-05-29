@@ -1,4 +1,4 @@
-import { UserId } from '../../../Shared/domain/value-objects/UserId'
+import { UserId } from '../../../shared/domain/value-objects/UserId'
 import { User } from '../User'
 
 export interface UserRepository {

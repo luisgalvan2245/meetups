@@ -1,4 +1,4 @@
-import { StringValueObject } from '../../../Shared/domain/value-objects/StringValueObject'
+import { StringValueObject } from '../../../shared/domain/value-objects/StringValueObject'
 import { InvalidUserNameError } from '../exceptions/InvalidUserNameError'
 
 export class UserName extends StringValueObject {

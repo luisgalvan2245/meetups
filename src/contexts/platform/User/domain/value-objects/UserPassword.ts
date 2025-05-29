@@ -1,4 +1,4 @@
-import { StringValueObject } from '../../../Shared/domain/value-objects/StringValueObject'
+import { StringValueObject } from '../../../shared/domain/value-objects/StringValueObject'
 import { InvalidUserPasswordError } from '../exceptions/InvalidUserPasswordError'
 
 export class UserPassword extends StringValueObject {

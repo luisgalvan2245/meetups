@@ -1,5 +1,5 @@
-import { UserId } from '../../../Shared/domain/value-objects/UserId'
-import { inMemoryStore } from '../../../Shared/infrastructure/persistance/InMemoryStore'
+import { UserId } from '../../../shared/domain/value-objects/UserId'
+import { inMemoryStore } from '../../../shared/infrastructure/persistance/InMemoryStore'
 import { User } from '../../domain/User'
 import { UserRepository } from '../../domain/persistance/UserRepository'
 

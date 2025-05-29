@@ -4,13 +4,13 @@
 import type { TsoaRoute } from '@tsoa/runtime';
 import {  fetchMiddlewares, ExpressTemplateService } from '@tsoa/runtime';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-import { MeetupPutController } from './../controllers/Meetup/MeetupPutController';
+import { MeetupPutController } from './../controllers/meetup/MeetupPutController';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-import { MeetupPatchController } from './../controllers/Meetup/MeetupPatchController';
+import { MeetupPatchController } from './../controllers/meetup/MeetupPatchController';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-import { MeetupGetController } from './../controllers/Meetup/MeetupGetController';
+import { MeetupGetController } from './../controllers/meetup/MeetupGetController';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-import { MeetupDeleteController } from './../controllers/Meetup/MeetupDeleteController';
+import { MeetupDeleteController } from './../controllers/meetup/MeetupDeleteController';
 import type { Request as ExRequest, Response as ExResponse, RequestHandler, Router } from 'express';
 
 
@@ -47,7 +47,7 @@ export function RegisterRoutes(app: Router) {
     // ###########################################################################################################
 
 
-    
+
         const argsMeetupPutController_createMeetup: Record<string, TsoaRoute.ParameterSchema> = {
                 id: {"in":"path","name":"id","required":true,"dataType":"string"},
                 data: {"in":"body","name":"data","required":true,"dataType":"nestedObjectLiteral","nestedProperties":{"organizerId":{"dataType":"string","required":true},"imageUrl":{"dataType":"string","required":true},"location":{"dataType":"string","required":true},"date":{"dataType":"datetime","required":true},"description":{"dataType":"string","required":true},"title":{"dataType":"string","required":true}}},

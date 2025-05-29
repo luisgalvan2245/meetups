@@ -1,4 +1,4 @@
-import { DomainEvent } from '../../../Shared/domain/eventsDomainEvent'
+import { DomainEvent } from '../../../shared/domain/event/DomainEvent'
 
 export class UserDeletedDomainEvent extends DomainEvent {
   static readonly EVENT_NAME = 'user.deleted'

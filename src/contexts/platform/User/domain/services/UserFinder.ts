@@ -1,4 +1,4 @@
-import { UserId } from '../../../Shared/domain/value-objects/UserId'
+import { UserId } from '../../../shared/domain/value-objects/UserId'
 import { User } from '../User'
 import { UserNotFoundError } from '../exceptions/UserNotFoundError'
 import { UserRepository } from '../persistance/UserRepository'
