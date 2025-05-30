@@ -41,7 +41,7 @@ export class Server {
   private setup(): void {
     this.app.use(express.json())
     RegisterRoutes(this.app)
-    this.app.use(ErrorHandler.handle)
+    this.app.use(ErrorHandler)
     this.app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerJson))
   }
 
