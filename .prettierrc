@@ -8,13 +8,7 @@
   "arrowParens": "avoid",
   "trailingComma": "none",
   "plugins": ["@trivago/prettier-plugin-sort-imports"],
-  "importOrder": [
-    "^node:",
-    "<THIRD_PARTY_MODULES>",
-    "^@/shared/(.*)$",
-    "^@/.*",
-    "^[./]"
-  ],
+  "importOrder": ["^node:", "<THIRD_PARTY_MODULES>", "^@/.*", "^[./]"],
   "importOrderSeparation": true,
   "importOrderSortSpecifiers": true
 }
