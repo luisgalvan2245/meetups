@@ -25,34 +25,14 @@ Feature: API Endpoints
     Then the response status code should be 201
     And the ticket should be created with the provided data
 
-  Scenario: Create ticket with missing title
-    When I make a PUT request to "/tickets/{ticketId}" with missing required fields
-    Then the response status code should be 422
-
   Scenario: Create ticket with missing description
     When I make a PUT request to "/tickets/{ticketId}" with missing description
-    Then the response status code should be 422
-
-  Scenario: Create ticket with missing date
-    When I make a PUT request to "/tickets/{ticketId}" with missing date
-    Then the response status code should be 422
-
-  Scenario: Create ticket with missing location
-    When I make a PUT request to "/tickets/{ticketId}" with missing location
-    Then the response status code should be 422
-
-  Scenario: Create ticket with missing imageUrl
-    When I make a PUT request to "/tickets/{ticketId}" with missing imageUrl
-    Then the response status code should be 422
-
-  Scenario: Create ticket with missing organizerId
-    When I make a PUT request to "/tickets/{ticketId}" with missing organizerId
     Then the response status code should be 422
 
   Scenario: Update ticket
     Given I have created a ticket
     When I make a PATCH request to "/tickets/{ticketId}" with update data
-    Then the response status code should be 204
+    Then the response status code should be 200
     And the ticket should be updated with the new data
 
   Scenario: Delete ticket

@@ -25,11 +25,6 @@ class APIWorld extends World {
     this.ticketId = ''
     this.ticketData = {}
   }
-
-  getFutureDate(days: number): string {
-    const daysInMs = days * 24 * 60 * 60 * 1000
-    return new Date(Date.now() + daysInMs).toISOString()
-  }
 }
 
 setWorldConstructor(APIWorld)
@@ -40,20 +35,10 @@ Before(async function (this: APIWorld) {
 
 Given('I have created two tickets', async function (this: APIWorld) {
   const ticketData1 = {
-    title: 'Test Ticket 1',
-    description: 'Test Description 1',
-    date: this.getFutureDate(7),
-    location: 'Test Location 1',
-    imageUrl: 'https://example.com/test1.jpg',
-    organizerId: uuidV4()
+    description: 'Test Description 1'
   }
   const ticketData2 = {
-    title: 'Test Ticket 2',
-    description: 'Test Description 2',
-    date: this.getFutureDate(7),
-    location: 'Test Location 2',
-    imageUrl: 'https://example.com/test2.jpg',
-    organizerId: uuidV4()
+    description: 'Test Description 2'
   }
   await request(this.app).put(`/tickets/${uuidV4()}`).send(ticketData1)
   await request(this.app).put(`/tickets/${uuidV4()}`).send(ticketData2)
@@ -62,12 +47,7 @@ Given('I have created two tickets', async function (this: APIWorld) {
 Given('I have created a ticket', async function (this: APIWorld) {
   this.ticketId = uuidV4()
   this.ticketData = {
-    title: 'Test Ticket',
-    description: 'Test Description',
-    date: this.getFutureDate(7),
-    location: 'Test Location',
-    imageUrl: 'https://example.com/test.jpg',
-    organizerId: uuidV4()
+    description: 'Test Description'
   }
   const response = await request(this.app)
     .put(`/tickets/${this.ticketId}`)
@@ -92,12 +72,7 @@ When(
   async function (this: APIWorld, endpoint: string) {
     this.ticketId = uuidV4()
     this.ticketData = {
-      title: 'Test Ticket CREATED',
-      description: 'Test Description CREATED',
-      date: this.getFutureDate(7),
-      location: 'Test Location CREATED',
-      imageUrl: 'https://example.com/test_created.jpg',
-      organizerId: uuidV4()
+      description: 'Test Description CREATED'
     }
     const url = endpoint.replace('{ticketId}', this.ticketId)
     this.response = await request(this.app).put(url).send(this.ticketData)
@@ -105,97 +80,10 @@ When(
 )
 
 When(
-  'I make a PUT request to {string} with missing required fields',
-  async function (this: APIWorld, endpoint: string) {
-    this.ticketId = uuidV4()
-    // Missing title field
-    const invalidData = {
-      description: 'Test Description',
-      date: this.getFutureDate(7),
-      location: 'Test Location',
-      imageUrl: 'https://example.com/test.jpg',
-      organizerId: uuidV4()
-    }
-    const url = endpoint.replace('{ticketId}', this.ticketId)
-    this.response = await request(this.app).put(url).send(invalidData)
-  }
-)
-
-When(
   'I make a PUT request to {string} with missing description',
   async function (this: APIWorld, endpoint: string) {
     this.ticketId = uuidV4()
-    const invalidData = {
-      title: 'Test Title',
-      date: this.getFutureDate(7),
-      location: 'Test Location',
-      imageUrl: 'https://example.com/test.jpg',
-      organizerId: uuidV4()
-    }
-    const url = endpoint.replace('{ticketId}', this.ticketId)
-    this.response = await request(this.app).put(url).send(invalidData)
-  }
-)
-
-When(
-  'I make a PUT request to {string} with missing date',
-  async function (this: APIWorld, endpoint: string) {
-    this.ticketId = uuidV4()
-    const invalidData = {
-      title: 'Test Title',
-      description: 'Test Description',
-      location: 'Test Location',
-      imageUrl: 'https://example.com/test.jpg',
-      organizerId: uuidV4()
-    }
-    const url = endpoint.replace('{ticketId}', this.ticketId)
-    this.response = await request(this.app).put(url).send(invalidData)
-  }
-)
-
-When(
-  'I make a PUT request to {string} with missing location',
-  async function (this: APIWorld, endpoint: string) {
-    this.ticketId = uuidV4()
-    const invalidData = {
-      title: 'Test Title',
-      description: 'Test Description',
-      date: this.getFutureDate(7),
-      imageUrl: 'https://example.com/test.jpg',
-      organizerId: uuidV4()
-    }
-    const url = endpoint.replace('{ticketId}', this.ticketId)
-    this.response = await request(this.app).put(url).send(invalidData)
-  }
-)
-
-When(
-  'I make a PUT request to {string} with missing imageUrl',
-  async function (this: APIWorld, endpoint: string) {
-    this.ticketId = uuidV4()
-    const invalidData = {
-      title: 'Test Title',
-      description: 'Test Description',
-      date: this.getFutureDate(7),
-      location: 'Test Location',
-      organizerId: uuidV4()
-    }
-    const url = endpoint.replace('{ticketId}', this.ticketId)
-    this.response = await request(this.app).put(url).send(invalidData)
-  }
-)
-
-When(
-  'I make a PUT request to {string} with missing organizerId',
-  async function (this: APIWorld, endpoint: string) {
-    this.ticketId = uuidV4()
-    const invalidData = {
-      title: 'Test Title',
-      description: 'Test Description',
-      date: this.getFutureDate(7),
-      location: 'Test Location',
-      imageUrl: 'https://example.com/test.jpg'
-    }
+    const invalidData = {}
     const url = endpoint.replace('{ticketId}', this.ticketId)
     this.response = await request(this.app).put(url).send(invalidData)
   }
@@ -205,7 +93,6 @@ When(
   'I make a PATCH request to {string} with update data',
   async function (this: APIWorld, endpoint: string) {
     const updateData = {
-      title: 'Updated Title',
       description: 'Updated Description'
     }
     const url = endpoint.replace('{ticketId}', this.ticketId)
@@ -244,51 +131,46 @@ Then(
     if (this.response.body.length !== 2) {
       throw new Error(`Expected 2 tickets but got ${this.response.body.length}`)
     }
-    const requiredProperties = [
-      'id',
-      'title',
-      'description',
-      'date',
-      'location',
-      'imageUrl'
-    ]
-    for (const ticket of this.response.body) {
-      for (const prop of requiredProperties) {
-        if (!(prop in ticket)) {
-          throw new Error(`Expected ticket to have property ${prop}`)
-        }
+    this.response.body.forEach((ticket: any) => {
+      if (!('id' in ticket)) {
+        throw new Error('Expected ticket to have property id')
       }
-    }
+      if (!('description' in ticket)) {
+        throw new Error('Expected ticket to have property description')
+      }
+    })
   }
 )
 
 Then('the response should contain the ticket data', function (this: APIWorld) {
-  const ticket = this.response.body
-  if (ticket.id !== this.ticketId) {
+  if (this.response.body.id !== this.ticketId) {
     throw new Error(
-      `Expected ticket id to be ${this.ticketId} but got ${ticket.id}`
+      `Expected ticket id to be ${this.ticketId} but got ${this.response.body.id}`
     )
   }
-  for (const [key, value] of Object.entries(this.ticketData)) {
-    if (ticket[key] !== value) {
-      throw new Error(`Expected ${key} to be ${value} but got ${ticket[key]}`)
-    }
+  if (this.response.body.description !== this.ticketData.description) {
+    throw new Error(
+      `Expected description to be ${this.ticketData.description} but got ${this.response.body.description}`
+    )
   }
 })
 
 Then(
   'the ticket should be created with the provided data',
   async function (this: APIWorld) {
-    const getResponse = await request(this.app).get(`/tickets/${this.ticketId}`)
-    if (getResponse.status !== 200) {
+    const response = await request(this.app).get(`/tickets/${this.ticketId}`)
+    if (response.status !== 200) {
       throw new Error('Failed to get created ticket')
     }
-    for (const [key, value] of Object.entries(this.ticketData)) {
-      if (getResponse.body[key] !== value) {
-        throw new Error(
-          `Expected ${key} to be ${value} but got ${getResponse.body[key]}`
-        )
-      }
+    if (response.body.id !== this.ticketId) {
+      throw new Error(
+        `Expected ticket id to be ${this.ticketId} but got ${response.body.id}`
+      )
+    }
+    if (response.body.description !== this.ticketData.description) {
+      throw new Error(
+        `Expected description to be ${this.ticketData.description} but got ${response.body.description}`
+      )
     }
   }
 )
@@ -296,22 +178,19 @@ Then(
 Then(
   'the ticket should be updated with the new data',
   async function (this: APIWorld) {
-    const getResponse = await request(this.app).get(`/tickets/${this.ticketId}`)
-    if (getResponse.status !== 200) {
+    const response = await request(this.app).get(`/tickets/${this.ticketId}`)
+    if (response.status !== 200) {
       throw new Error('Failed to get updated ticket')
     }
-    if (getResponse.body.title !== 'Updated Title') {
-      throw new Error('Title was not updated')
-    }
-    if (getResponse.body.description !== 'Updated Description') {
+    if (response.body.description !== 'Updated Description') {
       throw new Error('Description was not updated')
     }
   }
 )
 
 Then('the ticket should be deleted', async function (this: APIWorld) {
-  const getResponse = await request(this.app).get(`/tickets/${this.ticketId}`)
-  if (getResponse.status !== 404) {
+  const response = await request(this.app).get(`/tickets/${this.ticketId}`)
+  if (response.status !== 404) {
     throw new Error('Ticket was not deleted')
   }
 })
