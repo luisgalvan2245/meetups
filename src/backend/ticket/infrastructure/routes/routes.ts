@@ -4,13 +4,13 @@
 import type { TsoaRoute } from '@tsoa/runtime';
 import {  fetchMiddlewares, ExpressTemplateService } from '@tsoa/runtime';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-import { TicketPutController } from './../controllers/ticket/TicketPutController';
+import { TicketPutController } from './../controllers/TicketPutController';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-import { TicketPatchController } from './../controllers/ticket/TicketPatchController';
+import { TicketPatchController } from './../controllers/TicketPatchController';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-import { TicketGetController } from './../controllers/ticket/TicketGetController';
+import { TicketGetController } from './../controllers/TicketGetController';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-import { TicketDeleteController } from './../controllers/ticket/TicketDeleteController';
+import { TicketDeleteController } from './../controllers/TicketDeleteController';
 import type { Request as ExRequest, Response as ExResponse, RequestHandler, Router } from 'express';
 
 
@@ -43,7 +43,7 @@ export function RegisterRoutes(app: Router) {
     // ###########################################################################################################
 
 
-    
+
         const argsTicketPutController_createTicket: Record<string, TsoaRoute.ParameterSchema> = {
                 id: {"in":"path","name":"id","required":true,"dataType":"string"},
                 data: {"in":"body","name":"data","required":true,"dataType":"nestedObjectLiteral","nestedProperties":{"description":{"dataType":"string","required":true}}},

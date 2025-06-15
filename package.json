@@ -4,9 +4,9 @@
   "description": "API for Ticket App",
   "main": "index.js",
   "scripts": {
-    "dev:backend": "tsoa spec-and-routes && tsx watch src/apps/platform/backend/start.ts",
+    "dev:backend": "tsoa spec-and-routes && tsx watch src/backend/start.ts",
     "build": "tsoa spec-and-routes && tsc",
-    "start": "node dist/apps/platform/backend/start.js",
+    "start": "node dist/apps/backend/start.js",
     "test": "vitest",
     "test:cov": "vitest run --coverage",
     "test:ui": "vitest --ui",

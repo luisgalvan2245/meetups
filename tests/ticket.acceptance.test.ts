@@ -3,7 +3,7 @@ import request from 'supertest'
 import { v4 as uuidV4 } from 'uuid'
 import { describe, expect, it } from 'vitest'
 
-import { Server } from '../src/apps/platform/backend/server'
+import { Server } from '../src/backend/server'
 
 describe('TicketController', () => {
   const { app } = new Server()

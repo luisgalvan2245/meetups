@@ -1,13 +1,13 @@
 {
-  "entryFile": "src/apps/platform/backend/start.ts",
+  "entryFile": "src/backend/start.ts",
   "noImplicitAdditionalProperties": "throw-on-extras",
   "controllerPathGlobs": ["src/**/*Controller.ts"],
   "spec": {
-    "outputDirectory": "src/apps/platform/backend/spec",
+    "outputDirectory": "src/backend/spec",
     "specVersion": 3
   },
   "routes": {
-    "routesDir": "src/apps/platform/backend/routes",
+    "routesDir": "src/backend/routes",
     "middleware": "express"
   }
 }
