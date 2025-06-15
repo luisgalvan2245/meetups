@@ -1,15 +1,15 @@
-import { CreateMeetupCommandHandler } from '../../../meetup/application/create/CreateMeetupCommandHandler'
-import { MeetupCreator } from '../../../meetup/application/create/MeetupCreator'
-import { DeleteMeetupCommandHandler } from '../../../meetup/application/delete/DeleteMeetupCommandHandler'
-import { MeetupDeleter } from '../../../meetup/application/delete/MeetupDeleter'
-import { GetMeetupQueryHandler } from '../../../meetup/application/get/GetMeetupQueryHandler'
-import { MeetupGetter } from '../../../meetup/application/get/MeetupGetter'
-import { ListMeetupsQueryHandler } from '../../../meetup/application/list/ListMeetupsQueryHandler'
-import { MeetupsLister } from '../../../meetup/application/list/MeetupsLister'
-import { MeetupUpdater } from '../../../meetup/application/update/MeetupUpdater'
-import { UpdateMeetupCommandHandler } from '../../../meetup/application/update/UpdateMeetupCommandHandler'
-import { MeetupRepository } from '../../../meetup/domain/persistance/MeetupRepository'
-import { InMemoryMeetupRepository } from '../../../meetup/infrastructure/persistance/InMemoryMeetupRepository'
+import { CreateTicketCommandHandler } from '../../../meetup/application/create/CreateTicketCommandHandler'
+import { TicketCreator } from '../../../meetup/application/create/TicketCreator'
+import { DeleteTicketCommandHandler } from '../../../meetup/application/delete/DeleteTicketCommandHandler'
+import { TicketDeleter } from '../../../meetup/application/delete/TicketDeleter'
+import { GetTicketQueryHandler } from '../../../meetup/application/get/GetTicketQueryHandler'
+import { TicketGetter } from '../../../meetup/application/get/TicketGetter'
+import { ListTicketsQueryHandler } from '../../../meetup/application/list/ListTicketsQueryHandler'
+import { TicketsLister } from '../../../meetup/application/list/TicketsLister'
+import { TicketUpdater } from '../../../meetup/application/update/TicketUpdater'
+import { UpdateTicketCommandHandler } from '../../../meetup/application/update/UpdateTicketCommandHandler'
+import { TicketRepository } from '../../../meetup/domain/persistance/TicketRepository'
+import { InMemoryTicketRepository } from '../../../meetup/infrastructure/persistance/InMemoryTicketRepository'
 import { CommandBus } from '../../domain/command/CommandBus'
 import { EventBus } from '../../domain/events/EventBus'
 import { QueryBus } from '../../domain/query/QueryBus'
@@ -19,28 +19,28 @@ import { InMemoryQueryBus } from '../../infrastructure/query/InMemoryQueryBus'
 import { QueryHandlers } from '../../infrastructure/query/QueryHandlers'
 
 export class MeetupDeps {
-  readonly repository: MeetupRepository
+  readonly repository: TicketRepository
   readonly commandBus: CommandBus
   readonly queryBus: QueryBus
 
   constructor(eventBus: EventBus) {
-    this.repository = new InMemoryMeetupRepository()
+    this.repository = new InMemoryTicketRepository()
 
-    const creator = new MeetupCreator(this.repository, eventBus)
-    const updater = new MeetupUpdater(this.repository, eventBus)
-    const deleter = new MeetupDeleter(this.repository, eventBus)
-    const getter = new MeetupGetter(this.repository)
-    const lister = new MeetupsLister(this.repository)
+    const creator = new TicketCreator(this.repository, eventBus)
+    const updater = new TicketUpdater(this.repository, eventBus)
+    const deleter = new TicketDeleter(this.repository, eventBus)
+    const getter = new TicketGetter(this.repository)
+    const lister = new TicketsLister(this.repository)
 
     const commandHandlers = new CommandHandlers([
-      new CreateMeetupCommandHandler(creator),
-      new UpdateMeetupCommandHandler(updater),
-      new DeleteMeetupCommandHandler(deleter)
+      new CreateTicketCommandHandler(creator),
+      new UpdateTicketCommandHandler(updater),
+      new DeleteTicketCommandHandler(deleter)
     ])
 
     const queryHandlers = new QueryHandlers([
-      new GetMeetupQueryHandler(getter),
-      new ListMeetupsQueryHandler(lister)
+      new GetTicketQueryHandler(getter),
+      new ListTicketsQueryHandler(lister)
     ])
 
     this.commandBus = new InMemoryCommandBus(commandHandlers)

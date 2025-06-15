@@ -1,9 +1,7 @@
-import { User } from '../../../User/domain/User'
-import { Meetup } from '../../../meetup/domain/Meetup'
+import { Ticket } from '../../../meetup/domain/Ticket'
 
 class InMemoryStore {
-  users: User[] = []
-  meetups: Meetup[] = []
+  tickets: Ticket[] = []
 }
 
 export const inMemoryStore = new InMemoryStore()
