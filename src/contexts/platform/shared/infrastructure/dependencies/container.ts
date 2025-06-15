@@ -1,11 +1,11 @@
 import { InMemoryEventBus } from '../events/InMemoryEventBus'
 import { WinstonLogger } from '../logger/WinstonLogger'
-import { MeetupDeps } from './MeetupDeps'
+import { TicketDeps } from './TicketDeps'
 
 class Container {
   readonly logger = new WinstonLogger()
   readonly eventBus = new InMemoryEventBus()
-  readonly meetup = new MeetupDeps(this.eventBus)
+  readonly ticket = new TicketDeps(this.eventBus)
 }
 
 export const container = new Container()

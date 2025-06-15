@@ -1,15 +1,15 @@
 import { Route, Tags, Get, Path, Response } from '@tsoa/runtime'
 
-import { ListTicketsQuery } from '../../../../../contexts/platform/meetup/application/list/ListTicketsQuery'
-import { GetTicketQuery } from '../../../../../contexts/platform/meetup/application/get/GetTicketQuery'
-import { TicketResponse } from '../../../../../contexts/platform/meetup/application/TicketResponse'
+import { ListTicketsQuery } from '../../../../../contexts/platform/ticket/application/list/ListTicketsQuery'
+import { GetTicketQuery } from '../../../../../contexts/platform/ticket/application/get/GetTicketQuery'
+import { TicketResponse } from '../../../../../contexts/platform/ticket/application/TicketResponse'
 import { container } from '../../../../../contexts/platform/shared/infrastructure/dependencies/container'
 import { QueryBus } from '../../../../../contexts/platform/shared/domain/query/QueryBus'
 
 @Route('tickets')
 @Tags('Tickets')
 export class TicketGetController {
-  constructor(private bus: QueryBus = container.meetup.queryBus) {}
+  constructor(private bus: QueryBus = container.ticket.queryBus) {}
 
   @Get()
   async getAllTickets(): Promise<TicketResponse[]> {

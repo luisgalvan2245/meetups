@@ -1,6 +1,6 @@
-# 🚧 Meetups
+# 🚧 Tickets
 
-> App to manage meetups
+> App to manage tickets
 
 ## 🏗️ Under Construction
 

@@ -1,7 +1,7 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "description": "API for Meetup App",
+  "description": "API for Ticket App",
   "main": "index.js",
   "scripts": {
     "dev:backend": "tsoa spec-and-routes && tsx watch src/apps/platform/backend/start.ts",

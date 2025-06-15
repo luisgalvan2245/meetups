@@ -7,34 +7,18 @@
 		"requestBodies": {},
 		"responses": {},
 		"schemas": {
-			"MeetupResponse": {
+			"TicketResponse": {
 				"properties": {
 					"id": {
 						"type": "string"
 					},
-					"title": {
-						"type": "string"
-					},
 					"description": {
-						"type": "string"
-					},
-					"date": {
-						"type": "string"
-					},
-					"location": {
-						"type": "string"
-					},
-					"imageUrl": {
 						"type": "string"
 					}
 				},
 				"required": [
 					"id",
-					"title",
-					"description",
-					"date",
-					"location",
-					"imageUrl"
+					"description"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -45,16 +29,16 @@
 	"info": {
 		"title": "backend",
 		"version": "1.0.0",
-		"description": "API for Meetup App",
+		"description": "API for Ticket App",
 		"license": {
 			"name": "ISC"
 		},
 		"contact": {}
 	},
 	"paths": {
-		"/meetups/{id}": {
+		"/tickets/{id}": {
 			"put": {
-				"operationId": "CreateMeetup",
+				"operationId": "CreateTicket",
 				"responses": {
 					"201": {
 						"description": "Created"
@@ -67,7 +51,7 @@
 					}
 				},
 				"tags": [
-					"Meetups"
+					"Tickets"
 				],
 				"security": [],
 				"parameters": [
@@ -86,33 +70,12 @@
 						"application/json": {
 							"schema": {
 								"properties": {
-									"organizerId": {
-										"type": "string"
-									},
-									"imageUrl": {
-										"type": "string"
-									},
-									"location": {
-										"type": "string"
-									},
-									"date": {
-										"type": "string",
-										"format": "date-time"
-									},
 									"description": {
-										"type": "string"
-									},
-									"title": {
 										"type": "string"
 									}
 								},
 								"required": [
-									"organizerId",
-									"imageUrl",
-									"location",
-									"date",
-									"description",
-									"title"
+									"description"
 								],
 								"type": "object"
 							}
@@ -121,10 +84,10 @@
 				}
 			},
 			"patch": {
-				"operationId": "UpdateMeetup",
+				"operationId": "UpdateTicket",
 				"responses": {
-					"204": {
-						"description": "No Content"
+					"200": {
+						"description": "OK"
 					},
 					"400": {
 						"description": "Bad Request"
@@ -137,7 +100,7 @@
 					}
 				},
 				"tags": [
-					"Meetups"
+					"Tickets"
 				],
 				"security": [],
 				"parameters": [
@@ -156,20 +119,7 @@
 						"application/json": {
 							"schema": {
 								"properties": {
-									"imageUrl": {
-										"type": "string"
-									},
-									"location": {
-										"type": "string"
-									},
-									"date": {
-										"type": "string",
-										"format": "date-time"
-									},
 									"description": {
-										"type": "string"
-									},
-									"title": {
 										"type": "string"
 									}
 								},
@@ -180,14 +130,14 @@
 				}
 			},
 			"get": {
-				"operationId": "GetMeetupById",
+				"operationId": "GetTicketById",
 				"responses": {
 					"200": {
 						"description": "Ok",
 						"content": {
 							"application/json": {
 								"schema": {
-									"$ref": "#/components/schemas/MeetupResponse"
+									"$ref": "#/components/schemas/TicketResponse"
 								}
 							}
 						}
@@ -200,7 +150,7 @@
 					}
 				},
 				"tags": [
-					"Meetups"
+					"Tickets"
 				],
 				"security": [],
 				"parameters": [
@@ -215,7 +165,7 @@
 				]
 			},
 			"delete": {
-				"operationId": "DeleteMeetup",
+				"operationId": "DeleteTicket",
 				"responses": {
 					"204": {
 						"description": "No Content"
@@ -228,7 +178,7 @@
 					}
 				},
 				"tags": [
-					"Meetups"
+					"Tickets"
 				],
 				"security": [],
 				"parameters": [
@@ -243,9 +193,9 @@
 				]
 			}
 		},
-		"/meetups": {
+		"/tickets": {
 			"get": {
-				"operationId": "GetAllMeetups",
+				"operationId": "GetAllTickets",
 				"responses": {
 					"200": {
 						"description": "Ok",
@@ -253,7 +203,7 @@
 							"application/json": {
 								"schema": {
 									"items": {
-										"$ref": "#/components/schemas/MeetupResponse"
+										"$ref": "#/components/schemas/TicketResponse"
 									},
 									"type": "array"
 								}
@@ -262,7 +212,7 @@
 					}
 				},
 				"tags": [
-					"Meetups"
+					"Tickets"
 				],
 				"security": [],
 				"parameters": []

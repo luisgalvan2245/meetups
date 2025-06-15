@@ -16,14 +16,14 @@ import { Server } from '../../../src/apps/platform/backend/server'
 class APIWorld extends World {
   app!: Application
   response: any
-  meetupId: string
-  meetupData: any
+  ticketId: string
+  ticketData: any
 
   constructor(options: IWorldOptions) {
     super(options)
     this.response = null
-    this.meetupId = ''
-    this.meetupData = {}
+    this.ticketId = ''
+    this.ticketData = {}
   }
 
   getFutureDate(days: number): string {
@@ -38,31 +38,31 @@ Before(async function (this: APIWorld) {
   this.app = new Server({ silent: true }).app
 })
 
-Given('I have created two meetups', async function (this: APIWorld) {
-  const meetupData1 = {
-    title: 'Test Meetup 1',
+Given('I have created two tickets', async function (this: APIWorld) {
+  const ticketData1 = {
+    title: 'Test Ticket 1',
     description: 'Test Description 1',
     date: this.getFutureDate(7),
     location: 'Test Location 1',
     imageUrl: 'https://example.com/test1.jpg',
     organizerId: uuidV4()
   }
-  const meetupData2 = {
-    title: 'Test Meetup 2',
+  const ticketData2 = {
+    title: 'Test Ticket 2',
     description: 'Test Description 2',
     date: this.getFutureDate(7),
     location: 'Test Location 2',
     imageUrl: 'https://example.com/test2.jpg',
     organizerId: uuidV4()
   }
-  await request(this.app).put(`/meetups/${uuidV4()}`).send(meetupData1)
-  await request(this.app).put(`/meetups/${uuidV4()}`).send(meetupData2)
+  await request(this.app).put(`/tickets/${uuidV4()}`).send(ticketData1)
+  await request(this.app).put(`/tickets/${uuidV4()}`).send(ticketData2)
 })
 
-Given('I have created a meetup', async function (this: APIWorld) {
-  this.meetupId = uuidV4()
-  this.meetupData = {
-    title: 'Test Meetup',
+Given('I have created a ticket', async function (this: APIWorld) {
+  this.ticketId = uuidV4()
+  this.ticketData = {
+    title: 'Test Ticket',
     description: 'Test Description',
     date: this.getFutureDate(7),
     location: 'Test Location',
@@ -70,10 +70,10 @@ Given('I have created a meetup', async function (this: APIWorld) {
     organizerId: uuidV4()
   }
   const response = await request(this.app)
-    .put(`/meetups/${this.meetupId}`)
-    .send(this.meetupData)
+    .put(`/tickets/${this.ticketId}`)
+    .send(this.ticketData)
   if (response.status !== 201) {
-    throw new Error(`Failed to create meetup: ${response.status}`)
+    throw new Error(`Failed to create ticket: ${response.status}`)
   }
 })
 
@@ -81,33 +81,33 @@ When(
   'I make a GET request to {string}',
   async function (this: APIWorld, endpoint: string) {
     const url = endpoint
-      .replace('{meetupId}', this.meetupId)
+      .replace('{ticketId}', this.ticketId)
       .replace('{nonExistentId}', uuidV4())
     this.response = await request(this.app).get(url)
   }
 )
 
 When(
-  'I make a PUT request to {string} with valid meetup data',
+  'I make a PUT request to {string} with valid ticket data',
   async function (this: APIWorld, endpoint: string) {
-    this.meetupId = uuidV4()
-    this.meetupData = {
-      title: 'Test Meetup CREATED',
+    this.ticketId = uuidV4()
+    this.ticketData = {
+      title: 'Test Ticket CREATED',
       description: 'Test Description CREATED',
       date: this.getFutureDate(7),
       location: 'Test Location CREATED',
       imageUrl: 'https://example.com/test_created.jpg',
       organizerId: uuidV4()
     }
-    const url = endpoint.replace('{meetupId}', this.meetupId)
-    this.response = await request(this.app).put(url).send(this.meetupData)
+    const url = endpoint.replace('{ticketId}', this.ticketId)
+    this.response = await request(this.app).put(url).send(this.ticketData)
   }
 )
 
 When(
   'I make a PUT request to {string} with missing required fields',
   async function (this: APIWorld, endpoint: string) {
-    this.meetupId = uuidV4()
+    this.ticketId = uuidV4()
     // Missing title field
     const invalidData = {
       description: 'Test Description',
@@ -116,7 +116,7 @@ When(
       imageUrl: 'https://example.com/test.jpg',
       organizerId: uuidV4()
     }
-    const url = endpoint.replace('{meetupId}', this.meetupId)
+    const url = endpoint.replace('{ticketId}', this.ticketId)
     this.response = await request(this.app).put(url).send(invalidData)
   }
 )
@@ -124,7 +124,7 @@ When(
 When(
   'I make a PUT request to {string} with missing description',
   async function (this: APIWorld, endpoint: string) {
-    this.meetupId = uuidV4()
+    this.ticketId = uuidV4()
     const invalidData = {
       title: 'Test Title',
       date: this.getFutureDate(7),
@@ -132,7 +132,7 @@ When(
       imageUrl: 'https://example.com/test.jpg',
       organizerId: uuidV4()
     }
-    const url = endpoint.replace('{meetupId}', this.meetupId)
+    const url = endpoint.replace('{ticketId}', this.ticketId)
     this.response = await request(this.app).put(url).send(invalidData)
   }
 )
@@ -140,7 +140,7 @@ When(
 When(
   'I make a PUT request to {string} with missing date',
   async function (this: APIWorld, endpoint: string) {
-    this.meetupId = uuidV4()
+    this.ticketId = uuidV4()
     const invalidData = {
       title: 'Test Title',
       description: 'Test Description',
@@ -148,7 +148,7 @@ When(
       imageUrl: 'https://example.com/test.jpg',
       organizerId: uuidV4()
     }
-    const url = endpoint.replace('{meetupId}', this.meetupId)
+    const url = endpoint.replace('{ticketId}', this.ticketId)
     this.response = await request(this.app).put(url).send(invalidData)
   }
 )
@@ -156,7 +156,7 @@ When(
 When(
   'I make a PUT request to {string} with missing location',
   async function (this: APIWorld, endpoint: string) {
-    this.meetupId = uuidV4()
+    this.ticketId = uuidV4()
     const invalidData = {
       title: 'Test Title',
       description: 'Test Description',
@@ -164,7 +164,7 @@ When(
       imageUrl: 'https://example.com/test.jpg',
       organizerId: uuidV4()
     }
-    const url = endpoint.replace('{meetupId}', this.meetupId)
+    const url = endpoint.replace('{ticketId}', this.ticketId)
     this.response = await request(this.app).put(url).send(invalidData)
   }
 )
@@ -172,7 +172,7 @@ When(
 When(
   'I make a PUT request to {string} with missing imageUrl',
   async function (this: APIWorld, endpoint: string) {
-    this.meetupId = uuidV4()
+    this.ticketId = uuidV4()
     const invalidData = {
       title: 'Test Title',
       description: 'Test Description',
@@ -180,7 +180,7 @@ When(
       location: 'Test Location',
       organizerId: uuidV4()
     }
-    const url = endpoint.replace('{meetupId}', this.meetupId)
+    const url = endpoint.replace('{ticketId}', this.ticketId)
     this.response = await request(this.app).put(url).send(invalidData)
   }
 )
@@ -188,7 +188,7 @@ When(
 When(
   'I make a PUT request to {string} with missing organizerId',
   async function (this: APIWorld, endpoint: string) {
-    this.meetupId = uuidV4()
+    this.ticketId = uuidV4()
     const invalidData = {
       title: 'Test Title',
       description: 'Test Description',
@@ -196,7 +196,7 @@ When(
       location: 'Test Location',
       imageUrl: 'https://example.com/test.jpg'
     }
-    const url = endpoint.replace('{meetupId}', this.meetupId)
+    const url = endpoint.replace('{ticketId}', this.ticketId)
     this.response = await request(this.app).put(url).send(invalidData)
   }
 )
@@ -208,7 +208,7 @@ When(
       title: 'Updated Title',
       description: 'Updated Description'
     }
-    const url = endpoint.replace('{meetupId}', this.meetupId)
+    const url = endpoint.replace('{ticketId}', this.ticketId)
     this.response = await request(this.app).patch(url).send(updateData)
   }
 )
@@ -216,7 +216,7 @@ When(
 When(
   'I make a DELETE request to {string}',
   async function (this: APIWorld, endpoint: string) {
-    const url = endpoint.replace('{meetupId}', this.meetupId)
+    const url = endpoint.replace('{ticketId}', this.ticketId)
     this.response = await request(this.app).delete(url)
   }
 )
@@ -239,10 +239,10 @@ Then('the response should be a valid JSON array', function (this: APIWorld) {
 })
 
 Then(
-  'the response should contain two meetups with required properties',
+  'the response should contain two tickets with required properties',
   function (this: APIWorld) {
     if (this.response.body.length !== 2) {
-      throw new Error(`Expected 2 meetups but got ${this.response.body.length}`)
+      throw new Error(`Expected 2 tickets but got ${this.response.body.length}`)
     }
     const requiredProperties = [
       'id',
@@ -252,38 +252,38 @@ Then(
       'location',
       'imageUrl'
     ]
-    for (const meetup of this.response.body) {
+    for (const ticket of this.response.body) {
       for (const prop of requiredProperties) {
-        if (!(prop in meetup)) {
-          throw new Error(`Expected meetup to have property ${prop}`)
+        if (!(prop in ticket)) {
+          throw new Error(`Expected ticket to have property ${prop}`)
         }
       }
     }
   }
 )
 
-Then('the response should contain the meetup data', function (this: APIWorld) {
-  const meetup = this.response.body
-  if (meetup.id !== this.meetupId) {
+Then('the response should contain the ticket data', function (this: APIWorld) {
+  const ticket = this.response.body
+  if (ticket.id !== this.ticketId) {
     throw new Error(
-      `Expected meetup id to be ${this.meetupId} but got ${meetup.id}`
+      `Expected ticket id to be ${this.ticketId} but got ${ticket.id}`
     )
   }
-  for (const [key, value] of Object.entries(this.meetupData)) {
-    if (meetup[key] !== value) {
-      throw new Error(`Expected ${key} to be ${value} but got ${meetup[key]}`)
+  for (const [key, value] of Object.entries(this.ticketData)) {
+    if (ticket[key] !== value) {
+      throw new Error(`Expected ${key} to be ${value} but got ${ticket[key]}`)
     }
   }
 })
 
 Then(
-  'the meetup should be created with the provided data',
+  'the ticket should be created with the provided data',
   async function (this: APIWorld) {
-    const getResponse = await request(this.app).get(`/meetups/${this.meetupId}`)
+    const getResponse = await request(this.app).get(`/tickets/${this.ticketId}`)
     if (getResponse.status !== 200) {
-      throw new Error('Failed to get created meetup')
+      throw new Error('Failed to get created ticket')
     }
-    for (const [key, value] of Object.entries(this.meetupData)) {
+    for (const [key, value] of Object.entries(this.ticketData)) {
       if (getResponse.body[key] !== value) {
         throw new Error(
           `Expected ${key} to be ${value} but got ${getResponse.body[key]}`
@@ -294,11 +294,11 @@ Then(
 )
 
 Then(
-  'the meetup should be updated with the new data',
+  'the ticket should be updated with the new data',
   async function (this: APIWorld) {
-    const getResponse = await request(this.app).get(`/meetups/${this.meetupId}`)
+    const getResponse = await request(this.app).get(`/tickets/${this.ticketId}`)
     if (getResponse.status !== 200) {
-      throw new Error('Failed to get updated meetup')
+      throw new Error('Failed to get updated ticket')
     }
     if (getResponse.body.title !== 'Updated Title') {
       throw new Error('Title was not updated')
@@ -309,9 +309,9 @@ Then(
   }
 )
 
-Then('the meetup should be deleted', async function (this: APIWorld) {
-  const getResponse = await request(this.app).get(`/meetups/${this.meetupId}`)
+Then('the ticket should be deleted', async function (this: APIWorld) {
+  const getResponse = await request(this.app).get(`/tickets/${this.ticketId}`)
   if (getResponse.status !== 404) {
-    throw new Error('Meetup was not deleted')
+    throw new Error('Ticket was not deleted')
   }
 })

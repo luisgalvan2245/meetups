@@ -1,4 +1,4 @@
-import { Ticket } from '../../../meetup/domain/Ticket'
+import { Ticket } from '../../../ticket/domain/Ticket'
 
 class InMemoryStore {
   tickets: Ticket[] = []

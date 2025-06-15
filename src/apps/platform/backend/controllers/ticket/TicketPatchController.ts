@@ -1,13 +1,13 @@
 import { Route, Tags, Patch, SuccessResponse, Response, Path, Body } from '@tsoa/runtime'
 
-import { UpdateTicketCommand } from '../../../../../contexts/platform/meetup/application/update/UpdateTicketCommand'
+import { UpdateTicketCommand } from '../../../../../contexts/platform/ticket/application/update/UpdateTicketCommand'
 import { container } from '../../../../../contexts/platform/shared/infrastructure/dependencies/container'
 import { CommandBus } from '../../../../../contexts/platform/shared/domain/command/CommandBus'
 
 @Route('tickets')
 @Tags('Tickets')
 export class TicketPatchController {
-  constructor(private bus: CommandBus = container.meetup.commandBus) {}
+  constructor(private bus: CommandBus = container.ticket.commandBus) {}
 
   @Patch('{id}')
   @SuccessResponse(200, 'OK')

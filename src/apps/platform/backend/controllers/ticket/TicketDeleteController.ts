@@ -1,13 +1,13 @@
 import { Route, Tags, SuccessResponse, Delete, Path, Response } from '@tsoa/runtime'
 
-import { DeleteTicketCommand } from '../../../../../contexts/platform/meetup/application/delete/DeleteTicketCommand'
+import { DeleteTicketCommand } from '../../../../../contexts/platform/ticket/application/delete/DeleteTicketCommand'
 import { CommandBus } from '../../../../../contexts/platform/shared/domain/command/CommandBus'
 import { container } from '../../../../../contexts/platform/shared/infrastructure/dependencies/container'
 
 @Route('tickets')
 @Tags('Tickets')
 export class TicketDeleteController {
-  constructor(private bus: CommandBus = container.meetup.commandBus) {}
+  constructor(private bus: CommandBus = container.ticket.commandBus) {}
 
   @Delete('{id}')
   @SuccessResponse(204, 'No Content')
