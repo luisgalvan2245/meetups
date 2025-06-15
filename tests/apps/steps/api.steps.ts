@@ -11,7 +11,7 @@ import { Application } from 'express'
 import request from 'supertest'
 import { v4 as uuidV4 } from 'uuid'
 
-import { Server } from '../../../src/backend/server'
+import { Server } from '../../../src/server'
 
 class APIWorld extends World {
   app!: Application

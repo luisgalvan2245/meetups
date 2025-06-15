@@ -4,11 +4,11 @@ import { Server as HttpServer } from 'http'
 import swaggerUi from 'swagger-ui-express'
 import { promisify } from 'util'
 
-import { RegisterRoutes } from '../backend/ticket/infrastructure/routes/routes'
-import swaggerJson from '../backend/ticket/infrastructure/spec/swagger.json'
 import { Logger } from './shared/domain/logger/Logger'
 import { container } from './shared/infrastructure/dependencies/container'
 import { ErrorHandler } from './shared/infrastructure/middlewares/ErrorHandler'
+import { RegisterRoutes } from './ticket/infrastructure/routes/routes'
+import swaggerJson from './ticket/infrastructure/spec/swagger.json'
 
 interface ServerOptions {
   port?: number
