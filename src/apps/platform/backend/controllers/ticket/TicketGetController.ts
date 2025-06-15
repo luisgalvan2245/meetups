@@ -1,10 +1,11 @@
 import { Route, Tags, Get, Path, Response } from '@tsoa/runtime'
+import { Request } from 'express'
 
-import { ListTicketsQuery } from '../../../../../contexts/platform/ticket/application/list/ListTicketsQuery'
-import { GetTicketQuery } from '../../../../../contexts/platform/ticket/application/get/GetTicketQuery'
-import { TicketResponse } from '../../../../../contexts/platform/ticket/application/TicketResponse'
-import { container } from '../../../../../contexts/platform/shared/infrastructure/dependencies/container'
-import { QueryBus } from '../../../../../contexts/platform/shared/domain/query/QueryBus'
+import { ListTicketsQuery } from '../../../../../backend/platform/ticket/application/list/ListTicketsQuery'
+import { GetTicketQuery } from '../../../../../backend/platform/ticket/application/get/GetTicketQuery'
+import { TicketResponse } from '../../../../../backend/platform/ticket/application/TicketResponse'
+import { container } from '../../../../../backend/platform/shared/infrastructure/dependencies/container'
+import { QueryBus } from '../../../../../backend/platform/shared/domain/query/QueryBus'
 
 @Route('tickets')
 @Tags('Tickets')

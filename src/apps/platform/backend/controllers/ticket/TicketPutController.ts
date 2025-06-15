@@ -1,8 +1,9 @@
 import { Route, Tags, SuccessResponse, Body, Put, Path, Response } from '@tsoa/runtime'
+import { Request } from 'express'
 
-import { CreateTicketCommand } from '../../../../../contexts/platform/ticket/application/create/CreateTicketCommand'
-import { container } from '../../../../../contexts/platform/shared/infrastructure/dependencies/container'
-import { CommandBus } from '../../../../../contexts/platform/shared/domain/command/CommandBus'
+import { CreateTicketCommand } from '../../../../../backend/platform/ticket/application/create/CreateTicketCommand'
+import { container } from '../../../../../backend/platform/shared/infrastructure/dependencies/container'
+import { CommandBus } from '../../../../../backend/platform/shared/domain/command/CommandBus'
 
 @Route('tickets')
 @Tags('Tickets')
